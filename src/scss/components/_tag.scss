@@ -1,0 +1,33 @@
+//link styles
+.tag {
+    border: none;
+    outline: none;
+    background-color: $black--light;
+    color: $white;
+    padding: 0;
+    text-transform: inherit;
+    letter-spacing: 0;
+    font-size: inherit;
+    padding: $pad / 14 ($pad / 4) * 3;
+    border-radius: 4px;
+    width: inherit;
+    display: inline-block;
+    // padding-right: $pad * 2;
+    margin-right: $pad / 4;
+
+    &:hover {
+    background-color: lighten($grey, 5%);
+  }
+
+  &:focus {
+    background-color: darken($grey, 5%);
+  }
+
+  span {
+    vertical-align: middle;
+    font-size: 18px;
+    margin-left: 5px;
+    font-weight: bold;
+    margin-right: -2px;
+  }
+}

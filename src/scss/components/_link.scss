@@ -1,0 +1,18 @@
+//link styles
+.link {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: $blue;
+    padding: 0;
+    text-transform: inherit;
+    letter-spacing: 0;
+    font-size: inherit;
+    padding: $pad $pad * 2;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $blue;
+    }
+}

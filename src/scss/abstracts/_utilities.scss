@@ -1,0 +1,72 @@
+//*********
+// CLEARFIX
+.cf {
+    *zoom: 1;
+}
+
+.cf::before,
+.cf::after {
+    content: ' ';
+    display: table;
+}
+
+.cf::after {
+    clear: both;
+}
+
+// Completely remove from the flow and screen readers.
+.is-hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+// Completely remove from the flow but leave available to screen readers.
+.is-visually-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+ //*******
+// FLOATS
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+ //***************
+// TEXT ALIGNMENT
+.align-right {
+    text-align: right;
+}
+.align-center {
+    text-align: center;
+}
+.align-left {
+    text-align: left;
+}
+
+
+
+.flex-start {
+  justify-content: flex-start;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
+.space-justify {
+  justify-content: space-between;
+}

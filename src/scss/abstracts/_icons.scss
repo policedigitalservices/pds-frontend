@@ -1,0 +1,154 @@
+$icon-font-family: "pds-icons" !default;
+$icon-font-path: "../fonts" !default;
+
+$pds-icon-group-root: "\e900";
+$pds-icon-error-triangle: "\e901";
+$pds-icon-error-circle: "\e902";
+$pds-icon-tick-circle: "\e903";
+$pds-icon-info-circle: "\e904";
+$pds-icon-remove-circle: "\e905";
+$pds-icon-add: "\e906";
+$pds-icon-arrow-drop-down: "\e907";
+$pds-icon-arrow-drop-up: "\e908";
+$pds-icon-arrow-right: "\e909";
+$pds-icon-close: "\e90a";
+$pds-icon-keyboard-arrow-left: "\e90b";
+$pds-icon-keyboard-arrow-right: "\e90c";
+$pds-icon-more-vertical: "\e90d";
+$pds-icon-search: "\e90e";
+$pds-icon-group-child: "\e90f";
+$pds-icon-group-parent: "\e910";
+
+
+
+@font-face {
+  font-family: '#{$icon-font-family}';
+  src:  url('#{$icon-font-path}/#{$icon-font-family}.eot?7ge13u');
+  src:  url('#{$icon-font-path}/#{$icon-font-family}.eot?7ge13u#iefix') format('embedded-opentype'),
+    url('#{$icon-font-path}/#{$icon-font-family}.ttf?7ge13u') format('truetype'),
+    url('#{$icon-font-path}/#{$icon-font-family}.woff?7ge13u') format('woff'),
+    url('#{$icon-font-path}/#{$icon-font-family}.svg?7ge13u##{$icon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icon-font-family}' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Enable Ligatures ================ */
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  -webkit-font-variant-ligatures: discretionary-ligatures;
+  font-variant-ligatures: discretionary-ligatures;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.pds-icon-group-root {
+  &:before {
+    content: $pds-icon-group-root;
+    color: #696969;
+  }
+}
+.pds-icon-error-triangle {
+  &:before {
+    content: $pds-icon-error-triangle;
+    color: #696969;
+  }
+}
+.pds-icon-error-circle {
+  &:before {
+    content: $pds-icon-error-circle;
+    color: #696969;
+  }
+}
+.pds-icon-tick-circle {
+  &:before {
+    content: $pds-icon-tick-circle;
+    color: #696969;
+  }
+}
+.pds-icon-info-circle {
+  &:before {
+    content: $pds-icon-info-circle;
+    color: #696969;
+  }
+}
+.pds-icon-remove-circle {
+  &:before {
+    content: $pds-icon-remove-circle;
+    color: #696969;
+  }
+}
+.pds-icon-add {
+  &:before {
+    content: $pds-icon-add;
+  }
+}
+.pds-icon-arrow-drop-down {
+  &:before {
+    content: $pds-icon-arrow-drop-down;
+  }
+}
+.pds-icon-arrow-drop-up {
+  &:before {
+    content: $pds-icon-arrow-drop-up;
+  }
+}
+.pds-icon-arrow-right {
+  &:before {
+    content: $pds-icon-arrow-right;
+  }
+}
+.pds-icon-close {
+  &:before {
+    content: $pds-icon-close;
+  }
+}
+.pds-icon-keyboard-arrow-left {
+  &:before {
+    content: $pds-icon-keyboard-arrow-left;
+  }
+}
+.pds-icon-keyboard-arrow-right {
+  &:before {
+    content: $pds-icon-keyboard-arrow-right;
+  }
+}
+.pds-icon-more-vertical {
+  &:before {
+    content: $pds-icon-more-vertical;
+  }
+}
+.pds-icon-search {
+  &:before {
+    content: $pds-icon-search;
+  }
+}
+.pds-icon-group-child {
+  &:before {
+    content: $pds-icon-group-child;
+    color: #696969;
+  }
+}
+.pds-icon-group-parent {
+  &:before {
+    content: $pds-icon-group-parent;
+    color: #696969;
+  }
+}
+

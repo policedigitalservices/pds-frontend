@@ -1,0 +1,12 @@
+// Main Styles
+main,
+.main {
+    -ms-grid-row: 3;
+    -ms-grid-column: 3;
+    grid-area: main;
+
+    display: block;
+    background-color: $blue--light;
+    width: 100%;
+    padding:  $pad * 2.7 0;
+}

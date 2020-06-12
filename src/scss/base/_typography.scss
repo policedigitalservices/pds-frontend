@@ -1,0 +1,106 @@
+html {
+  font-weight: 400;
+  color: $black--medium;
+
+
+  box-sizing: border-box;
+  font-size: #{$base + 'px'};
+  font-size: #{$base-font-size + '%'};
+  font-family: $base-font-family;
+  line-height: $line-height;
+  // color: $white;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+
+
+}
+
+// Header Styles
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: $pad;
+  line-height: $headingLineHeight;
+  color: $black;
+
+  a {
+    font-weight: inherit;
+  }
+}
+
+h1,
+.h1 {
+  @include font-size(2.25);
+
+  font-weight: 300;
+  font-size: 96px;
+  line-height: 112px;
+  letter-spacing: -1.5px;
+}
+
+h2,
+.h2 {
+  @include font-size(1.875);
+
+  font-weight: 300;
+  font-size: 60px;
+  line-height: 70px;
+  letter-spacing: -0.5px;
+}
+
+h3,
+.h3 {
+  @include font-size(1.5);
+
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 56px;
+}
+
+h4,
+.h4 {
+  @include font-size(1.25);
+
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 40px;
+}
+
+h5,
+.h5 {
+  @include font-size(1.125);
+
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+h6,
+.h6 {
+  @include font-size(1);
+
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+}
+p {
+  margin-bottom: $pad;
+  color: $black--medium;
+}
+
+.caption {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.body1 {
+  font-weight: normal;
+font-size: 18px;
+line-height: 28px;
+letter-spacing: 0.5px;
+}
+
+// Text Styles
+em { font-style: italic; }
+strong { font-weight: bold; }
+.uppercase { text-transform: uppercase; }

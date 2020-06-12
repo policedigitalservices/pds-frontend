@@ -1,0 +1,33 @@
+// Container styles
+.container {
+  display: block;
+  margin: 0 auto;
+  padding: 0 $pad;
+  width: 100%;
+  max-width: #{$max-width + 'rem'};
+
+  &--padded {
+
+    max-width: #{$max-width/2 + 'rem'};
+    margin: 0 auto;
+
+    form {
+      width: 100%;
+    }
+  }
+
+  &--hint {
+    // max-width: #{($max-width/4 * 3) + 'rem'};
+    width: 100%;
+    margin: 0 auto;
+    // @include grid-column(2, 8);
+    @include display-grid();
+    grid-gap: $pad;
+    @include grid-template-columns(repeat(8,1fr));
+
+
+    form {
+      width: 100%;
+    }
+  }
+}

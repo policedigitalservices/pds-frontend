@@ -1,0 +1,36 @@
+// Table styles
+table {
+  border-top: 1px solid $grey;
+  width: 100%;
+  border-spacing: 0;
+    table-layout: fixed;
+    border-collapse: separate;
+
+  tr {
+
+     &:hover {
+      background-color: rgba($blue, 5%);
+    }
+
+    &:focus {
+      background-color: rgba($blue, 12%);
+    }
+
+    &.clickable {
+      cursor: pointer;
+    }
+
+    td {
+      padding: $pad;
+      border-bottom: 1px solid $grey;
+      color: $black--medium;
+
+     @extend .body1;
+
+      a {
+        text-decoration: none;
+        color: $black;
+      }
+    }
+  }
+}

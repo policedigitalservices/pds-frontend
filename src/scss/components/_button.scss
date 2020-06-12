@@ -1,0 +1,181 @@
+button,
+.button {
+  white-space: nowrap;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  background-color: $blue;
+  color: $white;
+  text-decoration: none;
+  margin: $pad / 4;
+  border: 1px solid transparent;
+  font-family: Roboto, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 500;
+  letter-spacing: .0892857143em;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0 8px 0 8px;
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  outline: none;
+  line-height: inherit;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-appearance: none;
+  overflow: visible;
+  vertical-align: middle;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: .445rem .875rem;
+
+  &,
+  &:active,
+  &.active,
+  &:hover,
+  &:focus,
+  &.focus {
+    text-decoration: none;
+    outline: 0;
+  }
+
+  &:hover {
+    background-color: lighten($blue, 5%);
+  }
+
+  &:focus {
+    background-color: darken($blue, 5%);
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: default;
+    // background-color: $grey;
+    color: rgba($black, .38);
+  }
+
+  &:-webkit-autofill {
+    background-color: inherit !important;
+}
+
+
+  &--outlined {
+    background-color: transparent;
+    border-color: $blue;
+    color: $blue;
+
+    &:hover {
+      background-color: rgba($blue, 5%);
+    }
+
+    &:focus {
+      background-color: rgba($blue, 12%);
+    }
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+      cursor: default;
+      background-color: transparent;
+      border-color: $grey;
+      color: $grey;
+    }
+  }
+
+  &--tag {
+    @extend .tag;
+
+    span {
+
+    font-size: 14px;
+line-height: 20px;
+font-weight: 400;
+
+
+    span {
+      i + & {
+        margin-right: 30px;
+      }
+    }
+
+    i {
+      span + & {
+        margin-right: 40px;
+      }
+    }
+  }
+}
+
+  &--fullwidth {
+    width: 100%;
+    margin-bottom: $pad;
+  }
+
+  &__icon {
+    @extend .material-icons;
+    margin-left: 0;
+    margin-right: 8px;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    vertical-align: top;
+
+
+    &--new {
+      @extend .button__icon;
+
+      &:before {
+        content: 'add';
+      }
+    }
+
+    &--remove {
+      @extend .button__icon;
+      // color: $black;
+
+      &:before {
+        content: 'remove_circle';
+      }
+    }
+  }
+
+  &--small {
+    padding: .445rem .875rem;
+  }
+
+  &--transparent {
+    background-color: transparent;
+    color: $blue;
+    padding: 2px 0 0 0;
+    margin: 0 .25rem;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+
+
+    &:hover {
+      background-color: transparent;
+      border-bottom: 2px solid $blue;
+    }
+
+    &:focus {
+      background-color: transparent;
+    }
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+      cursor: default;
+      background-color: transparent;
+      border-color: transparent;
+      color: $grey;
+    }
+  }
+}

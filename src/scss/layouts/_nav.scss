@@ -1,0 +1,161 @@
+// Nav Styles
+.navigation {
+  padding: 0;
+
+  @include grid-column(2, 14);
+
+  // @media (min-width: $smallBreakpoint) {
+  //   padding: 0;
+  // }
+}
+
+.nav {
+  @extend .cf;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  a {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+
+    &:active {
+      text-decoration: none;
+    }
+  }
+
+  li {
+    list-style: none;
+  }
+
+  &__item {
+
+    color: $white;
+    padding: $pad;
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+
+    &:hover {
+      text-decoration: none;
+      background-color: rgba($white, 0.1);
+      border-bottom-color: rgba($white, 0.1);
+
+      a {
+        text-decoration: none;
+        background-color: rgba($white, 0.1);
+        border-bottom-color: rgba($white, 0.1);
+      }
+    }
+
+    a {
+      color: $white;
+    }
+
+    &--active {
+      color: $white;
+      background-color: rgba($white, 0.1);
+      border-bottom-color: $white;
+
+      a {
+        color: $white;
+      }
+
+      &:hover {
+        border-bottom-color: $white;
+      }
+
+    }
+
+    &--first {
+      margin-left: 0;
+    }
+
+    &--last {
+      margin-right: 0;
+    }
+  }
+
+  &--horizontal {
+
+    li {
+      // float: left;
+      padding-left: 0;
+    }
+
+    a {
+      display: block;
+    }
+
+  }
+
+
+  &--vertical {
+
+    li {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    a {
+      display: inline-block;
+
+    }
+  }
+
+  &__toggle {
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    display: inline-block;
+    padding: 0;
+    vertical-align: top;
+    @extend .material-icons;
+    display: inline-block;
+      width: 1.875rem;
+      height: 1.875rem;
+      // vertical-align: middle;
+
+    @include font-size(1.875);
+
+
+
+    @media (min-width: $smallBreakpoint) {
+      display: none;
+    }
+
+    &.icon {
+
+
+
+      // content: "";
+      // background: no-repeat center center;
+      // background-size: 100% 100%;
+      // background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3 8V6H21V8H3ZM3 13H21V11H3V13ZM3 18H21V16H3V18Z' fill='white' fill-opacity='1'/%3E%3C/svg%3E%0A");
+
+
+
+
+
+      &--menu {
+        &:before {
+          content: 'menu';
+        }
+      }
+
+      &--add {
+        &:before {
+          content: 'add';
+        }
+      }
+    }
+  }
+}
+
+
+

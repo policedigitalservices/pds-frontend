@@ -1,0 +1,77 @@
+// Header Styles
+header,
+.header {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+   grid-area: header;
+   flex-shrink: 0;
+
+  ul {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+
+
+}
+
+.app-header {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: header;
+
+  position: sticky;
+  top: 0;
+  background-color: $blue;
+  color: $white;
+  padding: 0 $pad;
+  z-index: 11;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+
+  &__logo {
+    display: none;
+    text-transform: uppercase;
+    color: $white;
+    text-decoration: none;
+    @extend h4;
+    margin: 0;
+    padding: $pad * .7 0;
+
+    @media (min-width: $smallBreakpoint) {
+      display: inline-block;
+    }
+  }
+
+  &__title {
+    display: inline-block;
+    color: $white;
+    text-decoration: none;
+    @extend h3;
+    margin: .2rem $pad;
+
+    @media (min-width: $smallBreakpoint) {
+      display: none;
+    }
+  }
+}
+
+.page-header,
+.side-header {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: header;
+
+  padding: $pad;
+  overflow: hidden;
+  position: relative;
+
+  @media (min-width: $smallBreakpoint) {
+    padding: 0 $pad;
+  }
+
+}
+

@@ -1,0 +1,18 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: $blue--light;
+  height: 100%;
+
+  * {
+    box-sizing: inherit;
+  }
+}
+
+body {
+     // @include display-grid();
+    // grid-gap: $pad;
+    // @include grid-template-columns(repeat(12,1fr));
+}

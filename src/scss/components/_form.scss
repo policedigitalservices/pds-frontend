@@ -1,0 +1,150 @@
+form,
+.form {
+  display: inline-block;
+  // width: 100%;
+
+  &__label,
+  label,
+  legend {
+
+    display: inline-flex;
+    @extend h6;
+    margin-bottom: $pad / 2;
+
+        display: flex;
+    // justify-content: space-between;
+  align-items: center;
+
+  }
+
+  &__label--hidden {
+
+  }
+
+  &__group {
+    margin-bottom: $pad;
+    overflow: hidden;
+    line-height: 1;
+
+  }
+
+  input,
+  textarea {
+    font-family: $base-font-family;
+  }
+
+  textarea {
+    min-height: 10rem;
+  }
+
+  &__hint {
+    color: $black;
+    display: block;
+    font-size: 0.9em;
+    font-weight: 400;
+    margin: 0 0 1em;
+  }
+
+  &__input {
+    border: 1px solid rgba($black, 0.6);
+    background-color: $white;
+    outline: none;
+    border-radius: 0;
+    min-height: 3.5rem;
+    // margin-bottom: 1.5rem;
+    // max-width: 42.5rem;
+    padding: $pad;
+    width: 100%;
+    font-size: 100%;
+
+    & + .button {
+      margin: 0;
+    }
+
+    &.input-validation-error {
+      border: 2px solid $red;
+
+      & + span {
+        margin-bottom: 0;
+        margin-left: $pad;
+
+        @extend .caption;
+      }
+    }
+
+    &::-webkit-input-placeholder {
+      color: $black--light;
+    }
+
+    &:active,
+    &:focus,
+    &--focus,
+    &--active {
+      border-color: $blue;
+      outline: none;
+    }
+
+    &--search {
+      padding-left: $pad * 2.8;
+      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15.502 14H14.708L14.432 13.726C15.407 12.589 16 11.115 16 9.49997C16 5.90997 13.09 2.99997 9.5 2.99997C5.91 2.99997 3 5.90997 3 9.49997C3 13.09 5.91 16 9.5 16C11.115 16 12.588 15.408 13.725 14.434L14.001 14.708V15.5L18.999 20.491L20.49 19L15.502 14ZM9.5 14C7.014 14 5 11.986 5 9.49997C5 7.01497 7.014 4.99997 9.5 4.99997C11.985 4.99997 14 7.01497 14 9.49997C14 11.986 11.985 14 9.5 14Z' fill='black' fill-opacity='0.54'/%3E%3C/svg%3E%0A");
+      background-repeat: no-repeat;
+      background-position: ($pad/4) * 3 50%;
+
+      // &::-webkit-input-placeholder {
+      //   color: $blue;
+      // }
+
+    }
+
+  }
+}
+
+input,
+.input {
+  &__withaction {
+    input {
+      width: calc(100% - 3.5rem);
+      border-right: 0;
+      display: inline-block;
+      float: left;
+    }
+
+    button,
+    .button {
+      @extend .form__input;
+      width: 3.5rem;
+      border-radius: 0;
+      border-left: 0;
+      display: inline-block;
+      float: right;
+      min-height: 3.5rem;
+
+      @extend .material-icons;
+      @include font-size(1.5);
+
+      &:focus,
+      &.focus,
+      &.active {
+        border-color: rgba($black, 0.6);
+      }
+
+      &--remove {
+        &:before {
+          content: 'remove_circle';
+          color: $grey--medium;
+        }
+      }
+
+      &--add {
+        &:before {
+          content: 'add_circle';
+          color: $grey--medium;
+        }
+      }
+    }
+  }
+}
+
+.text-danger {
+  color: $red;
+}

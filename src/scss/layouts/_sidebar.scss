@@ -1,0 +1,20 @@
+// aside Styles
+aside,
+.aside {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: sidebar;
+  flex-grow: 1;
+
+  width: 400px;
+  background-color: $blue--medium;
+  border-right: 1px solid lighten($black--light, 65%);
+    ul {
+      display: block;
+      width: 100%;
+    }
+    form {
+      width: 100%;
+      padding: $pad 0;
+    }
+}
