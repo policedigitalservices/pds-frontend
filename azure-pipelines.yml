@@ -19,7 +19,7 @@ steps:
       [
         {
           "name": "FRONTEND_VER",
-          "value": $(Build.SourceVersion),
+          "value": "$(Build.SourceVersion)",
           "slotSetting": false
         }
       ]
