@@ -15,4 +15,11 @@ steps:
     azureSubscription: 'Courier (Azure)'
     appName: 'aspolice-courier'
     resourceGroupName: 'courier'
-    appSettings: "[{ 'name':'FRONTEND_VER', 'value':'1', 'slotSetting': false }]"
+    appSettings: |
+      [
+        {
+          "name": "FRONTEND_VER",
+          "value": "1",
+          "slotSetting": false
+        }
+      ]
