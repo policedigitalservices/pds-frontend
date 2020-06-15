@@ -1,8 +1,5 @@
 ﻿
 (function (selector) {
-
-    var rootGroup = 'All contacts';
-
     // Fetch the base path that the selected group will be appended to
     var pagePath = (function () {
         var url = new URL(window.location.href);
@@ -15,10 +12,16 @@
         return urlParams.get("group");
     })();
 
+    // Fetch the currently selected search criteria from the url
+    var searchParam = (function () {
+      var urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get("Search");
+    })();
+
     // Function to build the path
     function getPagePathForGroup(group) {
-        var grp = group === "" ? "\\" : group;
-        return pagePath + grp;
+      var grp = group === "" ? "\\" : group;
+      return pagePath + grp;
     }
 
     // Function to check if the node being add should be open i.e. to reveal the currently selected group
@@ -30,10 +33,10 @@
         return groupParam.startsWith(pathToCheck) && groupParam != pathToCheck;
     }
 
-    // Function to check if the node being add is the currentlySelectedGroup
+    // Function to check if the node being added is the currentlySelectedGroup
     function isSelectedGroup(path) {
         var paramsToCheck = groupParam || "\\";
-        var pathToCheck = path + "\\";
+        var pathToCheck = path || "\\";
         return paramsToCheck === pathToCheck;
     }
 
@@ -43,7 +46,9 @@
         link.textContent = text;
         link.href = getPagePathForGroup(path);
         link.classList.add("group-selector__link");
-        if (isSelectedGroup(path)) {
+
+        // We dont want the current class to be added if doing a search
+        if ((!searchParam) &&  isSelectedGroup(path)) {
             link.classList.add("group-selector__link--current");
         }
         return link;
@@ -152,20 +157,23 @@
             childListItemWithChildren.appendChild(childList);
             elementToAddTo.appendChild(childListItemWithChildren);
             // Call recursively with updated params for each child node
-            childKeys.forEach(function (childKey) {
-                displayChildKeys(
+          childKeys.forEach(function (childKey) {
+            if (childKey !== 'All contacts') {
+              displayChildKeys(
                     childKey,
                     currPath + "\\" + childKey,
                     obj[childKey],
                     childList,
                     level + 1
                 );
+            }
+
             });
         }
     }
 
     // The initial call of the recursive function starting at the root.
-    displayChildKeys("\\", "", structure["\\"], treeContainer, 1);
+    displayChildKeys("All Contact Groups", "", structure["\\"], treeContainer, 1);
 
     // Replace the select list with the new tree
     groupSelect.replaceWith(treeContainer);
