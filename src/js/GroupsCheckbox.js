@@ -1,4 +1,5 @@
-﻿
+﻿ var groupCheckboxesExist = document.getElementById("GroupCheckboxes");
+    if(groupCheckboxesExist){
 (function (selector) {
 
     //Check on page whether Group Multi Select exists
@@ -254,3 +255,4 @@
     treeContainer.parentNode.appendChild(hiddenField);
 
 })("#GroupCheckboxes");
+}

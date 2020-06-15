@@ -1,4 +1,6 @@
-﻿
+﻿ var groupExist = document.getElementById("Group");
+    if(groupExist){
+
 (function (selector) {
     // Fetch the base path that the selected group will be appended to
     var pagePath = (function () {
@@ -180,3 +182,4 @@
     treeContainer.parentNode.appendChild(hiddenField);
 
 })("#Group");
+}

@@ -1,7 +1,11 @@
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
+
 function menuToggle() {
+   var asideExist = document.getElementById("aside");
+    if(asideExist){
   document.getElementById("aside").classList.toggle("aside--active");
+}
 }
 
 // Close the dropdown menu if the user clicks outside of it
@@ -21,13 +25,16 @@ window.onclick = function(event) {
 
 var addGroupButton = document.querySelector("#add_group");
 
+if (addGroupButton) {
+
 addGroupButton.addEventListener("click", function(el) {
+  console.log('clicked');
 
         // addGroupButton.style.display = 'none';
         el.preventDefault();
         toggleSidebar();
     })
-
+}
 
 
 function toggleSidebar() {
