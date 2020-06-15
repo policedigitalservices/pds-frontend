@@ -6,10 +6,10 @@
     var groupTextarea = document.getElementById("GroupTextarea");
 
     // If the Group Multi Select does exist, hide it (if JS enabled)
-    // if (groupSelect !== null) {
+    if (groupSelect !== null) {
         groupSelect.parentElement.classList.add("is-hidden");
         groupTextarea.parentElement.classList.remove("is-hidden");
-    // };
+    };
 
 
     // Fetch the base path that the selected group will be appended to
