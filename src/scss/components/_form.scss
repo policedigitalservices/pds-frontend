@@ -63,7 +63,8 @@ form,
       margin: 0;
     }
 
-    &.input-validation-error {
+    &.input-validation-error,
+    &.field-validation-error {
       border: 2px solid $red;
 
       & + span {
@@ -71,6 +72,8 @@ form,
         margin-left: $pad;
 
         @extend .caption;
+
+        color: $red;
       }
     }
 
