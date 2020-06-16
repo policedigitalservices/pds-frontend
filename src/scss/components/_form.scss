@@ -1,6 +1,7 @@
 form,
 .form {
   display: inline-block;
+  max-width: $pad * 42.5;
   // width: 100%;
 
   &__label,
@@ -11,7 +12,8 @@ form,
     @extend h6;
     margin-bottom: $pad / 2;
 
-        display: flex;
+
+        // display: flex;
     // justify-content: space-between;
   align-items: center;
 

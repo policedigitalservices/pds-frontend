@@ -73,5 +73,23 @@ header,
     padding: 0 $pad;
   }
 
+  h5,
+  ul,
+  button,
+  form {
+    margin-right: 1rem;
+
+    &:last-child {
+      margin-right: 0;
+      margin-left: auto;
+    }
+  }
+
+
+
+  h5 + button {
+    margin-bottom: $pad ;
+  }
+
 }
 
