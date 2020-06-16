@@ -147,6 +147,37 @@ input,
   }
 }
 
+select,
+.select {
+  -webkit-appearance: none; /* Webkit */
+  -moz-appearance: none; /* FF */
+  -ms-appearance: none; /* Edge */
+  appearance: none; /* Future */
+
+  color: $black;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  padding: $pad $pad * 2 $pad $pad;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' width='24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  // &:after {
+  //         content: 'remove_circle';
+  //         color: $grey--medium;
+  //       }
+
+  &:focus {
+    background-color: rgba($black, 0.08);
+  }
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
 .text-danger {
   color: $red;
 }
