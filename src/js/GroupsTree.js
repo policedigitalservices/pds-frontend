@@ -1,7 +1,20 @@
 ﻿ var groupExist = document.getElementById("Group");
     if(groupExist){
 
-(function (selector) {
+        var useCheckboxes = groupExist.hasAttribute('data-with-checkbox');
+
+(function (selector, useCheckboxes=false) {
+
+    //Check on page whether Group Multi Select exists
+    var groupSelect = document.getElementById("GroupSelector");
+    var groupTextarea = document.getElementById("GroupTextarea");
+
+    // If the Group Multi Select does exist, hide it (if JS enabled)
+    if (groupSelect !== null) {
+        groupSelect.parentElement.classList.add("is-hidden");
+        groupTextarea.parentElement.classList.remove("is-hidden");
+    };
+
     // Fetch the base path that the selected group will be appended to
     var pagePath = (function () {
         var url = new URL(window.location.href);
@@ -56,6 +69,77 @@
         return link;
     }
 
+    function buildCheckbox(text, path) {
+        var checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.setAttribute("class", "GroupItem");
+        checkbox.name = text;
+        checkbox.value = path;
+        // checkbox.value = text;
+        checkbox.id = text;
+
+        return checkbox;
+    }
+
+    // Helper function to build link for the group
+    function buildCheckboxLabel(text, path) {
+        var checkboxLabel = document.createElement('label');
+        checkboxLabel.innerHTML = text;
+        checkboxLabel.for = text;
+        checkboxLabel.setAttribute("for", text);
+
+        return checkboxLabel;
+    }
+
+    function transferValues() {
+        var data = [];
+
+        var elems= document.querySelectorAll('.GroupItem')
+            for (var i=0;i<elems.length;i++) {
+
+                if (elems[i].checked) {
+
+                    data.push(elems[i].value);
+                }
+            }
+
+            populateGroupField(data);
+    }
+
+    
+    function populateGroupField(data) {
+        var textarea = document.getElementById("GroupTextarea");
+        textarea.innerHTML = '';
+
+        for(var i = 0; i < data.length; i++){
+            textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data[i].substring(1) + '<i class="button__icon">clear</i></div>';
+        }
+
+        var element = document.getElementById('GroupSelector'); //Change to the id of the select
+        // if (element)
+        // {
+            for (var i = 0; i < element.options.length; i++) {
+                element.options[i].selected = data.indexOf(element.options[i].value) >= 0;
+
+            }
+            // for (var i = 0; i < select.options.length; i++)
+            // {
+            //     //Select options matching array values, unselect others
+            //     select.options[i].selected = in_array(select.options[i].value, data, false);
+            // }
+        // }
+    }
+
+    function appendChildrenForMode(parent, text, path) {
+        if (useCheckboxes) {
+            parent.appendChild(buildCheckboxLabel(text, path));
+            parent.appendChild(buildCheckbox(text, path));
+        } else {
+            // Create the link to refresh page with selected node.
+            parent.appendChild(buildLink(text, path));
+        }
+    }
+
     // Grab the select list and all of its options
     var groupSelect = document.querySelector(selector);
     var options = groupSelect.querySelectorAll("option");
@@ -96,6 +180,8 @@
     treeContainer.addEventListener("click", function (e) {
         var target = e.target;
 
+        transferValues();
+
         // We only care about clicks on elements that are parents
         if (target.matches(".group-selector__group--parent")) {
             // If an open parent item is clicked, close it, but also all its open descendants.
@@ -124,19 +210,16 @@
         if (!childKeys.length) {
             // This is at the bottom i.e. no children to process
 
-            // Create the link to refresh page with selected node.
-            var childListItemLink = buildLink(currText, currPath);
-
             // Add the link into an li, and append to the parent container
             var childListItem = document.createElement("li");
             childListItem.classList.add("group-selector__group");
-            childListItem.appendChild(childListItemLink);
+            
+            appendChildrenForMode(childListItem, currText, currPath);
+            
             elementToAddTo.appendChild(childListItem);
+
         } else {
             // This node has children to process
-
-            // Create the link to refresh page with selected node.
-            var childListItemWithChildrenLink = buildLink(currText, currPath);
 
             // Create the li with the link contained
             var childListItemWithChildren = document.createElement("li");
@@ -151,12 +234,13 @@
                     "group-selector__group--active"
                 );
             }
-            childListItemWithChildren.appendChild(childListItemWithChildrenLink);
+
+            appendChildrenForMode(childListItemWithChildren, currText, currPath);
 
             // Create the container ready to be populated with the child nodes
             var childList = document.createElement("ul");
             childList.classList.add("group-selector__list");
-            childListItemWithChildren.appendChild(childList);
+            childListItemWithChildren.appendChild(childList);            
             elementToAddTo.appendChild(childListItemWithChildren);
             // Call recursively with updated params for each child node
           childKeys.forEach(function (childKey) {
@@ -181,5 +265,5 @@
     groupSelect.replaceWith(treeContainer);
     treeContainer.parentNode.appendChild(hiddenField);
 
-})("#Group");
+})("#Group", useCheckboxes);
 }
