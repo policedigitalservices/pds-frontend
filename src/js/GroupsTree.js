@@ -3,7 +3,7 @@
 
         var useCheckboxes = groupExist.hasAttribute('data-with-checkbox');
 
-(function (selector, useCheckboxes=false) {
+(function (selector, useCheckboxes) {
 
     //Check on page whether Group Multi Select exists
     var groupSelect = document.getElementById("GroupSelector");
@@ -15,23 +15,18 @@
         groupTextarea.parentElement.classList.remove("is-hidden");
     };
 
-    // Fetch the base path that the selected group will be appended to
-    var pagePath = (function () {
-        var url = new URL(window.location.href);
-        return url.origin + url.pathname + "?group=";
+    var searchParts = (function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        console.log(parts);
+        return vars;
     })();
 
-    // Fetch the currently selected group from the url
-    var groupParam = (function () {
-        var urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get("group");
-    })();
-
-    // Fetch the currently selected search criteria from the url
-    var searchParam = (function () {
-      var urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get("Search");
-    })();
+    var pagePath = window.location.origin + window.location.pathname + "?group=";
+    var groupParam = searchParts.group;
+    var searchParam = searchParts.Search;
 
     // Function to build the path
     function getPagePathForGroup(group) {
@@ -69,19 +64,19 @@
         return link;
     }
 
+    // Helper function to build checkbox label for the group
     function buildCheckbox(text, path) {
         var checkbox = document.createElement('input');
         checkbox.type = "checkbox";
         checkbox.setAttribute("class", "GroupItem");
         checkbox.name = text;
         checkbox.value = path;
-        // checkbox.value = text;
         checkbox.id = text;
 
         return checkbox;
     }
 
-    // Helper function to build link for the group
+    // Helper function to build checkbox for the group
     function buildCheckboxLabel(text, path) {
         var checkboxLabel = document.createElement('label');
         checkboxLabel.innerHTML = text;
@@ -105,29 +100,21 @@
 
             populateGroupField(data);
     }
-
     
     function populateGroupField(data) {
         var textarea = document.getElementById("GroupTextarea");
         textarea.innerHTML = '';
 
-        for(var i = 0; i < data.length; i++){
+        for (var i = 0; i < data.length; i++){
             textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data[i].substring(1) + '<i class="button__icon">clear</i></div>';
         }
 
         var element = document.getElementById('GroupSelector'); //Change to the id of the select
-        // if (element)
-        // {
+
             for (var i = 0; i < element.options.length; i++) {
                 element.options[i].selected = data.indexOf(element.options[i].value) >= 0;
 
             }
-            // for (var i = 0; i < select.options.length; i++)
-            // {
-            //     //Select options matching array values, unselect others
-            //     select.options[i].selected = in_array(select.options[i].value, data, false);
-            // }
-        // }
     }
 
     function appendChildrenForMode(parent, text, path) {
@@ -153,7 +140,10 @@
     var structure = { "\\": {} };
 
     // Build on the base structure by looping through each select item.
-    options.forEach(function (option) {
+    for (var option_i=0; option_i<options.length; option_i++) {
+
+        var option = options[option_i];
+
         if (option.textContent !== "") {
             // Seperate the group name into all its path segments
             var segments = option.textContent.split("\\");
@@ -161,16 +151,19 @@
             var nodeToCheck = structure["\\"];
 
             // For each segment ensure that all levels of the structure are in place.
-            segments.forEach(function (seg) {
+            for (var segment_i=0; segment_i<segments.length; segment_i++) { 
+
+                var seg = segments[segment_i];
+
                 if (seg !== "") {
                     if (!nodeToCheck[seg]) {
                         nodeToCheck[seg] = {};
                     }
                     nodeToCheck = nodeToCheck[seg];
                 }
-            });
-        }
-    });
+            }
+        }    
+    }
 
     // The base element that will be populated
     var treeContainer = document.createElement("ul");
@@ -190,9 +183,12 @@
                 var activeChildren = target.querySelectorAll(
                     ".group-selector__group--active"
                 );
-                activeChildren.forEach(function (activeChild) {
+
+                for (var ac_i=0; ac_i<activeChildren.length; ac_i++) {
+                    var activeChild = activeChildren[ac_i];
                     activeChild.classList.remove("group-selector__group--active");
-                });
+                }
+
             }
             // Open any closed parents that are clicked.
             else {
@@ -243,18 +239,21 @@
             childListItemWithChildren.appendChild(childList);            
             elementToAddTo.appendChild(childListItemWithChildren);
             // Call recursively with updated params for each child node
-          childKeys.forEach(function (childKey) {
-            if (childKey !== 'All contacts') {
-              displayChildKeys(
-                    childKey,
-                    currPath + "\\" + childKey,
-                    obj[childKey],
-                    childList,
-                    level + 1
-                );
-            }
+          
+            for (var ck_i=0; ck_i < childKeys.length; ck_i++) {
+                var childKey = childKeys[ck_i];
 
-            });
+                if (childKey !== 'All contacts') {
+                    displayChildKeys(
+                            childKey,
+                            currPath + "\\" + childKey,
+                            obj[childKey],
+                            childList,
+                            level + 1
+                        );
+                    }
+            }
+          
         }
     }
 
@@ -262,7 +261,8 @@
     displayChildKeys("All Contact Groups", "", structure["\\"], treeContainer, 1);
 
     // Replace the select list with the new tree
-    groupSelect.replaceWith(treeContainer);
+    groupSelect.parentNode.replaceChild(treeContainer, groupSelect);
+
     treeContainer.parentNode.appendChild(hiddenField);
 
 })("#Group", useCheckboxes);
