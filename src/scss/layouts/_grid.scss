@@ -14,7 +14,7 @@
 
   &--compact {
     @extend .grid;
-    -ms-grid-columns: 1fr 0 4fr 0 1fr 0 1fr;
+    -ms-grid-columns: 1fr 0 minmax(min-content, 720px) 0 minmax(min-content, 240px) 0 1fr;
     grid-template-columns: 1fr minmax(min-content, 720px) minmax(min-content, 240px) 1fr;
     grid-template-areas:
       ". header . ."
