@@ -89,17 +89,17 @@ ul {
                  padding-left: $pad;
                  width: 80%;
 
-                &:before {
-                    @extend .material-icons;
-                    display: inline-block;
-                    width: 1.2rem;
-                    height: 1.2rem;
-                    margin-right: $pad / 2;
-                    margin-top: $pad / 6;
-                    @include font-size(1.2);
-                    vertical-align: top;
-                    content: 'folder';
-                }
+                // &:before {
+                //     @extend .material-icons;
+                //     display: inline-block;
+                //     width: 1.2rem;
+                //     height: 1.2rem;
+                //     margin-right: $pad / 2;
+                //     margin-top: $pad / 6;
+                //     @include font-size(1.2);
+                //     vertical-align: top;
+                //     content: 'folder';
+                // }
 
             }
 
@@ -119,10 +119,36 @@ ul {
                 li {
                     a,
                     label {
-                        padding-left: $pad * 4;
+                        padding-left: $pad * 4.5;
                         background-image: none;
+                    }
 
-                        &:before {
+                    li {
+                        a,
+                        label {
+                            padding-left: $pad * 6.5;
+                            background-image: none;
+                        }
+
+                        li {
+                        a,
+                        label {
+                            padding-left: $pad * 8.5;
+                            background-image: none;
+                        }
+                    }
+                    }
+                }
+
+            }
+        }
+
+
+
+        .group-selector__group {
+            & > a,
+            label {
+                &:before {
                             @extend .material-icons;
                             display: inline-block;
                             width: 1.2rem;
@@ -133,10 +159,31 @@ ul {
                             vertical-align: top;
                             content: 'fiber_manual_record';
                         }
-                    }
-                }
+
             }
+
         }
+
+        .group-selector__group--parent {
+            & > a,
+            label {
+                &:before {
+                    @extend .material-icons;
+                    display: inline-block;
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    margin-right: $pad / 2;
+                    margin-top: $pad / 6;
+                    @include font-size(1.2);
+                    vertical-align: top;
+                    content: 'folder';
+                }
+
+            }
+
+        }
+
+
     }
     }
 }
