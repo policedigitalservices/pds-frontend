@@ -15,12 +15,26 @@
         groupTextarea.parentElement.classList.remove("is-hidden");
     };
 
+    if (groupTextarea !== null) {
+        groupTextarea.addEventListener('click', function(e) {
+            var target = e.target;
+            
+            if (target.matches(".tag>.button__icon") && target.hasAttribute('data-path')) {
+                var pathToUncheck = target.getAttribute("data-path").replace(/\\/g, "\\\\");
+                var cbSelector = 'input[type=checkbox].GroupItem[value="'+pathToUncheck+'"]';
+                var checboxToUncheck = document.querySelector(cbSelector);
+                if (checboxToUncheck) {
+                    checboxToUncheck.click();
+                }
+            }
+        });
+    }
+
     var searchParts = (function getUrlVars() {
         var vars = {};
         var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
             vars[key] = value;
         });
-        console.log(parts);
         return vars;
     })();
 
@@ -102,11 +116,12 @@
     }
     
     function populateGroupField(data) {
+        
         var textarea = document.getElementById("GroupTextarea");
         textarea.innerHTML = '';
 
         for (var i = 0; i < data.length; i++){
-            textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data[i].substring(1) + '<i class="button__icon">clear</i></div>';
+            textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data[i].substring(1) + '<i class="button__icon" data-path='+ data[i] +'>clear</i></div>';
         }
 
         var element = document.getElementById('GroupSelector'); //Change to the id of the select
