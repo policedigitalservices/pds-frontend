@@ -57,14 +57,17 @@
 
 .flex-start {
   justify-content: flex-start;
+  display: flex !important;
 }
 
 .flex-end {
   justify-content: flex-end;
+  display: flex !important;
 }
 
 .space-around {
   justify-content: space-around;
+  display: flex !important;
 }
 
 .space-justify {

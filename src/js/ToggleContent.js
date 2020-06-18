@@ -18,6 +18,15 @@ if (document.getElementById('Responses') !=null) {
                 responses[key].style.display = 'none';
             }
 
+            if (responses[key].querySelector("#remove_response") != null) {
+                responses[key].querySelector("#remove_response").addEventListener("click", function(el) {
+                    el.preventDefault();
+                    console.log('button clicked ' + key);
+                    removeResponse(key);
+
+                })
+            }
+
         });
 
         function validateResponse(key) {
@@ -32,6 +41,21 @@ if (document.getElementById('Responses') !=null) {
 
                 if (responses[key].style.display === 'none') {
                     responses[key].style.display = 'block';
+                    return false;
+                }
+
+                return true;
+
+            });
+        }
+
+        function removeResponse(key) {
+
+            keyArray.every(function(key){
+
+                if (responses[key].style.display === 'block') {
+                    responses[key].querySelector("[class~='response-option']").value = '';
+                    responses[key].style.display = 'none';
                     return false;
                 }
 
