@@ -115,9 +115,9 @@
             populateGroupField(data);
     }
     
-    function populateGroupField(data) {
-        
+    function populateGroupField(data) {        
         var textarea = document.getElementById("GroupTextarea");
+        if (textarea) {
         textarea.innerHTML = '';
 
         for (var i = 0; i < data.length; i++){
@@ -130,6 +130,7 @@
                 element.options[i].selected = data.indexOf(element.options[i].value) >= 0;
 
             }
+        }
     }
 
     function appendChildrenForMode(parent, text, path) {
