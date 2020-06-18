@@ -147,7 +147,7 @@ ul {
 
         .group-selector__group {
             & > a,
-            label {
+            & > label {
                 &:before {
                             @extend .material-icons;
                             display: inline-block;
@@ -166,7 +166,7 @@ ul {
 
         .group-selector__group--parent {
             & > a,
-            label {
+            & > label {
                 &:before {
                     @extend .material-icons;
                     display: inline-block;
