@@ -49,6 +49,7 @@ header,
 
   &__title {
     display: inline-block;
+    text-transform: uppercase;
     color: $white;
     text-decoration: none;
     @extend h3;

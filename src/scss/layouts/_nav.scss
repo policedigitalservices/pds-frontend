@@ -124,6 +124,8 @@
     @include font-size(1.875);
 
 
+    display: none;
+
 
     @media (min-width: $smallBreakpoint) {
       display: none;
@@ -157,5 +159,14 @@
   }
 }
 
+
+
+.primary {
+  display: none;
+
+  @media (min-width: $smallBreakpoint) {
+      display: flex;
+    }
+}
 
 
