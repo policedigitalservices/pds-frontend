@@ -12,7 +12,14 @@ const isDev = process.env.NODE_ENV !== "production";
 module.exports = {
   entry: {
     "dist/css/styles": ["./src/scss/styles.scss"],
-    "dist/js/scripts": ["./src/js/GroupsTree.js", "./src/js/side.js", "./src/js/ToggleContent.js", "./src/js/ToggleSidebar.js", "./src/js/tables.js"]
+    "dist/js/scripts": [
+      "./src/js/GroupsTree.js",
+      "./src/js/side.js",
+      "./src/js/ToggleContent.js",
+      "./src/js/ToggleSidebar.js",
+      "./src/js/tables.js",
+      "./src/js/SeeAll.js"
+    ]
   },
   output: {
     filename: "[name].js",
@@ -23,7 +30,7 @@ module.exports = {
   devServer: {
     contentBase: outputDir,
     compress: true,
-    port: 7263
+    port: 7264
   },
   plugins: [
     new CleanWebpackPlugin([outputDir]),
@@ -80,7 +87,7 @@ module.exports = {
       {
         test: /\.svg$/,
         loader: "file-loader"
-      },
+      }
       // {
       //   test: /\.(woff|woff2|eot|ttf|otf)$/,
       //   loader: "file-loader"
