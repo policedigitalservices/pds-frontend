@@ -5,6 +5,7 @@ aside,
   -ms-grid-column: 1;
   grid-area: sidebar;
   flex-grow: 1;
+  padding:  $pad * 2.7 0;
 
   width: 400px;
   background-color: $blue--medium;
