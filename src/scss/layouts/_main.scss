@@ -9,4 +9,9 @@ main,
     background-color: $blue--light;
     width: 100%;
     padding:  $pad * 2.7 0;
+
+    &--message {
+        width: $max-form-width/4 * 3;
+        margin: auto;
+    }
 }
