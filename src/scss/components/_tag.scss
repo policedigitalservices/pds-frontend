@@ -12,8 +12,17 @@
     border-radius: 4px;
     width: inherit;
     display: inline-block;
-    // padding-right: $pad * 2;
+    padding-right: $pad / 2;
     margin-right: $pad / 4;
+    line-height: 1.25;
+
+    i {
+        margin-right: 0;
+        margin-left: $pad / 8;
+        line-height: 1.15;
+        font-weight: 400;
+        cursor: pointer;
+    }
 
     &:hover {
     background-color: lighten($grey, 5%);
