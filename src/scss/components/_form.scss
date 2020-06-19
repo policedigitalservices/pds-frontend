@@ -1,7 +1,15 @@
+//hack
+p + form {
+  margin-left: $pad;
+}
+
 form,
 .form {
   display: inline-block;
   max-width: $max-form-width;
+  align-self: center;
+
+
   // width: 100%;
 
   &__label,
