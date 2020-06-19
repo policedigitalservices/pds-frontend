@@ -13,6 +13,7 @@ header,
     align-items: center;
     padding: 0;
     margin: 0;
+     align-self: flex-start;
   }
 
 
@@ -81,7 +82,7 @@ header,
 
     &:last-child {
       margin-right: 0;
-      margin-left: auto;
+      margin-left: 1rem;
     }
   }
 
