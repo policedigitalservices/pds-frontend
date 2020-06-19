@@ -18,7 +18,7 @@
     if (groupTextarea !== null) {
         groupTextarea.addEventListener('click', function(e) {
             var target = e.target;
-            
+
             if (target.matches(".tag>.button__icon") && target.hasAttribute('data-path')) {
                 var pathToUncheck = target.getAttribute("data-path").replace(/\\/g, "\\\\");
                 var cbSelector = 'input[type=checkbox].GroupItem[value="'+pathToUncheck+'"]';
@@ -114,8 +114,8 @@
 
             populateGroupField(data);
     }
-    
-    function populateGroupField(data) {        
+
+    function populateGroupField(data) {
         var textarea = document.getElementById("GroupTextarea");
         if (textarea) {
         textarea.innerHTML = '';
@@ -167,7 +167,7 @@
             var nodeToCheck = structure["\\"];
 
             // For each segment ensure that all levels of the structure are in place.
-            for (var segment_i=0; segment_i<segments.length; segment_i++) { 
+            for (var segment_i=0; segment_i<segments.length; segment_i++) {
 
                 var seg = segments[segment_i];
 
@@ -178,7 +178,7 @@
                     nodeToCheck = nodeToCheck[seg];
                 }
             }
-        }    
+        }
     }
 
     // The base element that will be populated
@@ -225,9 +225,9 @@
             // Add the link into an li, and append to the parent container
             var childListItem = document.createElement("li");
             childListItem.classList.add("group-selector__group");
-            
+
             appendChildrenForMode(childListItem, currText, currPath);
-            
+
             elementToAddTo.appendChild(childListItem);
 
         } else {
@@ -252,10 +252,10 @@
             // Create the container ready to be populated with the child nodes
             var childList = document.createElement("ul");
             childList.classList.add("group-selector__list");
-            childListItemWithChildren.appendChild(childList);            
+            childListItemWithChildren.appendChild(childList);
             elementToAddTo.appendChild(childListItemWithChildren);
             // Call recursively with updated params for each child node
-          
+
             for (var ck_i=0; ck_i < childKeys.length; ck_i++) {
                 var childKey = childKeys[ck_i];
 
@@ -269,7 +269,7 @@
                         );
                     }
             }
-          
+
         }
     }
 
