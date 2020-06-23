@@ -6,6 +6,7 @@
 (function (selector, useCheckboxes) {
 
     //Check on page whether Group Multi Select exists
+    var intiallySelectedNodes = [];
     var groupSelect = document.getElementById("GroupSelector");
     var groupTextarea = document.getElementById("GroupTextarea");
 
@@ -13,6 +14,13 @@
     if (groupSelect !== null) {
         groupSelect.parentElement.classList.add("is-hidden");
         groupTextarea.parentElement.classList.remove("is-hidden");
+
+        // Grab all the items that should be selected
+        var selectedOptionsNodes = groupSelect.querySelectorAll('option:checked');
+        
+        for (var i = 0; i < selectedOptionsNodes.length; i++){            
+           intiallySelectedNodes.push(selectedOptionsNodes[i].value);   
+        }
     };
 
     if (groupTextarea !== null) {
@@ -86,6 +94,7 @@
         checkbox.name = text;
         checkbox.value = path;
         checkbox.id = text;
+        checkbox.checked = intiallySelectedNodes.indexOf(path || '\\') >= 0;
 
         return checkbox;
     }
@@ -105,9 +114,7 @@
 
         var elems= document.querySelectorAll('.GroupItem')
             for (var i=0;i<elems.length;i++) {
-
                 if (elems[i].checked) {
-
                     data.push(elems[i].value);
                 }
             }
@@ -118,17 +125,17 @@
     function populateGroupField(data) {
         var textarea = document.getElementById("GroupTextarea");
         if (textarea) {
-        textarea.innerHTML = '';
+            textarea.innerHTML = '';
 
-        for (var i = 0; i < data.length; i++){
-            textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data[i].substring(1) + '<i class="button__icon" data-path='+ data[i] +'>clear</i></div>';
-        }
+            for (var i = 0; i < data.length; i++){
+                textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data[i].substring(1) + '<i class="button__icon" data-path='+ data[i] +'>clear</i></div>';
+            }
 
-        var element = document.getElementById('GroupSelector'); //Change to the id of the select
+            var element = document.getElementById('GroupSelector'); 
 
             for (var i = 0; i < element.options.length; i++) {
                 element.options[i].selected = data.indexOf(element.options[i].value) >= 0;
-
+        
             }
         }
     }
@@ -204,7 +211,6 @@
                     var activeChild = activeChildren[ac_i];
                     activeChild.classList.remove("group-selector__group--active");
                 }
-
             }
             // Open any closed parents that are clicked.
             else {
@@ -217,6 +223,7 @@
       Recursive function that builds the select list from the previous node structure.
     */
     function displayChildKeys(currText, currPath, obj, elementToAddTo, level) {
+        
         var childKeys = Object.keys(obj);
 
         if (!childKeys.length) {
@@ -276,10 +283,14 @@
     // The initial call of the recursive function starting at the root.
     displayChildKeys("All Contact Groups", "", structure["\\"], treeContainer, 1);
 
+ 
+
     // Replace the select list with the new tree
     groupSelect.parentNode.replaceChild(treeContainer, groupSelect);
-
     treeContainer.parentNode.appendChild(hiddenField);
+
+    transferValues();
+
 
 })("#Group", useCheckboxes);
 }
