@@ -2,6 +2,7 @@
     if(groupExist){
 
         var useCheckboxes = groupExist.hasAttribute('data-with-checkbox');
+        var lockRootNode = groupExist.hasAttribute('data-lock-root');
 
 (function (selector, useCheckboxes) {
 
@@ -94,7 +95,13 @@
         checkbox.name = text;
         checkbox.value = path;
         checkbox.id = text;
-        checkbox.checked = intiallySelectedNodes.indexOf(path || '\\') >= 0;
+
+        if (path === '' && lockRootNode) {
+            checkbox.checked = true;
+            checkbox.disabled = true;
+        } else {
+            checkbox.checked = intiallySelectedNodes.indexOf(path || '\\') >= 0;
+        }        
 
         return checkbox;
     }
@@ -114,7 +121,10 @@
 
         var elems= document.querySelectorAll('.GroupItem')
             for (var i=0;i<elems.length;i++) {
-                if (elems[i].checked) {
+
+                if (lockRootNode && !(elems[i].value)) {
+                    // No-operation
+                } else if (elems[i].checked) {
                     data.push(elems[i].value);
                 }
             }
