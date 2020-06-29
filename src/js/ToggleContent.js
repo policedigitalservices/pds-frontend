@@ -130,6 +130,28 @@ if (document.getElementById('add_group') !=null) {
     })("add_group");
 }
 
+var groupTextarea = document.getElementById("GroupTextarea");
+
+if (groupTextarea !== null) {
+    groupTextarea.addEventListener('click', function(e) {
+        var target = e.target;
+        var addGroupButton = document.querySelector("#add_group");
+
+        if (target.matches(".tag>.button__icon")) {
+            addGroupButton.classList.add("is-hidden");
+            addGroupButton.blur();
+            addGroupButton.disabled = true;
+
+            if (document.getElementById('add_group') !=null) {
+
+                var saveGroupButton = document.querySelector("#save_group");
+                saveGroupButton.classList.remove("is-hidden");
+
+            }
+        }
+    });
+}
+
 if (document.querySelectorAll('input.input-validation-error') !=null) {
 
     var inputErrors = document.querySelectorAll('input.input-validation-error');
