@@ -132,12 +132,14 @@ if (document.getElementById('add_group') !=null) {
 
 var groupTextarea = document.getElementById("GroupTextarea");
 
-if (groupTextarea !== null) {
+if (groupTextarea != null) {
     groupTextarea.addEventListener('click', function(e) {
-        var target = e.target;
+
+        var target2 = e.target;
         var addGroupButton = document.querySelector("#add_group");
 
-        if (target.matches(".tag>.button__icon")) {
+        if (target2.matches(".button__icon") && target2.hasAttribute('data-path')) {
+
             addGroupButton.classList.add("is-hidden");
             addGroupButton.blur();
             addGroupButton.disabled = true;
