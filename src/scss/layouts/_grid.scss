@@ -5,21 +5,34 @@
   grid-gap: 0;
   -ms-grid-columns: auto 0 5fr;
   grid-template-columns: auto 5fr;
-  -ms-grid-rows: auto 0 1fr 0 auto;
+  // -ms-grid-rows: auto 0 1fr 0 auto;
   grid-template-rows: auto 1fr auto;
+
+  -ms-grid-rows: auto 0 minmax(min-content, 100%) 0 auto;
+
   grid-template-areas:
     "header header"
     "sidebar main"
     "footer footer";
+}
 
-  &--compact {
-    @extend .grid;
+.grid--compact {
+
+  height: 100%;
+  display: -ms-grid;
+  display: grid;
+  // display: flex;
+  grid-gap: 0;
+  -ms-grid-columns: auto 0 5fr;
+  grid-template-columns: auto 5fr;
+  -ms-grid-rows: auto 0 1fr 0 auto;
+  grid-template-rows: auto 1fr auto;
+
     -ms-grid-columns: 1fr 0 minmax(min-content, 720px) 0 minmax(min-content, 240px) 0 1fr;
     grid-template-columns: 1fr minmax(min-content, 720px) minmax(min-content, 240px) 1fr;
     grid-template-areas:
       ". header . ."
       ". action hint ."
-  }
 }
 
 
