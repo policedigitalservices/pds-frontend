@@ -197,8 +197,15 @@
     }
 
     function handleCheckboxClick(checkbox) {
+
+
         var parentLi = checkbox.parentNode;
+        console.log(parentLi.classList.contains, parentLi.classList.contains('group-selector__group--parent'));
+
         if (parentLi.classList.contains('group-selector__group--parent')){
+
+            console.log('IN PARENT CONTAINS', parentLi.classList.contains);
+
             var childCheckboxes = parentLi.querySelectorAll('input[type=checkbox');
             if (checkbox.checked) {
                 forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, function(checkboxToUpdate) {
@@ -312,10 +319,8 @@
 
             // Create the li with the link contained
             var childListItemWithChildren = document.createElement("li");
-            childListItemWithChildren.classList.add(
-                "group-selector__group",
-                "group-selector__group--parent"
-            );
+            childListItemWithChildren.classList.add("group-selector__group");
+            childListItemWithChildren.classList.add("group-selector__group--parent");
 
             if (level === 1 || shouldParentBeOpen(currPath)) {
                 // Open first level children by default
