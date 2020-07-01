@@ -1,4 +1,6 @@
-﻿ var groupExist = document.getElementById("Group");
+﻿const { data } = require("jquery");
+
+ var groupExist = document.getElementById("Group");
     if(groupExist){
 
         var useCheckboxes = groupExist.hasAttribute('data-with-checkbox');
@@ -88,22 +90,32 @@
     }
 
     // Helper function to build checkbox label for the group
-    function buildCheckbox(text, path) {
+    function buildCheckbox(text, path, parentChecked) {
         var checkbox = document.createElement('input');
         checkbox.type = "checkbox";
         checkbox.setAttribute("class", "GroupItem");
         checkbox.name = text;
         checkbox.value = path;
         checkbox.id = text;
+        var newParentSelected = parentChecked;
 
         if (path === '' && lockRootNode) {
+            // In this mode the root node should be disabled and checked BUT the children of this node should act as though it isnt checked so we dont update the selected state
             checkbox.checked = true;
             checkbox.disabled = true;
-        } else {
-            checkbox.checked = intiallySelectedNodes.indexOf(path || '\\') >= 0;
+        } else if (parentChecked) {
+            // If a parent node is selected all its children should be disabled and unchecked
+            checkbox.checked = false;
+            checkbox.disabled = true;
+        }
+        else {
+            // If a parent node is not checked its children selected state depend on the childs value, and not be disabled
+            var newChecked = intiallySelectedNodes.indexOf(path || '\\') >= 0;
+            checkbox.checked = newChecked;
+            newParentSelected = newChecked;
         }        
 
-        return checkbox;
+        return {checkbox, newParentSelected};
     }
 
     // Helper function to build checkbox for the group
@@ -133,30 +145,71 @@
     }
 
     function populateGroupField(data) {
+
         var textarea = document.getElementById("GroupTextarea");
         if (textarea) {
             textarea.innerHTML = '';
 
-            for (var i = 0; i < data.length; i++){
-                textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data[i].substring(1) + '<i class="button__icon" data-path='+ data[i] +'>clear</i></div>';
-            }
-
             var element = document.getElementById('GroupSelector'); 
 
+            var existingOptionValues = Array.from(element.options).map(opt => opt.value);
+
+            for (var data_i = 0; data_i < data.length; data_i++){
+                var data_current = data[data_i];
+                textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data_current.substring(1) + '<i class="button__icon" data-path='+ data_current +'>clear</i></div>';
+
+                // Ensure the option exists - add it if not
+                if (existingOptionValues.indexOf(data_current) < 0) {
+                    var newOption = document.createElement('option');
+                    newOption.selected = true;
+                    newOption.value = data_current;
+                    newOption.innerText = data_current;""
+                    element.appendChild(newOption);
+                }
+            }
+
             for (var i = 0; i < element.options.length; i++) {
-                element.options[i].selected = data.indexOf(element.options[i].value) >= 0;
-        
+                element.options[i].selected = data.indexOf(element.options[i].value) >= 0;        
             }
         }
     }
 
-    function appendChildrenForMode(parent, text, path) {
+    function appendChildrenForMode(parent, text, path, parentChecked) {
         if (useCheckboxes) {
             parent.appendChild(buildCheckboxLabel(text, path));
-            parent.appendChild(buildCheckbox(text, path));
+            var checkboxResult = buildCheckbox(text, path, parentChecked);
+            parent.appendChild(checkboxResult.checkbox);
+            return checkboxResult.newParentSelected;
         } else {
             // Create the link to refresh page with selected node.
             parent.appendChild(buildLink(text, path));
+            return parentChecked;
+        }
+    }
+
+    function forEachCheckboxExcludingCurrent(current, children, updaterFn) {
+        for (var i = 0; i < children.length; i++) {
+            var currentLoopChild = children[i];
+            if (currentLoopChild !== current) {
+                updaterFn(currentLoopChild);
+            }
+        }
+    }
+
+    function handleCheckboxClick(checkbox) {
+        var parentLi = checkbox.parentNode;
+        if (parentLi.classList.contains('group-selector__group--parent')){
+            var childCheckboxes = parentLi.querySelectorAll('input[type=checkbox');
+            if (checkbox.checked) {
+                forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, function(checkboxToUpdate) {
+                    checkboxToUpdate.disabled = true;
+                    checkboxToUpdate.checked = false;
+                });
+            } else {
+                forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, function(checkboxToUpdate) {
+                    checkboxToUpdate.disabled = false;
+                });
+            }
         }
     }
 
@@ -206,6 +259,11 @@
     treeContainer.addEventListener("click", function (e) {
         var target = e.target;
 
+        // Handle checkbox items being selected.
+        if (target.matches('input[type=checkbox]')) {
+            handleCheckboxClick(target);
+        }
+
         transferValues();
 
         // We only care about clicks on elements that are parents
@@ -232,9 +290,11 @@
     /*
       Recursive function that builds the select list from the previous node structure.
     */
-    function displayChildKeys(currText, currPath, obj, elementToAddTo, level) {
+    function displayChildKeys(currText, currPath, obj, elementToAddTo, level, parentsChecked) {
         
         var childKeys = Object.keys(obj);
+
+        var parentCheckedState = parentsChecked;
 
         if (!childKeys.length) {
             // This is at the bottom i.e. no children to process
@@ -243,7 +303,7 @@
             var childListItem = document.createElement("li");
             childListItem.classList.add("group-selector__group");
 
-            appendChildrenForMode(childListItem, currText, currPath);
+            appendChildrenForMode(childListItem, currText, currPath, parentCheckedState);
 
             elementToAddTo.appendChild(childListItem);
 
@@ -264,7 +324,7 @@
                 );
             }
 
-            appendChildrenForMode(childListItemWithChildren, currText, currPath);
+            parentCheckedState = appendChildrenForMode(childListItemWithChildren, currText, currPath, parentCheckedState);
 
             // Create the container ready to be populated with the child nodes
             var childList = document.createElement("ul");
@@ -282,7 +342,8 @@
                             currPath + "\\" + childKey,
                             obj[childKey],
                             childList,
-                            level + 1
+                            level + 1,
+                            parentCheckedState 
                         );
                     }
             }
@@ -291,9 +352,8 @@
     }
 
     // The initial call of the recursive function starting at the root.
-    displayChildKeys("All Contact Groups", "", structure["\\"], treeContainer, 1);
+    displayChildKeys("All Contact Groups", "", structure["\\"], treeContainer, 1, false);
 
- 
 
     // Replace the select list with the new tree
     groupSelect.parentNode.replaceChild(treeContainer, groupSelect);
