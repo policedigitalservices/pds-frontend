@@ -1,6 +1,4 @@
-﻿const { data } = require("jquery");
-
- var groupExist = document.getElementById("Group");
+﻿ var groupExist = document.getElementById("Group");
     if(groupExist){
 
         var useCheckboxes = groupExist.hasAttribute('data-with-checkbox');
