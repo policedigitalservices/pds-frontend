@@ -78,7 +78,9 @@ form,
 
     &.input-validation-error,
     &.field-validation-error {
-      border: 2px solid $red;
+      // border: 2px solid $red;
+      border-width: 2px;
+      border-color: $red;
 
       & + span {
         margin-bottom: 0;
@@ -87,6 +89,20 @@ form,
         @extend .caption;
 
         color: $red;
+      }
+
+      & + button {
+        border-width: 2px;
+        border-color: $red;
+
+        & + span {
+          margin-bottom: 0;
+          margin-left: $pad;
+
+          @extend .caption;
+
+          color: $red;
+        }
       }
     }
 
@@ -148,7 +164,7 @@ input,
 
       &--remove {
         &:before {
-          content: 'remove_circle';
+          content: 'clear';
           color: $grey--medium;
         }
       }
@@ -157,6 +173,25 @@ input,
         &:before {
           content: 'add_circle';
           color: $grey--medium;
+        }
+      }
+
+      &--save {
+        &:before {
+          content: 'save';
+          color: $blue;
+
+          font-family: Roboto, sans-serif;
+          -moz-osx-font-smoothing: grayscale;
+          -webkit-font-smoothing: antialiased;
+          font-weight: 500;
+          letter-spacing: .0892857143em;
+          text-decoration: none;
+          text-transform: uppercase;
+          font-size: 14px;
+          position: absolute;
+          right: 1rem;
+          top: 1.3rem;
         }
       }
     }
