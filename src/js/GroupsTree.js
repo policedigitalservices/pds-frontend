@@ -198,11 +198,8 @@
 
 
         var parentLi = checkbox.parentNode;
-        console.log(parentLi.classList.contains, parentLi.classList.contains('group-selector__group--parent'));
 
         if (parentLi.classList.contains('group-selector__group--parent')){
-
-            console.log('IN PARENT CONTAINS', parentLi.classList.contains);
 
             var childCheckboxes = parentLi.querySelectorAll('input[type=checkbox');
             if (checkbox.checked) {
