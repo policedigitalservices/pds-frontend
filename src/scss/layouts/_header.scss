@@ -79,14 +79,58 @@ header,
   -ms-grid-column: 3;
   grid-area: header;
 
-  padding: $pad;
+  padding: 0;
   overflow: hidden;
-  position: relative;
+
+
   display: none;
+
+  .grid--compact & {
+
+    position: fixed;
+  top: 0;
+  z-index: 9999;
+  background-color: $blue;
+  display: flex;
+
+  h4,
+  .h4,
+  .h4  {
+        margin: 0;
+      padding: 1.2rem 1rem;
+      color: $white;
+      font-weight: 500;
+font-size: 20px;
+line-height: 23px;
+letter-spacing: 0.15px;
+
+
+  }
+
+  .h4 a {
+    padding: 0;
+    color: $white;
+    margin-left: -.5rem;
+    margin-right: .5rem;
+    line-height: 24px;
+    font-size: 24px;
+  }
+}
+  // display: none;
 
   @media (min-width: $smallBreakpoint) {
     padding: 0 $pad;
     display: flex;
+    position: relative;
+    z-index: 3;
+    background-color: transparent;
+
+    h4,
+    .h4 {
+      color: $black;
+      padding: inherit;
+      margin: 0 0 1rem;
+    }
   }
 
   h5,

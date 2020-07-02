@@ -29,7 +29,27 @@
     padding-left: 0 $pad;
     padding-top: $pad * 2;
 
+    label {
+        float: right;
+        padding: $pad 0;
+        @extend .button;
+        @extend .button--transparent;
+        @extend .button--small;
+
+        @media (min-width: $smallBreakpoint) {
+            display: none;
+        }
+    }
 }
+
+#snackbox {
+  display: none;
+}
+
+#snackbox:checked ~ .hint {
+  display: none;
+}
+
 
 .action {
     -ms-grid-row: 3;
