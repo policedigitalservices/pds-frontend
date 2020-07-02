@@ -5,6 +5,7 @@ table {
   border-spacing: 0;
     table-layout: fixed;
     border-collapse: separate;
+    white-space: nowrap;
 
   tr {
 
@@ -24,8 +25,11 @@ table {
       padding: $pad;
       border-bottom: 1px solid $grey;
       color: $black--medium;
+      text-overflow: ellipsis;
+      overflow: hidden;
 
-     @extend .body1;
+      @extend .body1;
+
 
       a {
         text-decoration: none;

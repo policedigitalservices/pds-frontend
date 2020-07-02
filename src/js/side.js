@@ -1,12 +1,12 @@
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 
-function menuToggle() {
-   var asideExist = document.getElementById("aside");
-    if(asideExist){
-  document.getElementById("aside").classList.toggle("aside--active");
-}
-}
+// function menuToggle() {
+//    var asideExist = document.getElementById("aside");
+//     if(asideExist){
+//   document.getElementById("aside").classList.toggle("aside--active");
+// }
+// }
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
@@ -36,12 +36,34 @@ addGroupButton.addEventListener("click", function(el) {
     })
 }
 
+var closeSidebar = document.querySelector('#close_sidebar');
+
+if (closeSidebar) {
+
+closeSidebar.addEventListener("click", function(el) {
+  console.log('clicked');
+
+        // addGroupButton.style.display = 'none';
+        el.preventDefault();
+        toggleSidebar();
+    })
+}
 
 function toggleSidebar() {
-  var x = document.getElementById("Sidebar");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+  var x = document.getElementById("sidebar");
+  var y = document.getElementById("main");
+  console.log('we\'re here');
+  // if (x.style.display === "none") {
+  //   x.style.display = "block";
+    if (!x.classList.contains('aside--active')) {
+        x.classList.add('aside--active');
+        // y.classList.add('main--hidden');
+      // }
+  } else if (x.classList.contains('aside--active')) {
+        x.classList.remove('aside--active');
+        // y.classList.remove('main--hidden');
+      // }
   }
+
+
 }

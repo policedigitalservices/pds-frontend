@@ -95,9 +95,16 @@ p {
 
 .body1 {
   font-weight: normal;
-font-size: 18px;
-line-height: 28px;
-letter-spacing: 0.5px;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+
+
+  @media (min-width: $smallBreakpoint) {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.5px;
+  }
 }
 
 // Text Styles

@@ -1,5 +1,18 @@
 
 .hint {
+
+    @media (max-width: $smallBreakpoint) {
+        background: $black;
+        color: $white;
+        position: fixed;
+        bottom: 0;
+        padding: $pad;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+        width: 100%;
+    }
     -ms-grid-row: 3;
     -ms-grid-column: 5;
     grid-area: hint;
@@ -26,6 +39,8 @@
 
     margin: 0;
     padding: 0 $pad;
+
+
 
     form {
         width: 100%;

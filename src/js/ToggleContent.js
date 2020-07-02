@@ -123,7 +123,10 @@ if (document.getElementById('add_group') !=null) {
             if (document.getElementById('add_group') !=null) {
 
                 var saveGroupButton = document.querySelector("#save_group");
-                saveGroupButton.classList.remove("is-hidden");
+
+                if (saveGroupButton !=null) {
+                    saveGroupButton.classList.remove("is-hidden");
+                }
 
             }
         })

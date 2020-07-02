@@ -4,9 +4,9 @@
 
   @include grid-column(2, 14);
 
-  // @media (min-width: $smallBreakpoint) {
-  //   padding: 0;
-  // }
+  @media (min-width: $smallBreakpoint) {
+    padding: 0;
+  }
 }
 
 .nav {
@@ -124,7 +124,7 @@
     @include font-size(1.875);
 
 
-    display: none;
+    // display: none;
 
 
     @media (min-width: $smallBreakpoint) {
@@ -159,14 +159,33 @@
   }
 }
 
-
+nav {
+  @media (max-width: $smallBreakpoint) {
+    width: 100%;
+  }
+}
 
 .primary {
-  display: none;
+  // display: none;
+  display: block;
 
-  @media (min-width: $smallBreakpoint) {
+  // @media (min-width: $smallBreakpoint) {
+    display: flex;
+
+    @media (max-width: $smallBreakpoint) {
       display: flex;
+      flex-direction: row;
     }
-}
+
+
+
+    li {
+      @media (max-width: $smallBreakpoint) {
+        flex-grow: 1;
+        flex-basis: 0;
+        text-align: center;
+      }
+    }
+  }
 
 

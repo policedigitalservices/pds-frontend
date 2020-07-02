@@ -149,6 +149,12 @@ font-weight: 400;
 
   &--small {
     padding: .445rem .875rem;
+    // font-size: 14px;
+
+    .material-icons {
+      font-size: 16px;
+      margin-right: $pad / 4;
+    }
   }
 
   &--transparent {

@@ -13,6 +13,8 @@ footer,
     grid-area: footer;
     flex-shrink: 0;
 
+    @extend .body1;
+
     background-color: $blue--light;
     color: $black;
     padding: $pad;
