@@ -2,9 +2,10 @@
     if(groupExist){
 
         var useCheckboxes = groupExist.hasAttribute('data-with-checkbox');
+        var useSingleSelectCheckbox = groupExist.hasAttribute('data-with-single-select-checkbox');
         var lockRootNode = groupExist.hasAttribute('data-lock-root');
 
-(function (selector, useCheckboxes) {
+(function (selector, useCheckboxes, useSingleSelectCheckbox) {
 
     //Check on page whether Group Multi Select exists
     var intiallySelectedNodes = [];
@@ -173,7 +174,7 @@
     }
 
     function appendChildrenForMode(parent, text, path, parentChecked) {
-        if (useCheckboxes) {
+        if (useCheckboxes || useSingleSelectCheckbox) {
             parent.appendChild(buildCheckboxLabel(text, path));
             var checkboxResult = buildCheckbox(text, path, parentChecked);
             parent.appendChild(checkboxResult.checkbox);
@@ -196,11 +197,20 @@
 
     function handleCheckboxClick(checkbox) {
 
+        if (useSingleSelectCheckbox) {
+            // In this mode only one item can be selected, and the selected item cannot be deseleted.
+            if (checkbox.checked) {
+                var allGroupCheckboxes = document.querySelectorAll('.group-selector__list--root input[type=checkbox]');
+                forEachCheckboxExcludingCurrent(checkbox, allGroupCheckboxes, function(checkboxToUpdate) {
+                    checkboxToUpdate.checked = false;
+                });
+            } else {
+                checkbox.checked = true;
+            }
+        }
+        else if (parentLi.classList.contains('group-selector__group--parent')){
 
-        var parentLi = checkbox.parentNode;
-
-        if (parentLi.classList.contains('group-selector__group--parent')){
-
+            var parentLi = checkbox.parentNode;
             var childCheckboxes = parentLi.querySelectorAll('input[type=checkbox');
             if (checkbox.checked) {
                 forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, function(checkboxToUpdate) {
@@ -256,6 +266,7 @@
     // The base element that will be populated
     var treeContainer = document.createElement("ul");
     treeContainer.classList.add("group-selector__list");
+    treeContainer.classList.add("group-selector__list--root");
 
     // Handle all the clicks at the parent level
     treeContainer.addEventListener("click", function (e) {
@@ -362,5 +373,5 @@
     transferValues();
 
 
-})("#Group", useCheckboxes);
+})("#Group", useCheckboxes, useSingleSelectCheckbox);
 }
