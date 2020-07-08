@@ -112,7 +112,22 @@
             var newChecked = intiallySelectedNodes.indexOf(path || '\\') >= 0;
             checkbox.checked = newChecked;
             newParentSelected = newChecked;
-        }        
+        }
+        
+        // Style as a radio button
+        if (useSingleSelectCheckbox) {
+            var label = document.createElement('label');
+            label.classList.add('radio-checkbox');
+            var checkSpan = document.createElement('span');
+            checkSpan.classList.add('radio-checkbox__check');
+            var borderSpan = document.createElement('span');
+            borderSpan.classList.add('radio-checkbox__border');
+            borderSpan.appendChild(checkbox);
+            borderSpan.appendChild(checkSpan);
+            label.appendChild(borderSpan);
+            checkbox.classList.add('radio-checkbox__input');
+            checkbox = label;
+        }
 
         return {checkbox, newParentSelected};
     }
