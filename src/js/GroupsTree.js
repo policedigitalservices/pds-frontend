@@ -195,16 +195,21 @@
         }
     }
 
-    function handleCheckboxClick(checkbox) {
+    function handleCheckboxClick(e, checkbox) {
 
         if (useSingleSelectCheckbox) {
+
+
+
             // In this mode only one item can be selected, and the selected item cannot be deseleted.
             if (checkbox.checked) {
                 var allGroupCheckboxes = document.querySelectorAll('.group-selector__list--root input[type=checkbox]');
                 forEachCheckboxExcludingCurrent(checkbox, allGroupCheckboxes, function(checkboxToUpdate) {
                     checkboxToUpdate.checked = false;
                 });
-            } else {
+            } 
+            else {
+                e.preventDefault();
                 checkbox.checked = true;
             }
         }
@@ -274,7 +279,7 @@
 
         // Handle checkbox items being selected.
         if (target.matches('input[type=checkbox]')) {
-            handleCheckboxClick(target);
+            handleCheckboxClick(e, target);
         }
 
         transferValues();
