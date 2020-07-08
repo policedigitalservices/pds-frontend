@@ -211,10 +211,10 @@
     }
 
     function handleCheckboxClick(e, checkbox) {
+        
+        var parentLi = checkbox.parentNode;
 
         if (useSingleSelectCheckbox) {
-
-
 
             // In this mode only one item can be selected, and the selected item cannot be deseleted.
             if (checkbox.checked) {
@@ -230,7 +230,7 @@
         }
         else if (parentLi.classList.contains('group-selector__group--parent')){
 
-            var parentLi = checkbox.parentNode;
+            
             var childCheckboxes = parentLi.querySelectorAll('input[type=checkbox');
             if (checkbox.checked) {
                 forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, function(checkboxToUpdate) {
