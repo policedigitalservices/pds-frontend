@@ -15,6 +15,7 @@ steps:
     azureSubscription: 'Courier (Azure)'
     appName: 'aspolice-courier'
     resourceGroupName: 'courier'
+    slotName: 'staging'
     appSettings: |
       [
         {
