@@ -147,11 +147,7 @@
 
         var elems= document.querySelectorAll('.GroupItem')
 
-       // console.log(elems);
-
             for (var i=0;i<elems.length;i++) {
-
-               // console.log(elems[i], elems[i].checked);
 
                 if (lockRootNode && !(elems[i].value)) {
                     // No-operation
@@ -390,11 +386,8 @@
     // The initial call of the recursive function starting at the root.
     displayChildKeys("All Contact Groups", "", structure["\\"], treeContainer, 1, false);
 
-    // TODO: Swap these two lines back over. 
-
     // Replace the select list with the new tree
-    groupSelect.parentNode.appendChild(treeContainer);
-    //groupSelect.parentNode.replaceChild(treeContainer, groupSelect);
+    groupSelect.parentNode.replaceChild(treeContainer, groupSelect);
 
     treeContainer.parentNode.appendChild(hiddenField);
 
