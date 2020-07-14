@@ -20,8 +20,8 @@
         // Grab all the items that should be selected
         var selectedOptionsNodes = groupSelect.querySelectorAll('option:checked');
         
-        for (var i = 0; i < selectedOptionsNodes.length; i++){            
-           intiallySelectedNodes.push(selectedOptionsNodes[i].value);   
+        for (var i = 0; i < selectedOptionsNodes.length; i++){ 
+           intiallySelectedNodes.push(selectedOptionsNodes[i].value || "\\");   
         }
     };
 
@@ -102,7 +102,7 @@
             // In this mode the root node should be disabled and checked BUT the children of this node should act as though it isnt checked so we dont update the selected state
             checkbox.checked = true;
             checkbox.disabled = true;
-        } else if (parentChecked) {
+        } else if (parentChecked && !useSingleSelectCheckbox) {
             // If a parent node is selected all its children should be disabled and unchecked
             checkbox.checked = false;
             checkbox.disabled = true;
@@ -146,7 +146,12 @@
         var data = [];
 
         var elems= document.querySelectorAll('.GroupItem')
+
+       // console.log(elems);
+
             for (var i=0;i<elems.length;i++) {
+
+               // console.log(elems[i], elems[i].checked);
 
                 if (lockRootNode && !(elems[i].value)) {
                     // No-operation
@@ -385,13 +390,15 @@
     // The initial call of the recursive function starting at the root.
     displayChildKeys("All Contact Groups", "", structure["\\"], treeContainer, 1, false);
 
+    // TODO: Swap these two lines back over. 
 
     // Replace the select list with the new tree
-    groupSelect.parentNode.replaceChild(treeContainer, groupSelect);
+    groupSelect.parentNode.appendChild(treeContainer);
+    //groupSelect.parentNode.replaceChild(treeContainer, groupSelect);
+
     treeContainer.parentNode.appendChild(hiddenField);
 
     transferValues();
-
 
 })("#Group", useCheckboxes, useSingleSelectCheckbox);
 }
