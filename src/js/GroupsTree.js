@@ -291,6 +291,7 @@
     treeContainer.classList.add("group-selector__list");
     treeContainer.classList.add("group-selector__list--root");
 
+
     // Handle all the clicks at the parent level
     treeContainer.addEventListener("click", function (e) {
         var target = e.target;
@@ -335,7 +336,8 @@
         var childListItem = document.createElement("li");        
         childListItem.classList.add("group-selector__group");
 
-        if (isSelectedGroup(currPath)) {
+        if (!useCheckboxes && !useSingleSelectCheckbox && isSelectedGroup(currPath)) {
+            // Only add the current state when in the 'link mode'
             childListItem.classList.add("group-selector__group--current");
         }
         
