@@ -63,14 +63,15 @@
         if (!groupParam) {
             return false;
         }
-        var pathToCheck = path + "\\";
+        var pathToCheck = (path + "\\");
         return groupParam.startsWith(pathToCheck) && groupParam != pathToCheck;
     }
 
     // Function to check if the node being added is the currentlySelectedGroup
     function isSelectedGroup(path) {
         var paramsToCheck = groupParam || "\\";
-        var pathToCheck = path || "\\";
+        var pathToCheck = (path || "\\").replace(/ /g, '%20');
+
         return paramsToCheck === pathToCheck;
     }
 
@@ -81,10 +82,11 @@
         link.href = getPagePathForGroup(path);
         link.classList.add("group-selector__link");
 
-        // We dont want the current class to be added if doing a search
-        if ((!searchParam) &&  isSelectedGroup(path)) {
-            link.classList.add("group-selector__link--current");
-        }
+        // NB.  Originally we didnt want the current class to be added if doing a search, but think we do now.
+        // if ((!searchParam) &&  isSelectedGroup(path)) {
+        // if (isSelectedGroup(path)) {
+        //     link.classList.add("group-selector__link--current");
+        // }
         return link;
     }
 
@@ -329,13 +331,16 @@
         var childKeys = Object.keys(obj);
 
         var parentCheckedState = parentsChecked;
+        
+        var childListItem = document.createElement("li");        
+        childListItem.classList.add("group-selector__group");
 
+        if (isSelectedGroup(currPath)) {
+            childListItem.classList.add("group-selector__group--current");
+        }
+        
         if (!childKeys.length) {
-            // This is at the bottom i.e. no children to process
-
-            // Add the link into an li, and append to the parent container
-            var childListItem = document.createElement("li");
-            childListItem.classList.add("group-selector__group");
+            // This is at the bottom of a branch i.e. no children to process
 
             appendChildrenForMode(childListItem, currText, currPath, parentCheckedState);
 
@@ -344,25 +349,22 @@
         } else {
             // This node has children to process
 
-            // Create the li with the link contained
-            var childListItemWithChildren = document.createElement("li");
-            childListItemWithChildren.classList.add("group-selector__group");
-            childListItemWithChildren.classList.add("group-selector__group--parent");
+            childListItem.classList.add("group-selector__group--parent");
 
             if (level === 1 || shouldParentBeOpen(currPath)) {
                 // Open first level children by default
-                childListItemWithChildren.classList.add(
+                childListItem.classList.add(
                     "group-selector__group--active"
                 );
             }
 
-            parentCheckedState = appendChildrenForMode(childListItemWithChildren, currText, currPath, parentCheckedState);
+            parentCheckedState = appendChildrenForMode(childListItem, currText, currPath, parentCheckedState);
 
             // Create the container ready to be populated with the child nodes
             var childList = document.createElement("ul");
             childList.classList.add("group-selector__list");
-            childListItemWithChildren.appendChild(childList);
-            elementToAddTo.appendChild(childListItemWithChildren);
+            childListItem.appendChild(childList);
+            elementToAddTo.appendChild(childListItem);
             // Call recursively with updated params for each child node
 
             for (var ck_i=0; ck_i < childKeys.length; ck_i++) {
