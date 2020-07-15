@@ -72,6 +72,22 @@ form,
     width: 100%;
     font-size: 100%;
 
+    .tag {
+      background-color: transparent;
+      color: $black;
+      padding: 0;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: transparent;
+      }
+
+      i {
+        display: none;
+      }
+    }
+
     & + .button {
       margin: 0;
     }
