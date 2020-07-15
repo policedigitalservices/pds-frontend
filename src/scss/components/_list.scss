@@ -49,6 +49,10 @@ ul {
                     display: inline-block;
                     padding-left: $pad;
                     width: 80%;
+                    @extend .body1;
+                    font-size: 100%;
+                    letter-spacing: 0;
+                    margin-bottom: 0;
                 }
 
                 label:nth-child(2) {
