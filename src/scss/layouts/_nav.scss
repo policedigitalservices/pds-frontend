@@ -35,9 +35,13 @@
   &__item {
 
     color: $white;
-    padding: $pad;
+    padding: $pad / 2 $pad;
     border-bottom: 4px solid transparent;
     border-top: 4px solid transparent;
+
+    @media (min-width: $smallBreakpoint) {
+      padding: $pad;
+    }
 
     &:hover {
       text-decoration: none;
@@ -188,4 +192,111 @@ nav {
     }
   }
 
+
+
+  .search {
+    display: none;
+
+
+    @media (min-width: $smallBreakpoint) {
+      display: block;
+    }
+
+
+
+    &.menu--active {
+      display: inline-block;
+      position: fixed;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+      background-color: $white;
+      color: $black;
+      right: 0;
+    top: 0;
+    box-shadow: none;
+    left: 0;
+
+      form {
+        width: 100%;
+        margin: 0;
+      }
+
+      input {
+        border: none;
+        min-height: 3.1rem;
+        padding-top: .9rem;
+
+      }
+    }
+  }
+
+
+  .menu {
+    display: none;
+
+    right: $pad;
+    top: $pad;
+
+    @media (min-width: $smallBreakpoint) {
+      display: block;
+    }
+
+
+    &--active {
+      display: inline-block;
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+      background-color: $white;
+      color: $black;
+      box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+    }
+  }
+
+  .list {
+    margin: 0 !important;
+    margin-left: 0;
+    display: block;
+
+    padding: $pad / 2 0;
+    list-style-type: none;
+
+    .button {
+      color: $black;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+
+    &--item {
+      display: -ms-flexbox;
+      display: flex;
+      position: relative;
+      -ms-flex-align: center;
+      align-items: center;
+      -ms-flex-pack: start;
+      justify-content: flex-start;
+      padding: $pad / 2 $pad;
+      overflow: hidden;
+
+      &:hover,
+      &:focus {
+        background-color: rgba($grey--light, 0.12);
+        border-color: transparent;
+      }
+
+      @extend .body1;
+
+      a {
+        &:hover {
+          border-color: transparent;
+        }
+      }
+    }
+
+
+
+  }
 

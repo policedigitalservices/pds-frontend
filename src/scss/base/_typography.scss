@@ -59,11 +59,27 @@ h3,
 
 h4,
 .h4 {
-  @include font-size(1.25);
+
+  @include font-size(1.125);
 
   font-weight: 400;
-  font-size: 34px;
-  line-height: 40px;
+  font-size: 24px;
+  line-height: 28px;
+
+  @media (max-width: $smallBreakpoint) {
+
+    letter-spacing: 0;
+
+  }
+
+  @media (min-width: $smallBreakpoint) {
+
+    @include font-size(1.25);
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 40px;
+
+  }
 }
 
 h5,

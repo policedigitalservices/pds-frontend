@@ -3,11 +3,14 @@ table {
   border-top: 1px solid $grey;
   width: 100%;
   border-spacing: 0;
-    table-layout: fixed;
-    border-collapse: separate;
-    white-space: nowrap;
+  table-layout: fixed;
+  // border-collapse: separate;
+  border-collapse: collapse;
+  white-space: nowrap;
 
   tr {
+
+    border-bottom: 1px solid $grey;
 
      &:hover {
       background-color: rgba($blue, 5%);
@@ -23,7 +26,7 @@ table {
 
     td {
       padding: $pad;
-      border-bottom: 1px solid $grey;
+
       color: $black--medium;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -36,5 +39,45 @@ table {
         color: $black;
       }
     }
+  }
+
+   @media (max-width: $smallBreakpoint) {
+
+    table,
+    thead,
+    tbody,
+    tr {
+      display: block;
+
+    }
+
+    tr {
+      padding: $pad / 2 0;
+    }
+
+    tr {
+
+    td {
+
+      padding: 0 $pad;
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        display: inline-block;
+        width: 50%;
+      }
+
+      &:nth-child(2) {
+        text-align: right;
+      }
+
+      &:nth-child(3),
+      &:nth-child(4) {
+        display: block;
+        width: 100%;
+        text-align: left;
+      }
+    }
+  }
   }
 }

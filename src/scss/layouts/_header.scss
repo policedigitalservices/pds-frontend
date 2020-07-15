@@ -17,6 +17,12 @@ header,
     align-self: flex-start;
   }
 
+  // div, button {
+  //   display: flex;
+  //   align-self: flex-end;
+  //   position: relative;
+  // }
+
 
 }
 
@@ -78,45 +84,81 @@ header,
   -ms-grid-row: 1;
   -ms-grid-column: 3;
   grid-area: header;
-
+  width: 100%;
   padding: 0;
-  overflow: hidden;
 
 
+
+  @media (max-width: $smallBreakpoint) {
   display: none;
 
-  .grid--compact & {
+  .message-detail & {
+    display: flex;
+    padding-top: $pad;
+
+    .material-icons {
+      display: none;
+    }
+  }
+
+  .grid--compact &,
+  .contact-index & {
 
     position: fixed;
-  top: 0;
-  z-index: 9999;
-  background-color: $blue;
-  display: flex;
+    top: 0;
+    z-index: 9990;
+    background-color: $blue;
+    display: flex;
 
-  h4,
-  .h4,
-  .h4  {
-        margin: 0;
-      padding: 1.2rem 1rem;
+    h4,
+    .h4,
+    .h4  {
+      margin: 0;
+      padding: .7rem 1rem;
       color: $white;
       font-weight: 500;
-font-size: 20px;
-line-height: 23px;
-letter-spacing: 0.15px;
+      font-size: 20px;
+      line-height: 23px;
+      letter-spacing: 0.15px;
+
+      overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
 
+    }
+
+    .h4 a {
+      padding: 0;
+      color: $white;
+      margin-left: -.5rem;
+      margin-right: .5rem;
+      line-height: 24px;
+      font-size: 24px;
+      // display: none;
+
+      // @media (min-width: $smallBreakpoint) {
+      //   display: inline-block;
+      // }
+    }
+
+    h5,
+    ul,
+    button,
+    form {
+      margin-right: 0rem;
+
+    }
+
+    button {
+      color: $white;
+    }
   }
 
-  .h4 a {
-    padding: 0;
-    color: $white;
-    margin-left: -.5rem;
-    margin-right: .5rem;
-    line-height: 24px;
-    font-size: 24px;
-  }
-}
+
   // display: none;
+
+}
 
   @media (min-width: $smallBreakpoint) {
     padding: 0 $pad;
@@ -125,11 +167,16 @@ letter-spacing: 0.15px;
     z-index: 3;
     background-color: transparent;
 
+    .material-icons {
+      display: none ;
+    }
+
     h4,
     .h4 {
       color: $black;
-      padding: inherit;
-      margin: 0 0 1rem;
+      // padding: inherit;
+      // margin: 0 0 1rem;
+
     }
   }
 

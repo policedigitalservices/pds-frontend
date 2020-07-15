@@ -1,4 +1,5 @@
 .grid {
+  position: relative;
   height: 100%;
   display: -ms-grid;
   display: grid;
@@ -54,11 +55,11 @@
 
 
 .one-third {
-
+  padding: 0 $pad;
 }
 
 .two-thirds {
-
+  padding: 0 $pad;
   width: 100%;
   max-width: $max-form-width * 1.5;
 }

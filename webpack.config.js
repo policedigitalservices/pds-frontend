@@ -18,7 +18,8 @@ module.exports = {
       "./src/js/ToggleContent.js",
       "./src/js/ToggleSidebar.js",
       "./src/js/tables.js",
-      "./src/js/SeeAll.js"
+      "./src/js/SeeAll.js",
+      "./src/js/menu.js"
     ]
   },
   output: {

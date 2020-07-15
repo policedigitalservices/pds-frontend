@@ -46,6 +46,7 @@ form,
   input,
   textarea {
     font-family: $base-font-family;
+    -webkit-appearance: none;
   }
 
   textarea {
@@ -71,6 +72,7 @@ form,
     padding: $pad;
     width: 100%;
     font-size: 100%;
+    -webkit-appearance: none;
 
     & + .button {
       margin: 0;

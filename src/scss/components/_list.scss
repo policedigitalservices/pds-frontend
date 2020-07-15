@@ -81,6 +81,8 @@ ul {
             width: 100%;
             display: block;
             border-top: 1px solid lighten($black--light, 65%);
+            text-overflow: ellipsis;
+              overflow: hidden;
 
             a,
             label {

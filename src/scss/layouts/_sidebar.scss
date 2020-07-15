@@ -13,7 +13,7 @@ aside,
   width: 100%;
   display: none;
 
-  position: absolute;
+  position: fixed;
     height: 100%;
     z-index: 9999;
 
@@ -21,15 +21,31 @@ aside,
     display: block;
   }
 
+  &.contacts {
+    display: block;
+    position: relative;
+    grid-column: 1 / 3;
+
+    &.sub-group {
+      display: none;
+    }
+  }
+
 
   @media (min-width: $smallBreakpoint) {
-    // display: block;
+    display: none;
     width: 400px;
 
     padding: $pad * 2.7 0;
 
     position: relative;
     z-index: 3;
+
+    &.contacts {
+    display: block;
+    position: relative;
+    grid-column: 1 / 2;
+  }
 
 
   }
