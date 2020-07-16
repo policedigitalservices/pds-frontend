@@ -11,7 +11,7 @@ const isDev = process.env.NODE_ENV !== "production";
 
 module.exports = {
   entry: {
-    "dist/css/styles": ["./src/scss/styles.scss"],
+    "dist/css/styles-staging": ["./src/scss/styles.scss"],
     "dist/js/scripts-staging": [
       "./src/js/GroupsTree.js",
       "./src/js/side.js",
