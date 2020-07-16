@@ -173,7 +173,7 @@
 
             for (var data_i = 0; data_i < data.length; data_i++){
                 var data_current = data[data_i];
-                textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data_current.substring(1) + '<i class="button__icon" data-path='+ data_current +'>clear</i></div>';
+                textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data_current.substring(1) + '<i class="button__icon" data-path="'+ data_current +'">clear</i></div>';
 
                 // Ensure the option exists - add it if not
                 if (existingOptionValues.indexOf(data_current) < 0) {
