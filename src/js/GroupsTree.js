@@ -18,9 +18,9 @@
 
         // Grab all the items that should be selected
         var selectedOptionsNodes = groupSelect.querySelectorAll('option:checked');
-        
-        for (var i = 0; i < selectedOptionsNodes.length; i++){            
-           intiallySelectedNodes.push(selectedOptionsNodes[i].value);   
+
+        for (var i = 0; i < selectedOptionsNodes.length; i++){
+           intiallySelectedNodes.push(selectedOptionsNodes[i].value);
         }
     };
 
@@ -97,7 +97,7 @@
         checkbox.id = text;
         var newParentSelected = parentChecked;
 
-        if (path === '' && lockRootNode) {
+        if (path === '\\' && lockRootNode) {
             // In this mode the root node should be disabled and checked BUT the children of this node should act as though it isnt checked so we dont update the selected state
             checkbox.checked = true;
             checkbox.disabled = true;
@@ -111,7 +111,7 @@
             var newChecked = intiallySelectedNodes.indexOf(path || '\\') >= 0;
             checkbox.checked = newChecked;
             newParentSelected = newChecked;
-        }        
+        }
 
         return {checkbox, newParentSelected};
     }
@@ -148,13 +148,21 @@
         if (textarea) {
             textarea.innerHTML = '';
 
-            var element = document.getElementById('GroupSelector'); 
+            var element = document.getElementById('GroupSelector');
 
             var existingOptionValues = Array.from(element.options).map(opt => opt.value);
 
             for (var data_i = 0; data_i < data.length; data_i++){
                 var data_current = data[data_i];
-                textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data_current.substring(1) + '<i class="button__icon" data-path='+ data_current +'>clear</i></div>';
+                console.log(data_current);
+
+                if (data_current === '\\' && lockRootNode) {
+                    textarea.innerHTML = textarea.innerHTML;
+                } else if (data_current === '\\') {
+                    textarea.innerHTML = textarea.innerHTML + '<div class="tag">All Contact Groups<i class="button__icon" data-path='+ data_current +'>clear</i></div>';
+                } else {
+                    textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data_current.substring(1) + '<i class="button__icon" data-path='+ data_current +'>clear</i></div>';
+                }
 
                 // Ensure the option exists - add it if not
                 if (existingOptionValues.indexOf(data_current) < 0) {
@@ -167,13 +175,19 @@
             }
 
             for (var i = 0; i < element.options.length; i++) {
-                element.options[i].selected = data.indexOf(element.options[i].value) >= 0;        
+                element.options[i].selected = data.indexOf(element.options[i].value) >= 0;
             }
         }
     }
 
     function appendChildrenForMode(parent, text, path, parentChecked) {
         if (useCheckboxes) {
+
+            // Temporary workaround the blank value for 'All Contact Groups'
+            if (path === '') {
+                path = "\\";
+            }
+
             parent.appendChild(buildCheckboxLabel(text, path));
             var checkboxResult = buildCheckbox(text, path, parentChecked);
             parent.appendChild(checkboxResult.checkbox);
@@ -293,7 +307,7 @@
       Recursive function that builds the select list from the previous node structure.
     */
     function displayChildKeys(currText, currPath, obj, elementToAddTo, level, parentsChecked) {
-        
+
         var childKeys = Object.keys(obj);
 
         var parentCheckedState = parentsChecked;
@@ -343,7 +357,7 @@
                             obj[childKey],
                             childList,
                             level + 1,
-                            parentCheckedState 
+                            parentCheckedState
                         );
                     }
             }
