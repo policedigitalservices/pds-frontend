@@ -62,7 +62,7 @@ form,
   }
 
   &__input {
-    border: 1px solid rgba($black, 0.6);
+    border: 1px solid rgba($black, 0.3);
     background-color: $white;
     outline: none;
     border-radius: 0;
@@ -125,9 +125,10 @@ form,
     &--active {
       border-color: $blue;
       outline: none;
+      border-width: 1px;
 
       & + button {
-        border-width: 2px;
+        border-width: 1px;
         border-color: $blue;
 
       }
