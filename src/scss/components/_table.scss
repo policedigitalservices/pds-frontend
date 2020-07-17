@@ -24,6 +24,8 @@ table {
       padding: $pad;
       border-bottom: 1px solid $grey;
       color: $black--medium;
+      text-overflow: ellipsis;
+      overflow: hidden;
 
      @extend .body1;
 
