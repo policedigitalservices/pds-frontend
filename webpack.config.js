@@ -11,18 +11,19 @@ const isDev = process.env.NODE_ENV !== "production";
 
 module.exports = {
   entry: {
-    "dist/css/styles-staging": ["./src/scss/styles.scss"],
-    "dist/js/scripts-staging": [
+    "dist/css/styles": ["./src/scss/styles.scss"],
+    "dist/js/scripts": [
       "./src/js/GroupsTree.js",
       "./src/js/side.js",
       "./src/js/ToggleContent.js",
       "./src/js/ToggleSidebar.js",
       "./src/js/tables.js",
-      "./src/js/SeeAll.js"
+      "./src/js/SeeAll.js",
+      "./src/js/snackbar.js"
     ]
   },
   output: {
-    filename: "[name].js",
+    filename: "[name]-staging.js",
     // filename: isDev ? "[name].js" : "[name].[contenthash].js",
     path: outputDir
   },
@@ -35,7 +36,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin([outputDir]),
     new MiniCssExtractPlugin({
-      filename: "[name].css"
+      filename: "[name]-staging.css"
       // filename: isDev ? "[name].css" : "[name].[contenthash].css"
     }),
     new CopyWebpackPlugin([

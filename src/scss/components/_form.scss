@@ -117,6 +117,10 @@ form,
       color: $black--light;
     }
 
+    &::-ms-clear {
+      display: none;
+    }
+
     &:active,
     &:focus,
     &--focus,
