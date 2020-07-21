@@ -92,6 +92,10 @@ header,
   @media (max-width: $smallBreakpoint) {
   display: none;
 
+//   section & {
+//   padding: 0 1rem;
+// }
+
   .message-detail & {
     display: flex;
     padding-top: $pad;
