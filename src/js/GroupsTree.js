@@ -1,4 +1,6 @@
-﻿ var groupExist = document.getElementById("Group");
+﻿const { param } = require("jquery");
+
+ var groupExist = document.getElementById("Group");
     if(groupExist){
 
         var useCheckboxes = groupExist.hasAttribute('data-with-checkbox');
@@ -70,8 +72,9 @@
     // Function to check if the node being added is the currentlySelectedGroup
     function isSelectedGroup(path) {
         var paramsToCheck = groupParam || "\\";
-        var pathToCheck = (path || "\\").replace(/ /g, '%20');
-
+        // var pathToCheck = (path || "\\").replace(/ /g, '%20');
+        var pathToCheck = encodeURI(path || "\\").replace(/'/g,'%27').replace(/%5C/g, '\\');
+        console.log('to check: ', pathToCheck, 'params to check', paramsToCheck )
         return paramsToCheck === pathToCheck;
     }
 
