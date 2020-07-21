@@ -1,23 +1,20 @@
 // Table styles
 table {
-
   width: 100%;
   border-spacing: 0;
   table-layout: fixed;
   border: none;
-  // border-collapse: separate;
   border-collapse: collapse;
   white-space: nowrap;
 
   tr {
-
     border-bottom: 1px solid lighten($black--light, 65%);
 
     &:first-child {
       border-top: 1px solid lighten($black--light, 65%);
     }
 
-     &:hover {
+    &:hover {
       background-color: rgba($blue, 5%);
     }
 
@@ -39,72 +36,60 @@ table {
 
       @extend .body1;
 
-
       a {
         text-decoration: none;
         color: $black;
       }
     }
   }
-
-
 }
 
- @media (max-width: $smallBreakpoint) {
+@media (max-width: $smallBreakpoint) {
 
-    table,
-    thead,
-    tbody,
-    tr {
-      // display: block;
-
-    }
-
-
-    table {
-      margin-bottom: $pad;
-      // max-width: 100%;
-    }
-    tr {
-      // padding: $pad / 2 0 $pad * 2 0;
-      padding: $pad / 2 0;
-      min-height: $pad * 4.575;
-      // white-space: nowrap;
-      display: block;
-    }
-
-
-
-    td {
-
-
-      padding: 0 !important;
-
-      &:nth-child(1) {
-        display: inline-block;
-        width: 65%;
-        display: block;
-        float: left;
-      }
-
-      &:nth-child(2) {
-        display: inline-block;
-        width: 34%;
-        display: block;
-        float: left;
-      }
-
-      &:nth-child(2) {
-        text-align: right;
-      }
-
-      &:nth-child(3),
-      &:nth-child(4) {
-        display: block;
-        width: 65%;
-        float: left;
-        text-align: left;
-      }
-    }
-
+  table,
+  thead,
+  tbody,
+  tr {
+    // display: block;
   }
+
+  table {
+    margin-bottom: $pad;
+  }
+
+  tr {
+    padding: $pad / 2 0;
+    min-height: $pad * 4.575;
+    display: block;
+  }
+
+  td {
+    padding: 0 !important;
+
+    &:nth-child(1) {
+      display: inline-block;
+      width: 65%;
+      display: block;
+      float: left;
+    }
+
+    &:nth-child(2) {
+      display: inline-block;
+      width: 34%;
+      display: block;
+      float: left;
+    }
+
+    &:nth-child(2) {
+      text-align: right;
+    }
+
+    &:nth-child(3),
+    &:nth-child(4) {
+      display: block;
+      width: 65%;
+      float: left;
+      text-align: left;
+    }
+  }
+}

@@ -74,6 +74,22 @@ form,
     font-size: 100%;
     -webkit-appearance: none;
 
+    .tag {
+      background-color: transparent;
+      color: $black;
+      padding: 0;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: transparent;
+      }
+
+      i {
+        display: none;
+      }
+    }
+
     & + .button {
       margin: 0;
     }
@@ -91,7 +107,6 @@ form,
         margin-top: 5px;
         display: inline-block;
 
-
         @extend .caption;
 
         color: $red;
@@ -108,6 +123,7 @@ form,
           margin-top: 2px;
           margin-top: 5px;
           display: inline-block;
+
           @extend .caption;
 
           color: $red;
@@ -117,6 +133,10 @@ form,
 
     &::-webkit-input-placeholder {
       color: $black--light;
+    }
+
+    &::-ms-clear {
+      display: none;
     }
 
     &:active,

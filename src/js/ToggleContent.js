@@ -14,6 +14,9 @@ if (document.getElementById('Responses') !=null) {
         })
 
         keyArray.forEach(function(key){
+
+            responses[key].setAttribute('data-key', key);
+
             if (responses[key].querySelector("[class~='response-option']").value.length == 0) {
                 responses[key].style.display = 'none';
             }
@@ -50,17 +53,14 @@ if (document.getElementById('Responses') !=null) {
 
         function removeResponse(key) {
 
-            keyArray.every(function(key){
+            if (responses[key].style.display === 'block' && responses[key].dataset.key == key) {
 
-                if (responses[key].style.display === 'block') {
-                    responses[key].querySelector("[class~='response-option']").value = '';
-                    responses[key].style.display = 'none';
-                    return false;
-                }
+                responses[key].parentNode.appendChild(responses[key]);
+                responses[key].querySelector("[class~='response-option']").value = '';
+                responses[key].style.display = 'none';
+                return false;
+            }
 
-                return true;
-
-            });
         }
 
     })("#Responses");

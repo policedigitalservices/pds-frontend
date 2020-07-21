@@ -1,43 +1,49 @@
-if (document.getElementById("messageStatuses") != null) {
-  (function(selector) {
-    var table = document.getElementById("messageStatuses");
-    for (var i = 0, row; (row = table.rows[i]); i++) {
-      if (i >= 11) {
-        row.style.display = "none";
-      }
-    }
-    var seeAllStatusesButton = document.getElementById("seeAllStatusesBtn");
-    if (table.rows.length <= 10) {
-      seeAllStatusesButton.style.display = "none";
-    }
-    seeAllStatusesButton.addEventListener("click", function(el) {
-      el.preventDefault();
-      var table = document.getElementById("messageStatuses");
-      for (var i = 0, row; (row = table.rows[i]); i++) {
-        row.style.display = "table-row";
-      }
-    });
-  })("messageStatuses");
-}
+/**
+ *  USAGE: To use this control you must add the following attribute to the button that should be doing the show all.
+ * 
+ *  data-showall-table-id="<<id of table to be effected>>"
+ * 
+ *  OPTIONAL: Use the following attrtibutes to adjust the behavior
+ * 
+ *  data-showall-item-limit="20" - sets the number of items to show initially.  Default is 10
+ *  
+ */
 
-if (document.getElementById("messageResponses") != null) {
-  (function(selector) {
-    var table = document.getElementById("messageResponses");
-    for (var i = 0, row; (row = table.rows[i]); i++) {
-      if (i >= 11) {
-        row.style.display = "none";
+var showMoreTableButtons = document.querySelectorAll('button[data-showall-table-id]');
+
+showMoreTableButtons.forEach(showAllButton => {
+  var tableId = showAllButton.getAttribute("data-showall-table-id");
+
+  var table = document.getElementById(tableId);
+  if (table) {
+
+    var defaultItemLimit = 10;    
+    var passedItemLimit = showAllButton.getAttribute("data-showall-item-limit");
+    var parsedItemLimit = parseInt(passedItemLimit, 10);
+    var limitToUse = isNaN(parsedItemLimit) ? defaultItemLimit : parsedItemLimit;
+    
+    // We dont want the headers
+    var tableBody = table.tBodies[0];
+    if (!tableBody) { return; }
+
+    var tableBodyLength = tableBody.rows.length;
+    
+    for (var i = 1, bodyRow; bodyRow = tableBody.rows[i-1]; i++) {
+      if (i > limitToUse) {
+        bodyRow.style.display = "none";
       }
     }
-    var seeAllStatusesButton = document.getElementById("seeAllResponsesBtn");
-    if (table.rows.length <= 10) {
-      seeAllStatusesButton.style.display = "none";
-    }
-    seeAllStatusesButton.addEventListener("click", function(el) {
+
+    if (tableBodyLength <= limitToUse) { showAllButton.style.display = "none"; }
+
+    showAllButton.addEventListener('click', (el) => {
       el.preventDefault();
-      var table = document.getElementById("messageResponses");
-      for (var i = 0, row; (row = table.rows[i]); i++) {
-        row.style.display = "table-row";
-      }
+
+      Array.from(tableBody.rows).forEach(function(bodyRow) {
+        bodyRow.style.display = "table-row";
+      });
+
+      el.target.style.display = "none";
     });
-  })("messageResponses");
-}
+  }
+});
