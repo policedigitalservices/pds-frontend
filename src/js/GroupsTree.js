@@ -2,9 +2,10 @@
     if(groupExist){
 
         var useCheckboxes = groupExist.hasAttribute('data-with-checkbox');
+        var useSingleSelectCheckbox = groupExist.hasAttribute('data-with-single-select-checkbox');
         var lockRootNode = groupExist.hasAttribute('data-lock-root');
 
-(function (selector, useCheckboxes) {
+(function (selector, useCheckboxes, useSingleSelectCheckbox) {
 
     //Check on page whether Group Multi Select exists
     var intiallySelectedNodes = [];
@@ -18,9 +19,9 @@
 
         // Grab all the items that should be selected
         var selectedOptionsNodes = groupSelect.querySelectorAll('option:checked');
-
-        for (var i = 0; i < selectedOptionsNodes.length; i++){
-           intiallySelectedNodes.push(selectedOptionsNodes[i].value);
+        
+        for (var i = 0; i < selectedOptionsNodes.length; i++){ 
+           intiallySelectedNodes.push(selectedOptionsNodes[i].value || "\\");   
         }
     };
 
@@ -62,14 +63,15 @@
         if (!groupParam) {
             return false;
         }
-        var pathToCheck = path + "\\";
+        var pathToCheck = (path + "\\");
         return groupParam.startsWith(pathToCheck) && groupParam != pathToCheck;
     }
 
     // Function to check if the node being added is the currentlySelectedGroup
     function isSelectedGroup(path) {
         var paramsToCheck = groupParam || "\\";
-        var pathToCheck = path || "\\";
+        var pathToCheck = (path || "\\").replace(/ /g, '%20');
+
         return paramsToCheck === pathToCheck;
     }
 
@@ -80,10 +82,11 @@
         link.href = getPagePathForGroup(path);
         link.classList.add("group-selector__link");
 
-        // We dont want the current class to be added if doing a search
-        if ((!searchParam) &&  isSelectedGroup(path)) {
-            link.classList.add("group-selector__link--current");
-        }
+        // NB.  Originally we didnt want the current class to be added if doing a search, but think we do now.
+        // if ((!searchParam) &&  isSelectedGroup(path)) {
+        // if (isSelectedGroup(path)) {
+        //     link.classList.add("group-selector__link--current");
+        // }
         return link;
     }
 
@@ -101,7 +104,7 @@
             // In this mode the root node should be disabled and checked BUT the children of this node should act as though it isnt checked so we dont update the selected state
             checkbox.checked = true;
             checkbox.disabled = true;
-        } else if (parentChecked) {
+        } else if (parentChecked && !useSingleSelectCheckbox) {
             // If a parent node is selected all its children should be disabled and unchecked
             checkbox.checked = false;
             checkbox.disabled = true;
@@ -111,6 +114,21 @@
             var newChecked = intiallySelectedNodes.indexOf(path || '\\') >= 0;
             checkbox.checked = newChecked;
             newParentSelected = newChecked;
+        }
+        
+        // Style as a radio button
+        if (useSingleSelectCheckbox) {
+            var label = document.createElement('label');
+            label.classList.add('radio-checkbox');
+            var checkSpan = document.createElement('span');
+            checkSpan.classList.add('radio-checkbox__check');
+            var borderSpan = document.createElement('span');
+            borderSpan.classList.add('radio-checkbox__border');
+            borderSpan.appendChild(checkbox);
+            borderSpan.appendChild(checkSpan);
+            label.appendChild(borderSpan);
+            checkbox.classList.add('radio-checkbox__input');
+            checkbox = label;
         }
 
         return {checkbox, newParentSelected};
@@ -130,6 +148,7 @@
         var data = [];
 
         var elems= document.querySelectorAll('.GroupItem')
+
             for (var i=0;i<elems.length;i++) {
 
                 if (lockRootNode && !(elems[i].value)) {
@@ -159,9 +178,9 @@
                 if (data_current === '\\' && lockRootNode) {
                     textarea.innerHTML = textarea.innerHTML;
                 } else if (data_current === '\\') {
-                    textarea.innerHTML = textarea.innerHTML + '<div class="tag">All Contact Groups<i class="button__icon" data-path='+ data_current +'>clear</i></div>';
+                    textarea.innerHTML = textarea.innerHTML + '<div class="tag">All Contact Groups<i class="button__icon" data-path="'+ data_current +'">clear</i></div>';
                 } else {
-                    textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data_current.substring(1) + '<i class="button__icon" data-path='+ data_current +'>clear</i></div>';
+                    textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data_current.substring(1) + '<i class="button__icon" data-path="'+ data_current +'">clear</i></div>';
                 }
 
                 // Ensure the option exists - add it if not
@@ -181,7 +200,7 @@
     }
 
     function appendChildrenForMode(parent, text, path, parentChecked) {
-        if (useCheckboxes) {
+        if (useCheckboxes || useSingleSelectCheckbox) {
 
             // Temporary workaround the blank value for 'All Contact Groups'
             if (path === '') {
@@ -208,13 +227,27 @@
         }
     }
 
-    function handleCheckboxClick(checkbox) {
-
-
+    function handleCheckboxClick(e, checkbox) {
+        
         var parentLi = checkbox.parentNode;
 
-        if (parentLi.classList.contains('group-selector__group--parent')){
+        if (useSingleSelectCheckbox) {
 
+            // In this mode only one item can be selected, and the selected item cannot be deseleted.
+            if (checkbox.checked) {
+                var allGroupCheckboxes = document.querySelectorAll('.group-selector__list--root input[type=checkbox]');
+                forEachCheckboxExcludingCurrent(checkbox, allGroupCheckboxes, function(checkboxToUpdate) {
+                    checkboxToUpdate.checked = false;
+                });
+            } 
+            else {
+                e.preventDefault();
+                checkbox.checked = true;
+            }
+        }
+        else if (parentLi.classList.contains('group-selector__group--parent')){
+
+            
             var childCheckboxes = parentLi.querySelectorAll('input[type=checkbox');
             if (checkbox.checked) {
                 forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, function(checkboxToUpdate) {
@@ -270,6 +303,8 @@
     // The base element that will be populated
     var treeContainer = document.createElement("ul");
     treeContainer.classList.add("group-selector__list");
+    treeContainer.classList.add("group-selector__list--root");
+
 
     // Handle all the clicks at the parent level
     treeContainer.addEventListener("click", function (e) {
@@ -277,7 +312,7 @@
 
         // Handle checkbox items being selected.
         if (target.matches('input[type=checkbox]')) {
-            handleCheckboxClick(target);
+            handleCheckboxClick(e, target);
         }
 
         transferValues();
@@ -311,13 +346,17 @@
         var childKeys = Object.keys(obj);
 
         var parentCheckedState = parentsChecked;
+        
+        var childListItem = document.createElement("li");        
+        childListItem.classList.add("group-selector__group");
 
+        if (!useCheckboxes && !useSingleSelectCheckbox && isSelectedGroup(currPath)) {
+            // Only add the current state when in the 'link mode'
+            childListItem.classList.add("group-selector__group--current");
+        }
+        
         if (!childKeys.length) {
-            // This is at the bottom i.e. no children to process
-
-            // Add the link into an li, and append to the parent container
-            var childListItem = document.createElement("li");
-            childListItem.classList.add("group-selector__group");
+            // This is at the bottom of a branch i.e. no children to process
 
             appendChildrenForMode(childListItem, currText, currPath, parentCheckedState);
 
@@ -326,25 +365,22 @@
         } else {
             // This node has children to process
 
-            // Create the li with the link contained
-            var childListItemWithChildren = document.createElement("li");
-            childListItemWithChildren.classList.add("group-selector__group");
-            childListItemWithChildren.classList.add("group-selector__group--parent");
+            childListItem.classList.add("group-selector__group--parent");
 
             if (level === 1 || shouldParentBeOpen(currPath)) {
                 // Open first level children by default
-                childListItemWithChildren.classList.add(
+                childListItem.classList.add(
                     "group-selector__group--active"
                 );
             }
 
-            parentCheckedState = appendChildrenForMode(childListItemWithChildren, currText, currPath, parentCheckedState);
+            parentCheckedState = appendChildrenForMode(childListItem, currText, currPath, parentCheckedState);
 
             // Create the container ready to be populated with the child nodes
             var childList = document.createElement("ul");
             childList.classList.add("group-selector__list");
-            childListItemWithChildren.appendChild(childList);
-            elementToAddTo.appendChild(childListItemWithChildren);
+            childListItem.appendChild(childList);
+            elementToAddTo.appendChild(childListItem);
             // Call recursively with updated params for each child node
 
             for (var ck_i=0; ck_i < childKeys.length; ck_i++) {
@@ -368,13 +404,12 @@
     // The initial call of the recursive function starting at the root.
     displayChildKeys("All Contact Groups", "", structure["\\"], treeContainer, 1, false);
 
-
     // Replace the select list with the new tree
     groupSelect.parentNode.replaceChild(treeContainer, groupSelect);
+
     treeContainer.parentNode.appendChild(hiddenField);
 
     transferValues();
 
-
-})("#Group", useCheckboxes);
+})("#Group", useCheckboxes, useSingleSelectCheckbox);
 }
