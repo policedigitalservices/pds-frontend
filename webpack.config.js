@@ -23,7 +23,7 @@ module.exports = {
     ]
   },
   output: {
-    filename: "[name]-staging.js",
+    filename: "[name].js",
     // filename: isDev ? "[name].js" : "[name].[contenthash].js",
     path: outputDir
   },
@@ -36,7 +36,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin([outputDir]),
     new MiniCssExtractPlugin({
-      filename: "[name]-staging.css"
+      filename: "[name].css"
       // filename: isDev ? "[name].css" : "[name].[contenthash].css"
     }),
     new CopyWebpackPlugin([
