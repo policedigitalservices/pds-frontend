@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="stylesheet" href="styles.css" /> -->
-  <link rel="stylesheet" href="http://localhost:7263/css/styles.css" />
+  <link rel="stylesheet" href="https://static.policedigital.services/dist/css/styles.css" />
   <style>
     body {
       padding: 50px;
@@ -44,43 +44,28 @@
 
   <h3>Buttons</h3>
 
-
-
-
   <button class="button button--small"><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
-
-   <button class="button button--small" disabled><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
-
+  <button class="button button--small" disabled><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
   <button class="button button--small"><span class="button__label">Button Link</span></button>
   <br>
-
-<button class="button button--outlined button--small"><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
-<button class="button button--outlined button--small" disabled><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
+  <button class="button button--outlined button--small"><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
+  <button class="button button--outlined button--small" disabled><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
   <button class="button button--outlined button--small"><span class="button__label">Button Link</span></button>
   <br>
-
-<button class="button button--transparent button--small"><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
-
-<button class="button button--transparent button--small" disabled><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
-
+  <button class="button button--transparent button--small"><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
+  <button class="button button--transparent button--small" disabled><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
   <button class="button button--transparent button--small"><span class="button__label">Button Link</span></button>
-
   <hr>
-
-
 
   <h3>Tags</h3>
-
   <button class="button button--tag"><span class="button__label">Group tag</span><i aria-hidden="true" class="button__icon">clear</i></button>
 
-
-<div class="tag">Group tag<i aria-hidden="true" class="button__icon">clear</i></div>
-
+  <div class="tag">Group tag<i aria-hidden="true" class="button__icon">clear</i></div>
   <hr>
 
-   <h3>Form elements</h3>
+  <h3>Form elements</h3>
 
-   <h4>Normal input fields (stacked)</h4>
+  <h4>Normal input fields (stacked)</h4>
 
   <div class="form__group">
     <label class="form__label">Element label</label>
@@ -125,153 +110,154 @@
 
   <h4>Normal input field with button</h4>
   <div class="form__group input__withaction">
-   <label class="form__label">Element label</label>
-   <input class="form__input" autocomplete="off" placeholder="placeholder text" />
-   <button class="button button--remove">Add</button>
- </div>
+    <label class="form__label">Element label</label>
+    <input class="form__input" autocomplete="off" placeholder="placeholder text" />
+    <button class="button button--remove">Add</button>
+  </div>
 
- <h4>Normal input field with icon</h4>
- <div class="form__group">
-  <input class="form__input form__input--search" placeholder="Search all contacts" type="text" id="Search" name="Search" value="">
-  <button class="is-hidden">Search all contacts</button>
-</div>
+  <h4>Normal input field with icon</h4>
+  <div class="form__group">
+    <input class="form__input form__input--search" placeholder="Search all contacts" type="text" id="Search" name="Search" value="">
+    <button class="is-hidden">Search all contacts</button>
+  </div>
 
 
-<h4>Groups list</h4>
+  <h4>Groups list</h4>
 
-<div class="group__list">
-  <ul class="group-selector__list">
+  <div class="group__list">
+    <ul class="group-selector__list">
       <li class="group-selector__group"><a href="?group=\All contacts" class="group-selector__link">All contacts</a></li>
       <li class="group-selector__group group-selector__group--parent">
-          <a href="?group=\test" class="group-selector__link">test</a>
-          <ul class="group-selector__list">
+        <a href="?group=\test" class="group-selector__link">test</a>
+        <ul class="group-selector__list">
 
-              <li class="group-selector__group"><label for="\">sub-child</label><input type="checkbox" class="GroupItem" name="sub-child" value="" id="sub-child">
-              <ul class="group-selector__list">
+          <li class="group-selector__group"><label for="\">sub-child</label><input type="checkbox" class="GroupItem" name="sub-child" value="" id="sub-child">
+            <ul class="group-selector__list">
               <li class="group-selector__group"><label for="\"> sub-child</label><input type="checkbox" class="GroupItem" name="sub-child" value="" id="sub-child"></li>
-          </ul></li>
+            </ul></li>
           </ul>
-      </li>
-  </ul>
-</div>
+        </li>
+      </ul>
+    </div>
 
-<h4>Tables</h4>
-
-
-<header>
-  <h5>Table header</h5>
-</header>
-<table>
-  <thead class="screen-reader__only">
-    <tr>
-      <th>Subject</th>
-      <th>Sent on</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <tr data-href="https://courier.policedigital.services">
-      <td>time to delve</td>
-      <td>17th May</td>
-    </tr>
-    <tr data-href="https://courier.policedigital.services">
-      <td>time to delve</td>
-      <td>17th May</td>
-    </tr>
-    <tr data-href="https://courier.policedigital.services">
-      <td>time to delve</td>
-      <td>17th May</td>
-    </tr>
-    <tr data-href="https://courier.policedigital.services">
-      <td>time to delve</td>
-      <td>17th May</td>
-    </tr>
-    <tr data-href="https://courier.policedigital.services">
-      <td>time to delve</td>
-      <td>17th May</td>
-    </tr>
-    <tr data-href="https://courier.policedigital.services">
-      <td>time to delve</td>
-      <td>17th May</td>
-    </tr>
-    <tr data-href="https://courier.policedigital.services">
-      <td>time to delve</td>
-      <td>17th May</td>
-    </tr>
-    <tr data-href="https://courier.policedigital.services">
-      <td>time to delve</td>
-      <td>17th May</td>
-    </tr>
-    <tr data-href="https://courier.policedigital.services">
-      <td>time to delve</td>
-      <td>17th May</td>
-    </tr>
-    <tr data-href="https://courier.policedigital.services">
-      <td>time to delve</td>
-      <td>17th May</td>
-    </tr>
-
-  </tbody>
-</table>
+    <h4>Tables</h4>
 
 
-<header>
-  <h5>Table header</h5>
-</header>
-<table>
-  <thead class="screen-reader__only">
-    <tr>
-      <th>Subject</th>
-      <th>Sent on</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <tr>
-      <td><a href="#">time to delve</a></td>
-      <td>17th May</td>
-      <td class="align-right">test</td>
-    </tr>
-    <tr>
-      <td><a href="#">time to delve</a></td>
-      <td>17th May</td>
-      <td class="align-right">test</td>
-    </tr>
+    <header>
+      <h5>Table header</h5>
+    </header>
+    <table>
+      <thead class="screen-reader__only">
         <tr>
-      <td><a href="#">time to delve</a></td>
-      <td>17th May</td>
-      <td class="align-right">test</td>
-    </tr>
-        <tr>
-      <td><a href="#">time to delve</a></td>
-      <td>17th May</td>
-      <td class="align-right">test</td>
-    </tr>
-        <tr>
-      <td><a href="#">time to delve</a></td>
-      <td>17th May</td>
-      <td class="align-right">test</td>
-    </tr>
-        <tr>
-      <td><a href="#">time to delve</a></td>
-      <td>17th May</td>
-      <td class="align-right">test</td>
-    </tr>
-        <tr>
-      <td><a href="#">time to delve</a></td>
-      <td>17th May</td>
-      <td class="align-right">test</td>
-    </tr>
-        <tr>
-      <td><a href="#">time to delve</a></td>
-      <td>17th May</td>
-      <td class="align-right">test</td>
-    </tr>
-  </tbody>
-</table>
+          <th>Subject</th>
+          <th>Sent on</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr data-href="https://courier.policedigital.services">
+          <td>time to delve</td>
+          <td>17th May</td>
+        </tr>
+        <tr data-href="https://courier.policedigital.services">
+          <td>time to delve</td>
+          <td>17th May</td>
+        </tr>
+        <tr data-href="https://courier.policedigital.services">
+          <td>time to delve</td>
+          <td>17th May</td>
+        </tr>
+        <tr data-href="https://courier.policedigital.services">
+          <td>time to delve</td>
+          <td>17th May</td>
+        </tr>
+        <tr data-href="https://courier.policedigital.services">
+          <td>time to delve</td>
+          <td>17th May</td>
+        </tr>
+        <tr data-href="https://courier.policedigital.services">
+          <td>time to delve</td>
+          <td>17th May</td>
+        </tr>
+        <tr data-href="https://courier.policedigital.services">
+          <td>time to delve</td>
+          <td>17th May</td>
+        </tr>
+        <tr data-href="https://courier.policedigital.services">
+          <td>time to delve</td>
+          <td>17th May</td>
+        </tr>
+        <tr data-href="https://courier.policedigital.services">
+          <td>time to delve</td>
+          <td>17th May</td>
+        </tr>
+        <tr data-href="https://courier.policedigital.services">
+          <td>time to delve</td>
+          <td>17th May</td>
+        </tr>
+
+      </tbody>
+    </table>
 
 
+    <header>
+      <h5>Table header</h5>
+    </header>
+    <table>
+      <thead class="screen-reader__only">
+        <tr>
+          <th>Subject</th>
+          <th>Sent on</th>
+        </tr>
+      </thead>
+      <tbody>
 
+        <tr>
+          <td><a href="#">time to delve</a></td>
+          <td>17th May</td>
+          <td class="align-right">test</td>
+        </tr>
+        <tr>
+          <td><a href="#">time to delve</a></td>
+          <td>17th May</td>
+          <td class="align-right">test</td>
+        </tr>
+        <tr>
+          <td><a href="#">time to delve</a></td>
+          <td>17th May</td>
+          <td class="align-right">test</td>
+        </tr>
+        <tr>
+          <td><a href="#">time to delve</a></td>
+          <td>17th May</td>
+          <td class="align-right">test</td>
+        </tr>
+        <tr>
+          <td><a href="#">time to delve</a></td>
+          <td>17th May</td>
+          <td class="align-right">test</td>
+        </tr>
+        <tr>
+          <td><a href="#">time to delve</a></td>
+          <td>17th May</td>
+          <td class="align-right">test</td>
+        </tr>
+        <tr>
+          <td><a href="#">time to delve</a></td>
+          <td>17th May</td>
+          <td class="align-right">test</td>
+        </tr>
+        <tr>
+          <td><a href="#">time to delve</a></td>
+          <td>17th May</td>
+          <td class="align-right">test</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.includes%2CArray.prototype.forEach%2CNodeList.prototype.forEach%2CElement.prototype.closest%2CArray.from%2CString.prototype.startsWith%2CURLSearchParams"></script>
+    <script src="https://static.policedigital.services/dist/js/scripts.js"></script>
 </body>
 
 </html>

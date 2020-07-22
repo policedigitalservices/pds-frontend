@@ -69,8 +69,8 @@
 
     // Function to check if the node being added is the currentlySelectedGroup
     function isSelectedGroup(path) {
-        var paramsToCheck = groupParam || "\\";
-        var pathToCheck = (path || "\\").replace(/ /g, '%20');
+        var paramsToCheck = decodeURIComponent(groupParam || "\\");
+        var pathToCheck = (path || "\\");
 
         return paramsToCheck === pathToCheck;
     }
@@ -173,7 +173,6 @@
 
             for (var data_i = 0; data_i < data.length; data_i++){
                 var data_current = data[data_i];
-                // console.log(data_current);
 
                 if (data_current === '\\' && lockRootNode) {
                     textarea.innerHTML = textarea.innerHTML;
