@@ -19,9 +19,9 @@
 
         // Grab all the items that should be selected
         var selectedOptionsNodes = groupSelect.querySelectorAll('option:checked');
-        
-        for (var i = 0; i < selectedOptionsNodes.length; i++){ 
-           intiallySelectedNodes.push(selectedOptionsNodes[i].value || "\\");   
+
+        for (var i = 0; i < selectedOptionsNodes.length; i++){
+           intiallySelectedNodes.push(selectedOptionsNodes[i].value || "\\");
         }
     };
 
@@ -115,7 +115,7 @@
             checkbox.checked = newChecked;
             newParentSelected = newChecked;
         }
-        
+
         // Style as a radio button
         if (useSingleSelectCheckbox) {
             var label = document.createElement('label');
@@ -227,7 +227,7 @@
     }
 
     function handleCheckboxClick(e, checkbox) {
-        
+
         var parentLi = checkbox.parentNode;
 
         if (useSingleSelectCheckbox) {
@@ -238,7 +238,7 @@
                 forEachCheckboxExcludingCurrent(checkbox, allGroupCheckboxes, function(checkboxToUpdate) {
                     checkboxToUpdate.checked = false;
                 });
-            } 
+            }
             else {
                 e.preventDefault();
                 checkbox.checked = true;
@@ -246,7 +246,7 @@
         }
         else if (parentLi.classList.contains('group-selector__group--parent')){
 
-            
+
             var childCheckboxes = parentLi.querySelectorAll('input[type=checkbox');
             if (checkbox.checked) {
                 forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, function(checkboxToUpdate) {
@@ -345,15 +345,15 @@
         var childKeys = Object.keys(obj);
 
         var parentCheckedState = parentsChecked;
-        
-        var childListItem = document.createElement("li");        
+
+        var childListItem = document.createElement("li");
         childListItem.classList.add("group-selector__group");
 
         if (!useCheckboxes && !useSingleSelectCheckbox && isSelectedGroup(currPath)) {
             // Only add the current state when in the 'link mode'
             childListItem.classList.add("group-selector__group--current");
         }
-        
+
         if (!childKeys.length) {
             // This is at the bottom of a branch i.e. no children to process
 

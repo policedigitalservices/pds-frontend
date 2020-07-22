@@ -21,7 +21,6 @@ ul {
             margin: 0;
             display: block;
 
-
             li {
                 padding: 0;
                 margin: 0;
@@ -64,7 +63,7 @@ ul {
 
                 input[type="checkbox"] {
                     float: right;
-                    margin: $pad * 1.4 0;
+                    margin: $pad * 1.25 0;
                     width: 20%;
                 }
 
@@ -117,10 +116,15 @@ ul {
                         width: 1.2rem;
                         height: 1.2rem;
                         margin-right: $pad / 2;
-                        margin-top: $pad / 2;
+                        // margin-top: $pad / 2;
+                        margin-top: ($pad * 0.7) / 2;
                         @include font-size(.8);
                         vertical-align: top;
                         content: 'fiber_manual_record';
+
+                        @media (min-width: $smallBreakpoint) {
+                            margin-top: $pad / 2;
+                        }
                     }
                 }
             }
@@ -134,10 +138,14 @@ ul {
                         width: 1.2rem;
                         height: 1.2rem;
                         margin-right: $pad / 2;
-                        margin-top: $pad / 6;
+                        margin-top: 0;
                         @include font-size(1.2);
                         vertical-align: top;
                         content: 'folder';
+
+                        @media (min-width: $smallBreakpoint) {
+                            margin-top: $pad / 6;
+                        }
                     }
                 }
             }

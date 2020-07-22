@@ -7,6 +7,7 @@ header,
   align-items: center;
    grid-area: header;
    flex-shrink: 0;
+   flex-wrap: wrap;
 
   ul {
     display: flex;
@@ -15,6 +16,12 @@ header,
     margin: 0;
     align-self: flex-start;
   }
+
+  // div, button {
+  //   display: flex;
+  //   align-self: flex-end;
+  //   position: relative;
+  // }
 
 
 }
@@ -29,9 +36,18 @@ header,
   top: 0;
   background-color: $blue;
   color: $white;
-  padding: 0 $pad;
+  padding: 0;
   z-index: 11;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+
+  // display: block;
+
+  @media (min-width: $smallBreakpoint) {
+    // display: flex;
+    padding: 0 $pad;
+  }
+
+
 
   &__logo {
     display: none;
@@ -40,24 +56,26 @@ header,
     text-decoration: none;
     @extend h4;
     margin: 0;
-    padding: $pad * .7 0;
+    padding: $pad * .7 $pad;
+    display: inline-block;
 
     @media (min-width: $smallBreakpoint) {
-      display: inline-block;
+      // display: inline-block;
+      padding: $pad * .7 0;
     }
   }
 
   &__title {
-    display: inline-block;
+    // display: inline-block;
     text-transform: uppercase;
     color: $white;
     text-decoration: none;
     @extend h3;
     margin: .2rem $pad;
 
-    @media (min-width: $smallBreakpoint) {
+    // @media (min-width: $smallBreakpoint) {
       display: none;
-    }
+    // }
   }
 }
 
@@ -66,13 +84,104 @@ header,
   -ms-grid-row: 1;
   -ms-grid-column: 3;
   grid-area: header;
+  width: 100%;
+  padding: 0;
 
-  padding: $pad;
-  overflow: hidden;
-  position: relative;
+
+
+  @media (max-width: $smallBreakpoint) {
+  display: none;
+
+//   section & {
+//   padding: 0 1rem;
+// }
+
+  .message-detail & {
+    display: flex;
+    padding-top: $pad;
+
+    .material-icons {
+      display: none;
+    }
+  }
+
+  .grid--compact &,
+  .contact-index & {
+
+    position: fixed;
+    top: 0;
+    z-index: 9990;
+    background-color: $blue;
+    display: flex;
+
+    h4,
+    .h4,
+    .h4  {
+      margin: 0;
+      padding: .7rem 1rem;
+      color: $white;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 23px;
+      letter-spacing: 0.15px;
+
+      overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+
+    }
+
+    .h4 a {
+      padding: 0;
+      color: $white;
+      margin-left: -.5rem;
+      margin-right: .5rem;
+      line-height: 24px;
+      font-size: 24px;
+      // display: none;
+
+      // @media (min-width: $smallBreakpoint) {
+      //   display: inline-block;
+      // }
+    }
+
+    h5,
+    ul,
+    button,
+    form {
+      margin-right: 0rem;
+
+    }
+
+    button {
+      color: $white;
+    }
+  }
+
+
+  // display: none;
+
+}
 
   @media (min-width: $smallBreakpoint) {
     padding: 0 $pad;
+    display: flex;
+    position: relative;
+    z-index: 3;
+    background-color: transparent;
+
+    .material-icons {
+      display: none ;
+    }
+
+    h4,
+    .h4 {
+      color: $black;
+      // padding: inherit;
+      // margin: 0 0 1rem;
+
+    }
   }
 
   h5,

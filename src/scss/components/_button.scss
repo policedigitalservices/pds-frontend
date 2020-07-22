@@ -57,13 +57,12 @@ button,
   &[disabled],
   fieldset[disabled] & {
     cursor: default;
-    // background-color: $grey;
     color: rgba($black, .38);
   }
 
   &:-webkit-autofill {
     background-color: inherit !important;
-}
+  }
 
 
   &--outlined {
@@ -94,24 +93,24 @@ button,
 
     span {
 
-    font-size: 14px;
-line-height: 20px;
-font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
 
 
-    span {
-      i + & {
-        margin-right: 30px;
+      span {
+        i + & {
+          margin-right: 30px;
+        }
       }
-    }
 
-    i {
-      span + & {
-        margin-right: 40px;
+      i {
+        span + & {
+          margin-right: 40px;
+        }
       }
     }
   }
-}
 
   &--fullwidth {
     width: 100%;
@@ -139,7 +138,6 @@ font-weight: 400;
 
     &--remove {
       @extend .button__icon;
-      // color: $black;
 
       &:before {
         content: 'remove_circle';
@@ -149,6 +147,12 @@ font-weight: 400;
 
   &--small {
     padding: .445rem .875rem;
+    // font-size: 14px;
+
+    .material-icons {
+      font-size: 16px;
+      margin-right: $pad / 4;
+    }
   }
 
   &--transparent {
@@ -177,5 +181,9 @@ font-weight: 400;
       border-color: transparent;
       color: $grey;
     }
+  }
+
+  &--fab {
+    border-radius: 3rem;
   }
 }

@@ -4,6 +4,7 @@ footer,
     display: flex;
     justify-content: space-between;
     align-items: center;
+    display: none;
 }
 
 .app-footer {
@@ -12,6 +13,8 @@ footer,
     -ms-grid-column-span: 3;
     grid-area: footer;
     flex-shrink: 0;
+
+    @extend .body1;
 
     background-color: $blue--light;
     color: $black;

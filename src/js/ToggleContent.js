@@ -116,14 +116,18 @@ if (document.getElementById('add_group') !=null) {
         addGroupButton.addEventListener("click", function(el) {
 
             el.preventDefault();
-            addGroupButton.classList.add("is-hidden");
-            addGroupButton.blur();
-            addGroupButton.disabled = true;
+
 
             if (document.getElementById('add_group') !=null) {
 
                 var saveGroupButton = document.querySelector("#save_group");
-                saveGroupButton.classList.remove("is-hidden");
+
+                if (saveGroupButton !=null) {
+                    addGroupButton.classList.add("is-hidden");
+            addGroupButton.blur();
+            addGroupButton.disabled = true;
+                    saveGroupButton.classList.remove("is-hidden");
+                }
 
             }
         })

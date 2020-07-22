@@ -1,12 +1,12 @@
-(function (selector) {
+// (function (selector) {
 
-    var groupTextarea = document.getElementById("GroupTextarea");
+//     var groupTextarea = document.getElementById("GroupTextarea");
 
-    if (groupTextarea !== null) {
-        groupTextarea.addEventListener("focusin", function() {
-            document.getElementById("Sidebar").classList.add("aside--active");
-        })
-    }
+//     if (groupTextarea !== null) {
+//         groupTextarea.addEventListener("focusin", function() {
+//             document.getElementById("Sidebar").classList.add("aside--active");
+//         })
+//     }
 
-})("#Sidebar");
+// })("#Sidebar");
 
