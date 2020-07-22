@@ -3,7 +3,7 @@
     //get div ID without #
     var menu = document.getElementById(selector.replace(/^#/, ''));
 
-    console.log(menu);
+    // console.log(menu);
 
     if (menu) {
 
@@ -11,7 +11,7 @@
         var menuChild = document.querySelector(menuButton.dataset.target);
 
         menuButton.addEventListener("click", function(el) {
-            console.log(selector + ' clicked');
+            // console.log(selector + ' clicked');
             el.preventDefault();
             menuChild.classList.add("menu--active");
         });
@@ -33,7 +33,7 @@
     //get div ID without #
     var menu = document.getElementById(selector.replace(/^#/, ''));
 
-    console.log(menu);
+    // console.log(menu);
 
     if (menu) {
 

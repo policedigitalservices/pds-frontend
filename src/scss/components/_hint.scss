@@ -42,11 +42,11 @@
     }
 }
 
-#snackbox {
+#snackbar {
   display: none;
 }
 
-#snackbox:checked ~ .hint {
+#snackbar:checked ~ .hint {
   display: none;
 }
 
