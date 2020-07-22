@@ -46,7 +46,10 @@ form,
   input,
   textarea {
     font-family: $base-font-family;
+
+    &:not[type="checkbox"] {
     -webkit-appearance: none;
+    }
   }
 
   textarea {

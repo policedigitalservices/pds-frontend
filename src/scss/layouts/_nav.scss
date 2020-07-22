@@ -287,6 +287,15 @@ nav {
         border-color: transparent;
       }
 
+      form {
+        margin: 0 !important;
+
+        button {
+          margin: 0 .25rem !important;
+          color: $black !important;
+        }
+      }
+
       @extend .body1;
 
       a {

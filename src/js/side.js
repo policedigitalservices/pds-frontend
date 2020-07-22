@@ -28,9 +28,6 @@ var addGroupButton = document.querySelector("#add_group");
 if (addGroupButton) {
 
 addGroupButton.addEventListener("click", function(el) {
-  console.log('clicked');
-
-        // addGroupButton.style.display = 'none';
         el.preventDefault();
         toggleSidebar();
     })
@@ -41,9 +38,6 @@ var closeSidebar = document.querySelector('#close_sidebar');
 if (closeSidebar) {
 
 closeSidebar.addEventListener("click", function(el) {
-  console.log('clicked');
-
-        // addGroupButton.style.display = 'none';
         el.preventDefault();
         toggleSidebar();
     })
@@ -52,7 +46,6 @@ closeSidebar.addEventListener("click", function(el) {
 function toggleSidebar() {
   var x = document.getElementById("sidebar");
   var y = document.getElementById("main");
-  console.log('we\'re here');
   // if (x.style.display === "none") {
   //   x.style.display = "block";
     if (!x.classList.contains('aside--active')) {
