@@ -1,3 +1,19 @@
+/****** 
+
+  Creates a tag list from a select element
+
+  usage:
+
+  new SelectListTag(selectId, revertGroupsId, onUpdateFunc).
+
+  - selectId (required): The id of the select element acting as the source (must have multiple attribute, and all items should be marked as selected)
+
+  - revertGroups (optiional): The id of the element that will be clicked to revert selected options (should have is-hidden class to start)
+
+  - onUpdateFunc (required): A function called when a tag has been removed, or options are reverted.. This function will be called with two params, selectedOptions and allOptions.
+                             This is intended to make the control more flexible i.e. our first usage is to update label with selected items text elsewhere on page without further coupling.
+
+******/
 class SelectListTags {
   constructor(selectId, revertGroupsId, onUpdateFunc = () => {}) {
       this.onUpdateFunc = onUpdateFunc;
@@ -57,12 +73,17 @@ class SelectListTags {
     };
 }
 
+// Should have a section like this for each page the control is used on, unless we want it behave exactly the same as a previous version (include ids and update function) 
 if (document.getElementById('FolowUpGroupsTest')) {
+
+  // Prepare an update function if required
   const span = document.getElementById('ResponseGroupsLabelSpan');
   const onUpdateFunc = (selectedOptions, allOptions) => {
     const pluralisedGroups = selectedOptions.length === 1 ? 'group' : 'groups';
     span.innerText = `Send to ${selectedOptions.length} response ${pluralisedGroups}`;
   }
+
+  // Initialise a instance of the ciontroler
   new SelectListTags('FolowUpGroupsTest', 'revert_groups', onUpdateFunc); 
 }
 
