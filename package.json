@@ -6,7 +6,8 @@
   "author": "Police Digital Services <git@policedigital.services>",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --mode=production",
+    "release": "cross-env NODE_ENV=production webpack --mode=production",
+    "build": "cross-env NODE_ENV=development webpack --mode=development",
     "lint": "npm run lint-js && npm run lint-css",
     "lint-css": "stylelint 'src/**/*.scss'",
     "lint-js": "eslint 'src/js/**/*.js' './*.js'",
