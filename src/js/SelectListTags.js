@@ -74,7 +74,7 @@ class SelectListTags {
 }
 
 // Should have a section like this for each page the control is used on, unless we want it behave exactly the same as a previous version (include ids and update function) 
-if (document.getElementById('FolowUpGroupsTest')) {
+if (document.getElementById('FollowupGroupSelector')) {
 
   // Prepare an update function if required
   const span = document.getElementById('ResponseGroupsLabelSpan');
@@ -84,7 +84,7 @@ if (document.getElementById('FolowUpGroupsTest')) {
   }
 
   // Initialise a instance of the ciontroler
-  new SelectListTags('FolowUpGroupsTest', 'revert_groups', onUpdateFunc); 
+  new SelectListTags('FollowupGroupSelector', 'revert_groups', onUpdateFunc); 
 }
 
 
