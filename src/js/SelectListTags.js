@@ -73,7 +73,7 @@ class SelectListTags {
     };
 }
 
-// Should have a section like this for each page the control is used on, unless we want it behave exactly the same as a previous version (include ids and update function) 
+// Should have a section like this for each page the control is used on, unless we want it behave exactly the same as a previous version (including ids and update function) 
 if (document.getElementById('FollowupGroupSelector')) {
 
   // Prepare an update function if required
