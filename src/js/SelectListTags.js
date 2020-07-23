@@ -31,8 +31,7 @@ class SelectListTags {
       });
 
       this.allOptions = [...this.tagOptions.querySelectorAll('option')];
-      const selectedOptions = this.allOptions.filter(o => o.selected);
-      if (this.allOptions.length > selectedOptions.length) {
+      if (this.allOptions.some(o => !o.selected)) {
         this.revertBtn.classList.remove('is-hidden');
       }
 
