@@ -17,9 +17,12 @@
 class SelectListTags {
   constructor(selectId, revertGroupsId, onUpdateFunc = () => {}) {
       this.onUpdateFunc = onUpdateFunc;
+
       this.tagOptions = document.getElementById(selectId);
       this.tagOptions.classList.add('is-hidden');
+      
       this.allOptions = [...this.tagOptions.querySelectorAll('option')];
+
       this.revertBtn = document.getElementById(revertGroupsId);
       this.revertBtn.addEventListener('click', e => {
         e.preventDefault();
@@ -29,8 +32,7 @@ class SelectListTags {
         this.revertBtn.classList.add('is-hidden');
       });
 
-      this.tags = document.createElement('div');
-      
+      this.tags = document.createElement('div');      
       this.tags.addEventListener('click', e => {
         e.preventDefault();
         if(e.target.matches('i')) {
