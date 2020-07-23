@@ -76,16 +76,13 @@ class SelectListTags {
 // Should have a section like this for each page the control is used on, unless we want it behave exactly the same as a previous version (including ids and update function) 
 if (document.getElementById('FollowupGroupSelector')) {
 
-  // Prepare an update function if required
+  // Prepare an update function if required (optional parameter)
   const span = document.getElementById('ResponseGroupsLabelSpan');
   const onUpdateFunc = (selectedOptions, allOptions) => {
     const pluralisedGroups = selectedOptions.length === 1 ? 'group' : 'groups';
     span.innerText = `Send to ${selectedOptions.length} response ${pluralisedGroups}`;
   }
 
-  // Initialise a instance of the ciontroler
+  // Initialise an instance of the control
   new SelectListTags('FollowupGroupSelector', 'revert_groups', onUpdateFunc); 
 }
-
-
-
