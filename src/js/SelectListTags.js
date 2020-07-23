@@ -21,8 +21,6 @@ class SelectListTags {
       this.tagOptions = document.getElementById(selectId);
       this.tagOptions.classList.add('is-hidden');
       
-      this.allOptions = [...this.tagOptions.querySelectorAll('option')];
-
       this.revertBtn = document.getElementById(revertGroupsId);
       this.revertBtn.addEventListener('click', e => {
         e.preventDefault();
@@ -31,6 +29,12 @@ class SelectListTags {
         this.populateTags();
         this.revertBtn.classList.add('is-hidden');
       });
+
+      this.allOptions = [...this.tagOptions.querySelectorAll('option')];
+      const selectedOptions = this.allOptions.filter(o => o.selected);
+      if (this.allOptions.length > selectedOptions.length) {
+        this.revertBtn.classList.remove('is-hidden');
+      }
 
       this.tags = document.createElement('div');      
       this.tags.addEventListener('click', e => {
