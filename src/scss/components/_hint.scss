@@ -1,33 +1,29 @@
-
 .hint {
-    -ms-grid-row: 3;
-    -ms-grid-column: 5;
-    grid-area: hint;
-    flex-grow: 1;
+  @extend h4;
 
-    @extend h4;
-    font-size: 24px;
-    line-height: 28px;
-    margin: 0;
-    padding: 0;
-    color: $blue;
-    font-weight: 300;
-
-    padding-left: 0 $pad;
-    padding-top: $pad * 2;
-
+  -ms-grid-row: 3;
+  -ms-grid-column: 5;
+  grid-area: hint;
+  flex-grow: 1;
+  font-size: 24px;
+  line-height: 28px;
+  margin: 0;
+  padding: 0;
+  color: $blue;
+  font-weight: 300;
+  padding-left: 0 $pad;
+  padding-top: $pad * 2;
 }
 
 .action {
-    -ms-grid-row: 3;
-    -ms-grid-column: 3;
-    grid-area: action;
-    flex-grow: 1;
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  grid-area: action;
+  flex-grow: 1;
+  margin: 0;
+  padding: 0 $pad;
 
-    margin: 0;
-    padding: 0 $pad;
-
-    form {
-        width: 100%;
-    }
+  form {
+      width: 100%;
+  }
 }

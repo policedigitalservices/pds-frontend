@@ -5,8 +5,8 @@
   "rules": {
     "at-rule-no-unknown": null,
     "no-descending-specificity": null,
-    "order/properties-alphabetical-order": true,
-    "scss/at-import-no-partial-leading-underscore": true,
+    "order/properties-alphabetical-order": null,
+    "scss/at-import-no-partial-leading-underscore": null,
     "scss/at-rule-no-unknown": true,
     "scss/declaration-nested-properties": "never",
     "scss/dollar-variable-colon-space-after": "always",
@@ -18,7 +18,7 @@
     "scss/operator-no-newline-after": true,
     "scss/operator-no-newline-before": true,
     "scss/operator-no-unspaced": true,
-    "scss/partial-no-import": true,
+    "scss/partial-no-import": null,
     "scss/selector-no-redundant-nesting-selector": true
   }
 }

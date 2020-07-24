@@ -6,7 +6,6 @@ button,
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
   background-color: $blue;
   color: $white;
-  text-decoration: none;
   margin: $pad / 4;
   border: 1px solid transparent;
   font-family: Roboto, sans-serif;
@@ -16,7 +15,6 @@ button,
   letter-spacing: .0892857143em;
   text-decoration: none;
   text-transform: uppercase;
-  padding: 0 8px 0 8px;
   display: inline-flex;
   position: relative;
   align-items: center;
@@ -93,11 +91,9 @@ button,
     @extend .tag;
 
     span {
-
     font-size: 14px;
-line-height: 20px;
-font-weight: 400;
-
+    line-height: 20px;
+    font-weight: 400;
 
     span {
       i + & {
@@ -120,6 +116,7 @@ font-weight: 400;
 
   &__icon {
     @extend .material-icons;
+
     margin-left: 0;
     margin-right: 8px;
     display: inline-block;
@@ -128,20 +125,18 @@ font-weight: 400;
     font-size: 18px;
     vertical-align: top;
 
-
     &--new {
       @extend .button__icon;
 
-      &:before {
+      &::before {
         content: 'add';
       }
     }
 
     &--remove {
       @extend .button__icon;
-      // color: $black;
 
-      &:before {
+      &::before {
         content: 'remove_circle';
       }
     }

@@ -6,50 +6,39 @@ $base-font-size-desktop: 100 !default; // In %. Used to calculate the desktop fo
 $line-height: 1.625 !default;
 $max-width: 35 !default; // Number only, no units. Gets converted to REMs and pixels.
 
-
 // Mobile base & leading
 $base: 18 * ($base-font-size / 100);
 $leading: round($base * $line-height);
 $leading-rem: $leading / $base;
-
-
-$base-font-family : 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-
-
+$base-font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 $max-width: 90; // Number only, no units. Gets converted to REMs and pixels.
 
 // Font Sizing
-$baseFontSize      : 18px;
-$baseLineHeight    : 1.5;
-$headingLineHeight : 1.2;
+$baseFontSize: 18px;
+$baseLineHeight: 1.5;
+$headingLineHeight: 1.2;
 
 // Colors
-$black : rgba(0, 0, 0, 0.87);
+$black: rgba(0, 0, 0, 0.87);
 $black--light: rgba(0, 0, 0, 0.38);
 $black--medium: rgba(0, 0, 0, 0.6);
-
-$red   : #FF0C3E;
-$blue  : #2C98F0;
-$white : #ffffff;
-
+$red: #FF0C3E;
+$blue: #2C98F0;
+$white: #FFF;
 $blue--light: #F5FBFF;
 $blue--medium: #EDF7FF;
 $blue--dark: #D5EAFC;
-
 $grey: #BDBDBD;
 $grey--light: #929292;
 $grey--medium: #606060;
 
 // Spacing
-$pad : 1rem;
-
+$pad: 1rem;
 $max-form-width: $pad * 42.5;
 
 // Breakpoints
-$smallBreakpoint : 600px;
-$largeBreakpoint : 1080px;
-
-
+$smallBreakpoint: 600px;
+$largeBreakpoint: 1080px;
 $breakpoints: (
     S: 640,
     M: 1024,

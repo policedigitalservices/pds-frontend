@@ -1,6 +1,5 @@
 $icon-font-family: "pds-icons" !default;
 $icon-font-path: "../fonts" !default;
-
 $pds-icon-group-root: "\e900";
 $pds-icon-error-triangle: "\e901";
 $pds-icon-error-circle: "\e902";
@@ -18,8 +17,6 @@ $pds-icon-more-vertical: "\e90d";
 $pds-icon-search: "\e90e";
 $pds-icon-group-child: "\e90f";
 $pds-icon-group-parent: "\e910";
-
-
 
 @font-face {
   font-family: '#{$icon-font-family}';
@@ -59,96 +56,95 @@ i {
 }
 
 .pds-icon-group-root {
-  &:before {
+  &::before {
     content: $pds-icon-group-root;
     color: #696969;
   }
 }
 .pds-icon-error-triangle {
-  &:before {
+  &::before {
     content: $pds-icon-error-triangle;
     color: #696969;
   }
 }
 .pds-icon-error-circle {
-  &:before {
+  &::before {
     content: $pds-icon-error-circle;
     color: #696969;
   }
 }
 .pds-icon-tick-circle {
-  &:before {
+  &::before {
     content: $pds-icon-tick-circle;
     color: #696969;
   }
 }
 .pds-icon-info-circle {
-  &:before {
+  &::before {
     content: $pds-icon-info-circle;
     color: #696969;
   }
 }
 .pds-icon-remove-circle {
-  &:before {
+  &::before {
     content: $pds-icon-remove-circle;
     color: #696969;
   }
 }
 .pds-icon-add {
-  &:before {
+  &::before {
     content: $pds-icon-add;
   }
 }
 .pds-icon-arrow-drop-down {
-  &:before {
+  &::before {
     content: $pds-icon-arrow-drop-down;
   }
 }
 .pds-icon-arrow-drop-up {
-  &:before {
+  &::before {
     content: $pds-icon-arrow-drop-up;
   }
 }
 .pds-icon-arrow-right {
-  &:before {
+  &::before {
     content: $pds-icon-arrow-right;
   }
 }
 .pds-icon-close {
-  &:before {
+  &::before {
     content: $pds-icon-close;
   }
 }
 .pds-icon-keyboard-arrow-left {
-  &:before {
+  &::before {
     content: $pds-icon-keyboard-arrow-left;
   }
 }
 .pds-icon-keyboard-arrow-right {
-  &:before {
+  &::before {
     content: $pds-icon-keyboard-arrow-right;
   }
 }
 .pds-icon-more-vertical {
-  &:before {
+  &::before {
     content: $pds-icon-more-vertical;
   }
 }
 .pds-icon-search {
-  &:before {
+  &::before {
     content: $pds-icon-search;
   }
 }
 .pds-icon-group-child {
-  &:before {
+  &::before {
     content: $pds-icon-group-child;
     color: #696969;
   }
 }
 .pds-icon-group-parent {
-  &:before {
+  &::before {
     content: $pds-icon-group-parent;
     color: #696969;
   }
 }
-

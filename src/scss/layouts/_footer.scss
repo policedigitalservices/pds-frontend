@@ -1,22 +1,21 @@
 // Footer Styles
 footer,
 .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .app-footer {
-    -ms-grid-row: 5;
-    -ms-grid-column: 1;
-    -ms-grid-column-span: 3;
-    grid-area: footer;
-    flex-shrink: 0;
-
-    background-color: $blue--light;
-    color: $black;
-    padding: $pad;
-    width: 100%;
-    border-top: 1px solid $grey;
-    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: footer;
+  flex-shrink: 0;
+  background-color: $blue--light;
+  color: $black;
+  padding: $pad;
+  width: 100%;
+  border-top: 1px solid $grey;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
 }

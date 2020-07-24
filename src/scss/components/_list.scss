@@ -1,146 +1,149 @@
 ul {
-    padding: 0 $pad * 3;
-    list-style: none;
+  padding: 0 $pad * 3;
+  list-style: none;
 
-    li {
+  li {
 
-        a {
-            color: $black;
-            text-decoration: none;
-        }
+    a {
+      color: $black;
+      text-decoration: none;
     }
+  }
 }
 
 .group {
-    &__list {
+  &__list {
+    padding: 0;
+    display: block;
+
+    ul {
+      padding: 0;
+      margin: 0;
+      display: block;
+
+
+      li {
         padding: 0;
+        margin: 0;
+        width: 100%;
         display: block;
+        border-top: 1px solid lighten($black--light, 65%);
+        position: relative;
 
-        ul {
-            padding: 0;
-            margin: 0;
-            display: block;
+        .radio-checkbox {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+        }
 
+        .radio-checkbox__border {
+          position: absolute;
+          top: calc(1rem + 2px);
+          left: 50%;
+          transform: translateX(-50%)
+        }
+
+        a,
+        label:not(.radio-checkbox) {
+          @extend .body1;
+
+          padding: $pad 0;
+          display: inline-block;
+          padding-left: $pad;
+          width: 80%;
+          font-size: 100%;
+          letter-spacing: 0;
+          margin-bottom: 0;
+        }
+
+        label:nth-child(2) {
+          color: red;
+          width: 20%;
+          text-align: center;
+          display: inline-block;
+        }
+
+        input[type="checkbox"] {
+          float: right;
+          margin: $pad * 1.4 0;
+          width: 20%;
+        }
+
+        li {
+
+          a,
+          label:not(.radio-checkbox) {
+            padding-left: $pad * 2.5;
+            background-position: $pad * 1.5 50%;
+          }
+
+          li {
+            a,
+            label:not(.radio-checkbox) {
+              padding-left: $pad * 4.5;
+              background-image: none;
+            }
 
             li {
-                padding: 0;
-                margin: 0;
-                width: 100%;
-                display: block;
-                border-top: 1px solid lighten($black--light, 65%);
-                position: relative;
+              a,
+              label:not(.radio-checkbox) {
+                padding-left: $pad * 6.5;
+                background-image: none;
+              }
 
-                .radio-checkbox {
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                }
-
-                .radio-checkbox__border {
-                    position: absolute;
-                    top: calc(1rem + 2px);
-                    left: 50%;
-                    transform: translatex(-50%)
-                }
-
+              li {
                 a,
                 label:not(.radio-checkbox) {
-                    padding: $pad 0;
-                    display: inline-block;
-                    padding-left: $pad;
-                    width: 80%;
-                    @extend .body1;
-                    font-size: 100%;
-                    letter-spacing: 0;
-                    margin-bottom: 0;
+                  padding-left: $pad * 8.5;
+                  background-image: none;
                 }
-
-                label:nth-child(2) {
-                    color: red;
-                    width: 20%;
-                    text-align: center;
-                    display: inline-block;
-                }
-
-                input[type="checkbox"] {
-                    float: right;
-                    margin: $pad * 1.4 0;
-                    width: 20%;
-                }
-
-                li {
-
-                    a,
-                    label:not(.radio-checkbox) {
-                        padding-left: $pad * 2.5;
-                        background-position: $pad * 1.5 50%;
-                    }
-
-                    li {
-                        a,
-                        label:not(.radio-checkbox) {
-                            padding-left: $pad * 4.5;
-                            background-image: none;
-                        }
-
-                        li {
-                            a,
-                            label:not(.radio-checkbox) {
-                                padding-left: $pad * 6.5;
-                                background-image: none;
-                            }
-
-                            li {
-                                a,
-                                label:not(.radio-checkbox) {
-                                    padding-left: $pad * 8.5;
-                                    background-image: none;
-                                }
-                            }
-                        }
-                    }
-                }
+              }
             }
-
-            .group-selector__group {
-                background-color: $blue--medium;
-
-                &--current {
-                    background-color: $blue--dark;
-                }
-
-                & > a,
-                & > label:not(.radio-checkbox) {
-                    &:before {
-                        @extend .material-icons;
-                        display: inline-block;
-                        width: 1.2rem;
-                        height: 1.2rem;
-                        margin-right: $pad / 2;
-                        margin-top: $pad / 2;
-                        @include font-size(.8);
-                        vertical-align: top;
-                        content: 'fiber_manual_record';
-                    }
-                }
-            }
-
-            .group-selector__group--parent {
-                & > a,
-                & > label:not(.radio-checkbox) {
-                    &:before {
-                        @extend .material-icons;
-                        display: inline-block;
-                        width: 1.2rem;
-                        height: 1.2rem;
-                        margin-right: $pad / 2;
-                        margin-top: $pad / 6;
-                        @include font-size(1.2);
-                        vertical-align: top;
-                        content: 'folder';
-                    }
-                }
-            }
+          }
         }
+      }
+
+      .group-selector__group {
+        background-color: $blue--medium;
+
+        &--current {
+          background-color: $blue--dark;
+        }
+
+        > a,
+        > label:not(.radio-checkbox) {
+          &::before {
+            @extend .material-icons;
+            @include font-size(.8);
+
+            display: inline-block;
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-right: $pad / 2;
+            margin-top: $pad / 2;
+            vertical-align: top;
+            content: 'fiber_manual_record';
+          }
+        }
+      }
+
+      .group-selector__group--parent {
+        > a,
+        > label:not(.radio-checkbox) {
+          &::before {
+            @extend .material-icons;
+            @include font-size(1.2);
+
+            display: inline-block;
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-right: $pad / 2;
+            margin-top: $pad / 6;
+            vertical-align: top;
+            content: 'folder';
+          }
+        }
+      }
     }
+  }
 }

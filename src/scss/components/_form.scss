@@ -1,4 +1,4 @@
-//hack
+// hack
 p + form {
   margin-left: $pad;
 }
@@ -9,38 +9,25 @@ form,
   max-width: $max-form-width;
   align-self: center;
 
-
-  // width: 100%;
-
   &__label,
   label,
   legend {
+    @extend h6;
 
     display: inline-flex;
-    @extend h6;
     margin-bottom: $pad / 2;
-
-
-        // display: flex;
-    // justify-content: space-between;
-  align-items: center;
-
-  }
-
-  &__label--hidden {
-
+    align-items: center;
   }
 
   &__group {
     margin-bottom: $pad;
     overflow: hidden;
     line-height: 1;
-   max-width: $max-form-width;
+    max-width: $max-form-width;
 
-   &.no-bottom-margin {
-    margin-bottom: 0;
-   }
-
+    &.no-bottom-margin {
+      margin-bottom: 0;
+    }
   }
 
   input,
@@ -66,8 +53,6 @@ form,
     outline: none;
     border-radius: 0;
     min-height: 3.5rem;
-    // margin-bottom: 1.5rem;
-    // max-width: 42.5rem;
     padding: $pad;
     width: 100%;
     font-size: 100%;
@@ -88,42 +73,37 @@ form,
       }
     }
 
-    & + .button {
+    + .button {
       margin: 0;
     }
 
     &.input-validation-error,
     &.field-validation-error {
-      // border: 2px solid $red;
       border-width: 2px;
       border-color: $red;
 
-      & + span {
+      + span {
+        @extend .caption;
+
         margin-bottom: 0;
-        // margin-left: $pad;
         margin-left: 0;
         margin-top: 5px;
         display: inline-block;
-
-        @extend .caption;
-
         color: $red;
       }
 
-      & + button {
+      + button {
         border-width: 2px;
         border-color: $red;
 
-        & + span {
+        + span {
+          @extend .caption;
+
           margin-bottom: 0;
-          // margin-left: $pad;
           margin-left: 0;
           margin-top: 2px;
           margin-top: 5px;
           display: inline-block;
-
-          @extend .caption;
-
           color: $red;
         }
       }
@@ -149,14 +129,8 @@ form,
       padding-left: $pad * 2.8;
       background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15.502 14H14.708L14.432 13.726C15.407 12.589 16 11.115 16 9.49997C16 5.90997 13.09 2.99997 9.5 2.99997C5.91 2.99997 3 5.90997 3 9.49997C3 13.09 5.91 16 9.5 16C11.115 16 12.588 15.408 13.725 14.434L14.001 14.708V15.5L18.999 20.491L20.49 19L15.502 14ZM9.5 14C7.014 14 5 11.986 5 9.49997C5 7.01497 7.014 4.99997 9.5 4.99997C11.985 4.99997 14 7.01497 14 9.49997C14 11.986 11.985 14 9.5 14Z' fill='black' fill-opacity='0.54'/%3E%3C/svg%3E%0A");
       background-repeat: no-repeat;
-      background-position: ($pad/4) * 3 50%;
-
-      // &::-webkit-input-placeholder {
-      //   color: $blue;
-      // }
-
+      background-position: ($pad / 4) * 3 50%;
     }
-
   }
 }
 
@@ -173,6 +147,7 @@ input,
     button,
     .button {
       @extend .form__input;
+
       width: 3.5rem;
       border-radius: 0;
       border-left: 0;
@@ -190,24 +165,23 @@ input,
       }
 
       &--remove {
-        &:before {
+        &::before {
           content: 'clear';
           color: $grey--medium;
         }
       }
 
       &--add {
-        &:before {
+        &::before {
           content: 'add_circle';
           color: $grey--medium;
         }
       }
 
       &--save {
-        &:before {
+        &::before {
           content: 'save';
           color: $blue;
-
           font-family: Roboto, sans-serif;
           -moz-osx-font-smoothing: grayscale;
           -webkit-font-smoothing: antialiased;
@@ -231,21 +205,15 @@ select,
   -moz-appearance: none; /* FF */
   -ms-appearance: none; /* Edge */
   appearance: none; /* Future */
-
   color: $black;
   outline: none;
   border: none;
   background-color: transparent;
   font-size: 14px;
   padding: $pad $pad * 2 $pad $pad;
-
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' width='24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: 100% 50%;
-  // &:after {
-  //         content: 'remove_circle';
-  //         color: $grey--medium;
-  //       }
 
   &:focus {
     background-color: rgba($black, 0.08);
@@ -260,6 +228,6 @@ select,
 .field-validation-error {
   color: $red;
   margin-top: 5px;
-          display: inline-block;
+  display: inline-block;
   @extend .caption;
 }
