@@ -8,6 +8,7 @@ const webpack = require("webpack");
 
 const outputDir = path.resolve(__dirname, "");
 const isDev = process.env.NODE_ENV !== "production";
+const outputEnv = isDev ? "." + process.env.NODE_ENV : "";
 
 module.exports = {
   entry: {
@@ -20,24 +21,25 @@ module.exports = {
       "./src/js/tables.js",
       "./src/js/SeeAll.js",
       "./src/js/menu.js",
-      "./src/js/snackbar.js"
+      "./src/js/snackbar.js",
+      "./src/js/SelectListTags.js"
     ]
   },
   output: {
-    filename: "[name].js",
+    filename: "[name]" + outputEnv + ".js",
     // filename: isDev ? "[name].js" : "[name].[contenthash].js",
     path: outputDir
   },
   devtool: isDev ? "inline-source-map" : false,
   devServer: {
     contentBase: outputDir,
-    compress: true,
+    compress: isDev ? true : false,
     port: 7264
   },
   plugins: [
     new CleanWebpackPlugin([outputDir]),
     new MiniCssExtractPlugin({
-      filename: "[name].css"
+      filename: "[name]" + outputEnv + ".css"
       // filename: isDev ? "[name].css" : "[name].[contenthash].css"
     }),
     new CopyWebpackPlugin([
@@ -71,17 +73,25 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              sourceMap: !!isDev
+              sourceMap: !!isDev,
+
             }
           },
           {
-            loader: "postcss-loader"
+            loader: "postcss-loader",
+            options: {
+              sourceMap: !!isDev,
+              minimize: !!isDev
+
+            }
           },
           {
             loader: "sass-loader",
             options: {
               implementation: sass,
-              sourceMap: !!isDev
+              sourceMap: !!isDev,
+              minimize: !!isDev,
+              outputStyle: isDev ? "expanded" : "compressed"
             }
           }
         ]

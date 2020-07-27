@@ -48,6 +48,10 @@
 
 #snackbar:checked ~ .hint {
   display: none;
+
+  @media (min-width: $smallBreakpoint) {
+            display: block;
+        }
 }
 
 

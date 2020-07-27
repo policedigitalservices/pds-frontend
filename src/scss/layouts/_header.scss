@@ -171,8 +171,16 @@ header,
     z-index: 3;
     background-color: transparent;
 
+    .message-detail & {
+      padding: 0 $pad 0 0;
+    }
+
     .material-icons {
-      display: none ;
+      display: none;
+
+      .message-detail & {
+        display: flex;
+      }
     }
 
     h4,

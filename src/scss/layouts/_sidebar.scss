@@ -52,6 +52,10 @@ aside,
       display: block;
       position: relative;
       grid-column: 1 / 2;
+
+      &.sub-group {
+        display: block;
+      }
     }
   }
 }
