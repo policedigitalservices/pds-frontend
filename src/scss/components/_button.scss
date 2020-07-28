@@ -55,14 +55,12 @@ button,
   &[disabled],
   fieldset[disabled] & {
     cursor: default;
-    // background-color: $grey;
     color: rgba($black, .38);
   }
 
   &:-webkit-autofill {
     background-color: inherit !important;
-}
-
+  }
 
   &--outlined {
     background-color: transparent;
@@ -91,23 +89,23 @@ button,
     @extend .tag;
 
     span {
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
 
-    span {
-      i + & {
-        margin-right: 30px;
+      span {
+        i + & {
+          margin-right: 30px;
+        }
       }
-    }
 
-    i {
-      span + & {
-        margin-right: 40px;
+      i {
+        span + & {
+          margin-right: 40px;
+        }
       }
     }
   }
-}
 
   &--fullwidth {
     width: 100%;
@@ -144,6 +142,11 @@ button,
 
   &--small {
     padding: .445rem .875rem;
+
+    .material-icons {
+      font-size: 16px;
+      margin-right: $pad / 4;
+    }
   }
 
   &--transparent {
@@ -172,5 +175,9 @@ button,
       border-color: transparent;
       color: $grey;
     }
+  }
+
+  &--fab {
+    border-radius: 3rem;
   }
 }

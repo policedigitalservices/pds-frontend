@@ -33,6 +33,10 @@ form,
   input,
   textarea {
     font-family: $base-font-family;
+
+    &:not[type="checkbox"] {
+    -webkit-appearance: none;
+    }
   }
 
   textarea {
@@ -48,7 +52,7 @@ form,
   }
 
   &__input {
-    border: 1px solid rgba($black, 0.6);
+    border: 1px solid rgba($black, 0.3);
     background-color: $white;
     outline: none;
     border-radius: 0;
@@ -56,6 +60,7 @@ form,
     padding: $pad;
     width: 100%;
     font-size: 100%;
+    -webkit-appearance: none;
 
     .tag {
       background-color: transparent;
@@ -123,6 +128,13 @@ form,
     &--active {
       border-color: $blue;
       outline: none;
+      border-width: 1px;
+
+      & + button {
+        border-width: 1px;
+        border-color: $blue;
+
+      }
     }
 
     &--search {
@@ -161,7 +173,7 @@ input,
       &:focus,
       &.focus,
       &.active {
-        border-color: rgba($black, 0.6);
+        border-color: rgba($black, 0.3);
       }
 
       &--remove {

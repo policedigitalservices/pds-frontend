@@ -1,14 +1,20 @@
 // Table styles
 table {
-  border-top: 1px solid $grey;
   width: 100%;
   border-spacing: 0;
-    table-layout: fixed;
-    border-collapse: separate;
+  table-layout: fixed;
+  border: none;
+  border-collapse: collapse;
+  white-space: nowrap;
 
   tr {
+    border-bottom: 1px solid lighten($black--light, 65%);
 
-     &:hover {
+    &:first-child {
+      border-top: 1px solid lighten($black--light, 65%);
+    }
+
+    &:hover {
       background-color: rgba($blue, 5%);
     }
 
@@ -22,17 +28,68 @@ table {
 
     td {
       padding: $pad;
-      border-bottom: 1px solid $grey;
+
       color: $black--medium;
       text-overflow: ellipsis;
       overflow: hidden;
+      white-space: nowrap;
 
-     @extend .body1;
+      @extend .body1;
 
       a {
         text-decoration: none;
         color: $black;
       }
+    }
+  }
+}
+
+@media (max-width: $smallBreakpoint) {
+
+  table,
+  thead,
+  tbody,
+  tr {
+    // display: block;
+  }
+
+  table {
+    margin-bottom: $pad;
+  }
+
+  tr {
+    padding: $pad / 2 0;
+    min-height: $pad * 4.575;
+    display: block;
+  }
+
+  td {
+    padding: 0 !important;
+
+    &:nth-child(1) {
+      display: inline-block;
+      width: 65%;
+      display: block;
+      float: left;
+    }
+
+    &:nth-child(2) {
+      display: inline-block;
+      width: 34%;
+      display: block;
+      float: left;
+    }
+
+    &:nth-child(2) {
+      text-align: right;
+    }
+
+    &:nth-child(3),
+    &:nth-child(4) {
+      display: block;
+      width: 65%;
+      float: left;
+      text-align: left;
     }
   }
 }

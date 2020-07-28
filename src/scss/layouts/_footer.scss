@@ -1,12 +1,18 @@
 // Footer Styles
 footer,
 .footer {
-  display: flex;
   justify-content: space-between;
   align-items: center;
+  display: none;
+
+  @media (max-width: $smallBreakpoint) {
+    display: flex;
+  }
 }
 
 .app-footer {
+  @extend .body1;
+
   -ms-grid-row: 5;
   -ms-grid-column: 1;
   -ms-grid-column-span: 3;

@@ -60,6 +60,7 @@
 .flex-end {
   justify-content: flex-end;
   display: flex !important;
+  padding: 0 $pad;
 }
 
 .space-around {
@@ -70,4 +71,19 @@
 .space-justify {
   justify-content: space-between;
   display: flex !important;
+  // padding: $pad $pad 0 $pad !important;
+}
+
+.only {
+  &--mobile {
+    @media (min-width: $smallBreakpoint) {
+      display: none !important;
+    }
+  }
+
+  &--desktop {
+    @media (max-width: $smallBreakpoint) {
+      display: none !important;
+    }
+  }
 }

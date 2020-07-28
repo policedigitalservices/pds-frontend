@@ -6,6 +6,7 @@ header,
   align-items: center;
   grid-area: header;
   flex-shrink: 0;
+  flex-wrap: wrap;
 
   ul {
     display: flex;
@@ -25,9 +26,13 @@ header,
   top: 0;
   background-color: $blue;
   color: $white;
-  padding: 0 $pad;
+  padding: 0;
   z-index: 11;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
+
+  @media (min-width: $smallBreakpoint) {
+    padding: 0 $pad;
+  }
 
   &__logo {
     @extend h4;
@@ -37,25 +42,22 @@ header,
     color: $white;
     text-decoration: none;
     margin: 0;
-    padding: $pad * .7 0;
+    padding: $pad * .7 $pad;
+    display: inline-block;
 
     @media (min-width: $smallBreakpoint) {
-      display: inline-block;
+      padding: $pad * .7 0;
     }
   }
 
   &__title {
     @extend h3;
 
-    display: inline-block;
     text-transform: uppercase;
     color: $white;
     text-decoration: none;
     margin: .2rem $pad;
-
-    @media (min-width: $smallBreakpoint) {
-      display: none;
-    }
+    display: none;
   }
 }
 
@@ -64,12 +66,91 @@ header,
   -ms-grid-row: 1;
   -ms-grid-column: 3;
   grid-area: header;
-  padding: $pad;
-  overflow: hidden;
-  position: relative;
+  width: 100%;
+  padding: 0;
+
+  @media (max-width: $smallBreakpoint) {
+    display: none;
+
+    .message-detail & {
+      display: flex;
+      padding-top: $pad;
+
+      .material-icons {
+        display: none;
+      }
+    }
+
+    .grid--compact &,
+    .contact-index & {
+
+      position: fixed;
+      top: 0;
+      z-index: 9990;
+      background-color: $blue;
+      display: flex;
+
+      h4,
+      .h4,
+      .h4  {
+        margin: 0;
+        padding: .7rem 1rem;
+        color: $white;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 23px;
+        letter-spacing: 0.15px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .h4 a {
+        padding: 0;
+        color: $white;
+        margin-left: -.5rem;
+        margin-right: .5rem;
+        line-height: 24px;
+        font-size: 24px;
+      }
+
+      h5,
+      ul,
+      button,
+      form {
+        margin-right: 0rem;
+
+      }
+
+      button {
+        color: $white;
+      }
+    }
+  }
 
   @media (min-width: $smallBreakpoint) {
     padding: 0 $pad;
+    display: flex;
+    position: relative;
+    z-index: 3;
+    background-color: transparent;
+
+    .message-detail & {
+      padding: 0 $pad 0 0;
+    }
+
+    .material-icons {
+      display: none;
+
+      .message-detail & {
+        display: flex;
+      }
+    }
+
+    h4,
+    .h4 {
+      color: $black;
+    }
   }
 
   h5,
