@@ -95,56 +95,61 @@ ul {
                 label:not(.radio-checkbox) {
                   padding-left: $pad * 8.5;
                   background-image: none;
+                }
               }
             }
           }
         }
       }
 
-      .group-selector__group {
-        background-color: $blue--medium;
+        .group-selector__group {
+          background-color: $blue--medium;
 
-        &--current {
-          background-color: $blue--dark;
-        }
+          &--current {
+            background-color: $blue--dark;
+          }
 
-        > a,
-        > label:not(.radio-checkbox) {
-          &::before {
-            @extend .material-icons;
-            @include font-size(.8);
+          > a,
+          > label:not(.radio-checkbox) {
+            &::before {
+              @extend .material-icons;
+              @include font-size(.8);
 
-            display: inline-block;
-            width: 1.2rem;
-            height: 1.2rem;
-            margin-right: $pad / 2;
-            margin-top: $pad / 2;
-            vertical-align: top;
-            content: 'fiber_manual_record';
+              display: inline-block;
+              width: 1.2rem;
+              height: 1.2rem;
+              margin-right: $pad / 2;
+              margin-top: ($pad * 0.7) / 2;
+              vertical-align: top;
+              content: 'fiber_manual_record';
+
+              @media (min-width: $smallBreakpoint) {
+                margin-top: $pad / 2;
+              }
+            }
           }
         }
-      }
 
-      .group-selector__group--parent {
-        & > a,
-        & > label:not(.radio-checkbox) {
-          &:before {
-            @extend .material-icons;
-            display: inline-block;
-            width: 1.2rem;
-            height: 1.2rem;
-            margin-right: $pad / 2;
-            margin-top: 0;
-            @include font-size(1.2);
-            vertical-align: top;
-            content: 'folder';
+        .group-selector__group--parent {
+          & > a,
+          & > label:not(.radio-checkbox) {
+            &:before {
+              @extend .material-icons;
+              display: inline-block;
+              width: 1.2rem;
+              height: 1.2rem;
+              margin-right: $pad / 2;
+              margin-top: 0;
+              @include font-size(1.2);
+              vertical-align: top;
+              content: 'folder';
 
-            @media (min-width: $smallBreakpoint) {
+              @media (min-width: $smallBreakpoint) {
                 margin-top: $pad / 6;
+              }
             }
           }
         }
       }
     }
   }
-}

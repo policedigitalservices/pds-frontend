@@ -5,7 +5,7 @@ footer,
   align-items: center;
   display: none;
 
-  @media (max-width: $smallBreakpoint) {
+  @media (min-width: $smallBreakpoint) {
     display: flex;
   }
 }
