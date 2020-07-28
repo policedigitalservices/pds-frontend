@@ -1,45 +1,43 @@
-
 .hint {
+  @extend h4;
 
-    @media (max-width: $smallBreakpoint) {
-        background: $black;
-        color: $white;
-        position: fixed;
-        bottom: 0;
-        padding: $pad;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 20px;
-        letter-spacing: 0.25px;
-        width: 100%;
+  -ms-grid-row: 3;
+  -ms-grid-column: 5;
+  grid-area: hint;
+  flex-grow: 1;
+  font-size: 24px;
+  line-height: 28px;
+  margin: 0;
+  padding: 0;
+  color: $blue;
+  font-weight: 300;
+  padding-left: 0 $pad;
+  padding-top: $pad * 2;
+
+  @media (max-width: $smallBreakpoint) {
+    background: $black;
+    color: $white;
+    position: fixed;
+    bottom: 0;
+    padding: $pad;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    width: 100%;
+  }
+
+  label {
+    float: right;
+    padding: $pad 0;
+    @extend .button;
+    @extend .button--transparent;
+    @extend .button--small;
+
+    @media (min-width: $smallBreakpoint) {
+      display: none;
     }
-    -ms-grid-row: 3;
-    -ms-grid-column: 5;
-    grid-area: hint;
-    flex-grow: 1;
-
-    @extend h4;
-    font-size: 24px;
-    line-height: 28px;
-    margin: 0;
-    padding: 0;
-    color: $blue;
-    font-weight: 300;
-
-    padding-left: 0 $pad;
-    padding-top: $pad * 2;
-
-    label {
-        float: right;
-        padding: $pad 0;
-        @extend .button;
-        @extend .button--transparent;
-        @extend .button--small;
-
-        @media (min-width: $smallBreakpoint) {
-            display: none;
-        }
-    }
+  }
 }
 
 #snackbar {
@@ -50,23 +48,19 @@
   display: none;
 
   @media (min-width: $smallBreakpoint) {
-            display: block;
-        }
+    display: block;
+  }
 }
 
-
 .action {
-    -ms-grid-row: 3;
-    -ms-grid-column: 3;
-    grid-area: action;
-    flex-grow: 1;
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  grid-area: action;
+  flex-grow: 1;
+  margin: 0;
+  padding: 0 $pad;
 
-    margin: 0;
-    padding: 0 $pad;
-
-
-
-    form {
-        width: 100%;
-    }
+  form {
+      width: 100%;
+  }
 }

@@ -1,17 +1,16 @@
 // Main Styles
 main,
 .main {
-    -ms-grid-row: 3;
-    -ms-grid-column: 3;
-    grid-area: main;
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  grid-area: main;
+  height: 100%;
+  display: block;
+  background-color: $blue--light;
+  width: 100%;
+  padding:  0;
 
-    height: 100%;
-    display: block;
-    background-color: $blue--light;
-    width: 100%;
-    padding:  0;
-
-    @media (min-width: $smallBreakpoint) {
+  @media (min-width: $smallBreakpoint) {
     padding: $pad * 2.7 0;
   }
 
@@ -19,8 +18,8 @@ main,
     display: none !important;
   }
 
-    &--message {
-        width: $max-form-width/4 * 3;
-        margin: auto;
-    }
+  &--message {
+    width: $max-form-width/4 * 3;
+    margin: auto;
+  }
 }

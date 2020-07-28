@@ -1,31 +1,31 @@
-//link styles
+// link styles
 .tag {
-    border: none;
-    outline: none;
-    background-color: $black--light;
-    color: $white;
-    padding: 0;
-    text-transform: inherit;
-    letter-spacing: 0;
-    font-size: inherit;
-    padding: $pad / 14 ($pad / 4) * 3;
-    border-radius: 4px;
-    width: inherit;
-    display: inline-block;
-    padding-right: $pad / 2;
-    margin-right: $pad / 4;
-    margin-bottom: $pad / 4;
-    line-height: 1.25;
+  border: none;
+  outline: none;
+  background-color: $black--light;
+  color: $white;
+  padding: 0;
+  text-transform: inherit;
+  letter-spacing: 0;
+  font-size: inherit;
+  padding: $pad / 14 ($pad / 4) * 3;
+  border-radius: 4px;
+  width: inherit;
+  display: inline-block;
+  padding-right: $pad / 2;
+  margin-right: $pad / 4;
+  margin-bottom: $pad / 4;
+  line-height: 1.25;
 
-    i {
-        margin-right: 0;
-        margin-left: $pad / 8;
-        line-height: 1.15;
-        font-weight: 400;
-        cursor: pointer;
-    }
+  i {
+    margin-right: 0;
+    margin-left: $pad / 8;
+    line-height: 1.15;
+    font-weight: 400;
+    cursor: pointer;
+  }
 
-    &:hover {
+  &:hover {
     background-color: lighten($grey, 5%);
   }
 

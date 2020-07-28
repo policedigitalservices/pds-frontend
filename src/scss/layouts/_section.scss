@@ -1,51 +1,41 @@
 // Main Styles
 section,
 .section {
-    display: block;
+  display: block;
   padding: 0 $pad;
 
   @media (min-width: $smallBreakpoint) {
-      padding: $pad;
-    }
-
-
- // aside + & {
- //  @include grid-column(5, 14);
- // }
+    padding: $pad;
+  }
 }
 
-
 .controls {
+  position: fixed;
+  bottom: 0;
+  padding: $pad * 1.5 $pad;
+  width: 100%;
+  text-align: right;
+  z-index: 9999;
 
-    position: fixed;
-    bottom: 0;
-    padding: $pad * 1.5 $pad;
-    width: 100%;
-    text-align: right;
-    z-index: 9999;
+  button,
+  .button {
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
+  }
+
+  &--fullwidth {
+    padding: 0;
 
     button,
     .button {
-        box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+      &--fullwidth {
+        border-radius: 0;
+        box-shadow: 0;
+        margin: 0;
+      }
     }
-
-
-    &--fullwidth {
-        padding: 0;
-
-        button,
-        .button {
-            &--fullwidth {
-                border-radius: 0;
-                box-shadow: 0;
-                margin: 0;
-            }
-        }
-    }
-
-
-    @media (min-width: $smallBreakpoint) {
-      display: none;
   }
 
+  @media (min-width: $smallBreakpoint) {
+    display: none;
+  }
 }

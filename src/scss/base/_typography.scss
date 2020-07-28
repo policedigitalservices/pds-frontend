@@ -1,18 +1,13 @@
 html {
   font-weight: 400;
   color: $black--medium;
-
-
   box-sizing: border-box;
   font-size: #{$base + 'px'};
   font-size: #{$base-font-size + '%'};
   font-family: $base-font-family;
   line-height: $line-height;
-  // color: $white;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-
-
 }
 
 // Header Styles

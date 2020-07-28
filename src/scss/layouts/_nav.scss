@@ -1,8 +1,8 @@
 // Nav Styles
 .navigation {
-  padding: 0;
-
   @include grid-column(2, 14);
+
+  padding: 0;
 
   @media (min-width: $smallBreakpoint) {
     padding: 0;
@@ -11,6 +11,7 @@
 
 .nav {
   @extend .cf;
+
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -33,7 +34,6 @@
   }
 
   &__item {
-
     color: $white;
     padding: $pad / 2 $pad;
     border-bottom: 4px solid transparent;
@@ -86,16 +86,13 @@
   &--horizontal {
 
     li {
-      // float: left;
       padding-left: 0;
     }
 
     a {
       display: block;
     }
-
   }
-
 
   &--vertical {
 
@@ -107,55 +104,34 @@
 
     a {
       display: inline-block;
-
     }
   }
 
   &__toggle {
-    font-size: 1.25rem;
+    @extend .material-icons;
+    @include font-size(1.875);
+
     line-height: 1;
     background-color: transparent;
     border: 1px solid transparent;
-    display: inline-block;
     padding: 0;
     vertical-align: top;
-    @extend .material-icons;
-    display: inline-block;
-      width: 1.875rem;
-      height: 1.875rem;
-      // vertical-align: middle;
-
-    @include font-size(1.875);
-
-
-    // display: none;
-
+    width: 1.875rem;
+    height: 1.875rem;
 
     @media (min-width: $smallBreakpoint) {
       display: none;
     }
 
     &.icon {
-
-
-
-      // content: "";
-      // background: no-repeat center center;
-      // background-size: 100% 100%;
-      // background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3 8V6H21V8H3ZM3 13H21V11H3V13ZM3 18H21V16H3V18Z' fill='white' fill-opacity='1'/%3E%3C/svg%3E%0A");
-
-
-
-
-
       &--menu {
-        &:before {
+        &::before {
           content: 'menu';
         }
       }
 
       &--add {
-        &:before {
+        &::before {
           content: 'add';
         }
       }
@@ -170,142 +146,123 @@ nav {
 }
 
 .primary {
-  // display: none;
-  display: block;
+  display: flex;
 
-  // @media (min-width: $smallBreakpoint) {
+  @media (max-width: $smallBreakpoint) {
     display: flex;
-
-    @media (max-width: $smallBreakpoint) {
-      display: flex;
-      flex-direction: row;
-    }
-
-
-
-    li {
-      @media (max-width: $smallBreakpoint) {
-        flex-grow: 1;
-        flex-basis: 0;
-        text-align: center;
-      }
-    }
+    flex-direction: row;
   }
 
-
-
-  .search {
-    display: none;
-
-
-    @media (min-width: $smallBreakpoint) {
-      display: block;
+  li {
+    @media (max-width: $smallBreakpoint) {
+      flex-grow: 1;
+      flex-basis: 0;
+      text-align: center;
     }
+  }
+}
 
+.search {
+  display: none;
 
+  @media (min-width: $smallBreakpoint) {
+    display: block;
+  }
 
-    &.menu--active {
-      display: inline-block;
-      position: fixed;
-      margin: 0;
-      padding: 0;
-      overflow: auto;
-      background-color: $white;
-      color: $black;
-      right: 0;
+  &.menu--active {
+    display: inline-block;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    background-color: $white;
+    color: $black;
+    right: 0;
     top: 0;
     box-shadow: none;
     left: 0;
 
-      form {
-        width: 100%;
-        margin: 0;
-      }
-
-      input {
-        border: none;
-        min-height: 3.1rem;
-        padding-top: .9rem;
-
-      }
-    }
-  }
-
-
-  .menu {
-    display: none;
-
-    right: $pad;
-    top: $pad;
-
-    @media (min-width: $smallBreakpoint) {
-      display: block;
-    }
-
-
-    &--active {
-      display: inline-block;
-      position: absolute;
+    form {
+      width: 100%;
       margin: 0;
-      padding: 0;
-      overflow: auto;
-      background-color: $white;
-      color: $black;
-      box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+    }
+
+    input {
+      border: none;
+      min-height: 3.1rem;
+      padding-top: .9rem;
+
     }
   }
+}
 
-  .list {
-    margin: 0 !important;
-    margin-left: 0;
+.menu {
+  display: none;
+  right: $pad;
+  top: $pad;
+
+  @media (min-width: $smallBreakpoint) {
     display: block;
+  }
 
-    padding: $pad / 2 0;
-    list-style-type: none;
+  &--active {
+    display: inline-block;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    background-color: $white;
+    color: $black;
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+  }
+}
 
-    .button {
-      color: $black;
-      text-transform: none;
-      letter-spacing: 0;
+.list {
+  margin: 0 !important;
+  margin-left: 0;
+  display: block;
+
+  padding: $pad / 2 0;
+  list-style-type: none;
+
+  .button {
+    color: $black;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  &--item {
+    @extend .body1;
+
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    padding: $pad / 2 $pad;
+    overflow: hidden;
+
+    &:hover,
+    &:focus {
+      background-color: rgba($grey--light, 0.12);
+      border-color: transparent;
     }
 
+    form {
+      margin: 0 !important;
 
-    &--item {
-      display: -ms-flexbox;
-      display: flex;
-      position: relative;
-      -ms-flex-align: center;
-      align-items: center;
-      -ms-flex-pack: start;
-      justify-content: flex-start;
-      padding: $pad / 2 $pad;
-      overflow: hidden;
+      button {
+        margin: 0 .25rem !important;
+        color: $black !important;
+      }
+    }
 
-      &:hover,
-      &:focus {
-        background-color: rgba($grey--light, 0.12);
+    a {
+      &:hover {
         border-color: transparent;
       }
-
-      form {
-        margin: 0 !important;
-
-        button {
-          margin: 0 .25rem !important;
-          color: $black !important;
-        }
-      }
-
-      @extend .body1;
-
-      a {
-        &:hover {
-          border-color: transparent;
-        }
-      }
     }
-
-
-
   }
-
+}
