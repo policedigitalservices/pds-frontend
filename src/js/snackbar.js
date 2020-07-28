@@ -36,7 +36,7 @@
     } else if (OrganisationParam === 'True') {
         snackbarMessage = 'New organisation has been created';
 
-    } else {
+    } else if (snackbar) {
         snackbar.addEventListener("click", function(el) {
 
             if (!snackbarStorageItemArray.locations.includes(window.location.pathname)) {
