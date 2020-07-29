@@ -15,57 +15,96 @@
 
   &__responses {
     position: relative;
-    display: inline-block;
-    width: 75%;
-    width: 100%;
-    float: left;
+    // display: inline-block;
+    // width: 100%;
+    // display: inline-flex;
+    // flex-direction: row;
+    // flex-wrap: wrap;
+    // gap: 12px;
+
+    display: inline-flex;
+  flex-wrap: wrap;
+  margin: -20px 0 0 -20px;
+  width: calc(100% + 20px);
 
     .response-box {
       background-color: $blue;
       color: $white;
       text-align: center;
       padding: $pad;
-      border-radius: .5rem;
-      display: inline-block;
-      width: 100%;
-      margin: 1%;
-      float: left;
       min-height: auto;
-      transform: translateY(50%);
       position: relative;
+
+      flex: 0 1 100%;
+
+
+      margin: 20px 0 0 20px;
+      // margin: 0 10px;
 
       h2,
       p {
         color: $white;
       }
 
+      h2 {
+        font-weight: 300;
+        margin-bottom: 0;
+        font-size: 48px;
+      }
+
+      p {
+        margin: 0;
+        @extend .body1;
+      }
+
       @media (min-width: $smallBreakpoint) {
-        width: 23%;
-        padding: $pad * 2;
-        min-height: 12rem;
+        padding: $pad;
+        // min-height: 12rem;
+        flex: 0 1 calc(33.333333333% - 20px);
       }
 
     }
 
-    .response-count--0 {
-      background-color: transparent;
-      transform: translateY(0%);
+    &.total--1 {
+      & > div {
+        flex: 0 1 100%;
 
+        @media (min-width: $smallBreakpoint) {
+          flex: 0 1 480px;
+        }
+      }
+    }
+
+    &.total--2 {
+      & > div {
+        flex: 0 1 100%;
+
+        @media (min-width: $smallBreakpoint) {
+          flex: 0 1 calc(50% - 20px);
+        }
+      }
     }
 
     .response-count--1 {
       background-color: $blue;
-
     }
 
-    .response-count--2 {
-      background-color: $grey--light;
+    .response-count--2,
+    .response-count--5,
+    .response-count--9 {
+      background-color: #929292;
     }
 
-    .response-count--3 {
-      background-color: $grey--medium;
+    .response-count--3,
+    .response-count--6,
+    .response-count--10 {
+      background-color: #808080;
     }
 
+    .response-count--4,
+    .response-count--8 {
+      background-color: #707070;
+    }
   }
 }
 
