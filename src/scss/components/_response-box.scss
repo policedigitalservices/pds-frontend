@@ -22,8 +22,13 @@
     // flex-wrap: wrap;
     // gap: 12px;
 
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
     display: inline-flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+
+
   margin: -20px 0 0 -20px;
   width: calc(100% + 20px);
 
@@ -34,8 +39,11 @@
       padding: $pad;
       min-height: auto;
       position: relative;
+      min-height: 152px;
 
-      flex: 0 1 100%;
+      -webkit-box-flex: 0;
+        -ms-flex: 0 1 100%;
+            flex: 0 1 100%;
 
 
       margin: 20px 0 0 20px;
@@ -60,30 +68,18 @@
       @media (min-width: $smallBreakpoint) {
         padding: $pad;
         // min-height: 12rem;
-        flex: 0 1 calc(33.333333333% - 20px);
+
+        -webkit-box-flex: 0;
+        -ms-flex: 1 1 calc(33.333333333% - 20px);
+            flex: 1 1 calc(33.333333333% - 20px);
+            max-width: 480px;
+
+
       }
 
     }
 
-    &.total--1 {
-      & > div {
-        flex: 0 1 100%;
 
-        @media (min-width: $smallBreakpoint) {
-          flex: 0 1 480px;
-        }
-      }
-    }
-
-    &.total--2 {
-      & > div {
-        flex: 0 1 100%;
-
-        @media (min-width: $smallBreakpoint) {
-          flex: 0 1 calc(50% - 20px);
-        }
-      }
-    }
 
     .response-count--1 {
       background-color: $blue;
