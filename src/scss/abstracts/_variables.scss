@@ -38,7 +38,8 @@ $max-form-width: $pad * 42.5;
 
 // Breakpoints
 $smallBreakpoint: 600px;
-$largeBreakpoint: 1080px;
+$mediumBreakpoint: 1080px;
+$largeBreakpoint: 1440px;
 $breakpoints: (
     S: 640,
     M: 1024,
