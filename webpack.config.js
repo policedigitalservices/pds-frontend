@@ -22,7 +22,8 @@ module.exports = {
       "./src/js/SeeAll.js",
       "./src/js/menu.js",
       "./src/js/snackbar.js",
-      "./src/js/SelectListTags.js"
+      "./src/js/SelectListTags.js",
+      "./src/js/BottomDrawer.js"
     ]
   },
   output: {
