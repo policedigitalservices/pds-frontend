@@ -44,16 +44,18 @@ export default class IdCookieHelper{
       return this._ids.size;
     }
     
-    // Remove one or more ids
+    // Remove one or more ids. Return the new count
     remove(id) {
       this._ids.delete(id);      
       this._update();
+      return this.getCount();
     }
     
-    // Add one or more ids
+    // Add one or more ids. Returns the new count
     add(id) {
       this._ids.add(id);
       this._update();
+      return this.getCount();
     }
 
     // Does the set contain the passed in array item.

@@ -23,7 +23,7 @@ module.exports = {
       "./src/js/menu.js",
       "./src/js/snackbar.js",
       "./src/js/SelectListTags.js",
-      "./src/js/BottomDrawer.js"
+      "./src/js/SelectStaffForMessage.js"
     ]
   },
   output: {
