@@ -14,16 +14,4 @@
       width: 100%;
     }
   }
-
-  &--hint {
-    width: 100%;
-    margin: 0 auto;
-    grid-gap: $pad;
-    @include display-grid();
-    @include grid-template-columns(repeat(8,1fr));
-
-    form {
-      width: 100%;
-    }
-  }
 }

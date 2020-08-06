@@ -5,7 +5,7 @@ footer,
   align-items: center;
   display: none;
 
-  @media (min-width: $smallBreakpoint) {
+  @include mq(S) {
     display: flex;
   }
 }
@@ -18,8 +18,8 @@ footer,
   -ms-grid-column-span: 3;
   grid-area: footer;
   flex-shrink: 0;
-  background-color: $blue--light;
-  color: $black;
+  background-color: lighten(pds-color($pds-color-primary, '50'), 1%);
+  color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
   padding: $pad;
   width: 100%;
   border-top: 1px solid $grey;

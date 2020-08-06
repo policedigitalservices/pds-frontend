@@ -4,7 +4,7 @@ section,
   display: block;
   padding: 0 $pad;
 
-  @media (min-width: $smallBreakpoint) {
+  @include mq(S) {
     padding: $pad;
   }
 }
@@ -35,7 +35,7 @@ section,
     }
   }
 
-  @media (min-width: $smallBreakpoint) {
+  @include mq(S) {
     display: none;
   }
 }

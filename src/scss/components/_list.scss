@@ -5,7 +5,7 @@ ul {
   li {
 
     a {
-      color: $black;
+      color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
       text-decoration: none;
     }
   }
@@ -27,7 +27,7 @@ ul {
         margin: 0;
         width: 100%;
         display: block;
-        border-top: 1px solid lighten($black--light, 65%);
+        border-top: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
         position: relative;
 
         .radio-checkbox {
@@ -103,10 +103,10 @@ ul {
       }
 
         .group-selector__group {
-          background-color: $blue--medium;
+          background-color: pds-color($pds-color-primary, '50');
 
           &--current {
-            background-color: $blue--dark;
+            background-color: pds-color($pds-color-primary, '100');
           }
 
           > a,
@@ -123,7 +123,7 @@ ul {
               vertical-align: top;
               content: 'fiber_manual_record';
 
-              @media (min-width: $smallBreakpoint) {
+              @include mq(S) {
                 margin-top: $pad / 2;
               }
             }
@@ -144,7 +144,7 @@ ul {
               vertical-align: top;
               content: 'folder';
 
-              @media (min-width: $smallBreakpoint) {
+              @include mq(S) {
                 margin-top: $pad / 6;
               }
             }

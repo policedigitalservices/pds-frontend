@@ -1,6 +1,6 @@
 html {
   font-weight: 400;
-  color: $black--medium;
+  color: pds-type-weight($pds-type-color-primary, 'dark', 'medium');
   box-sizing: border-box;
   font-size: #{$base + 'px'};
   font-size: #{$base-font-size + '%'};
@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   margin-bottom: $pad;
   line-height: $headingLineHeight;
-  color: $black;
+  color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
 
   a {
     font-weight: inherit;
@@ -61,13 +61,13 @@ h4,
   font-size: 24px;
   line-height: 28px;
 
-  @media (max-width: $smallBreakpoint) {
+  @include mq(S, 'max-width') {
 
     letter-spacing: 0;
 
   }
 
-  @media (min-width: $smallBreakpoint) {
+  @include mq(S) {
 
     @include font-size(1.25);
     font-weight: 400;
@@ -96,7 +96,6 @@ h6,
 }
 p {
   margin-bottom: $pad;
-  color: $black--medium;
 }
 
 .caption {
@@ -111,7 +110,7 @@ p {
   letter-spacing: 0.25px;
 
 
-  @media (min-width: $smallBreakpoint) {
+  @include mq(S) {
     font-size: 18px;
     line-height: 28px;
     letter-spacing: 0.5px;

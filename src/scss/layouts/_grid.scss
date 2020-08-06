@@ -32,7 +32,7 @@
   "action"
   "hint";
 
-  @media (min-width: $smallBreakpoint) {
+  @include mq(S) {
     -ms-grid-columns: auto 0 5fr;
     grid-template-columns: auto 5fr;
     -ms-grid-rows: auto 0 1fr 0 auto;
