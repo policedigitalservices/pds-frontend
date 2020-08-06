@@ -9,13 +9,13 @@
   line-height: 28px;
   margin: 0;
   padding: 0;
-  color: $blue;
+  color: pds-color($pds-color-primary, '500');
   font-weight: 300;
   padding-left: 0 $pad;
   padding-top: $pad * 2;
 
-  @media (max-width: $smallBreakpoint) {
-    background: $black;
+  @include mq(S, 'max-width') {
+    background: pds-type-weight($pds-type-color-primary, 'dark', 'high');
     color: $white;
     position: fixed;
     bottom: 0;
@@ -34,7 +34,7 @@
     @extend .button--transparent;
     @extend .button--small;
 
-    @media (min-width: $smallBreakpoint) {
+    @include mq(S) {
       display: none;
     }
   }
@@ -47,7 +47,7 @@
 #snackbar:checked ~ .hint {
   display: none;
 
-  @media (min-width: $smallBreakpoint) {
+  @include mq(S) {
     display: block;
   }
 }

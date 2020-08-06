@@ -70,8 +70,8 @@
 // $value: can be a number, 'landscape', or a breakpoint letter
 // $feature: default is min-width, can be overwritten with 'max-width', or 'orientation' etc.
 @mixin mq($value, $feature: 'min-width') {
-    @if map-has-key($breakpoints, $value) {
-        $value: map-get($breakpoints, $value);
+    @if map-has-key($pds-breakpoints, $value) {
+        $value: map-get($pds-breakpoints, $value);
     }
     @if type-of($value) == 'number' {
         $value: $value + px;
@@ -80,3 +80,47 @@
         @content;
     }
 }
+
+
+
+/**
+ * Retrieves a color value from the $pds-colors Sass map
+ * Inspired by https://github.com/nilskaspersson/Google-Material-UI-Color-Palette/
+ *
+ * @function
+ * @param {string} color-name             - quoted, lower-case, dasherized color
+ *                                          name (e.g. 'pink', 'amber')
+ * @param {string} [color-variant='500']  - quoted, lowercase color variant (e.g.
+ *                                          '200', 'a100')
+ */
+@function pds-color($color-name, $color-variant: '500') {
+  $color: map-get(map-get($pds-colors, $color-name),$color-variant);
+  @if $color {
+    @return $color;
+  } @else {
+    // Libsass still doesn't seem to support @error
+    @warn "=> ERROR: COLOR NOT FOUND! <= | Your $color-name, $color-variant combination did not match any of the values in the $pds-colors map.";
+  }
+}
+
+
+/**
+ * Retrieves a color value from the $pds-colors Sass map
+ * Inspired by https://github.com/nilskaspersson/Google-Material-UI-Color-Palette/
+ *
+ * @function
+ * @param {string} color-name             - quoted, lower-case, dasherized color
+ *                                          name (e.g. 'pink', 'amber')
+ * @param {string} [color-variant='500']  - quoted, lowercase color variant (e.g.
+ *                                          '200', 'a100')
+ */
+@function pds-type-weight($boo, $variant-name, $weight-variant: 'medium') {
+  $type: rgba($boo, map-get(map-get($pds-type-weights, $variant-name),$weight-variant));
+  @if $type {
+    @return $type;
+  } @else {
+    // Libsass still doesn't seem to support @error
+    @warn "=> ERROR: COLOR NOT FOUND! <= | Your $color-name, $color-variant combination did not match any of the values in the $pds-colors map.";
+  }
+}
+

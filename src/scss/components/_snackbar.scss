@@ -1,6 +1,6 @@
 // Table styles
 .snackbar {
-  background: $black;
+  background: pds-type-weight($pds-type-color-primary, 'dark', 'high');
   color: $white;
   position: fixed;
   bottom: $pad * 1.5;

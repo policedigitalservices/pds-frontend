@@ -44,7 +44,7 @@ form,
   }
 
   &__hint {
-    color: $black;
+    color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
     display: block;
     font-size: 0.9em;
     font-weight: 400;
@@ -52,7 +52,7 @@ form,
   }
 
   &__input {
-    border: 1px solid rgba($black, 0.3);
+    border: 1px solid pds-type-weight($pds-type-color-primary, 'dark', 'light');;
     background-color: $white;
     outline: none;
     border-radius: 0;
@@ -64,7 +64,7 @@ form,
 
     .tag {
       background-color: transparent;
-      color: $black;
+      color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
       padding: 0;
 
       &:hover,
@@ -115,7 +115,7 @@ form,
     }
 
     &::-webkit-input-placeholder {
-      color: $black--light;
+      color: pds-type-weight($pds-type-color-primary, 'dark', 'light');
     }
 
     &::-ms-clear {
@@ -126,13 +126,13 @@ form,
     &:focus,
     &--focus,
     &--active {
-      border-color: $blue;
+      border-color: pds-color($pds-color-primary, '500');
       outline: none;
       border-width: 1px;
 
       & + button {
         border-width: 1px;
-        border-color: $blue;
+        border-color: pds-color($pds-color-primary, '500');
 
       }
     }
@@ -173,7 +173,7 @@ input,
       &:focus,
       &.focus,
       &.active {
-        border-color: rgba($black, 0.3);
+        border-color: pds-type-weight($pds-type-color-primary, 'dark', 'light');;
       }
 
       &--remove {
@@ -193,7 +193,7 @@ input,
       &--save {
         &::before {
           content: 'save';
-          color: $blue;
+          color: pds-color($pds-color-primary, '500');
           font-family: Roboto, sans-serif;
           -moz-osx-font-smoothing: grayscale;
           -webkit-font-smoothing: antialiased;
@@ -217,7 +217,7 @@ select,
   -moz-appearance: none; /* FF */
   -ms-appearance: none; /* Edge */
   appearance: none; /* Future */
-  color: $black;
+  color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
   outline: none;
   border: none;
   background-color: transparent;
@@ -228,7 +228,7 @@ select,
   background-position: 100% 50%;
 
   &:focus {
-    background-color: rgba($black, 0.08);
+    background-color: rgba(pds-type-weight($pds-type-color-primary, 'dark', 'high'), 0.08);
   }
 
   &::-ms-expand {

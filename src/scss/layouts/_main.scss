@@ -6,11 +6,11 @@ main,
   grid-area: main;
   height: 100%;
   display: block;
-  background-color: $blue--light;
+  background-color: $pds-color-background;
   width: 100%;
   padding:  0;
 
-  @media (min-width: $smallBreakpoint) {
+  @include mq(S) {
     padding: $pad * 2.7 0;
   }
 

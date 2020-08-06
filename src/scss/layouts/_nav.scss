@@ -4,7 +4,7 @@
 
   padding: 0;
 
-  @media (min-width: $smallBreakpoint) {
+  @include mq(S) {
     padding: 0;
   }
 }
@@ -39,7 +39,7 @@
     border-bottom: 4px solid transparent;
     border-top: 4px solid transparent;
 
-    @media (min-width: $smallBreakpoint) {
+    @include mq(S) {
       padding: $pad;
     }
 
@@ -119,7 +119,7 @@
     width: 1.875rem;
     height: 1.875rem;
 
-    @media (min-width: $smallBreakpoint) {
+    @include mq(S) {
       display: none;
     }
 
@@ -140,7 +140,7 @@
 }
 
 nav {
-  @media (max-width: $smallBreakpoint) {
+  @include mq(S, 'max-width') {
     width: 100%;
   }
 }
@@ -148,13 +148,13 @@ nav {
 .primary {
   display: flex;
 
-  @media (max-width: $smallBreakpoint) {
+  @include mq(S, 'max-width') {
     display: flex;
     flex-direction: row;
   }
 
   li {
-    @media (max-width: $smallBreakpoint) {
+    @include mq(S, 'max-width') {
       flex-grow: 1;
       flex-basis: 0;
       text-align: center;
@@ -165,7 +165,7 @@ nav {
 .search {
   display: none;
 
-  @media (min-width: $smallBreakpoint) {
+  @include mq(S) {
     display: block;
   }
 
@@ -176,7 +176,7 @@ nav {
     padding: 0;
     overflow: auto;
     background-color: $white;
-    color: $black;
+    color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
     right: 0;
     top: 0;
     box-shadow: none;
@@ -201,7 +201,7 @@ nav {
   right: $pad;
   top: $pad;
 
-  @media (min-width: $smallBreakpoint) {
+  @include mq(S) {
     display: block;
   }
 
@@ -212,7 +212,7 @@ nav {
     padding: 0;
     overflow: auto;
     background-color: $white;
-    color: $black;
+    color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
     box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
   }
 }
@@ -226,7 +226,7 @@ nav {
   list-style-type: none;
 
   .button {
-    color: $black;
+    color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
     text-transform: none;
     letter-spacing: 0;
   }
@@ -255,7 +255,7 @@ nav {
 
       button {
         margin: 0 .25rem !important;
-        color: $black !important;
+        color: pds-type-weight($pds-type-color-primary, 'dark', 'high') !important;
       }
     }
 
