@@ -3,7 +3,6 @@
 */
 export default class BottomDrawer {
     constructor() {
-        console.log('Creating bottom drawer here');
         this._openClass = "bottom-drawer-open";
     }
 

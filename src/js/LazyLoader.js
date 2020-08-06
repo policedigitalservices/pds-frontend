@@ -1,4 +1,4 @@
-import debounce from './Utilities';
+import { debounce } from './Utilities';
 
 /**
   Class to manage the load on scroll functionality for a page.

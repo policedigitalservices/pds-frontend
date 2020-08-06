@@ -45,3 +45,8 @@ $breakpoints: (
     M: 1024,
     L: 1440
 );
+
+// BottomDrawer
+$bottomDrawerHeight: 7.6875rem;
+$bottomDrawerTransitionSpeed: .5s;
+$bottomDrawerTransitionTimingFunction: ease-in-out;

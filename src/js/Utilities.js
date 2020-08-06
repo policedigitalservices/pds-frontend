@@ -2,7 +2,7 @@
   Debounce function prevent excessive calls on scroll.
   https://davidwalsh.name/javascript-debounce-function
 */
-export function debounce(func, wait, immediate) {
+export const debounce = (func, wait, immediate) => {
 	var timeout;
 	return function() {
 		var context = this, args = arguments;

@@ -1,0 +1,40 @@
+
+.draft-message-drawer {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__details {
+        color: $white;
+        font-size: 20px;
+        font-size: 1.25rem;
+        font-weight: 500;
+
+        span {color: $white;}
+
+        h4 {          
+            font-size: 24px;
+            font-size: 1.5rem;
+            line-height: 28px;
+            line-height: 1.75rem;
+            margin-bottom: 1.0625rem;
+            color: $white;
+
+            strong { font-weight: 500; }
+        }        
+    }
+
+    &__options {
+        display: flex;
+        align-items: center;
+    }
+}
+
+// <div class="draft-message-drawer">
+// <div class="draft-message-drawer__details">
+//     <h4>Draft message: <strong>Untitled</strong></h4>
+//     Recipients: <span class="draft-message-drawer__total">0</span>
+// </div>
+// <a href="#" class="btn btn--">Go to message</a>
+// </div>

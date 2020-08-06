@@ -2,6 +2,8 @@
     This script is specific to the search staff page.
 */
 
+// TODO: CHECK THAT WE ARE ON THE CORRECT PAGE BEFORE RUNNING THIS CODE
+
 import IdCookieHelper from './IdCookieHelper';
 import DraftMessageDrawer from './DraftMessageDrawer';
 import LazyLoader from './LazyLoader';
@@ -16,6 +18,8 @@ document.querySelector('.test-checkboxes').addEventListener('change', ({target})
     }
 });
 
+
+//  SAMPLE OF DUMMY CODE THAT WAS RUNNING ON CODE PEN - FOR REMINDER OF HOW TO IMPLMENT 
 /*
 
 const contactsLoaderElement = document.getElementById('contacts-loader');
