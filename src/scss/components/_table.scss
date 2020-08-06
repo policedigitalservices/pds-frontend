@@ -40,6 +40,12 @@ table {
         text-decoration: none;
         color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
       }
+
+      span.count {
+        color: $blue;
+        font-weight: 700;
+        margin-left: 10px;
+      }
     }
   }
 }
@@ -91,5 +97,6 @@ table {
       float: left;
       text-align: left;
     }
+
   }
 }
