@@ -1,0 +1,45 @@
+
+.message-detail {
+
+    &__message {
+        /* Body - 1 */
+        font-size: 18px;
+        font-size: 1.125rem;
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+
+    &__message-section {
+        padding-bottom: 0;
+    }
+
+    &__sequence-no {
+        @extend .uppercase;
+        @extend .standout;
+        font-style: normal;
+        /* Body - 2 */
+        font-size: 14px;
+        font-size: 0.875rem;
+        margin-right: 10px;
+        letter-spacing: 0.75px;
+    }
+
+    &__date-section {
+        padding-bottom: 5px;
+        padding-right: $pad * 2;
+    }
+
+    &__options {
+        align-items: center;
+    }
+    
+    &__options {
+        align-items: center;
+    }
+    
+    &__complete {
+        & + * {
+            margin-left: 4px;
+        }
+    }
+}
