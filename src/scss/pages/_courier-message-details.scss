@@ -28,4 +28,18 @@
         padding-bottom: 5px;
         padding-right: $pad * 2;
     }
+
+    &__options {
+        align-items: center;
+    }
+    
+    &__options {
+        align-items: center;
+    }
+    
+    &__complete {
+        & + * {
+            margin-left: 4px;
+        }
+    }
 }
