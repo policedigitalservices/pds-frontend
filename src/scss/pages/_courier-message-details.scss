@@ -6,6 +6,11 @@
         font-size: 18px;
         font-size: 1.125rem;
         margin-top: 0;
+        margin-bottom: 5px;
+    }
+
+    &__message-section {
+        padding-bottom: 0;
     }
 
     &__sequence-no {
@@ -17,5 +22,9 @@
         font-size: 0.875rem;
         margin-right: 10px;
         letter-spacing: 0.75px;
+    }
+
+    &__date-section {
+        padding-bottom: 5px;
     }
 }
