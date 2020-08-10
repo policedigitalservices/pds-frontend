@@ -69,6 +69,10 @@ header,
   width: 100%;
   padding: 0;
 
+  & + section {
+    padding-top: 0;
+  }
+
   @include mq(S, 'max-width') {
     display: none;
 
