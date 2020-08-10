@@ -41,10 +41,10 @@ table {
         color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
       }
 
-      span.count {
-        color: $blue;
-        font-weight: 700;
+      em.count {
+        @extend .standout;
         margin-left: 10px;
+        font-style: normal;
       }
     }
   }

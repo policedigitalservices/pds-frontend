@@ -121,3 +121,9 @@ p {
 em { font-style: italic; }
 strong { font-weight: bold; }
 .uppercase { text-transform: uppercase; }
+
+.standout {
+  color: $blue;
+  font-weight: 700;
+}
+
