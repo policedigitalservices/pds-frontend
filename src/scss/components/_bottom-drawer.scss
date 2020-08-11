@@ -19,9 +19,15 @@
         width: 85%;
         padding: $pad;
 
-        @media (max-width: $smallBreakpoint) {        
+        @include mq(S, 'max-width') {
+
             width: 100%;
+        
         }
+
+        // @media (max-width: $smallBreakpoint) {        
+        //     width: 100%;
+        // }
     }
 
     body.bottom-drawer-open > & {

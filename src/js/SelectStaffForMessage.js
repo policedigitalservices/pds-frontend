@@ -2,14 +2,24 @@
     This script is specific to the search staff page.
 */
 
-// TODO: CHECK THAT WE ARE ON THE CORRECT PAGE BEFORE RUNNING THIS CODE
-
 import IdCookieHelper from './IdCookieHelper';
 import DraftMessageDrawer from './DraftMessageDrawer';
 import LazyLoader from './LazyLoader';
 
+const m = document.querySelector('main');
+
+if (m && m.classList.contains('asc-staff-index')) {
+
+  // TODO: Move all of the workings in here to scope to page. 
+
+  // TODO: Add a cookie bar.
+}
+
+
+
 const ch = new IdCookieHelper('CourierMessageUserIds');
 const dmd = new DraftMessageDrawer(ch.getCount());
+// TODO: create the SelectListTags
 
 document.querySelector('.test-checkboxes').addEventListener('change', ({target}) => {
     if (target.matches('input[type=checkbox]')) {
