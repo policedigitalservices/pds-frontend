@@ -1,13 +1,29 @@
-// .message-series {
-
-//     table {
-
-//         table-layout: auto;
-
-//         tr {
-//             td:first-child {
-//                 width: 150px;
-//             }
-//         } 
-//     }
-// }
+.message-series {
+    @include mq(S) {
+        table {
+            tr {
+                td {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+            }        
+            
+            col {
+                &.message-sequence-no {
+                width: 22%;
+                padding-right: 1em;
+                }
+        
+                &.message-title {
+                width: 46%;
+                }
+        
+                &.message-date {
+                width: 32%;
+                text-align: right;
+                }
+            }   
+        }
+    }
+}
