@@ -19,15 +19,12 @@ $baseLineHeight: 1.5;
 $headingLineHeight: 1.2;
 
 // Colors
-$black: rgba(0, 0, 0, 0.87);
-$black--light: rgba(0, 0, 0, 0.38);
-$black--medium: rgba(0, 0, 0, 0.6);
+$black: rgba(0, 0, 0, .87);
+// $black--light: rgba(0, 0, 0, 0.38);
+// $black--medium: rgba(0, 0, 0, 0.6);
 $red: #FF0C3E;
 $blue: #2C98F0;
 $white: #FFF;
-$blue--light: #F5FBFF;
-$blue--medium: #EDF7FF;
-$blue--dark: #D5EAFC;
 $grey: #BDBDBD;
 $grey--light: #929292;
 $grey--medium: #606060;
@@ -36,17 +33,75 @@ $grey--medium: #606060;
 $pad: 1rem;
 $max-form-width: $pad * 42.5;
 
-// Breakpoints
-$smallBreakpoint: 600px;
-$mediumBreakpoint: 1080px;
-$largeBreakpoint: 1440px;
-$breakpoints: (
-    S: 640,
-    M: 1024,
-    L: 1440
-);
+
+$pds-breakpoints: (
+  S: 640,
+  M: 1024,
+  L: 1440
+  );
+
+$pds-type-weights: (
+  'dark': (
+    'high': .87,
+    'medium': .6,
+    'light': .38,
+    ),
+  'light': (
+    'high': 1,
+    'medium': .7,
+    'light': .5,
+    )
+  );
+
+$pds-colors: (
+  'blue': (
+    '50': #EDF7FF,
+    '100': #BBDEFB,
+    '200': #90CAF9,
+    '300': #64B5F6,
+    '400': #42A5F5,
+    '500': #2C98F0,
+    '600': #1E88E5,
+    '700': #1976D2,
+    '800': #1565C0,
+    '900': #0D47A1
+    ),
+  'teal': (
+    '50': #90F9F0,
+    '100': #79EBE1,
+    '200': #70E4DA,
+    '300': #5CD8CD,
+    '400': #49C6BB,
+    '500': #01A39D,
+    '600': #1C807D,
+    '700': #116B69,
+    '800': #0D504F,
+    '900': #283A3A
+    ),
+  'purple': (
+    '50': #F3E5F5,
+    '100': #E1BEE7,
+    '200': #CE93D8,
+    '300': #BA68C8,
+    '400': #AB47BC,
+    '500': #9C27B0,
+    '600': #8E24AA,
+    '700': #7B1FA2,
+    '800': #6A1B9A,
+    '900': #4A148C
+    ),
+  );
+
+$pds-color-primary: 'blue';
+$pds-color-secondary: 'blue';
+$pds-color-background: #F5FBFF;
+
+$pds-type-color-primary: #000000; //body text
+$pds-type-color-secondary: $pds-type-color-primary; //headings text
+$pds-type-color-secondary: $pds-type-color-primary; //headings text
 
 // BottomDrawer
 $bottomDrawerHeight: 7.6875rem;
 $bottomDrawerTransitionSpeed: .5s;
+$bottomDrawerTransitionTimingFunction: ease-in-out;
 $bottomDrawerTransitionTimingFunction: ease-in-out;

@@ -76,13 +76,13 @@
 
 .only {
   &--mobile {
-    @media (min-width: $smallBreakpoint) {
+    @include mq(S) {
       display: none !important;
     }
   }
 
   &--desktop {
-    @media (max-width: $smallBreakpoint) {
+    @include mq(S, 'max-width') {
       display: none !important;
     }
   }

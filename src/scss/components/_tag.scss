@@ -2,7 +2,7 @@
 .tag {
   border: none;
   outline: none;
-  background-color: $black--light;
+  background-color: pds-type-weight($pds-type-color-primary, 'dark', 'light');
   color: $white;
   padding: 0;
   text-transform: inherit;

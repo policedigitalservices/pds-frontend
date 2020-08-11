@@ -4,7 +4,7 @@ button,
   touch-action: manipulation;
   cursor: pointer;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  background-color: $blue;
+  background-color: pds-color($pds-color-secondary, '500');
   color: $white;
   margin: $pad / 4;
   border: 1px solid transparent;
@@ -44,18 +44,18 @@ button,
   }
 
   &:hover {
-    background-color: lighten($blue, 5%);
+    background-color: pds-color($pds-color-secondary, '400');
   }
 
   &:focus {
-    background-color: darken($blue, 5%);
+    background-color: pds-color($pds-color-secondary, '600');
   }
 
   &.disabled,
   &[disabled],
   fieldset[disabled] & {
     cursor: default;
-    color: rgba($black, .38);
+    color: pds-type-weight($pds-type-color-primary, 'dark', 'light');
   }
 
   &:-webkit-autofill {
@@ -74,8 +74,8 @@ button,
 
   &--outlined {
     background-color: transparent;
-    border-color: $blue;
-    color: $blue;
+    border-color: pds-color($pds-color-secondary, '500');
+    color: pds-color($pds-color-secondary, '500');
 
     &:hover {
       background-color: rgba($blue, 5%);
@@ -161,7 +161,7 @@ button,
 
   &--transparent {
     background-color: transparent;
-    color: $blue;
+    color: pds-color($pds-color-secondary, '500');
     padding: 2px 0 0 0;
     margin: 0 .25rem;
     border-radius: 0;
@@ -170,7 +170,7 @@ button,
 
     &:hover {
       background-color: transparent;
-      border-bottom: 2px solid $blue;
+      border-bottom: 2px solid pds-color($pds-color-secondary, '500');
     }
 
     &:focus {

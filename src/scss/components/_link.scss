@@ -3,7 +3,7 @@
   border: none;
   outline: none;
   background-color: transparent;
-  color: $blue;
+  color: pds-color($pds-color-primary, '500');
   text-transform: inherit;
   letter-spacing: 0;
   font-size: inherit;
@@ -12,6 +12,6 @@
   &:hover,
   &:active,
   &:focus {
-    color: $blue;
+    color: pds-color($pds-color-primary, '500');
   }
 }
