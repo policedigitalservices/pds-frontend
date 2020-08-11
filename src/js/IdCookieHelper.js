@@ -29,10 +29,17 @@ export default class IdCookieHelper{
     
     // Save the passed in ids to the cookie
     _persist(ids) {    
-      const idsJson = JSON.stringify(ids);
+      const idsJson = JSON.stringify(ids || []);
       document.cookie = `${this._name}=${idsJson};`;
     }
     
+    // Set all the ids in one hit. Returns the new count.
+    setIds(ids = []) {
+      this._ids = new Set(ids);
+      this._update();
+      return this.getCount();
+    }
+
     // Returns the count of items in the selection.
     getIds() {
       const ids = Array.from(this._ids)
