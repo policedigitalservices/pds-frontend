@@ -14,13 +14,13 @@
                              This is intended to make the control more flexible i.e. our first usage is to update label with selected items text elsewhere on page without further coupling.
 
 ******/
-class SelectListTags {
+export default class SelectListTags {
   constructor(selectId, revertGroupsId, onUpdateFunc = () => {}) {
       this.onUpdateFunc = onUpdateFunc;
 
       this.tagOptions = document.getElementById(selectId);
       this.tagOptions.classList.add('is-hidden');
-      
+
       if (revertGroupsId) {
         this.revertBtn = document.getElementById(revertGroupsId);
         if (this.revertBtn) {
@@ -35,7 +35,7 @@ class SelectListTags {
       }
 
       this.allOptions = [...this.tagOptions.querySelectorAll('option')];
-      if (this.allOptions.some(o => !o.selected)) {
+      if (this.revertBtn && this.allOptions.some(o => !o.selected)) {
         this.revertBtn.classList.remove('is-hidden');
       }
 
@@ -47,7 +47,9 @@ class SelectListTags {
           const o = this.tagOptions.querySelector('option[value="'+targetVal+'"]');
               if(o){
                   o.selected = false;   
-                  this.revertBtn.classList.remove('is-hidden');      
+                  if (this.revertBtn) {
+                    this.revertBtn.classList.remove('is-hidden');      
+                  }
               } 
             this.populateTags();
           }
@@ -83,7 +85,7 @@ class SelectListTags {
 }
 
 // Should have a section like this for each page the control is used on, unless we want it behave exactly the same as a previous version (including ids and update function) 
-// Alternatively have in seperate script file scoped to specific page (like with SelectStaffForMessage.js)
+// *Better still* - have in seperate script file scoped to specific page (like with SelectStaffForMessage.js)
 if (document.getElementById('FollowupGroupSelector')) {
 
   // Prepare an update function if required (optional parameter)
