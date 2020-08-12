@@ -2,9 +2,10 @@
 .bottom-drawer {
     position: fixed;
     /* Adjust to also hide the box shadow */
-    bottom: calc(#{-$bottomDrawerHeight} - 12px);
+    bottom: -$bottomDrawerHeight - 0.75rem;  /* 12px = 0.75rem */
     height: $bottomDrawerHeight;
     width: 100%;
+    left: 0;
 
     background-color: $blue;
     box-shadow: 0px -6px 11px 0px rgba(0,0,0,0.23);
@@ -20,14 +21,8 @@
         padding: $pad;
 
         @include mq(S, 'max-width') {
-
             width: 100%;
-        
         }
-
-        // @media (max-width: $smallBreakpoint) {        
-        //     width: 100%;
-        // }
     }
 
     body.bottom-drawer-open > & {

@@ -2,31 +2,25 @@
     This script is specific to the search staff page.
 */
 
-import IdCookieHelper from './IdCookieHelper';
-import DraftMessageDrawer from './DraftMessageDrawer';
-import LazyLoader from './LazyLoader';
+import IdCookieHelper from '../IdCookieHelper';
+import DraftMessageDrawer from '../DraftMessageDrawer';
+// import LazyLoader from './LazyLoader';
 
-const m = document.querySelector('main');
+const main = document.querySelector('main');
 
-if (m && m.classList.contains('asc-staff-index')) {
+if (main && main.classList.contains('asc-staff-index')) {
 
-  // TODO: Move all of the workings in here to scope to page. 
-
-  // TODO: Add a cookie bar.
-}
-
-
-
-const ch = new IdCookieHelper('CourierMessageUserIds');
-const dmd = new DraftMessageDrawer(ch.getCount());
-// TODO: create the SelectListTags
-
-document.querySelector('.test-checkboxes').addEventListener('change', ({target}) => {
+  const ch = new IdCookieHelper('CourierMessageUserIds');
+  const dmd = new DraftMessageDrawer(ch.getCount());
+  
+  // TODO: Proper selector for this
+  document.querySelector('.test-checkboxes').addEventListener('change', ({target}) => {
     if (target.matches('input[type=checkbox]')) {
         const newTotal = target.checked ? ch.add(target.value) : ch.remove(target.value);
         dmd.update(newTotal);
     }
-});
+  });
+}
 
 
 //  SAMPLE OF DUMMY CODE THAT WAS RUNNING ON CODE PEN - FOR REMINDER OF HOW TO IMPLMENT 

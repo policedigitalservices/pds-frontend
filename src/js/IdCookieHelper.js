@@ -30,7 +30,9 @@ export default class IdCookieHelper{
     // Save the passed in ids to the cookie
     _persist(ids) {    
       const idsJson = JSON.stringify(ids || []);
-      document.cookie = `${this._name}=${idsJson};`;
+      const newCookie = `${this._name}=${idsJson};`
+      // console.log(newCookie);
+      document.cookie = newCookie;
     }
     
     // Set all the ids in one hit. Returns the new count.
