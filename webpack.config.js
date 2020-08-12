@@ -14,6 +14,7 @@ module.exports = {
   entry: {
     "dist/css/styles": ["./src/scss/styles.scss"],
     "dist/js/scripts": [
+      "./src/js/Start.js",
       "./src/js/GroupsTree.js",
       "./src/js/side.js",
       "./src/js/ToggleContent.js",

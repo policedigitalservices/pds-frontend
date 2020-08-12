@@ -11,7 +11,7 @@ footer,
 }
 
 .app-footer {
-  @extend .body1;
+  @extend .body2;
 
   -ms-grid-row: 5;
   -ms-grid-column: 1;
@@ -24,4 +24,16 @@ footer,
   width: 100%;
   border-top: 1px solid $grey;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
+
+  & .separator {
+
+    padding: 0;
+    margin: 0 4px;
+    position: relative;
+    top: -1px;
+
+    &::before {
+      content: '|'
+    }
+  }
 }

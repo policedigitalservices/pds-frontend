@@ -14,4 +14,14 @@
   &:focus {
     color: pds-color($pds-color-primary, '500');
   }
+
+  .app-footer & {
+      text-decoration: none;
+      padding: 0;
+      white-space: nowrap;
+
+      &:hover, :focus {
+        text-decoration: underline;
+      }
+  }
 }

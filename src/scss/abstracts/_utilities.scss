@@ -87,3 +87,11 @@
     }
   }
 }
+
+.js-only {
+
+  body.no-js & {
+    display: none !important;
+  }
+
+}
