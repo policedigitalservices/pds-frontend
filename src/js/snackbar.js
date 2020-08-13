@@ -6,8 +6,11 @@
     const snackbar = document.querySelector(selector);
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+
     var contactParam = urlParams.get('ContactAdded');
     var OrganisationParam = urlParams.get('OrganisationAdded');
+    var MessageSentParam = urlParams.get('MessageSent');
+
     var snackbarMessage = '';
 
     //check if localStrorage 'snackbar' exists and if it doesnt setup object ready for eventListener
@@ -20,7 +23,6 @@
 
             //if it does then hide the snackbar
             snackbar.checked = true;
-
         }
 
     } else {
@@ -35,7 +37,8 @@
 
     } else if (OrganisationParam === 'True') {
         snackbarMessage = 'New organisation has been created';
-
+    } else if (MessageSentParam === 'True') {
+        snackbarMessage = 'Message sent';
     } else if (snackbar) {
         snackbar.addEventListener("click", function(el) {
 

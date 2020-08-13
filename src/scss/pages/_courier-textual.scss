@@ -1,0 +1,45 @@
+.textual {
+    @extend .body2;
+    color: #000;
+
+    header + section {
+        margin-top: -10px;
+    }
+
+    h2 {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 20px;
+        letter-spacing: 0.25px;
+        margin: 0;
+
+        & + p {
+            margin-top: 0;
+        }
+    }
+
+    .bulleted {
+        list-style-type: none;
+        padding: 0;
+        
+        li {
+            padding-left: 2rem;
+            position: relative;
+            
+            /* Regular discs were too big to match design */
+            &::after {
+                content: '.';
+                display: inline-block;
+                position: absolute;
+                top: -6px;
+                left: 0;
+                font-size: bold;
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+.terms-and-conditions {
+    @extend .textual;
+}
