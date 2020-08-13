@@ -1,43 +1,42 @@
-.checkbox {    
-    height: 18px;
-    width: 18px;    
-    border: 2px solid #707375;
-    border-radius: 3px;
-    cursor: pointer;
-
+.checkbox {      
     display: inline-block;
-    position: relative;
-    
+    height: 18px;
+    width: 18px;   
+    position: relative;     
+
+    border: 2px solid #707375;
+    border-radius: 4px;
+
+    cursor: pointer;
     
     & > input {
       display: none;
     }
     
     span {
-
       opacity: 0;
       transition: opacity 0.3s;
 
       color: #fff;
-      background-color: #707375;      
-      border-radius: 3px;
-      border: 2px solid #707375;
-      height: 18px;
-      width: 18px;
+      background-color: #707375; 
+      border: 2px solid #707375;     
+      border-radius: 4px;
 
       position: absolute;
+      height: 18px;
+      width: 18px;
       top: -2px;
       left: -2px;
 
       display: flex;
       justify-content: center;
       align-items: center;
-
       text-align: center;
 
       &::before {
-        content: "X";
+        content: "\2713\0020";  /* TODO: Proper  icon */
         font-size: 14px;
+        font-weight: bold;
       }
     }
     
