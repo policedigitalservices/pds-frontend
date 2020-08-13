@@ -36,6 +36,28 @@ table {
 
       @extend .body1;
 
+      &.checkbox-cell {        
+        padding: 0;     
+        position: relative;
+        display: table-cell; 
+        height: 100%;
+
+        & > label {
+          cursor: pointer;          
+          padding: $pad;
+
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
       a {
         text-decoration: none;
         color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
@@ -71,6 +93,12 @@ table {
 
   td {
     padding: 0 !important;
+
+    &.checkbox-cell {
+      label {
+        padding: 0;
+      }
+    }
 
     &:nth-child(1) {
       display: inline-block;
