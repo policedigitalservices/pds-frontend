@@ -14,7 +14,7 @@ if (main && main.classList.contains('asc-staff-index')) {
   const dmd = new DraftMessageDrawer(ch.getCount());
   
   // TODO: Proper selector for this
-  document.querySelector('.test-checkboxes').addEventListener('change', ({target}) => {
+  document.getElementById('table-select-staff').addEventListener('change', ({target}) => {
     if (target.matches('input[type=checkbox]')) {
         const newTotal = target.checked ? ch.add(target.value) : ch.remove(target.value);
         dmd.update(newTotal);

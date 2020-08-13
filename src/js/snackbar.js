@@ -57,7 +57,7 @@
 
         setTimeout(function(){
             snackbar.classList.remove('snackbar--active');
-        }, 3500);
+        }, 5000);
     }
 
 })("#snackbar");

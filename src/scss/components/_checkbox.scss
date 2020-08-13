@@ -1,0 +1,20 @@
+.checkbox {       
+
+    cursor: pointer;
+    
+    & > input {
+      display: none;
+    }
+
+    span {
+      @extend .material-icons;
+
+      &::before {
+        content: "check_box_outline_blank";          
+      }
+    }
+    
+    :checked + span::before {
+      content: "check_box";
+    }    
+  }
