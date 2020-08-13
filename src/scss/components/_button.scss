@@ -62,6 +62,16 @@ button,
     background-color: inherit !important;
   }
 
+  &--inverse {
+    color: $blue;
+    background-color: $white;
+    border: 1px solid $white;
+
+    &:hover, &:focus {
+      color: #fff;
+    }
+  }
+
   &--outlined {
     background-color: transparent;
     border-color: pds-color($pds-color-secondary, '500');

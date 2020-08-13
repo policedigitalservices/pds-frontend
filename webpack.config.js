@@ -23,7 +23,9 @@ module.exports = {
       "./src/js/SeeAll.js",
       "./src/js/menu.js",
       "./src/js/snackbar.js",
-      "./src/js/SelectListTags.js"
+      "./src/js/SelectListTags.js",
+      "./src/js/pages/SelectStaffForMessage.js",
+      "./src/js/pages/ComposeStaffMessage.js"
     ]
   },
   output: {
