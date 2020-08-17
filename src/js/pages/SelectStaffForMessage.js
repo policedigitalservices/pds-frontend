@@ -1,10 +1,9 @@
 /* 
     This script is specific to the search staff page.
 */
-
 import IdCookieHelper from '../IdCookieHelper';
 import DraftMessageDrawer from '../DraftMessageDrawer';
-// import LazyLoader from './LazyLoader';
+import LazyLoader from '../LazyLoader';
 
 const main = document.querySelector('main');
 
@@ -12,66 +11,57 @@ if (main && main.classList.contains('asc-staff-index')) {
 
   const ch = new IdCookieHelper('CourierMessageUserIds');
   const dmd = new DraftMessageDrawer(ch.getCount());
+  const loader = document.querySelector('loader');
+
+  const usersTable = document.getElementById('table-select-staff');
+  const usersTableBody = usersTable.getElementById('tbody');
+
+  // TODO: This ...
+  let currentPage = 1;
+
+  const getSearchEndpoint = () => `https://<<SOME_URL>>/ad-staff?page=${currentPage}`;
   
-  // TODO: Proper selector for this
+  // Add listeners for the checkboxes
   document.getElementById('table-select-staff').addEventListener('change', ({target}) => {
     if (target.matches('input[type=checkbox]')) {
         const newTotal = target.checked ? ch.add(target.value) : ch.remove(target.value);
         dmd.update(newTotal);
     }
   });
-}
 
-
-//  SAMPLE OF DUMMY CODE THAT WAS RUNNING ON CODE PEN - FOR REMINDER OF HOW TO IMPLMENT 
-/*
-
-const contactsLoaderElement = document.getElementById('contacts-loader');
-
-if (contactsLoaderElement) {
-  const itemsList = document.querySelector('.items-list');
-  
-  const createDummyRow = id => {
-    const itemDiv = document.createElement('div');
-    itemDiv.classList.add('item');
-    const header = document.createElement('h2');
-    header.innerText = 'Test Item ' + id;
-    const p = document.createElement('p');
-    p.innerText = 'Nemo laborum asperiores molestiae earum accusantium alias provident commodi porro a illum soluta dolore ipsa, debitis deleniti beatae placeat possimus consequuntur dolorum? Laudantium accusamus nam numquam, perspiciatis quod dicta dolor.';
-    itemDiv.appendChild(header);
-    itemDiv.appendChild(p);
-    return itemDiv;
-  };
-  
-  const checkIfMore = () => {
-    return itemsList.querySelectorAll('.items-list > .item').length < 100;
+  const addRow = user => {
+    const newRow = document.createElement('tr');
+    // TODO: add tds into this row, using 'user' details.
+    usersTableBody.append(newRow);
   }
+
+  const addResultRows = rows => {
+    rows.forEach(addRow);
+  }
+
+  if (loader) {
+    new LazyLoader(loader, async (done) => {
   
-  const insertDummyRows = () => {
-    const maxRows = itemsList.querySelectorAll('.items-list > .item').length;
-    
-    for (let i = 0; i < 10; i++) {
-      var dummyItem = createDummyRow(maxRows + i + 1);
-      itemsList.appendChild(dummyItem);
-    }
-  };
-  
-  const handleSearchResults = (doneSearching) => {
-      // Add in some dummy rows...
-      insertDummyRows();
-      const moreToLoad = checkIfMore();
-      doneSearching(moreToLoad);
-  };
-  
-  const contactsLoader = new CourierLazyLoader(contactsLoaderElement, (done) => {
-    
-    setTimeout(() => {
-      handleSearchResults(done);    
-    }, 500);
-    
-  }, { debug: false, peekDistance: 50 });
+      try {
+        // Get the next page index
+        currentPage++;
+        const endpoint = getSearchEndpoint();
+
+        // Do the search
+        const response = await window.fetch(endpoint);
+        const json = await response.json();
+
+        addResultRows(json.rows);
+        done(json.hasMoreRows);
+      }
+      catch(e) {        
+        console.error(`Failed to lazy load page ${currentPage} of ad users`);
+        console.error(e);
+        // Ignore current failed page
+        currentPage--;
+        done(false);
+      }
+      
+    }, { debug: false, peekDistance: 50 });
+  }  
 }
-
-*/
-
-
