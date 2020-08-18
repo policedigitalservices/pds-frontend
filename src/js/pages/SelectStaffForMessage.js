@@ -50,7 +50,7 @@ if (main && main.classList.contains('asc-staff-index')) {
 
   const createCellWithText = text => {
     const cell = document.createElement('td');
-    cell.innerText = "Put name here";
+    cell.innerText = text;
     return cell;
   }
 
