@@ -18,7 +18,7 @@ export default class IdCookieHelper{
       }
       
       const matchingValueToSplit = matchingCookie.split('=')[1];
-      return matchingValueToSplit.split('|'); 
+      return matchingValueToSplit.split('|').filter(i => i);   // Split and remove empty values
     }
     
     // Save the new ids to the cookie after update
