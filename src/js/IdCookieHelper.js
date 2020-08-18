@@ -16,7 +16,6 @@ export default class IdCookieHelper{
         this._persist([]);   
         return [];
       }
-      
       const matchingValueToSplit = matchingCookie.split('=')[1];
       return matchingValueToSplit.split('|').filter(i => i);   // Split and remove empty values
     }
@@ -30,7 +29,7 @@ export default class IdCookieHelper{
     // Save the passed in ids to the cookie
     _persist(ids) {    
       const joinedIds = ids.join('|');
-      const newCookie = `${this._name}=${joinedIds};`
+      const newCookie = `${this._name}=${joinedIds}; path=/`
       document.cookie = newCookie;
     }
     
