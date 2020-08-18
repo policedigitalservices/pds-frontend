@@ -29,6 +29,7 @@ export default class IdCookieHelper{
     // Save the passed in ids to the cookie
     _persist(ids) {    
       const joinedIds = ids.join('|');
+      // Create a new cookie containing selected ids.  Set to same site strict and path to root
       const newCookie = `${this._name}=${joinedIds}; path=/; samesite=Strict`
       document.cookie = newCookie;
     }
