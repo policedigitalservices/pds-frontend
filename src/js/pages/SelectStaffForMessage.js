@@ -14,7 +14,10 @@ if (main && main.classList.contains('asc-staff-index')) {
   const loader = document.querySelector('loader');
 
   const usersTable = document.getElementById('table-select-staff');
-  const usersTableBody = usersTable.getElementById('tbody');
+  let usersTableBody;
+  if(usersTable) {
+   usersTableBody = usersTable.querySelector('tbody');
+  }
 
   // TODO: This ...
   let currentPage = 1;
@@ -55,7 +58,7 @@ if (main && main.classList.contains('asc-staff-index')) {
         done(json.hasMoreRows);
       }
       catch(e) {        
-        console.error(`Failed to lazy load page ${currentPage} of ad users`);
+        console.error(`Failed to lazy load page ${currentPage} of AD users`);
         console.error(e);
         // Ignore current failed page
         currentPage--;
