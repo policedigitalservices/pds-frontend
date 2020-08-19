@@ -1,10 +1,9 @@
 /* 
     This script is specific to the search staff page.
 */
-
 import IdCookieHelper from '../IdCookieHelper';
 import DraftMessageDrawer from '../DraftMessageDrawer';
-// import LazyLoader from './LazyLoader';
+import LazyLoader from '../LazyLoader';
 
 const main = document.querySelector('main');
 
@@ -12,66 +11,94 @@ if (main && main.classList.contains('asc-staff-index')) {
 
   const ch = new IdCookieHelper('CourierMessageUserIds');
   const dmd = new DraftMessageDrawer(ch.getCount());
+  const loader = document.querySelector('.loader');
+
+  const usersTable = document.getElementById('table-select-staff');
+  let usersTableBody;
+  if(usersTable) {
+   usersTableBody = usersTable.querySelector('tbody');
+  }
+
+  // TODO: This ...
+  let currentPage = 1;
+
+  const getSearchEndpoint = () => `https://<<SOME_URL>>/ad-staff?page=${currentPage}`;
   
-  // TODO: Proper selector for this
+  // Add listeners for the checkboxes
   document.getElementById('table-select-staff').addEventListener('change', ({target}) => {
     if (target.matches('input[type=checkbox]')) {
         const newTotal = target.checked ? ch.add(target.value) : ch.remove(target.value);
         dmd.update(newTotal);
     }
   });
-}
 
-
-//  SAMPLE OF DUMMY CODE THAT WAS RUNNING ON CODE PEN - FOR REMINDER OF HOW TO IMPLMENT 
-/*
-
-const contactsLoaderElement = document.getElementById('contacts-loader');
-
-if (contactsLoaderElement) {
-  const itemsList = document.querySelector('.items-list');
-  
-  const createDummyRow = id => {
-    const itemDiv = document.createElement('div');
-    itemDiv.classList.add('item');
-    const header = document.createElement('h2');
-    header.innerText = 'Test Item ' + id;
-    const p = document.createElement('p');
-    p.innerText = 'Nemo laborum asperiores molestiae earum accusantium alias provident commodi porro a illum soluta dolore ipsa, debitis deleniti beatae placeat possimus consequuntur dolorum? Laudantium accusamus nam numquam, perspiciatis quod dicta dolor.';
-    itemDiv.appendChild(header);
-    itemDiv.appendChild(p);
-    return itemDiv;
-  };
-  
-  const checkIfMore = () => {
-    return itemsList.querySelectorAll('.items-list > .item').length < 100;
+  const createCheckboxField = (value, checked) => {  
+    const cell = document.createElement('td');
+    cell.classList.add('checkbox-cell');
+    const label = document.createElement('label');
+    label.classList.add('checkbox');
+    const input = document.createElement('input');
+    input.setAttribute('type', 'checkbox');
+    input.value = value;
+    input.checked = checked;
+    const span = document.createElement('span');
+    label.appendChild(input);
+    label.appendChild(span);
+    cell.appendChild(label);
+    return cell;
   }
+
+  const createCellWithText = text => {
+    const cell = document.createElement('td');
+    cell.innerText = text;
+    return cell;
+  }
+
+  const addRow = user => {
+    const newRow = document.createElement('tr');
+
+    newRow.appendChild(createCellWithText('PUT NAME HERE FROM USER'));
+    newRow.appendChild(createCellWithText('PUT COLLAR HERE FROM USER'));
+    newRow.appendChild(createCellWithText('PUT EMAIL HERE FROM USER'));
+    newRow.appendChild(createCellWithText('PUT PHONE HERE FROM USER'));
+    newRow.appendChild(createCheckboxField('PUT COLLAR HERE', ch.hasId('PUT COLLAR HERE')));
+
+    usersTableBody.append(newRow);
+  }
+
+  const addResultRows = rows => {
+    rows.forEach(addRow);
+  }
+
+  /*
+
+  // TODO: Restore this block of code once the end point is in place.
+
+  if (loader) {
+    new LazyLoader(loader, async (done) => {
   
-  const insertDummyRows = () => {
-    const maxRows = itemsList.querySelectorAll('.items-list > .item').length;
-    
-    for (let i = 0; i < 10; i++) {
-      var dummyItem = createDummyRow(maxRows + i + 1);
-      itemsList.appendChild(dummyItem);
-    }
-  };
-  
-  const handleSearchResults = (doneSearching) => {
-      // Add in some dummy rows...
-      insertDummyRows();
-      const moreToLoad = checkIfMore();
-      doneSearching(moreToLoad);
-  };
-  
-  const contactsLoader = new CourierLazyLoader(contactsLoaderElement, (done) => {
-    
-    setTimeout(() => {
-      handleSearchResults(done);    
-    }, 500);
-    
-  }, { debug: false, peekDistance: 50 });
+      try {
+        // Get the next page index
+        currentPage++;
+        const endpoint = getSearchEndpoint();
+
+        // Do the search
+        const response = await window.fetch(endpoint);
+        const json = await response.json();
+
+        addResultRows(json.rows);
+        done(!json.hasMoreRows);
+      }
+      catch(e) {        
+        console.error(`Failed to lazy load page ${currentPage} of AD users`);
+        console.error(e);
+        // Ignore current failed page, so will try again
+        currentPage--;
+        done(true); // Call done with more to load.
+        // TODO: What to do here. If enpoint is down, we would get lots of console errors at the moment....
+      }
+      
+    }, { debug: false, peekDistance: 50 });
+  }  
+  */
 }
-
-*/
-
-

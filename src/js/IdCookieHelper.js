@@ -16,9 +16,8 @@ export default class IdCookieHelper{
         this._persist([]);   
         return [];
       }
-      
-      const matchingValueJSON = matchingCookie.split('=')[1];
-      return JSON.parse(matchingValueJSON);
+      const matchingValueToSplit = matchingCookie.split('=')[1];
+      return matchingValueToSplit.split('|').filter(i => i);   // Split and remove empty values
     }
     
     // Save the new ids to the cookie after update
@@ -29,9 +28,9 @@ export default class IdCookieHelper{
     
     // Save the passed in ids to the cookie
     _persist(ids) {    
-      const idsJson = JSON.stringify(ids || []);
-      const newCookie = `${this._name}=${idsJson};`
-      // console.log(newCookie);
+      const joinedIds = ids.join('|');
+      // Create a new cookie containing selected ids.  Set to same site strict and path to root
+      const newCookie = `${this._name}=${joinedIds}; path=/; samesite=Strict`
       document.cookie = newCookie;
     }
     

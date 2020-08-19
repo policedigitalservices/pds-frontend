@@ -11,7 +11,6 @@ if (main && main.classList.contains('asc-staff-compose')) {
 
   const ch = new IdCookieHelper('CourierMessageUserIds');
   
-  // This should move to the new compose page
   const onUpdateFunc = (selectedOptions, allOptions) => {
     ch.setIds(selectedOptions.map(x => x.value));
   }

@@ -8,7 +8,7 @@
 
   - selectId (required): The id of the select element acting as the source (must have multiple attribute, and all items should be marked as selected)
 
-  - revertGroups (optiional): The id of the element that will be clicked to revert selected options (should have is-hidden class to start)
+  - revertGroups (optional): The id of the element that will be clicked to revert selected options (should have is-hidden class to start)
 
   - onUpdateFunc (required): A function called when a tag has been removed, or options are reverted.. This function will be called with two params, selectedOptions and allOptions.
                              This is intended to make the control more flexible i.e. our first usage is to update label with selected items text elsewhere on page without further coupling.
