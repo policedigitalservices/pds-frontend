@@ -19,7 +19,6 @@ if (main && main.classList.contains('asc-staff-index')) {
    usersTableBody = usersTable.querySelector('tbody');
   }
 
-  // TODO: This ...
   let currentPage = 1;
 
   const getSearchEndpoint = () => `https://<<SOME_URL>>/ad-staff?page=${currentPage}`;
@@ -70,12 +69,9 @@ if (main && main.classList.contains('asc-staff-index')) {
     rows.forEach(addRow);
   }
 
-  /*
-
-  // TODO: Restore this block of code once the end point is in place.
 
   if (loader) {
-    new LazyLoader(loader, async (done) => {
+    new LazyLoader(loader, async done => {
   
       try {
         // Get the next page index
@@ -84,10 +80,15 @@ if (main && main.classList.contains('asc-staff-index')) {
 
         // Do the search
         const response = await window.fetch(endpoint);
-        const json = await response.json();
+        const results = await response.json();
 
-        addResultRows(json.rows);
-        done(!json.hasMoreRows);
+        const hasResults = results.length > 0;
+
+        if (hasResults) {          
+          addResultRows(results);
+        }
+
+        done(hasResults);  
       }
       catch(e) {        
         console.error(`Failed to lazy load page ${currentPage} of AD users`);
@@ -100,5 +101,4 @@ if (main && main.classList.contains('asc-staff-index')) {
       
     }, { debug: false, peekDistance: 50 });
   }  
-  */
 }
