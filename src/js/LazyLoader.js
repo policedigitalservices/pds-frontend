@@ -126,8 +126,8 @@ export default class CourierLazyLoader {
   // Do the check to see if screen somewhere it should be loaded.
   _doLoadMoreCheck() {    
     const highestVisibleYPos = window.scrollY + window.innerHeight;
-    const documentHeight = document.body.clientHeight;
-    const loadMoreTriggerPos = Math.min((this._loader.offsetTop + this._config.peekDistance), documentHeight);
+    const documentHeight = document.documentElement.scrollHeight;
+    const loadMoreTriggerPos = Math.min((this._loader.offsetTop + this._config.peekDistance), documentHeight); 
     const peekPositionVisible = highestVisibleYPos >= loadMoreTriggerPos;
     const shouldLoadMore = peekPositionVisible;
     

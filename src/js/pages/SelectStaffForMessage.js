@@ -21,7 +21,7 @@ if (main && main.classList.contains('asc-staff-index')) {
 
   let currentPage = 1;
 
-  const getSearchEndpoint = () => `https://<<SOME_URL>>/ad-staff?page=${currentPage}`;
+  const getSearchEndpoint = () => `http://localhost:5001/Force/Contacts/${currentPage}`;
   
   // Add listeners for the checkboxes
   document.getElementById('table-select-staff').addEventListener('change', ({target}) => {
@@ -56,11 +56,11 @@ if (main && main.classList.contains('asc-staff-index')) {
   const addRow = user => {
     const newRow = document.createElement('tr');
 
-    newRow.appendChild(createCellWithText('PUT NAME HERE FROM USER'));
-    newRow.appendChild(createCellWithText('PUT COLLAR HERE FROM USER'));
-    newRow.appendChild(createCellWithText('PUT EMAIL HERE FROM USER'));
-    newRow.appendChild(createCellWithText('PUT PHONE HERE FROM USER'));
-    newRow.appendChild(createCheckboxField('PUT COLLAR HERE', ch.hasId('PUT COLLAR HERE')));
+    newRow.appendChild(createCellWithText(user.name));
+    newRow.appendChild(createCellWithText(user.collar));
+    newRow.appendChild(createCellWithText(user.email));
+    newRow.appendChild(createCellWithText(user.phoneNumber));
+    newRow.appendChild(createCheckboxField(user.collar, ch.hasId(user.collar)));
 
     usersTableBody.append(newRow);
   }
