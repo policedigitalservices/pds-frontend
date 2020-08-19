@@ -21,7 +21,13 @@ if (main && main.classList.contains('asc-staff-index')) {
 
   let currentPage = 1;
 
-  const getSearchEndpoint = () => `http://localhost:5001/Force/Contacts/${currentPage}`;
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const criteriaKey = 'criteria';
+  
+  let searchCriteriaString = urlParams.has(criteriaKey) ? `?criteria=${urlParams.get(criteriaKey)}` : '';
+
+  const getSearchEndpoint = () => `${location.origin}/Force/Contacts/${currentPage}${searchCriteriaString}`;
   
   // Add listeners for the checkboxes
   document.getElementById('table-select-staff').addEventListener('change', ({target}) => {
