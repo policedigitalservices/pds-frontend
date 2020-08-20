@@ -66,7 +66,7 @@ if (main && main.classList.contains('asc-staff-index')) {
     newRow.appendChild(createCellWithText(user.collar));
     newRow.appendChild(createCellWithText(user.email));
     newRow.appendChild(createCellWithText(user.phoneNumber));
-    newRow.appendChild(createCheckboxField(user.collar, ch.hasId(user.collar)));
+    newRow.appendChild(createCheckboxField(user.id, ch.hasId(user.id.toString())));
 
     usersTableBody.appendChild(newRow);
   }
