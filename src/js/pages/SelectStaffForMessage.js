@@ -68,7 +68,7 @@ if (main && main.classList.contains('asc-staff-index')) {
     newRow.appendChild(createCellWithText(user.phoneNumber));
     newRow.appendChild(createCheckboxField(user.collar, ch.hasId(user.collar)));
 
-    usersTableBody.append(newRow);
+    usersTableBody.appendChild(newRow);
   }
 
   const addResultRows = rows => {
