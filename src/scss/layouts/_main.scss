@@ -10,6 +10,8 @@ main,
   width: 100%;
   padding:  0;
 
+  transition: margin-bottom $bottomDrawerTransitionSpeed $bottomDrawerTransitionTimingFunction;
+
   @include mq(S) {
     padding: $pad * 2.7 0;
   }
