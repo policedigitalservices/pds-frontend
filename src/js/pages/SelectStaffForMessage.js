@@ -77,6 +77,9 @@ if (main && main.classList.contains('asc-staff-index')) {
 
 
   if (loader) {
+
+    const loaderPageSize = loader.getAttribute("page-size");
+
     new LazyLoader(loader, async done => {
   
       try {
@@ -90,11 +93,18 @@ if (main && main.classList.contains('asc-staff-index')) {
 
         const hasResults = results.length > 0;
 
+        // We dont know if there will be more results, but its likely if we return a full page of results
+        let moreResultsLikely = hasResults;
+        if (loaderPageSize) {
+          // We may not have this attribute, but if we do check if the page is full. If not there should be no more results to fetch
+          moreResultsLikely = results.length === parseInt(loaderPageSize, 10);
+        }
+
         if (hasResults) {          
           addResultRows(results);
         }
 
-        done(hasResults);  
+        done(moreResultsLikely);  
       }
       catch(e) {        
         console.error(`Failed to lazy load page ${currentPage} of AD users`);
