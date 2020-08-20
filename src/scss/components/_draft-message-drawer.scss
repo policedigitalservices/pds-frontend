@@ -88,7 +88,10 @@
         a {
             white-space: nowrap;
 
-
+            @include mq(600, 'max-width') {
+                font-size: 12px;
+                font-size: 0.75rem;
+            } 
         }
     }
 }
