@@ -20,6 +20,14 @@
         width: 85%;
         padding: $pad;
 
+        @include mq(900, 'max-width') {
+            width: 90%;
+        }    
+        
+        @include mq(750, 'max-width') {
+            width: 95%;
+        } 
+        
         @include mq(S, 'max-width') {
             width: 100%;
         }
