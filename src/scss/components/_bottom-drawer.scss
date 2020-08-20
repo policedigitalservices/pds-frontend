@@ -25,7 +25,14 @@
         }
     }
 
-    body.bottom-drawer-open > & {
+    .bottom-drawer-open > & {
         bottom: 0;
     }
+
+    &-open {    
+        main {
+            margin-bottom: $pad * 3.8;
+        }
+    }
+    
 }
