@@ -20,7 +20,8 @@ if (main && main.classList.contains('asc-staff-compose')) {
   const cookieMessageHelper = new SimpleCookieHelper('CourierMessageContent');
   const cookieAutoResendHelper = new SimpleCookieHelper('CourierMessageResend');
   const cookieResponseHelper = new SimpleCookieHelper('CourierMessageResponses');
-  const idsCookieHelper = new IdCookieHelper('CourierMessageUserIds');
+  
+  const cookieIdsHelper = new IdCookieHelper('CourierMessageUserIds');
 
   const getResponseOptionValuesString = () => {
     const nonEmptyOptions = responseOptions.reduce((acc, curr) => {
@@ -42,7 +43,7 @@ if (main && main.classList.contains('asc-staff-compose')) {
   });
   
   const onUpdateFunc = (selectedOptions, allOptions) => {
-    idsCookieHelper.setIds(selectedOptions.map(x => x.value));
+    cookieIdsHelper.setIds(selectedOptions.map(x => x.value));
   }
   
   new SelectListTags('AscStaffSelector', null, onUpdateFunc); 
