@@ -14,16 +14,31 @@ if (main && main.classList.contains('asc-staff-compose')) {
   const subjectInput = document.getElementById('subject_input');
   const messageInput = document.getElementById('Input_Message');
   const resendInput = document.getElementById('Input_AutoResendSchedule');
+  const responseOptions = Array.from(document.querySelectorAll('.response-option'));
 
   const cookieHelper = new SimpleCookieHelper('CourierMessageTitle');
   const cookieMessageHelper = new SimpleCookieHelper('CourierMessageContent');
-  const autoResendHelper = new SimpleCookieHelper('CourierMessageResend');
+  const cookieAutoResendHelper = new SimpleCookieHelper('CourierMessageResend');
+  const cookieResponseHelper = new SimpleCookieHelper('CourierMessageResponses');
   const idsCookieHelper = new IdCookieHelper('CourierMessageUserIds');
+
+  const getResponseOptionValuesString = () => {
+    const nonEmptyOptions = responseOptions.reduce((acc, curr) => {
+      if (curr.value) {
+        return [...acc, curr.value];
+      }
+  
+      return acc;
+    }, []);
+    
+    return nonEmptyOptions.join('||');
+  };
 
   addBtn.addEventListener('click', () => {
     cookieHelper.set(subjectInput.value);
     cookieMessageHelper.set(messageInput.value);
-    autoResendHelper.set(resendInput.value)
+    cookieAutoResendHelper.set(resendInput.value);  
+    cookieResponseHelper.set(getResponseOptionValuesString());
   });
   
   const onUpdateFunc = (selectedOptions, allOptions) => {
