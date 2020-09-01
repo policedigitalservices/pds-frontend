@@ -1,69 +1,77 @@
-if (document.getElementById('Responses') !=null) {
+if (document.getElementById('Responses') != null) {
 
-    (function (selector) {
 
-        var responses = document.querySelectorAll('.response-field');
-        var keyArray = Object.keys(responses);
+    (function () {
+
+        // Find all the response fields and the response list
+        const responses = document.querySelectorAll('.response-field');
+        const responsesList = document.querySelector('.response-options-list');
+
+        // Hide all the empty response fields
+        responses.forEach((response, idx) => {
+            if (response.querySelector('.response-option') .value.trim() === '') {
+                response.style.display = 'none';
+            }
+            response.dataset.key = idx;
+        });
+
+        // Reveals the first hidden item
+        const showFirstEmpyItem = () => {
+            for (var i = 0; i < responses.length; i++) {
+                const currentResponse = responses[i];
+                if (currentResponse.style.display === 'none') {
+                    currentResponse.style.display = 'block';
+                    return;
+                }
+            }
+        };
+
+        // When an item is removed, copy all values forward to fill gaps
+        const copyItemsForward = (index) => {
+            for (var idx = index + 1; idx < responses.length; idx++) {
+                const prevInput = responses[idx-1].querySelector('.response-option');;
+                const input = responses[idx].querySelector('.response-option');
+                prevInput.value = input.value;
+            }
+        };
+
+        //
+        const removeLastEmptyItem = (removeIdx) => {
+            
+            // As all copied forward blank last item out
+            responses[responses.length-1].querySelector('.response-option').value = "";
+
+            // Go through backwards and hide last visible item
+            for (var idx = (responses.length-1); idx >= removeIdx; idx--) {
+                if (responses[idx].style.display !== 'none') {
+                    responses[idx].style.display = 'none';
+                    return;
+                }
+            }
+        }
+
         var addResponseButton = document.querySelector("#add_response");
 
         addResponseButton.addEventListener("click", function(el) {
             el.preventDefault();
             addResponseButton.blur();
-            addResponse();
+            showFirstEmpyItem();
 
         })
 
-        keyArray.forEach(function(key){
+        responsesList.addEventListener('click', (e) => {
+                        
+            const target = e.target;
 
-            responses[key].setAttribute('data-key', key);
-
-            if (responses[key].querySelector("[class~='response-option']").value.length == 0) {
-                responses[key].style.display = 'none';
+            if (target.matches('.btn-remove-response')) {
+                e.preventDefault();
+                const parent = target.parentNode;
+                const removeIdx = parseInt(parent.dataset.key, 10);
+                copyItemsForward(removeIdx);
+                removeLastEmptyItem(removeIdx);
             }
-
-            if (responses[key].querySelector("#remove_response") != null) {
-                responses[key].querySelector("#remove_response").addEventListener("click", function(el) {
-                    el.preventDefault();
-                    removeResponse(key);
-
-                })
-            }
-
         });
-
-        function validateResponse(key) {
-            if (responses[key].querySelector("[class~='response-option']").value.length != 0) {
-                addResponse(parseInt(key) + 1);
-            }
-        }
-
-        function addResponse(key) {
-
-            keyArray.every(function(key){
-
-                if (responses[key].style.display === 'none') {
-                    responses[key].style.display = 'block';
-                    return false;
-                }
-
-                return true;
-
-            });
-        }
-
-        function removeResponse(key) {
-
-            if (responses[key].style.display === 'block' && responses[key].dataset.key == key) {
-
-                responses[key].parentNode.appendChild(responses[key]);
-                responses[key].querySelector("[class~='response-option']").value = '';
-                responses[key].style.display = 'none';
-                return false;
-            }
-
-        }
-
-    })("#Responses");
+    })();
 }
 
 
