@@ -38,8 +38,8 @@ if (main && main.classList.contains('asc-staff-index')) {
           const newTotal = target.checked ? ch.add(target.value) : ch.remove(target.value);
           dmd.update(newTotal);
       }
-    });  }
-  
+    });  
+  }  
 
   const createCheckboxField = (value, checked) => {  
     const cell = document.createElement('td');

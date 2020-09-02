@@ -35,28 +35,44 @@ header,
   }
 
   &__logo {
-    @extend h4;
 
-    display: none;
-    text-transform: uppercase;
-    color: $white;
-    text-decoration: none;
-    margin: 0;
-    padding: $pad * .7 $pad;
+    text-indent: -7000px;
+    background-image: url(/dist/img/logo.svg);
+    background-repeat: no-repeat;
     display: inline-block;
+    width: 139px;
+    height: 33px;
+    position: relative;
+    top: -3px;
 
-    @include mq(S) {
-      padding: $pad * .7 0;
+    @include mq(S, 'max-width') {
+      margin: $pad $pad 0 $pad;
+      background-size: 80%;
     }
+
+    // @extend h4;
+
+    // display: none;
+    // text-transform: uppercase;
+    // color: $white;
+    // text-decoration: none;
+    // margin: 0;
+    // padding: $pad * .7 $pad;
+    // display: inline-block;
+
+    // @include mq(S) {
+    //  //margin-left: 20px;
+    //  background-color: pink;
+    // }
   }
 
   &__title {
-    @extend h3;
+    // @extend h3;
 
-    text-transform: uppercase;
-    color: $white;
-    text-decoration: none;
-    margin: .2rem $pad;
+    // text-transform: uppercase;
+    // color: $white;
+    // text-decoration: none;
+    // margin: .2rem $pad;
     display: none;
   }
 }
