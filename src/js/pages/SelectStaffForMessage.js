@@ -30,12 +30,16 @@ if (main && main.classList.contains('asc-staff-index')) {
   const getSearchEndpoint = () => `${location.origin}/Force/Contacts/${currentPage}${searchCriteriaString}`;
   
   // Add listeners for the checkboxes
-  document.getElementById('table-select-staff').addEventListener('change', ({target}) => {
-    if (target.matches('input[type=checkbox]')) {
-        const newTotal = target.checked ? ch.add(target.value) : ch.remove(target.value);
-        dmd.update(newTotal);
-    }
-  });
+  const staffTable = document.getElementById('table-select-staff');
+
+  if (staffTable) {
+    staffTable.addEventListener('change', ({target}) => {
+      if (target.matches('input[type=checkbox]')) {
+          const newTotal = target.checked ? ch.add(target.value) : ch.remove(target.value);
+          dmd.update(newTotal);
+      }
+    });  }
+  
 
   const createCheckboxField = (value, checked) => {  
     const cell = document.createElement('td');
