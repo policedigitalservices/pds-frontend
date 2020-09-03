@@ -10,7 +10,7 @@
   // grid-template-rows: minmax(50px, auto) 1fr auto;
   // -ms-grid-rows: minmax(50px, auto) 0 minmax(min-content, 100%) 0 auto;
   grid-template-rows: minmax(50px, auto) 1fr auto;
-  -ms-grid-rows: auto 0 minmax(min-content, 100%) 0 auto;
+  -ms-grid-rows: minmax(50px, auto) 0 minmax(min-content, 100%) 0 auto;
   grid-template-areas:
     "header header"
     "sidebar main"
@@ -18,10 +18,8 @@
 
     @include  mq(S) {
       grid-template-rows: minmax(66px, auto) 1fr auto;
-      -ms-grid-rows: auto 0 minmax(min-content, 100%) 0 auto;
+      -ms-grid-rows: minmax(66px, min-content) 0 minmax(min-content, 100%) 0 auto;
     }
-
-
 }
 
 .grid--text-page {
