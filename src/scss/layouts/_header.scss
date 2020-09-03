@@ -36,7 +36,7 @@ header,
 
   &__logo {
 
-    // Apps without specific logo image
+    // Apps without specific logo image (i.e. not courier)
     &:not(&--courier) {
 
       @extend h4;
