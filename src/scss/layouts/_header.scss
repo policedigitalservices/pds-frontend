@@ -36,22 +36,17 @@ header,
 
   &__logo {
 
-    // Apps without specific logo image (i.e. not courier)
-    &:not(&--courier) {
+    @extend h4;
 
-      @extend h4;
+    text-transform: uppercase;
+    color: $white;
+    text-decoration: none;
+    margin: 0;
+    padding: $pad * .7 $pad;
+    display: inline-block;
 
-          display: none;
-          text-transform: uppercase;
-          color: $white;
-          text-decoration: none;
-          margin: 0;
-          padding: $pad * .7 $pad;
-          display: inline-block;
-
-          @include mq(S) {
-            padding: $pad * .7 0;
-          }
+    @include mq(S) {
+      padding: $pad * .7 0;
     }
 
     // Courier
@@ -59,18 +54,14 @@ header,
       text-indent: -7000px;
       background-image: url(/dist/img/logo.svg);
       background-repeat: no-repeat;
-      display: inline-block;
+      background-position: left center;
       width: 139px;
-      height: 33px;
-      position: relative;
-      top: -3px;
 
       @include mq(S, 'max-width') {
-        margin: $pad $pad 0 $pad;
-        background-size: 80%;
+       margin-left: $pad;
+       background-size: 80%;
       }
     }
-
   }
 
   &__title {
