@@ -147,10 +147,10 @@ form,
     &--readonly, 
     &--readonly:focus, 
     &--readonly:active {
-        border-width: 0;
-        padding: 0;
-        outline: nonw;
-        
+      border-width: 0;
+      padding: 0;
+      outline: none;
+      background-color: transparent;
     }
   }
 }
@@ -175,6 +175,7 @@ input,
       display: inline-block;
       float: right;
       min-height: 3.5rem;
+      color: transparent;
 
       @extend .material-icons;
       @include font-size(1.5);
