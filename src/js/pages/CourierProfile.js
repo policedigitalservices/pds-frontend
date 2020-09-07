@@ -32,7 +32,7 @@ if (main) {
         newPhone.className = "form__group input__withaction input--profile-phone";
         newPhone.innerHTML = `
             <input class="form__input" autocomplete="off" type="text" name="phone" value="">
-            <button style="display: inline-block;" class="button button--remove btn-remove-contact-phone">Remove</button>
+            <button class="button button--remove btn-remove-contact-phone">Remove</button>
             <span class="field-validation-valid" data-valmsg-for="phone_validation" data-valmsg-replace="true"></span>
         `;
         return newPhone;
@@ -57,7 +57,7 @@ if (main) {
         newEmailRow.className = "form__group input__withaction input--profile-email";  
         newEmailRow.innerHTML = `
             <input class="form__input" autocomplete="off" type="text" name="email" value="">
-            <button style="display: inline-block;" class="button button--remove  btn-remove-contact-email">Remove</button>
+            <button class="button button--remove  btn-remove-contact-email">Remove</button>
             <span class="field-validation-valid" data-valmsg-for="email_validation" data-valmsg-replace="true"></span>
         `;
         return newEmailRow;
