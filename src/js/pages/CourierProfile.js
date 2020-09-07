@@ -41,7 +41,7 @@ if (main) {
     // Update the index used for model binding phones
     function renumberPhonesInputs() {
         const phoneInputs = document.querySelectorAll('.input--profile-phone');
-        debugger;
+
         phoneInputs.forEach((phone, index) => {
             const inp = phone.querySelector('input');
             inp.id = `Input_PersonalPhoneNumbers_${index}_`;
@@ -66,7 +66,7 @@ if (main) {
     // Update the index used for model binding emails
     function renumberlEmailsInputs() {
         const emailInputs = document.querySelectorAll('.input--profile-email');
-        debugger;
+
         emailInputs.forEach((email, index) => {
             const inp = email.querySelector('input');
             inp.id = `Input.PersonalEmailAddresses_${index}_`;
