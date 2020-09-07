@@ -18,7 +18,7 @@ if (main) {
 
     // Show all the js only buttons
     [addPhoneBtn, addEmailBtn, ...removeEmailButtons, ...removePhoneButtons].forEach(el => {
-        el.style.display = 'inline-block';
+        el.style.display = "";
     });
 
     [...removeEmailButtons, ...removePhoneButtons].forEach(el => {
