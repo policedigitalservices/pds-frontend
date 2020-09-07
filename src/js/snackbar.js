@@ -40,7 +40,7 @@
         snackbarMessage = 'New organisation has been created';
     } else if (MessageSentParam === 'True') {
         snackbarMessage = 'Message sent';
-    } else if (ForceContactUpdatedParam === 'True') {
+    } else if (ForceContactUpdatedParam && ForceContactUpdatedParam.toLowerCase() === 'true') {
         snackbarMessage = 'Personal contact details updated';
     } 
     else if (snackbar) {
