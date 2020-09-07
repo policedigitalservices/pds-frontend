@@ -10,7 +10,7 @@
     var contactParam = urlParams.get('ContactAdded');
     var OrganisationParam = urlParams.get('OrganisationAdded');
     var MessageSentParam = urlParams.get('MessageSent');
-    var ForceContactUpdatedParam = urlParams.get('ForceContactUpdatedParam');
+    var ForceContactUpdatedParam = urlParams.get('ForceContactUpdated');
 
     var snackbarMessage = '';
 
