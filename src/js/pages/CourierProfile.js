@@ -24,25 +24,23 @@ if (main) {
     // Add a new phone row
     function newPhoneRow() {        
         const newPhone  = document.createElement('div');
+        newPhone.className = "form__group input__withaction";
         newPhone.innerHTML = `
-            <div class="form__group input__withaction">
-                <input class="form__input" autocomplete="off" type="text" id="phone" name="phone" value="">
-                <button style="display: inline-block;" class="button button--remove btn-remove-contact-phone">Remove</button>
-                <span class="field-validation-valid" data-valmsg-for="phone_validation" data-valmsg-replace="true"></span>
-            </div>
+            <input class="form__input" autocomplete="off" type="text" id="phone" name="phone" value="">
+            <button style="display: inline-block;" class="button button--remove btn-remove-contact-phone">Remove</button>
+            <span class="field-validation-valid" data-valmsg-for="phone_validation" data-valmsg-replace="true"></span>
         `;
         return newPhone;
     }
 
     // Add a new email row
     function newEmailRow() {    
-        const newEmailRow  = document.createElement('div');    
+        const newEmailRow  = document.createElement('div');  
+        newEmailRow.className = "form__group input__withaction";  
         newEmailRow.innerHTML = `
-            <div class="form__group input__withaction">
-                <input class="form__input" autocomplete="off" type="text" id="email" name="email" value="">
-                <button style="display: inline-block;" class="button button--remove  btn-remove-contact-email">Remove</button>
-                <span class="field-validation-valid" data-valmsg-for="email_validation" data-valmsg-replace="true"></span>
-            </div>
+            <input class="form__input" autocomplete="off" type="text" id="email" name="email" value="">
+            <button style="display: inline-block;" class="button button--remove  btn-remove-contact-email">Remove</button>
+            <span class="field-validation-valid" data-valmsg-for="email_validation" data-valmsg-replace="true"></span>
         `;
         return newEmailRow;
     }
