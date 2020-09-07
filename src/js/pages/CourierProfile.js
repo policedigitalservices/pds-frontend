@@ -21,19 +21,47 @@ if (main) {
         el.style.display = 'inline-block';
     });
 
+    // Add a new phone row
+    function newPhoneRow() {        
+        const newPhone  = document.createElement('div');
+        newPhone.innerHTML = `
+            <div class="form__group input__withaction">
+                <input class="form__input" autocomplete="off" type="text" id="phone" name="phone" value="">
+                <button style="display: inline-block;" class="button button--remove btn-remove-contact-phone">Remove</button>
+                <span class="field-validation-valid" data-valmsg-for="phone_validation" data-valmsg-replace="true"></span>
+            </div>
+        `;
+        return newPhone;
+    }
+
+    // Add a new email row
+    function newEmailRow() {    
+        const newEmailRow  = document.createElement('div');    
+        newEmailRow.innerHTML = `
+            <div class="form__group input__withaction">
+                <input class="form__input" autocomplete="off" type="text" id="email" name="email" value="">
+                <button style="display: inline-block;" class="button button--remove  btn-remove-contact-email">Remove</button>
+                <span class="field-validation-valid" data-valmsg-for="email_validation" data-valmsg-replace="true"></span>
+            </div>
+        `;
+        return newEmailRow;
+    }
+
     // Wire up the button listeners
     addPhoneBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        alert('Add phone Button clicked');
+        e.target.closest('section').appendChild(newPhoneRow())
     });
     addEmailBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        alert('Add email Button clicked');
+        e.target.closest('section').appendChild(newEmailRow())
     });  
 
     // Handle the remove on the parent form, so that will work for new items added after load.
     contactProfileForm.addEventListener('click', (e) => {
         if (e.target.matches('.btn-remove-contact-phone')  || e.target.matches('.btn-remove-contact-email')) {
+            e.preventDefault();
+            
             // Remove parent form group containing email or phone.
             const formGroup = e.target.closest('.form__group');
             if (formGroup) {
