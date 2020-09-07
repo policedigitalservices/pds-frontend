@@ -66,7 +66,7 @@ if (main) {
     addPhoneBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.target.closest('section').appendChild(newPhoneRow());
-        _renumberInputs('.input--profile-phone', 'Input_PersonalPhoneNumbers');
+        _renumberInputs('.input--profile-phone', 'Input.PersonalPhoneNumbers');
     });
     addEmailBtn.addEventListener('click', (e) => {
         e.preventDefault();
