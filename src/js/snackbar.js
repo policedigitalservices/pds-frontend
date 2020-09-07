@@ -10,6 +10,7 @@
     var contactParam = urlParams.get('ContactAdded');
     var OrganisationParam = urlParams.get('OrganisationAdded');
     var MessageSentParam = urlParams.get('MessageSent');
+    var ForceContactUpdatedParam = urlParams.get('ForceContactUpdatedParam');
 
     var snackbarMessage = '';
 
@@ -39,7 +40,10 @@
         snackbarMessage = 'New organisation has been created';
     } else if (MessageSentParam === 'True') {
         snackbarMessage = 'Message sent';
-    } else if (snackbar) {
+    } else if (ForceContactUpdatedParam === 'True') {
+        snackbarMessage = 'Personal contact details updated';
+    } 
+    else if (snackbar) {
         snackbar.addEventListener("click", function(el) {
 
             if (!snackbarStorageItemArray.locations.includes(window.location.pathname)) {
