@@ -82,6 +82,7 @@ header,
   grid-area: header;
   width: 100%;
   padding: 0;
+  margin-bottom: $pad;
 
   & + section {
     padding-top: 0;
@@ -185,5 +186,11 @@ header,
 
   h5 + button {
     margin-bottom: $pad ;
+  }
+}
+
+.page-header {
+  .h4 {
+    margin-bottom: 0;
   }
 }

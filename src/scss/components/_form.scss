@@ -143,6 +143,15 @@ form,
       background-repeat: no-repeat;
       background-position: ($pad / 4) * 3 50%;
     }
+
+    &--readonly, 
+    &--readonly:focus, 
+    &--readonly:active {
+        border-width: 0;
+        padding: 0;
+        outline: nonw;
+        
+    }
   }
 }
 
