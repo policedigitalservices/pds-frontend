@@ -38,16 +38,15 @@ if (main) {
         return newPhone;
     }
 
-    // Update the index used for model binding phones
-    function renumberPhonesInputs() {
-        const phoneInputs = document.querySelectorAll('.input--profile-phone');
+    function _renumberInputs(selector, identifier) {
+        const inputs = document.querySelectorAll(selector);
 
-        phoneInputs.forEach((phone, index) => {
-            const inp = phone.querySelector('input');
-            inp.id = `Input_PersonalPhoneNumbers_${index}_`;
-            inp.name = `Input_PersonalPhoneNumbers[${index}]`;
-            const spn = phone.querySelector('span');
-            spn.setAttribute('data-valmsg-for', `Input_PersonalPhoneNumbers[${index}]`)
+        inputs.forEach((input, index) => {
+            const inp = input.querySelector('input');
+            inp.id = `${identifier}_${index}_`;
+            inp.name = `${identifier}[${index}]`;
+            const spn = input.querySelector('span');
+            spn.setAttribute('data-valmsg-for', `${identifier}[${index}]`)
         });
     }
 
@@ -63,29 +62,16 @@ if (main) {
         return newEmailRow;
     }
 
-    // Update the index used for model binding emails
-    function renumberlEmailsInputs() {
-        const emailInputs = document.querySelectorAll('.input--profile-email');
-
-        emailInputs.forEach((email, index) => {
-            const inp = email.querySelector('input');
-            inp.id = `Input.PersonalEmailAddresses_${index}_`;
-            inp.name = `Input.PersonalEmailAddresses[${index}]`;
-            const spn = email.querySelector('span');
-            spn.setAttribute('data-valmsg-for', `Input.PersonalEmailAddresses[${index}]`)
-        });
-    }
-
     // Wire up the button listeners
     addPhoneBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.target.closest('section').appendChild(newPhoneRow());
-        renumberPhonesInputs();
+        _renumberInputs('.input--profile-phone', 'Input_PersonalPhoneNumbers');
     });
     addEmailBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.target.closest('section').appendChild(newEmailRow())
-        renumberlEmailsInputs();
+        _renumberInputs('.input--profile-email', 'Input.PersonalEmailAddresses');
     });  
 
     // Handle the remove on the parent form, so that will work for new items added after load.
@@ -101,12 +87,11 @@ if (main) {
         }
 
         if (e.target.matches('.btn-remove-contact-phone')) {
-            renumberPhonesInputs();
+            _renumberInputs('.input--profile-phone', 'Input.PersonalPhoneNumbers');
         }
 
         if (e.target.matches('.btn-remove-contact-email')) {
-            renumberlEmailsInputs();
+            _renumberInputs('.input--profile-email', 'Input.PersonalEmailAddresses');
         }
     });
-
 }
