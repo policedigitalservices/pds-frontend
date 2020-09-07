@@ -21,38 +21,71 @@ if (main) {
         el.style.display = 'inline-block';
     });
 
+    [...removeEmailButtons, ...removePhoneButtons].forEach(el => {
+        el.closest('.form__group').classList.add('input__withaction');
+    });
+
     // Add a new phone row
     function newPhoneRow() {        
+
         const newPhone  = document.createElement('div');
-        newPhone.className = "form__group input__withaction";
+        newPhone.className = "form__group input__withaction input--profile-phone";
         newPhone.innerHTML = `
-            <input class="form__input" autocomplete="off" type="text" id="phone" name="phone" value="">
+            <input class="form__input" autocomplete="off" type="text" name="phone" value="">
             <button style="display: inline-block;" class="button button--remove btn-remove-contact-phone">Remove</button>
             <span class="field-validation-valid" data-valmsg-for="phone_validation" data-valmsg-replace="true"></span>
         `;
         return newPhone;
     }
 
+    // Update the index used for model binding phones
+    function renumberPhonesInputs() {
+        const phoneInputs = document.querySelectorAll('.input--profile-phone');
+        debugger;
+        phoneInputs.forEach((phone, index) => {
+            const inp = phone.querySelector('input');
+            inp.id = `Input_PersonalPhoneNumbers_${index}_`;
+            inp.name = `Input_PersonalPhoneNumbers[${index}]`;
+            const spn = phone.querySelector('span');
+            spn.setAttribute('data-valmsg-for', `Input_PersonalPhoneNumbers[${index}]`)
+        });
+    }
+
     // Add a new email row
     function newEmailRow() {    
         const newEmailRow  = document.createElement('div');  
-        newEmailRow.className = "form__group input__withaction";  
+        newEmailRow.className = "form__group input__withaction input--profile-email";  
         newEmailRow.innerHTML = `
-            <input class="form__input" autocomplete="off" type="text" id="email" name="email" value="">
+            <input class="form__input" autocomplete="off" type="text" name="email" value="">
             <button style="display: inline-block;" class="button button--remove  btn-remove-contact-email">Remove</button>
             <span class="field-validation-valid" data-valmsg-for="email_validation" data-valmsg-replace="true"></span>
         `;
         return newEmailRow;
     }
 
+    // Update the index used for model binding emails
+    function renumberlEmailsInputs() {
+        const emailInputs = document.querySelectorAll('.input--profile-email');
+        debugger;
+        emailInputs.forEach((email, index) => {
+            const inp = email.querySelector('input');
+            inp.id = `Input.PersonalEmailAddresses_${index}_`;
+            inp.name = `Input.PersonalEmailAddresses[${index}]`;
+            const spn = email.querySelector('span');
+            spn.setAttribute('data-valmsg-for', `Input.PersonalEmailAddresses[${index}]`)
+        });
+    }
+
     // Wire up the button listeners
     addPhoneBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        e.target.closest('section').appendChild(newPhoneRow())
+        e.target.closest('section').appendChild(newPhoneRow());
+        renumberPhonesInputs();
     });
     addEmailBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.target.closest('section').appendChild(newEmailRow())
+        renumberlEmailsInputs();
     });  
 
     // Handle the remove on the parent form, so that will work for new items added after load.
@@ -65,6 +98,14 @@ if (main) {
             if (formGroup) {
                 formGroup.remove();
             }
+        }
+
+        if (e.target.matches('.btn-remove-contact-phone')) {
+            renumberPhonesInputs();
+        }
+
+        if (e.target.matches('.btn-remove-contact-email')) {
+            renumberlEmailsInputs();
         }
     });
 
