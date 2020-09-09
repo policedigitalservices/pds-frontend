@@ -30,13 +30,4 @@
         })
     }
 
-    if (snackbarMessage) {
-        snackbar.classList.add('snackbar--active');
-        snackbar.innerHTML = snackbarMessage;
-
-        setTimeout(function(){
-            snackbar.classList.remove('snackbar--active');
-        }, 5000);
-    }
-
 })("#hint-snackbar");
