@@ -5,7 +5,7 @@ const main = document.querySelector('main.courier-profile-page');
 
 if (main) {
     
-    //new CheckboxDisableButtonHelper('#btnSave', '#cbAcceptTerms');
+    new CheckboxDisableButtonHelper('#btnSave', '#cbAcceptTerms');
 
     // Grab all the buttons that are only show when js enabled
     const addPhoneBtn = document.getElementById('addPhoneBtn');

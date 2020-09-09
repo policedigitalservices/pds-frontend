@@ -1,9 +1,9 @@
 // Disables and enables a button by whether or not a checkbox is selected.
-class CheckboxDisableButtonHelper {
+export default class CheckboxDisableButtonHelper {
     constructor(buttonSelector, checkboxSelector) {
         // Grab the button
         this._button = document.querySelector(buttonSelector);
-        if (!this_button) throw new Error("Button selector doesnt match an element");
+        if (!this._button) throw new Error("Button selector doesnt match an element");
         // Grab the checkbox
         this._checkbox = document.querySelector(checkboxSelector);
         if (!this._checkbox) throw new Error("Checkbox selector doesnt match an element");
@@ -23,13 +23,13 @@ class CheckboxDisableButtonHelper {
 
     // Disables the button
     _disableButton() {
-        saveButton.removeAttribute('disabled');
-        saveButton.classList.remove('disabled');
+        this._button.setAttribute('disabled', 'disabled');
+        this._button.classList.add('disabled');
     }
 
     // Enables the button
     _enableButton() {
-        saveButton.setAttribute('disabled', 'disabled');
-        saveButton.classList.add('disabled');
+        this._button.removeAttribute('disabled');
+        this._button.classList.remove('disabled');
     }
 }
