@@ -24,4 +24,20 @@
         text-decoration: underline;
       }
   }
+
+  &--inline {
+    padding: 0;
+    text-decoration: none;
+
+    &:hover,
+    &:active,
+    &:focus, 
+    &:visited {
+      color: pds-color($pds-color-primary, '500');
+    }
+
+    &:hover, :focus {
+      text-decoration: underline;
+    }
+  }
 }
