@@ -17,7 +17,13 @@ form,
     display: inline-flex;
     margin-bottom: $pad / 2;
     align-items: center;
+
   }
+
+  & .form__label--cb-text{
+    font-size: 1.125rem;
+    font-weight: 400;
+  }  
 
   &__group {
     margin-bottom: $pad;
@@ -157,6 +163,7 @@ form,
 
       margin-top: -8px;
     }
+
   }
 }
 
