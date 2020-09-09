@@ -40,11 +40,11 @@
   }
 }
 
-input#snackbar {
+input#hint-snackbar {
   display: none;
 }
 
-input#snackbar:checked ~ .hint {
+input#hint-snackbar:checked ~ .hint {
   display: none;
 
   @include mq(S) {
