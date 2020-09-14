@@ -25,6 +25,10 @@ if (main) {
         el.closest('.form__group').classList.add('input__withaction');
     });
 
+    // Remove the empty inputs added for non js purposes
+    const emptyInputsToRemove = document.querySelectorAll('.input--profile-phone:last-of-type, .input--profile-email:last-of-type');
+    emptyInputsToRemove.forEach(emptyInput => emptyInput.remove());
+
     // Add a new phone row
     function newPhoneRow() {        
 
