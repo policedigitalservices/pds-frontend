@@ -265,3 +265,11 @@ select,
   display: inline-block;
   @extend .caption;
 }
+
+.label--select-all {
+  display: flex;
+  
+  & span {
+      margin-left: 5px;
+  }
+}

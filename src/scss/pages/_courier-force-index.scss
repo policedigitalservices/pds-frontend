@@ -1,0 +1,20 @@
+.asc-staff-index {
+    @include mq(S) {
+        table {
+            tr {
+                td {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+            }        
+            
+            col {
+
+                &.contact__add {
+                    width: 60px;
+                }
+            }   
+        }
+    }
+}
