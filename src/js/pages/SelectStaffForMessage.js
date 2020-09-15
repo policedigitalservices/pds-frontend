@@ -16,17 +16,27 @@ if (main && main.classList.contains('asc-staff-index')) {
   const allCheckboxesInTable = Array.from(document.querySelectorAll("#table-select-staff [type=checkbox]"));
 
   const allCheckboxesSelected = () => allCheckboxesInTable.every(cb => cb.checked);
+  const allContactIds = () => allCheckboxesInTable.map(cb => cb.value);
 
-  const deselectAll = (toDeselect) => {
-    toDeselect.forEach(toDeselect => toDeselect.checked = false);
-    ch.setIds([]);
-    dmd.update(0);
+  // Uses a passed in 'combiner' function to decided how to either add or remove selected results to those from other pages.
+  const handleSelectiondChangeMerge = (combineFn) => {
+    const allIdsForGroup = allContactIds();
+    const existingIds = ch.getIds();
+    const newIds = combineFn(existingIds, allIdsForGroup);    
+    ch.setIds(newIds);
+    dmd.update(newIds.length);
   }
 
+  // Remove all the ids that were contained in this results page.  Keep result from other pages selected
+  const deselectAll = (toDeselect) => {
+    toDeselect.forEach(toDeselect => toDeselect.checked = false);
+    handleSelectiondChangeMerge((existingIds, allIdsForGroup) => existingIds.filter(id => !allIdsForGroup.includes(id)));
+  }
+
+  // Add all the ids that were contained in this results page.  Keep result from other pages selected
   const selectAll = (toSelect) => {
-    toSelect.forEach(toSelect => toSelect.checked = true);
-    ch.setIds(toSelect.map(selected => selected.value));
-    dmd.update(toSelect.length);
+    toSelect.forEach(toSelect => toSelect.checked = true);    
+    handleSelectiondChangeMerge((existingIds, allIdsForGroup) => Array.from(new Set([...existingIds, ...allIdsForGroup])));
   }
 
   const handleSelectAllChange = (e) => {
@@ -117,7 +127,6 @@ if (main && main.classList.contains('asc-staff-index')) {
   const addResultRows = rows => {
     rows.forEach(addRow);
   }
-
 
   if (loader) {
 
