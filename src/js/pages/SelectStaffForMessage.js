@@ -13,6 +13,39 @@ if (main && main.classList.contains('asc-staff-index')) {
   const dmd = new DraftMessageDrawer(ch.getCount());
   const loader = document.querySelector('.loader');
 
+  const allCheckboxesInTable = Array.from(document.querySelectorAll("#table-select-staff [type=checkbox]"));
+
+  const allCheckboxesSelected = () => allCheckboxesInTable.every(cb => cb.checked);
+
+  const deselectAll = (toDeselect) => {
+    toDeselect.forEach(toDeselect => toDeselect.checked = false);
+    ch.setIds([]);
+    dmd.update(0);
+  }
+
+  const selectAll = (toSelect) => {
+    toSelect.forEach(toSelect => toSelect.checked = true);
+    ch.setIds(toSelect.map(selected => selected.value));
+    dmd.update(toSelect.length);
+  }
+
+  const handleSelectAllChange = (e) => {
+    const target = e.target;   
+
+    target.checked ?
+      selectAll(allCheckboxesInTable) :
+      deselectAll(allCheckboxesInTable);
+  }
+
+  const toggleSelectAllCheckbox = document.querySelector('#cbSelectAll [type=checkbox]');
+  if (toggleSelectAllCheckbox) {
+    toggleSelectAllCheckbox.addEventListener('change', handleSelectAllChange);
+
+    if (allCheckboxesSelected()) {
+      toggleSelectAllCheckbox.checked = true;
+    }
+  }
+
   const usersTable = document.getElementById('table-select-staff');
   let usersTableBody;
   if(usersTable) {
@@ -36,10 +69,16 @@ if (main && main.classList.contains('asc-staff-index')) {
     staffTable.addEventListener('change', ({target}) => {
       if (target.matches('input[type=checkbox]')) {
           const newTotal = target.checked ? ch.add(target.value) : ch.remove(target.value);
+          if (!target.checked) {
+            // If unchecked deselect the check all.
+            toggleSelectAllCheckbox.checked = false;
+          } else if (allCheckboxesSelected()) {
+            // If checked see if all are now selected.
+            toggleSelectAllCheckbox.checked = true;
+          }
           dmd.update(newTotal);
       }
-    });  }
-  
+    });  }  
 
   const createCheckboxField = (value, checked) => {  
     const cell = document.createElement('td');
