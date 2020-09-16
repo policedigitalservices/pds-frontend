@@ -1,7 +1,7 @@
 /* 
     This script is specific to the search staff page.
 */
-import IdCookieHelper from '../IdCookieHelper';
+import IdSessionStorageHelper from '../IdSessionStorageHelper';
 import DraftMessageDrawer from '../DraftMessageDrawer';
 import LazyLoader from '../LazyLoader';
 
@@ -9,34 +9,54 @@ const main = document.querySelector('main');
 
 if (main && main.classList.contains('asc-staff-index')) {
 
-  const ch = new IdCookieHelper('CourierMessageUserIds');
-  const dmd = new DraftMessageDrawer(ch.getCount());
+  const idSh = new IdSessionStorageHelper('CourierMessageUserIds');
+  const dmd = new DraftMessageDrawer(idSh.getCount());
   const loader = document.querySelector('.loader');
 
   const allCheckboxesInTable = Array.from(document.querySelectorAll("#table-select-staff [type=checkbox]"));
 
+  // Check all items in the local storage
+  const itemsThatShouldBeSelected = allCheckboxesInTable.filter(cb => idSh.hasId(cb.value));
+  itemsThatShouldBeSelected.forEach(i => i.checked = true);
+
   const allCheckboxesSelected = () => allCheckboxesInTable.every(cb => cb.checked);
-  const allContactIds = () => allCheckboxesInTable.map(cb => cb.value);
+  
+  // const allContactIds = () => allCheckboxesInTable.map(cb => cb.value);
+  const allContacts = () => allCheckboxesInTable.map(cb => {
+    return {
+      id: cb.value,
+      name: cb.getAttribute('data-contact-name')
+    }
+  });
 
   // Uses a passed in 'combiner' function to decided how to either add or remove selected results to those from other pages.
   const handleSelectiondChangeMerge = (combineFn) => {
-    const allIdsForGroup = allContactIds();
-    const existingIds = ch.getIds();
-    const newIds = combineFn(existingIds, allIdsForGroup);    
-    ch.setIds(newIds);
-    dmd.update(newIds.length);
+    const allContactsDisplayed = allContacts();
+    const existingContacts = idSh.getItems();
+    const newItems = combineFn(existingContacts, allContactsDisplayed);  
+
+    idSh.setItems(newItems);
+    dmd.update(newItems.length);
   }
 
   // Remove all the ids that were contained in this results page.  Keep result from other pages selected
   const deselectAll = (toDeselect) => {
     toDeselect.forEach(toDeselect => toDeselect.checked = false);
-    handleSelectiondChangeMerge((existingIds, allIdsForGroup) => existingIds.filter(id => !allIdsForGroup.includes(id)));
+    handleSelectiondChangeMerge((existingItems, allItemsForGroup) => existingItems.filter(({id}) => !allItemsForGroup.map(i => i.id).includes(id)));
   }
 
   // Add all the ids that were contained in this results page.  Keep result from other pages selected
   const selectAll = (toSelect) => {
     toSelect.forEach(toSelect => toSelect.checked = true);    
-    handleSelectiondChangeMerge((existingIds, allIdsForGroup) => Array.from(new Set([...existingIds, ...allIdsForGroup])));
+
+    handleSelectiondChangeMerge((existingItems, allItemsForGroup) => {
+
+      // get all items on the page not in the existing results
+      const groupItemsToAdd = allItemsForGroup.filter(({id}) => !existingItems.map(i => i.id).includes(id));
+
+      // Merge the new items in
+      return [...existingItems, ...groupItemsToAdd];
+    });
   }
 
   const handleSelectAllChange = (e) => {
@@ -78,7 +98,7 @@ if (main && main.classList.contains('asc-staff-index')) {
   if (staffTable) {
     staffTable.addEventListener('change', ({target}) => {
       if (target.matches('input[type=checkbox]')) {
-          const newTotal = target.checked ? ch.add(target.value) : ch.remove(target.value);
+          const newTotal = target.checked ? idSh.add(target.value, target.getAttribute('data-contact-name')) : idSh.remove(target.value);
           if (!target.checked) {
             // If unchecked deselect the check all.
             toggleSelectAllCheckbox.checked = false;
@@ -90,7 +110,7 @@ if (main && main.classList.contains('asc-staff-index')) {
       }
     });  }  
 
-  const createCheckboxField = (value, checked) => {  
+  const createCheckboxField = (value, checked, name) => {  
     const cell = document.createElement('td');
     cell.classList.add('checkbox-cell');
     const label = document.createElement('label');
@@ -99,6 +119,7 @@ if (main && main.classList.contains('asc-staff-index')) {
     input.setAttribute('type', 'checkbox');
     input.value = value;
     input.checked = checked;
+    input.setAttribute('data-contact-name', name);
     const span = document.createElement('span');
     label.appendChild(input);
     label.appendChild(span);
@@ -119,7 +140,7 @@ if (main && main.classList.contains('asc-staff-index')) {
     newRow.appendChild(createCellWithText(user.collar));
     newRow.appendChild(createCellWithText(user.email));
     newRow.appendChild(createCellWithText(user.phoneNumber));
-    newRow.appendChild(createCheckboxField(user.id, ch.hasId(user.id.toString())));
+    newRow.appendChild(createCheckboxField(user.id, idSh.hasId(user.id), user.name));
 
     usersTableBody.appendChild(newRow);
   }

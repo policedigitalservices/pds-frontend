@@ -3,7 +3,7 @@
 */
 
 import SimpleCookieHelper from '../SimpleCookieHelper';
-import IdCookieHelper from '../IdCookieHelper';
+import IdSessionStorageHelper from '../IdSessionStorageHelper';
 import SelectListTags from '../SelectListTags';
 
 const main = document.querySelector('main');
@@ -21,7 +21,7 @@ if (main && main.classList.contains('asc-staff-compose')) {
   const cookieAutoResendHelper = new SimpleCookieHelper('CourierMessageResend');
   const cookieResponseHelper = new SimpleCookieHelper('CourierMessageResponses');
   
-  const cookieIdsHelper = new IdCookieHelper('CourierMessageUserIds');
+  const idsSessionHelper = new IdSessionStorageHelper('CourierMessageUserIds');
 
   const getResponseOptionValuesString = () => {
     const nonEmptyOptions = responseOptions.reduce((acc, curr) => {
@@ -43,8 +43,16 @@ if (main && main.classList.contains('asc-staff-compose')) {
   });
   
   const onUpdateFunc = (selectedOptions, allOptions) => {
-    cookieIdsHelper.setIds(selectedOptions.map(x => x.value));
+    idsSessionHelper.filterByIds(selectedOptions.map(x => x.value));
   }
+
+  const selectOptions = idsSessionHelper.getItems().map(({id, name})=> {
+    const option = document.createElement('option');
+    option.selected = true;
+    option.value = id;
+    option.innerText = name;
+    return option;
+  });
   
-  new SelectListTags('AscStaffSelector', null, onUpdateFunc); 
+  new SelectListTags('AscStaffSelector', null, onUpdateFunc, selectOptions); 
 }

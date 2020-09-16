@@ -15,7 +15,7 @@
 
 ******/
 export default class SelectListTags {
-  constructor(selectId, revertGroupsId, onUpdateFunc = () => {}) {
+  constructor(selectId, revertGroupsId, onUpdateFunc = () => {}, options = null) {
       this.onUpdateFunc = onUpdateFunc;
 
       this.tagOptions = document.getElementById(selectId);
@@ -34,7 +34,13 @@ export default class SelectListTags {
         }        
       }
 
-      this.allOptions = [...this.tagOptions.querySelectorAll('option')];
+      if (options) {
+        options.forEach(o => this.tagOptions.appendChild(o));
+      }
+
+      // Now handles passed in select options
+      this.allOptions = options || [...this.tagOptions.querySelectorAll('option')];
+
       if (this.revertBtn && this.allOptions.some(o => !o.selected)) {
         this.revertBtn.classList.remove('is-hidden');
       }
