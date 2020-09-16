@@ -25,7 +25,7 @@ if (main && main.classList.contains('asc-staff-compose')) {
 
   const discardBtn = document.getElementById('btnDiscard');
   discardBtn.addEventListener('click', () => {
-    idsSessionHelper.setItems([]);
+    sessionStorage.removeItem("CourierMessageUsers");
   });
   
   const getResponseOptionValuesString = () => {
