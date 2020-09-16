@@ -24,11 +24,10 @@ if (main && main.classList.contains('asc-staff-compose')) {
   const idsSessionHelper = new IdSessionStorageHelper('CourierMessageUsers');
 
   const discardBtn = document.getElementById('btnDiscard');
-  document.addEventListener('click', () => {
+  discardBtn.addEventListener('click', () => {
     idsSessionHelper.setItems([]);
   });
   
-
   const getResponseOptionValuesString = () => {
     const nonEmptyOptions = responseOptions.reduce((acc, curr) => {
       if (curr.value) {
