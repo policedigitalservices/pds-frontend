@@ -16,6 +16,10 @@
     } else if (OrganisationParam === 'True') {
         snackbarMessage = 'New organisation has been created';
     } else if (MessageSentParam === 'True') {
+        /* 
+            Bit hacky, but clearing the sessionStorage here to clear message state here. 
+        */
+        sessionStorage.removeItem("CourierMessageUsers")
         snackbarMessage = 'Message sent';
     } else if (ForceContactUpdatedParam && ForceContactUpdatedParam.toLowerCase() === 'true') {
         snackbarMessage = 'Personal contact details updated';

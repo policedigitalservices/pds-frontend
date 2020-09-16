@@ -21,7 +21,7 @@ if (main && main.classList.contains('asc-staff-compose')) {
   const cookieAutoResendHelper = new SimpleCookieHelper('CourierMessageResend');
   const cookieResponseHelper = new SimpleCookieHelper('CourierMessageResponses');
   
-  const idsSessionHelper = new IdSessionStorageHelper('CourierMessageUserIds');
+  const idsSessionHelper = new IdSessionStorageHelper('CourierMessageUsers');
 
   const getResponseOptionValuesString = () => {
     const nonEmptyOptions = responseOptions.reduce((acc, curr) => {

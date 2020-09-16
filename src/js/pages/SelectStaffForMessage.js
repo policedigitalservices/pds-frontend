@@ -9,7 +9,7 @@ const main = document.querySelector('main');
 
 if (main && main.classList.contains('asc-staff-index')) {
 
-  const idSh = new IdSessionStorageHelper('CourierMessageUserIds');
+  const idSh = new IdSessionStorageHelper('CourierMessageUsers');
   const dmd = new DraftMessageDrawer(idSh.getCount());
   const loader = document.querySelector('.loader');
 
@@ -99,12 +99,14 @@ if (main && main.classList.contains('asc-staff-index')) {
     staffTable.addEventListener('change', ({target}) => {
       if (target.matches('input[type=checkbox]')) {
           const newTotal = target.checked ? idSh.add(target.value, target.getAttribute('data-contact-name')) : idSh.remove(target.value);
-          if (!target.checked) {
-            // If unchecked deselect the check all.
-            toggleSelectAllCheckbox.checked = false;
-          } else if (allCheckboxesSelected()) {
-            // If checked see if all are now selected.
-            toggleSelectAllCheckbox.checked = true;
+          if (toggleSelectAllCheckbox) {
+            if (!target.checked) {
+              // If unchecked deselect the check all.
+              toggleSelectAllCheckbox.checked = false;
+            } else if (allCheckboxesSelected()) {
+              // If checked see if all are now selected.
+              toggleSelectAllCheckbox.checked = true;
+            }
           }
           dmd.update(newTotal);
       }
