@@ -20,8 +20,14 @@ if (main && main.classList.contains('asc-staff-compose')) {
   const cookieMessageHelper = new SimpleCookieHelper('CourierMessageContent');
   const cookieAutoResendHelper = new SimpleCookieHelper('CourierMessageResend');
   const cookieResponseHelper = new SimpleCookieHelper('CourierMessageResponses');
-  
+
   const idsSessionHelper = new IdSessionStorageHelper('CourierMessageUsers');
+
+  const discardBtn = document.getElementById('btnDiscard');
+  document.addEventListener('click', () => {
+    idsSessionHelper.setItems([]);
+  });
+  
 
   const getResponseOptionValuesString = () => {
     const nonEmptyOptions = responseOptions.reduce((acc, curr) => {
