@@ -13,6 +13,8 @@
   - onUpdateFunc (required): A function called when a tag has been removed, or options are reverted.. This function will be called with two params, selectedOptions and allOptions.
                              This is intended to make the control more flexible i.e. our first usage is to update label with selected items text elsewhere on page without further coupling.
 
+  - items (optional):  Html option elements to be inserted into the underlying select list before tags generated. 
+
 ******/
 export default class SelectListTags {
   constructor(selectId, revertGroupsId, onUpdateFunc = () => {}, options = null) {
@@ -88,6 +90,17 @@ export default class SelectListTags {
       
       return tag;
     };
+
+  // Deselect all the options in the underlying select list.  Optionally regnerated the tags list. 
+  // Optional as not worth overhead if dont need it. 
+  clearItems(repolulateTags = false) {
+    const options = this.tagOptions.querySelectorAll('option');
+    options.forEach(o => o.selected = false);
+
+    if (repolulateTags) {      
+      this.populateTags();
+    }
+  }
 }
 
 // Should have a section like this for each page the control is used on, unless we want it behave exactly the same as a previous version (including ids and update function) 

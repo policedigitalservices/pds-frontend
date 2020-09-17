@@ -22,11 +22,6 @@ if (main && main.classList.contains('asc-staff-compose')) {
   const cookieResponseHelper = new SimpleCookieHelper('CourierMessageResponses');
 
   const idsSessionHelper = new IdSessionStorageHelper('CourierMessageUsers');
-
-  const discardBtn = document.getElementById('btnDiscard');
-  discardBtn.addEventListener('click', () => {
-    sessionStorage.removeItem("CourierMessageUsers");
-  });
   
   const getResponseOptionValuesString = () => {
     const nonEmptyOptions = responseOptions.reduce((acc, curr) => {
@@ -59,5 +54,11 @@ if (main && main.classList.contains('asc-staff-compose')) {
     return option;
   });
   
-  new SelectListTags('AscStaffSelector', null, onUpdateFunc, selectOptions); 
+  const slt = new SelectListTags('AscStaffSelector', null, onUpdateFunc, selectOptions); 
+
+  const discardBtn = document.getElementById('btnDiscard');
+  discardBtn.addEventListener('click', () => {
+    idsSessionHelper.clearItems();
+    slt.clearItems();
+  });
 }

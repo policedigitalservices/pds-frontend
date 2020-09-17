@@ -267,23 +267,24 @@ select,
 }
 
 .label--select-all {
-
-  display: flex;
-  align-items: center;
   font-size: 0.875rem;
-  line-height: 1.25rem;
+  line-height: 30px;
   letter-spacing: 0.25px;
   margin-bottom: 10px;
   cursor: pointer;
   
   label {
-    margin-top: -2px;
-    height: 100%;
-    display: flex;
-    align-items: center;
+    height: 100%;    
   }
 
   & span {
       margin-left: 5px;
+      height: 100%;
+      line-height: 30px;
+
+      &::before {        
+        height: 100%;
+      vertical-align: middle;
+      }
   }
 }

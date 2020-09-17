@@ -28,7 +28,6 @@ export default class IdSessionStorageHelper {
     sessionStorage.setItem(this._name, JSON.stringify(items));
   }
   
-
   // Set all the items in one hit. Returns the new count.
   setItems(items = []) {
     this._items = new Map();
@@ -84,5 +83,10 @@ export default class IdSessionStorageHelper {
   // Does the map contain the passed in id.
   hasId(id) {
     return this._items.has(id);
+  }
+
+  // Empties the list of selected items in the map.
+  clearItems() {
+    return this.setItems([]);
   }
 }
