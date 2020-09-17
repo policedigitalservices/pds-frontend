@@ -42,6 +42,7 @@ export default class IdSessionStorageHelper {
     return ids;
   }  
 
+  // Remove all map items whose ids are not in the passed in list
   filterByIds(idsToKeep) {
     const ids = this.getIds();
     return ids.forEach(i => {
