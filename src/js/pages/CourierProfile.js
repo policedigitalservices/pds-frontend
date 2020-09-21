@@ -1,11 +1,8 @@
-import CheckboxDisableButtonHelper from '../CheckboxDisableButtonHelper';
 
 // Check we are on the correct page.
 const main = document.querySelector('main.courier-profile-page');
 
 if (main) {
-    
-    new CheckboxDisableButtonHelper('#btnSave', '#Input_PrivacyPolicy');
 
     // Grab all the buttons that are only show when js enabled
     const addPhoneBtn = document.getElementById('addPhoneBtn');
