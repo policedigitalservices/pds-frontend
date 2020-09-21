@@ -165,6 +165,18 @@ form,
     }
 
   }
+  p {
+    font-size: 0.875rem;
+
+    
+  }
+  p.mb0 + p {
+      margin-top: 0;
+  }
+
+  h6 {
+    margin-bottom: 10px;
+  }
 }
 
 input,
