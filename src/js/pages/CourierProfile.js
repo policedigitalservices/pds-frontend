@@ -10,21 +10,66 @@ if (main) {
     const removeEmailButtons = Array.from(document.querySelectorAll('.btn-remove-contact-email'));
     const removePhoneButtons = Array.from(document.querySelectorAll('.btn-remove-contact-phone'));
     
-    // Get the form, to add remove listeners to
-    const contactProfileForm = document.getElementById('contact-profile-form');
-
     // Show all the js only buttons
     [addPhoneBtn, addEmailBtn, ...removeEmailButtons, ...removePhoneButtons].forEach(el => {
         el.style.display = "";
     });
 
+    const emailsSection = document.querySelector('.form-emails');
+    
+    emailsSection.addEventListener('input', (e) => {
+        e.target.closest('.form__group').classList.remove('blank');
+        setAddEmailButtonVisibilityIfApplicable();
+    });
+
+    const phonesSection = document.querySelector('.form-phones');
+    
+    phonesSection.addEventListener('input', (e) => {        
+        e.target.closest('.form__group').classList.remove('blank');
+        setAddPhoneButtonVisibilityIfApplicable();
+    });
+
+    // Check if any empty phone boxes, or email boxes
+    const hasEmptyContactBoxeForType = (section, selector) => {
+        return Array.from(section
+            .querySelectorAll(selector))
+            .some(x => x.value.trim() === '');
+    };
+
+    // Should not have and add email button if already a blank one available
+    const setAddPhoneButtonVisibilityIfApplicable = () => {
+        addPhoneBtn.style.display = hasEmptyContactBoxeForType(phonesSection, '.input--profile-phone > input') ? 'none' : 'block';
+    }
+
+    // Should not have and add phone button if already a blank one available
+    const setAddEmailButtonVisibilityIfApplicable = () => {
+        addEmailBtn.style.display =  hasEmptyContactBoxeForType(emailsSection, '.input--profile-email > input') ? 'none' : 'block';
+    }
+
+    // Get the form, to add remove listeners to
+    const contactProfileForm = document.getElementById('contact-profile-form');   
+
     [...removeEmailButtons, ...removePhoneButtons].forEach(el => {
         el.closest('.form__group').classList.add('input__withaction');
     });
 
-    // Remove the empty inputs added for non js purposes
-    const emptyInputsToRemove = document.querySelectorAll('.input--profile-phone:last-of-type, .input--profile-email:last-of-type');
-    emptyInputsToRemove.forEach(emptyInput => emptyInput.remove());
+    // Remove excess inputs of these types on load (Added for non js purposes).
+    [".input--profile-phone > input", ".input--profile-email > input"].forEach(selector => {
+        const inputsForSelector = Array.from(document.querySelectorAll(selector));
+
+        if (inputsForSelector.length > 1) {
+            inputsForSelector.forEach(input => {
+                console.dir(input);
+                if (input.value.trim() === '') {
+                    input.closest('.form__group').remove();
+                }
+            })
+        }
+    });
+
+    // Set correct start state for email and phone add buttons
+    setAddPhoneButtonVisibilityIfApplicable();
+    setAddEmailButtonVisibilityIfApplicable();
 
     // Add a new phone row
     function newPhoneRow() {        
@@ -39,6 +84,7 @@ if (main) {
         return newPhone;
     }
 
+    // Remove gaps in index sequences
     function _renumberInputs(selector, identifier) {
         const inputs = document.querySelectorAll(selector);
 
@@ -68,12 +114,14 @@ if (main) {
         e.preventDefault();
         e.target.closest('section').appendChild(newPhoneRow());
         _renumberInputs('.input--profile-phone', 'Input.PersonalPhoneNumbers');
+        setAddPhoneButtonVisibilityIfApplicable();
     });
     
     addEmailBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.target.closest('section').appendChild(newEmailRow())
         _renumberInputs('.input--profile-email', 'Input.PersonalEmailAddresses');
+        setAddEmailButtonVisibilityIfApplicable();
     });  
 
     // Handle the remove on the parent form, so that will work for new items added after load.
@@ -84,16 +132,18 @@ if (main) {
             // Remove parent form group containing email or phone.
             const formGroup = e.target.closest('.form__group');
             if (formGroup) {
-                formGroup.remove();
+                formGroup.remove();                
             }
         }
 
         if (e.target.matches('.btn-remove-contact-phone')) {
             _renumberInputs('.input--profile-phone', 'Input.PersonalPhoneNumbers');
+            setAddPhoneButtonVisibilityIfApplicable();
         }
 
         if (e.target.matches('.btn-remove-contact-email')) {
             _renumberInputs('.input--profile-email', 'Input.PersonalEmailAddresses');
+            setAddEmailButtonVisibilityIfApplicable();
         }
     });
 }

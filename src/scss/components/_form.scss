@@ -180,8 +180,20 @@ form,
 }
 
 input,
-.input {
+.input {  
+
   &__withaction {
+    button,
+    .button {
+      display: none;
+    }
+  }
+
+  /* .blank is added by the back end when the page is rendered for the blank fields 
+     (automatically inserted to ensure non js version has input avaialable) that are displayed 
+     
+  */
+  &__withaction:not(.blank) {
     input {
       width: calc(100% - 3.5rem);
       border-right: 0;
