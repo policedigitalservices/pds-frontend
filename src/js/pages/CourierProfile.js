@@ -57,8 +57,6 @@ if (main) {
     [".input--profile-phone > input", ".input--profile-email > input"].forEach(selector => {
         const inputsForSelector = Array.from(document.querySelectorAll(selector));
 
-        debugger;
-
         if (inputsForSelector.length > 1) {
             inputsForSelector.forEach(input => {
                 console.dir(input);
