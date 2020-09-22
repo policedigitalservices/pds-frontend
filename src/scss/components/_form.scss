@@ -90,6 +90,7 @@ form,
 
     &.input-validation-error,
     &.field-validation-error {
+
       border-width: 2px;
       border-color: $red;
 
@@ -165,16 +166,48 @@ form,
     }
 
   }
+  p {
+    font-size: 0.875rem;
+
+    
+  }
+  p.mb0 + p {
+      margin-top: 0;
+  }
+
+  h6 {
+    margin-bottom: 10px;
+  }
 }
 
 input,
-.input {
+.input {  
+
   &__withaction {
+    button,
+    .button {
+      display: none;
+    }
+  }
+
+  &__withaction {
+
+    &.blank {
+      input {
+        border: 1px solid pds-type-weight($pds-type-color-primary, 'dark', 'light');
+        width: 100%;
+      }
+    }
+
     input {
       width: calc(100% - 3.5rem);
       border-right: 0;
       display: inline-block;
       float: left;
+    }
+
+    &.blank .button--remove {
+      display: none;
     }
 
     button,
