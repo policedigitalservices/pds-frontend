@@ -90,6 +90,7 @@ form,
 
     &.input-validation-error,
     &.field-validation-error {
+
       border-width: 2px;
       border-color: $red;
 
@@ -189,16 +190,24 @@ input,
     }
   }
 
-  /* .blank is added by the back end when the page is rendered for the blank fields 
-     (automatically inserted to ensure non js version has input avaialable) that are displayed 
-     
-  */
-  &__withaction:not(.blank) {
+  &__withaction {
+
+    &.blank {
+      input {
+        border: 1px solid pds-type-weight($pds-type-color-primary, 'dark', 'light');
+        width: 100%;
+      }
+    }
+
     input {
       width: calc(100% - 3.5rem);
       border-right: 0;
       display: inline-block;
       float: left;
+    }
+
+    &.blank .button--remove {
+      display: none;
     }
 
     button,
