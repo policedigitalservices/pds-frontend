@@ -57,6 +57,8 @@ if (main) {
     [".input--profile-phone > input", ".input--profile-email > input"].forEach(selector => {
         const inputsForSelector = Array.from(document.querySelectorAll(selector));
 
+        debugger;
+
         if (inputsForSelector.length > 1) {
             inputsForSelector.forEach(input => {
                 console.dir(input);
@@ -65,7 +67,8 @@ if (main) {
                 }
             })
 
-            _renumberInputs();
+            _renumberInputs('.input--profile-phone', 'Input.PersonalPhoneNumbers');
+            _renumberInputs('.input--profile-email', 'Input.PersonalEmailAddresses');
         }
     });
 
