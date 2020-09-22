@@ -64,6 +64,8 @@ if (main) {
                     input.closest('.form__group').remove();
                 }
             })
+
+            _renumberInputs();
         }
     });
 
