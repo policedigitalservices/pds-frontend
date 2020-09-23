@@ -29,6 +29,7 @@ header,
   padding: 0;
   z-index: 11;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
+  line-height: 3.75rem;;
 
   @include mq(S) {
     padding: 0 $pad;
@@ -42,11 +43,12 @@ header,
     color: $white;
     text-decoration: none;
     margin: 0;
-    padding: $pad * .7 $pad;
+    padding: 0 $pad;
     display: inline-block;
+    line-height: inherit;
 
     @include mq(S) {
-      padding: $pad * .7 0;
+      padding: 0 0;
     }
 
     // Courier
@@ -56,6 +58,7 @@ header,
       background-repeat: no-repeat;
       background-position: left center;
       width: 139px;
+      padding: 0;
 
       @include mq(S, 'max-width') {
        margin-left: $pad;
