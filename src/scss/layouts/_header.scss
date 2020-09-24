@@ -96,7 +96,7 @@ header,
 
     .message-detail & {
       display: flex;
-      padding-top: $pad;
+      padding: $pad $pad 0;
 
       .material-icons {
         display: none;
@@ -158,7 +158,7 @@ header,
     background-color: transparent;
 
     .message-detail & {
-      padding: 0 $pad 0 0;
+      padding: 0 $pad;
     }
 
     .material-icons {
@@ -172,6 +172,10 @@ header,
     h4,
     .h4 {
       color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
+
+      .material-icons {
+        margin-left: -10px
+    }
     }
   }
 
