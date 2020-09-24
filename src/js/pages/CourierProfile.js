@@ -132,11 +132,19 @@ if (main) {
         if (e.target.matches('.btn-remove-contact-phone')  || e.target.matches('.btn-remove-contact-email')) {
             e.preventDefault();
             
-            // Remove parent form group containing email or phone.
-            const formGroup = e.target.closest('.form__group');
-            if (formGroup) {
-                formGroup.remove();                
-            }
+            // Get all the inputs in the parent section
+            const inputs = e.target.closest('section').querySelectorAll('input');
+
+            // If only one blank it - else remove it
+            if (inputs.length === 1) {
+                inputs[0].value = '';
+            } else {
+                 // Remove parent form group containing email or phone.
+                const formGroup = e.target.closest('.form__group');
+                if (formGroup) {
+                    formGroup.remove();                
+                }
+            }           
         }
 
         if (e.target.matches('.btn-remove-contact-phone')) {
