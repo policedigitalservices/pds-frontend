@@ -80,7 +80,7 @@ if (main) {
         const newPhone  = document.createElement('div');
         newPhone.className = "form__group input__withaction input--profile-phone";
         newPhone.innerHTML = `
-            <input class="form__input" autocomplete="off" type="text" name="phone" value="">
+            <input class="form__input" autocomplete="off" type="text" name="phone" value="" placeholder="Add a phone number">
             <button class="button button--remove btn-remove-contact-phone">Remove</button>
             <span class="field-validation-valid" data-valmsg-for="phone_validation" data-valmsg-replace="true"></span>
         `;
@@ -105,7 +105,7 @@ if (main) {
         const newEmailRow  = document.createElement('div');  
         newEmailRow.className = "form__group input__withaction input--profile-email";  
         newEmailRow.innerHTML = `
-            <input class="form__input" autocomplete="off" type="text" name="email" value="">
+            <input class="form__input" autocomplete="off" type="text" name="email" value="" placeholder="Add an email address">
             <button class="button button--remove  btn-remove-contact-email">Remove</button>
             <span class="field-validation-valid" data-valmsg-for="email_validation" data-valmsg-replace="true"></span>
         `;
