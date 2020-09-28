@@ -1,0 +1,135 @@
+
+/* Progress on new side bar */
+
+.treeview {
+
+    $icon-width: 1.875rem;    
+    $treeview_padding: 0.625rem;
+        
+    &__list {
+        
+        /* reset the basics */
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+                
+        &--root {}
+    }    
+    
+    &__item {
+              
+        line-height: 3rem;       
+
+        &-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            padding-left: $icon-width + $treeview_padding;
+            padding-right: $icon-width + $treeview_padding;
+            flex-grow: 1;
+
+            &::before {   
+                content: 'fiber_manual_record';
+                width: $icon-width;
+                margin-right: $treeview_padding;
+                display: inline-block;
+                @extend .material-icons;
+                //font-size: 16px;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0;
+            }   
+        }
+        
+        &--parent {
+
+           & > * > .treeview__item-content {
+                &::before {   
+                    content: 'folder';
+                }
+            }            
+        }
+        
+        &-label, &-link {
+            line-height: inherit;
+            padding: 0 $treeview_padding;
+            cursor: pointer;            
+            display: flex;
+            align-items: center;
+
+            &::before {   
+                content: 'arrow_right';
+                width: $icon-width;
+                margin-right: $treeview_padding;
+                display: inline-block;
+                // background-color: green;
+                @extend .material-icons;
+            }   
+                  
+            .treeview__item .treeview__item .treeview__item & { 
+                padding-left: ($treeview_padding + $icon-width) + $treeview_padding; 
+            }
+            .treeview__item .treeview__item .treeview__item .treeview__item & 
+            {   padding-left: (($treeview_padding + $icon-width) * 2) + $treeview_padding; 
+            
+            }
+            //.treeview__item .treeview__item .treeview__item .treeview__item .treeview__item & { padding-left: $treeview_padding * 5; }
+        }
+        
+        &-label {
+            
+            // display: flex;
+            // align-items: baseline;
+            
+            & .treeview__checkbox,
+            a .treeview__radio {
+                line-height: inherit;
+                //position: absolute;
+                //top: 0;
+                right: $treeview_padding;
+            }
+            
+            & .treeview__checkbox {
+
+                visibility: hidden;
+
+                &::before {
+                    @extend .material-icons;
+                    visibility: visible;
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    transform: translateY(-50%);
+                    content: 'check_box_outline_blank';
+                }
+
+                &:checked::before {
+
+                    content: 'check_box';
+                }
+            }
+            
+            & .treeview__radio {
+
+                visibility: hidden;
+
+                &::before {
+                    @extend .material-icons;
+                    visibility: visible;
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    transform: translateY(-50%);
+                    content: 'radio_button_unchecked';
+                }
+               
+                &:checked::before {
+                    content: 'radio_button_checked';
+                }
+            }
+        }
+        
+    }    
+}
