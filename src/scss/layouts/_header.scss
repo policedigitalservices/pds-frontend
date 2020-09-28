@@ -86,6 +86,9 @@ header,
   width: 100%;
   padding: 0;
   margin-bottom: $pad;
+  height: 3rem;
+  align-items: baseline;
+  
 
   & + section {
     padding-top: 0;
