@@ -20,6 +20,15 @@
     }    
     
     &__item {
+
+        &--active {
+
+            & > .treeview__item-label,
+            & > .treeview__item-link {
+                background-color: pds-color($pds-color-primary, '100');
+            }
+
+        }
               
         // line-height: 3rem;    // 48px
         line-height: 1.25rem;    // 16px
@@ -34,6 +43,7 @@
             flex-grow: 1;
 
             &::before {   
+                text-align: center;;
                 content: 'fiber_manual_record';
                 width: $icon-width;
                 margin-right: $treeview_padding;
@@ -75,6 +85,7 @@
                 display: inline-block;
                 // background-color: green;
                 @extend .material-icons;
+                text-align: center;
             }   
 
             // IE 10 fix for vertical alignment when min rather than regular height
