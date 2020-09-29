@@ -75,86 +75,30 @@
         return paramsToCheck === pathToCheck;
     }
 
+    // Helper function to build link for the group
     function buildLink(text, path) {
-        
         var link = document.createElement("a");
-
-        link.innerHTML = `
-            <span class='treeview__item-link'>${text}</span>
-        `;
+        link.textContent = text;
         link.href = getPagePathForGroup(path);
-        link.classList.add("treeview__item-link");
+        link.classList.add("group-selector__link");
 
+        // NB.  Originally we didnt want the current class to be added if doing a search, but think we do now.
+        // if ((!searchParam) &&  isSelectedGroup(path)) {
+        // if (isSelectedGroup(path)) {
+        //     link.classList.add("group-selector__link--current");
+        // }
         return link;
     }
-
-    function buildLabel(text, path, parentChecked) {
-
-        var newParentSelected = parentChecked;
-
-        var label = document.createElement('label');
-        label.classList.add("treeview__item-label");
-        var outerSpan = document.createElement('span');
-        outerSpan.textContent = text;
-        var checkbox = document.createElement(input);
-        checkbox.type = "checkbox";
-        // checkbox.setAttribute("class", "GroupItem");
-        checkbox.name = text;
-        checkbox.value = path;
-        checkbox.id = text;
-        outerSpan.appendChild(checkbox);
-        outerSpan.appendChild(document.createElement('span'));
-
-        if (path === '\\' && lockRootNode) {
-            // In this mode the root node should be disabled and checked BUT the children of this node should act as though it isnt checked so we dont update the selected state
-            checkbox.checked = true;
-            checkbox.disabled = true;
-        } else if (parentChecked && !useSingleSelectCheckbox) {
-            // If a parent node is selected all its children should be disabled and unchecked
-            checkbox.checked = false;
-            checkbox.disabled = true;
-        }
-        else {
-            // If a parent node is not checked its children selected state depend on the childs value, and not be disabled
-            var newChecked = intiallySelectedNodes.indexOf(path || '\\') >= 0;
-            checkbox.checked = newChecked;
-            newParentSelected = newChecked;
-        }
-
-        checkbox.classList.add(useSingleSelectCheckbox ? 'treeview__radio' : 'treeview__checkbox');
-
-        // Style as a radio button
-        if (useSingleSelectCheckbox) {
-
-            // var label = document.createElement('label');
-            // label.classList.add('radio-checkbox');
-            // var checkSpan = document.createElement('span');
-            // checkSpan.classList.add('radio-checkbox__check');
-            // var borderSpan = document.createElement('span');
-            // borderSpan.classList.add('radio-checkbox__border');
-            // borderSpan.appendChild(checkbox);
-            // borderSpan.appendChild(checkSpan);
-            // label.appendChild(borderSpan);
-            // checkbox.classList.add('radio-checkbox__input');
-            // checkbox = label;
-        }
-
-        return {label, newParentSelected};
-    }
-
-
-
-
 
     // Helper function to build checkbox label for the group
     function buildCheckbox(text, path, parentChecked) {
         var checkbox = document.createElement('input');
-        // checkbox.type = "checkbox";
-        // checkbox.setAttribute("class", "GroupItem");
-        // checkbox.name = text;
-        // checkbox.value = path;
-        // checkbox.id = text;
-        // var newParentSelected = parentChecked;
+        checkbox.type = "checkbox";
+        checkbox.setAttribute("class", "GroupItem");
+        checkbox.name = text;
+        checkbox.value = path;
+        checkbox.id = text;
+        var newParentSelected = parentChecked;
 
         if (path === '\\' && lockRootNode) {
             // In this mode the root node should be disabled and checked BUT the children of this node should act as though it isnt checked so we dont update the selected state
