@@ -5,6 +5,9 @@
 
     $icon-width: 1.875rem;    
     $treeview_padding: 0.625rem;
+
+    border-bottom: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
+      
         
     &__list {
         
@@ -18,7 +21,8 @@
     
     &__item {
               
-        line-height: 3rem;       
+        // line-height: 3rem;    // 48px
+        line-height: 1.25rem;    // 16px
 
         &-content {
             display: flex;
@@ -35,7 +39,7 @@
                 margin-right: $treeview_padding;
                 display: inline-block;
                 @extend .material-icons;
-                //font-size: 16px;
+                font-size: 0.8rem;
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
@@ -47,6 +51,7 @@
 
            & > * > .treeview__item-content {
                 &::before {   
+                    font-size: 1.2rem;
                     content: 'folder';
                 }
             }            
@@ -54,30 +59,89 @@
         
         &-label, &-link {
             line-height: inherit;
+            min-height: 3rem; // 48px
             padding: 0 $treeview_padding;
             cursor: pointer;            
             display: flex;
             align-items: center;
-
+            border-top: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
+      
             &::before {   
-                content: 'arrow_right';
+                flex-shrink: 0;
+                flex-grow: 0;
+                content: '';
                 width: $icon-width;
                 margin-right: $treeview_padding;
                 display: inline-block;
                 // background-color: green;
                 @extend .material-icons;
             }   
+
+            // IE 10 fix for vertical alignment when min rather than regular height
+            // See: https://stackoverflow.com/questions/19371626/flexbox-not-centering-vertically-in-ie/54796082#54796082
+            &::after {
+                content: '';
+                min-height: inherit;
+                font-size: 0;
+            }
+
+            .treeview__item .treeview__item & { 
+                //padding-left: ($treeview_padding + $icon-width) + $treeview_padding; 
+            }
                   
             .treeview__item .treeview__item .treeview__item & { 
+                // padding-left: (($treeview_padding + $icon-width) * 2) + $treeview_padding; 
                 padding-left: ($treeview_padding + $icon-width) + $treeview_padding; 
             }
-            .treeview__item .treeview__item .treeview__item .treeview__item & 
-            {   padding-left: (($treeview_padding + $icon-width) * 2) + $treeview_padding; 
+
+            .treeview__item .treeview__item .treeview__item .treeview__item &   {   
+                padding-left: (($treeview_padding + $icon-width) * 2) + $treeview_padding; 
             
             }
+
             //.treeview__item .treeview__item .treeview__item .treeview__item .treeview__item & { padding-left: $treeview_padding * 5; }
         }
         
+        // .treeview__list--root
+        &--parent {
+
+            /*
+            .treeview__list--root > &,
+            .treeview__list--no-collapsing & {
+                & > .treeview__item-label, 
+                & > .treeview__item-link {
+                    &::before {
+                        color: red;
+                        display: none;
+                    }
+                }
+            }
+            */
+
+            // Root node does not have collapsing arrow
+            .treeview__list--root > & {
+                & > .treeview__item-label, 
+                & > .treeview__item-link {
+                    &::before {                        
+                        display: none;
+                    }
+                }
+            }
+
+            & > .treeview__item-label, 
+            & > .treeview__item-link {
+                &::before {
+                    content: 'arrow_right';
+                }
+            }
+        }
+
+        .treeview__list--root > &--parent
+        
+        &-link {
+            color: pds-type-weight($pds-type-color-primary, 'dark', 'medium'); 
+        }
+
         &-label {
             
             // display: flex;
@@ -95,7 +159,7 @@
 
                 visibility: hidden;
 
-                &::before {
+                & + span::before {
                     @extend .material-icons;
                     visibility: visible;
                     position: absolute;
@@ -105,7 +169,7 @@
                     content: 'check_box_outline_blank';
                 }
 
-                &:checked::before {
+                &:checked + span::before {
 
                     content: 'check_box';
                 }
@@ -115,7 +179,7 @@
 
                 visibility: hidden;
 
-                &::before {
+                & + span::before {
                     @extend .material-icons;
                     visibility: visible;
                     position: absolute;
@@ -123,9 +187,9 @@
                     right: 0;
                     transform: translateY(-50%);
                     content: 'radio_button_unchecked';
-                }
+                } 
                
-                &:checked::before {
+                &:checked + span::before {
                     content: 'radio_button_checked';
                 }
             }
