@@ -46,6 +46,8 @@ header,
     padding: 0 $pad;
     display: inline-block;
     line-height: inherit;
+    position: relative;
+    top: -3px;
 
     @include mq(S) {
       padding: 0 0;
