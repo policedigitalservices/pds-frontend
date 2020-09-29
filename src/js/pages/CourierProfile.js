@@ -80,7 +80,7 @@ if (main) {
         const newPhone  = document.createElement('div');
         newPhone.className = "form__group input__withaction input--profile-phone";
         newPhone.innerHTML = `
-            <input class="form__input" autocomplete="off" type="text" name="phone" value="">
+            <input class="form__input" autocomplete="off" type="text" name="phone" value="" placeholder="Add a phone number">
             <button class="button button--remove btn-remove-contact-phone">Remove</button>
             <span class="field-validation-valid" data-valmsg-for="phone_validation" data-valmsg-replace="true"></span>
         `;
@@ -105,7 +105,7 @@ if (main) {
         const newEmailRow  = document.createElement('div');  
         newEmailRow.className = "form__group input__withaction input--profile-email";  
         newEmailRow.innerHTML = `
-            <input class="form__input" autocomplete="off" type="text" name="email" value="">
+            <input class="form__input" autocomplete="off" type="text" name="email" value="" placeholder="Add an email address">
             <button class="button button--remove  btn-remove-contact-email">Remove</button>
             <span class="field-validation-valid" data-valmsg-for="email_validation" data-valmsg-replace="true"></span>
         `;
@@ -132,11 +132,19 @@ if (main) {
         if (e.target.matches('.btn-remove-contact-phone')  || e.target.matches('.btn-remove-contact-email')) {
             e.preventDefault();
             
-            // Remove parent form group containing email or phone.
-            const formGroup = e.target.closest('.form__group');
-            if (formGroup) {
-                formGroup.remove();                
-            }
+            // Get all the inputs in the parent section
+            const inputs = e.target.closest('section').querySelectorAll('input');
+
+            // If only one blank it - else remove it
+            if (inputs.length === 1) {
+                inputs[0].value = '';
+            } else {
+                 // Remove parent form group containing email or phone.
+                const formGroup = e.target.closest('.form__group');
+                if (formGroup) {
+                    formGroup.remove();                
+                }
+            }           
         }
 
         if (e.target.matches('.btn-remove-contact-phone')) {

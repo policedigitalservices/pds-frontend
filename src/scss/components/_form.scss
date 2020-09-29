@@ -16,7 +16,7 @@ form,
 
     display: inline-flex;
     margin-bottom: $pad / 2;
-    align-items: center;
+    align-items: baseline;
 
   }
 
@@ -30,10 +30,6 @@ form,
     overflow: hidden;
     line-height: 1;
     max-width: $max-form-width;
-
-    // &.no-bottom-margin {
-    //   margin-bottom: 0;
-    // }
   }
 
   input,
@@ -47,6 +43,7 @@ form,
 
   textarea {
     min-height: 10rem;
+    resize: none;
   }
 
   &__hint {

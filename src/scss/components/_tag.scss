@@ -7,7 +7,7 @@
   padding: 0;
   text-transform: inherit;
   letter-spacing: 0;
-  font-size: inherit;
+  font-size: 0.875rem;
   padding: $pad / 14 ($pad / 4) * 3;
   border-radius: 4px;
   width: inherit;
@@ -15,12 +15,13 @@
   padding-right: $pad / 2;
   margin-right: $pad / 4;
   margin-bottom: $pad / 4;
-  line-height: 1.25;
+  line-height: 1.75rem;
+  height: 1.75rem;
 
   i {
     margin-right: 0;
     margin-left: $pad / 8;
-    line-height: 1.15;
+    line-height: 1.75rem;
     font-weight: 400;
     cursor: pointer;
   }

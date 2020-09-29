@@ -5,21 +5,20 @@ table {
   table-layout: fixed;
   border: none;
   border-collapse: collapse;
-  white-space: nowrap;
+  white-space: nowrap; 
 
-  &.table--hoverable {
-    tr {
-
-      &:hover {
-        background-color: rgba($blue, 5%);
+  .js &[data-linkable-cell] {     
+      tr {
+        cursor: pointer;
+        &:hover {
+          background-color: rgba($blue, 5%);
+        }
+        &:focus {
+          background-color: rgba($blue, 12%);
+          cursor: pointer;
+        }
       }
-
-      &:focus {
-        background-color: rgba($blue, 12%);
-      }
-
-    }
-  }  
+  } 
 
   tr {
     border-bottom: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
