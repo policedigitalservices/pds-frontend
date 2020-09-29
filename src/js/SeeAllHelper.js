@@ -2,12 +2,11 @@ class SeeAllHelper {
 
     constructor(itemsSelector, seeAllSelector, passedOptions = {}) {
 
+        this._itemsSelector = itemsSelector;
         this._seeAll = document.querySelector(seeAllSelector);
-        this._allItems = Array.from(document.querySelectorAll(itemsSelector));
+        this._originalVisibilityOfSeeAll = this._seeAll.style.display;
 
-        console.log(this._allItems);
-
-        const defaults = { itemLimit: 10, showLessText: "See Less" };
+        const defaults = { itemLimit: 3, showLessText: "See Less" };
         this._options = { ...passedOptions, ...defaults };
         this._itemLimit = this._options.itemLimit;
 
@@ -19,11 +18,9 @@ class SeeAllHelper {
         this._seeAll.addEventListener('click', e => {
             e.preventDefault();
             if (this._showingAll) {
-                alert('hiding');
                 this._hideExcessItems();
             }
             else {
-                alert('showing');
                 this._showAllItems();
             }
 
@@ -31,17 +28,7 @@ class SeeAllHelper {
             this._seeAll.textContent = this._showingAll ? this._showLessText : this._showMoreText;
         });
 
-        // IF NO ITEMS
-        if (this._allItems.length <= this._itemLimit) {
-            this._seeAll.style.display = 'none';
-            this._showingAll = false;
-            return;
-        } else {
-            // Capture the original visibitly so it can be restored i.e. display block, display visiable etc
-            this._originalVisibilityOfItems = this._allItems[0].style.display;
-            this._hideExcessItems();
-        }
-
+        this.recalculate();
     }
 
     _setShowAllVisibility(visible) {
@@ -51,9 +38,7 @@ class SeeAllHelper {
     }
 
     _showAllItems() {
-        console.log(this._originalVisibilityOfItems);
         this._allItems.forEach(item => {
-            console.log('in item');
             item.style.display = this._originalVisibilityOfItems;
         })
     }
@@ -69,15 +54,19 @@ class SeeAllHelper {
     }
 
     // Call this when you remove an item
-    recalculate() {        
-        this._allItems = Array.from(document.querySelectorAll(itemsSelector));
-        
+    recalculate() {    
+        this._allItems = Array.from(document.querySelectorAll(this._itemsSelector));
+
         if (this._allItems.length <= this._itemLimit) {
-            this._showingAll = true;
             this._seeAll.style.display = 'none';
+        } else {
+            if (!this._originalVisibilityOfItems) {
+                this._originalVisibilityOfItems = this._allItems[0].style.display;
+            }
+            this._seeAll.style.display = this._originalVisibilityOfSeeAll;
         }
 
-        this._hideExcessItems();
+        if (!this._showingAll)  { this._hideExcessItems(); }
     }
 }
 

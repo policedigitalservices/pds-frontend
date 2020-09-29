@@ -74,6 +74,10 @@
   // padding: $pad $pad 0 $pad !important;
 }
 
+.flex-grow {
+  flex-grow: 1 !important;
+}
+
 .only {
   &--mobile {
     @include mq(S) {
@@ -106,4 +110,8 @@
 
 .pb0 {
   padding-bottom: 0 !important;
+}
+
+.lm1 {
+  margin-left: $pad !important;
 }

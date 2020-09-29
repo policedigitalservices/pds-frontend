@@ -43,7 +43,7 @@ if (main && main.classList.contains('asc-staff-compose')) {
     cookieResponseHelper.set(getResponseOptionValuesString());
   });
 
-  let tagsSeeAllHelper;
+  const tagsSeeAllHelper = new SeeAllHelper('#AscStaffSelector + div > .tag', '#seeMoreRecipients');
   
   const onUpdateFunc = (selectedOptions, allOptions) => {
     idsSessionHelper.filterByIds(selectedOptions.map(x => x.value));
@@ -60,12 +60,14 @@ if (main && main.classList.contains('asc-staff-compose')) {
   
   const slt = new SelectListTags('AscStaffSelector', null, onUpdateFunc, selectOptions); 
 
+  tagsSeeAllHelper.recalculate();
+
   const discardBtn = document.getElementById('btnDiscard');
   discardBtn.addEventListener('click', () => {
     idsSessionHelper.clearItems();
     slt.clearItems();
+    tagsSeeAllHelper();
   });
 
-  tagsSeeAllHelper = new SeeAllHelper('#AscStaffSelector + div > .tag', '#seeMoreRecipients');
 
 }
