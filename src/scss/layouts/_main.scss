@@ -9,6 +9,9 @@ main,
   background-color: $pds-color-background;
   width: 100%;
   padding:  0;
+  overflow-y: auto;
+
+  position: relative;
 
   transition: margin-bottom $bottomDrawerTransitionSpeed $bottomDrawerTransitionTimingFunction;
 
