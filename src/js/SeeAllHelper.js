@@ -1,4 +1,69 @@
-class SeeAllHelper {
+/**
+ *  USAGE: To use this control you must add the following attribute to the button that should be doing the show all.
+ * 
+ *  data-showall-container-id="<<id of container to be effected>>"
+ * 
+ *  OPTIONAL: Use the following attrtibutes to adjust the behavior
+ * 
+ *  data-showall-item-limit="20" - sets the number of items to show initially.  Default is 10
+ *  
+ *  data-showall-count-id
+ * 
+ * // TODO item selector
+ */
+
+ export class SeeAllAttributeHelper {
+     constructor() {
+        var showMoreButtons = document.querySelectorAll('[data-showall-container-id]');
+
+        showMoreButtons.forEach(showAllButton => {
+        
+            var containerId = showAllButton.getAttribute("data-showall-container-id");
+            var itemSelector = showAllButton.getAttribute("data-showall-item-selector");
+            var showAllItemLimit = showAllButton.getAttribute("data-showall-item-limit");
+            var showAllItemCountId = showAllButton.getAttribute("data-showall-count-id");
+            var buttonId = showAllButton.id;
+
+            if (!buttonId) {
+                return;
+            };
+
+            var container = document.getElementById(containerId);
+            
+            if (!container) {
+                showAllButton.style.display = 'none';
+                return;
+            }
+
+            let selectorToUse;
+
+            if (itemSelector) {
+                selectorToUse = `#${containerId} ${itemSelector}`;
+            } else if (container.tagName === "TABLE") {
+                selectorToUse = `#${containerId} tbody tr`;
+            } else {
+                console.error("No child selector available");
+                return;
+            }
+            
+            var parsedItemLimit = parseInt(showAllItemLimit, 10);
+
+            let options = {};
+
+            if (!isNaN(parsedItemLimit)) { 
+                options = {...options, itemLimit: parsedItemLimit};
+            }
+
+            if(showAllItemCountId) {
+                options = {...options, countFieldId: showAllItemCountId};
+            }
+
+            new SeeAllHelper(selectorToUse, `#${buttonId}`, options);
+        });
+     }
+ }
+
+export class SeeAllHelper {
 
     constructor(itemsSelector, seeAllSelector, passedOptions = {}) {
 
@@ -6,12 +71,14 @@ class SeeAllHelper {
         this._seeAll = document.querySelector(seeAllSelector);
         this._originalVisibilityOfSeeAll = this._seeAll.style.display;
 
-        const defaults = { itemLimit: 3, showLessText: "See Less" };
-        this._options = { ...passedOptions, ...defaults };
+        const defaults = { itemLimit: 5, showLessText: "See Less", countFieldId: null };
+        this._options = { ...defaults, ...passedOptions };
         this._itemLimit = this._options.itemLimit;
 
         this._showLessText = this._options.showLessText;
         this._showMoreText = this._seeAll.textContent;
+
+        this._countField = this._options.countFieldId ? document.getElementById(this._options.countFieldId) : null;
 
         this._showingAll = false;
 
@@ -31,12 +98,6 @@ class SeeAllHelper {
         this.recalculate();
     }
 
-    _setShowAllVisibility(visible) {
-        this._seeAll.style.display = visible 
-            ? this._originalVisibilityOfSeeAll 
-            : "none";
-    }
-
     _showAllItems() {
         this._allItems.forEach(item => {
             item.style.display = this._originalVisibilityOfItems;
@@ -53,9 +114,12 @@ class SeeAllHelper {
         });
     }
 
-    // Call this when you remove an item
     recalculate() {    
         this._allItems = Array.from(document.querySelectorAll(this._itemsSelector));
+
+        if (this._countField) {
+            this._countField.textContent = this._allItems.length;
+        }
 
         if (this._allItems.length <= this._itemLimit) {
             this._seeAll.style.display = 'none';
@@ -69,5 +133,3 @@ class SeeAllHelper {
         if (!this._showingAll)  { this._hideExcessItems(); }
     }
 }
-
-export default SeeAllHelper;

@@ -5,7 +5,7 @@
 import SimpleCookieHelper from '../SimpleCookieHelper';
 import IdSessionStorageHelper from '../IdSessionStorageHelper';
 import SelectListTags from '../SelectListTags';
-import SeeAllHelper from '../SeeAllHelper';
+import {SeeAllHelper} from '../SeeAllHelper';
 
 const main = document.querySelector('main');
 
@@ -22,7 +22,6 @@ if (main && main.classList.contains('asc-staff-compose')) {
   const cookieAutoResendHelper = new SimpleCookieHelper('CourierMessageResend');
   const cookieResponseHelper = new SimpleCookieHelper('CourierMessageResponses');
   const idsSessionHelper = new IdSessionStorageHelper('CourierMessageUsers');
-
   
   const getResponseOptionValuesString = () => {
     const nonEmptyOptions = responseOptions.reduce((acc, curr) => {
@@ -43,7 +42,7 @@ if (main && main.classList.contains('asc-staff-compose')) {
     cookieResponseHelper.set(getResponseOptionValuesString());
   });
 
-  const tagsSeeAllHelper = new SeeAllHelper('#AscStaffSelector + div > .tag', '#seeMoreRecipients');
+  const tagsSeeAllHelper = new SeeAllHelper('#AscStaffSelector + div > .tag', '#seeMoreRecipients', { itemLimit: 21, countFieldId: 'recipientsCount' });
   
   const onUpdateFunc = (selectedOptions, allOptions) => {
     idsSessionHelper.filterByIds(selectedOptions.map(x => x.value));
