@@ -1,4 +1,6 @@
-﻿ var groupExist = document.getElementById("Group");
+﻿ import {SeeAllHelper} from './SeeAllHelper';
+ 
+ var groupExist = document.getElementById("Group");
     if(groupExist){
 
         var useCheckboxes = groupExist.hasAttribute('data-with-checkbox');
@@ -11,6 +13,8 @@
     var intiallySelectedNodes = [];
     var groupSelect = document.getElementById("GroupSelector");
     var groupTextarea = document.getElementById("GroupTextarea");
+    
+    let tagsSeeAllHelper = null;
 
     // If the Group Multi Select does exist, hide it (if JS enabled)
     if (groupSelect !== null) {
@@ -26,6 +30,11 @@
     };
 
     if (groupTextarea !== null) {
+
+        const itemLimit = 21;
+
+        tagsSeeAllHelper  = new SeeAllHelper('#GroupTextarea > .tag', '#seeMoreGroups', { itemLimit, countFieldId: 'groupsCount' });
+
         groupTextarea.addEventListener('click', function(e) {
             var target = e.target;
 
@@ -36,6 +45,8 @@
                 if (checboxToUncheck) {
                     checboxToUncheck.click();
                 }
+
+                tagsSeeAllHelper.recalculate();
             }
         });
     }
@@ -195,6 +206,8 @@
             for (var i = 0; i < element.options.length; i++) {
                 element.options[i].selected = data.indexOf(element.options[i].value) >= 0;
             }
+
+            tagsSeeAllHelper.recalculate();
         }
     }
 

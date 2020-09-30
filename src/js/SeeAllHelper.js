@@ -7,9 +7,9 @@
  * 
  *  data-showall-item-limit="20" - sets the number of items to show initially.  Default is 10
  *  
- *  data-showall-count-id
+ *  data-showall-count-id - id of a field that should be updated with a count of the items
  * 
- * // TODO item selector
+ *  data-showall-item-selector - a selector to get the item from with the container.  This is required if the container is not a table
  */
 
  export class SeeAllAttributeHelper {
@@ -69,6 +69,12 @@ export class SeeAllHelper {
 
         this._itemsSelector = itemsSelector;
         this._seeAll = document.querySelector(seeAllSelector);
+
+        if (!this._seeAll) {
+            // Running on a page without see all buttton, so stop after counts.
+            return;
+        }
+
         this._originalVisibilityOfSeeAll = this._seeAll.style.display;
 
         const defaults = { itemLimit: 5, showLessText: "See Less", countFieldId: null };
@@ -120,6 +126,8 @@ export class SeeAllHelper {
         if (this._countField) {
             this._countField.textContent = this._allItems.length;
         }
+
+        if(!this._seeAll) return;
 
         if (this._allItems.length <= this._itemLimit) {
             this._seeAll.style.display = 'none';
