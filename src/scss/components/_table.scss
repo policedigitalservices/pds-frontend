@@ -32,13 +32,14 @@ table {
         @extend .subtitle-2;
     }
 }
+  tbody > tr:first-child {
+    border-top: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
+  }
 
   tr {
     border-bottom: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
 
-    tbody > &:first-child {
-      border-top: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
-    }
+    
 
 
     .subtitle-2
