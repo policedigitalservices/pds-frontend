@@ -44,13 +44,15 @@
         //     margin-bottom: $bottomDrawerHeight;
         // }
         
-        // Solution 2. Page bottom of main and aside
+       //  Solution 2. Page bottom of main and aside
         aside {
-            padding-bottom: $bottomDrawerHeight;
+            padding-bottom: 123px - 53px;
         }
         main 
         {
-            padding-bottom: $bottomDrawerHeight;
+            padding-bottom: 123px - 53px;
         }
+
+
     }    
 }

@@ -147,16 +147,16 @@ strong { font-weight: bold; }
   background-color: $grey--badge;
   font-style: normal;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 20px;
   text-align: center;
   color: $black;
   padding: 0;
   position: relative;
   display: inline-block;
   top: -1px;
-  height: 14px;
-  width: 16px; 
-  padding: 2px 4px;
+  padding: 0 4px;
+  display: inline-block;
+  width: 16px;
   box-sizing: content-box;
 }
 

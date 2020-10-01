@@ -13,10 +13,10 @@ main,
 
   position: relative;
 
-  transition: margin-bottom $bottomDrawerTransitionSpeed $bottomDrawerTransitionTimingFunction;
+  transition: padding-bottom $bottomDrawerTransitionSpeed $bottomDrawerTransitionTimingFunction;
 
   @include mq(S) {
-    padding: 2.125rem 0 $pad * 2.7 0;
+    padding: 2.125rem 0 0 0;
   }
 
   &--hidden {
