@@ -38,20 +38,19 @@
     }
 
     &-open {    
-        // main {
-        //    // margin-bottom: $pad * 3.8;
 
-        //    margin-bottom: $bottomDrawerHeight;
-        // }
-
-        // aside {
+        /* Fix 1 move draw up */
+        // .app-footer {
         //     margin-bottom: $bottomDrawerHeight;
         // }
-        .app-footer {
-            margin-bottom: $bottomDrawerHeight;
-        }
         
-    }
-
-    
+        // Solution 2. Page bottom of main and aside
+        aside {
+            padding-bottom: $bottomDrawerHeight;
+        }
+        main 
+        {
+            padding-bottom: $bottomDrawerHeight;
+        }
+    }    
 }
