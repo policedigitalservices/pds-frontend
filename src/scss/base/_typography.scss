@@ -145,18 +145,18 @@ strong { font-weight: bold; }
 
 .badge {
   background-color: $grey--badge;
+  font-size: 12px;
   font-style: normal;
-  font-size: 14px;
-  line-height: 20px;
   text-align: center;
   color: $black;
   padding: 0;
   position: relative;
-  display: inline-block;
-  top: -1px;
-  padding: 0 4px;
-  display: inline-block;
+  height: 16px; 
   width: 16px;
-  box-sizing: content-box;
+  top: -2px;
+  display: inline-flex;  
+  align-items: center;
+  justify-content: center;
+  line-height: 16x;
 }
 
