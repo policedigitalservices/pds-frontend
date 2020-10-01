@@ -38,9 +38,20 @@
     }
 
     &-open {    
-        main {
-            margin-bottom: $pad * 3.8;
+        // main {
+        //    // margin-bottom: $pad * 3.8;
+
+        //    margin-bottom: $bottomDrawerHeight;
+        // }
+
+        // aside {
+        //     margin-bottom: $bottomDrawerHeight;
+        // }
+        .app-footer {
+            margin-bottom: $bottomDrawerHeight;
         }
+        
     }
+
     
 }
