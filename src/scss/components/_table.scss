@@ -8,7 +8,7 @@ table {
   white-space: nowrap; 
 
   .js &[data-linkable-cell] {     
-      tr {
+      tbody tr {
         cursor: pointer;
         &:hover {
           background-color: rgba($blue, 5%);
@@ -20,12 +20,28 @@ table {
       }
   } 
 
+  thead {
+    
+    & > tr {        
+        text-align: left;
+    }
+    
+    & th {
+        padding: 0 1rem;
+        padding-bottom: 0.65625rem;
+        @extend .subtitle-2;
+    }
+}
+
   tr {
     border-bottom: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
 
-    &:first-child {
+    tbody > &:first-child {
       border-top: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
     }
+
+
+    .subtitle-2
 
     &.clickable {
       cursor: pointer;
