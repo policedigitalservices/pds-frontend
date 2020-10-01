@@ -21,7 +21,7 @@
     
     &__item {
 
-        &--active {
+        &--current {
 
             & > .treeview__item-label,
             & > .treeview__item-link {
@@ -158,8 +158,7 @@
             // display: flex;
             // align-items: baseline;
             
-            & .treeview__checkbox,
-            a .treeview__radio {
+            & .treeview__checkbox{
                 line-height: inherit;
                 //position: absolute;
                 //top: 0;
@@ -184,26 +183,17 @@
 
                     content: 'check_box';
                 }
-            }
-            
-            & .treeview__radio {
 
-                visibility: hidden;
-
-                & + span::before {
-                    @extend .material-icons;
-                    visibility: visible;
-                    position: absolute;
-                    top: 50%;
-                    right: 0;
-                    transform: translateY(-50%);
+                &--radio + span::before {                   
                     content: 'radio_button_unchecked';
                 } 
                
-                &:checked + span::before {
+                &--radio:checked + span::before {
                     content: 'radio_button_checked';
                 }
             }
+            
+
         }
         
     }    
