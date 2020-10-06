@@ -21,7 +21,6 @@ function redirectWithoutSearch(paramName) {
 
 /* Clear a search field when the inputs clear button is clicked */
 function clearSearch(e) {
-    debugger;
     var toClear = document.querySelectorAll('.form--search > .form__input--search');
     toClear.forEach(tc => tc.value = '');
 
