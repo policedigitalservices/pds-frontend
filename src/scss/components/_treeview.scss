@@ -1,13 +1,12 @@
 
-/* Progress on new side bar */
-
 .treeview {
 
     $icon-width: 1.875rem;    
     $treeview_padding: 0.625rem;
 
     border-bottom: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
-      
+    padding-bottom: 0;
+    padding-top: 0;
         
     &__list {
         
@@ -64,19 +63,36 @@
                     font-size: 1.2rem;
                     content: 'folder';
                 }
-            }            
+            }        
+            
+            & > .treeview__list {
+                display: none;
+            }
+
+            &.treeview__item--open > .treeview__list {
+                display: block;                
+            }
+        }
+
+        &-toggle {
+            line-height: inherit;
+            height: 20px;
         }
         
         &-label, &-link {
+
             line-height: inherit;
             min-height: 3rem; // 48px
             padding: 0 $treeview_padding;
+            margin-bottom: 0;
+            font-weight: normal;
             cursor: pointer;            
             display: flex;
             align-items: center;
             border-top: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
-      
-            &::before {   
+            color: pds-type-weight($pds-type-color-primary, 'dark', 'medium');
+
+            & .treeview__item-toggle::before {   
                 flex-shrink: 0;
                 flex-grow: 0;
                 content: '';
@@ -86,6 +102,7 @@
                 // background-color: green;
                 @extend .material-icons;
                 text-align: center;
+                line-height: inherit;
             }   
 
             // IE 10 fix for vertical alignment when min rather than regular height
@@ -133,7 +150,7 @@
             .treeview__list--root > & {
                 & > .treeview__item-label, 
                 & > .treeview__item-link {
-                    &::before {                        
+                    .treeview__item-toggle::before {                        
                         display: none;
                     }
                 }
@@ -141,11 +158,22 @@
 
             & > .treeview__item-label, 
             & > .treeview__item-link {
-                &::before {
+                .treeview__item-toggle::before {      
                     content: 'arrow_right';
+                    transform-origin: center center;
+                    transition:transform 0.4s;
+                }
+            }
+
+            &.treeview__item--open > .treeview__item-label, 
+            &.treeview__item--open > .treeview__item-link {
+                .treeview__item-toggle::before {      
+                   transform:  translateY(-3px) rotate(90deg);
                 }
             }
         }
+
+
 
         .treeview__list--root > &--parent
         
@@ -153,21 +181,18 @@
             color: pds-type-weight($pds-type-color-primary, 'dark', 'medium'); 
         }
 
-        &-label {
+        &-label {                    
             
-            // display: flex;
-            // align-items: baseline;
-            
-            & .treeview__checkbox{
-                line-height: inherit;
-                //position: absolute;
-                //top: 0;
-                right: $treeview_padding;
-            }
-            
-            & .treeview__checkbox {
+            & .treeview__checkbox  {
 
-                visibility: hidden;
+                visibility: hidden; 
+                line-height: inherit;
+                right: $treeview_padding;
+
+                &:disabled + span::before {
+                    color: $grey--light;
+                    cursor: not-allowed;
+                }
 
                 & + span::before {
                     @extend .material-icons;
@@ -176,6 +201,12 @@
                     top: 50%;
                     right: 0;
                     transform: translateY(-50%);
+                }               
+            }
+
+            & .treeview__checkbox  {
+
+                & + span::before {                   
                     content: 'check_box_outline_blank';
                 }
 
@@ -184,15 +215,21 @@
                     content: 'check_box';
                 }
 
-                &--radio + span::before {                   
-                    content: 'radio_button_unchecked';
-                } 
                
-                &--radio:checked + span::before {
+            }
+
+            & .treeview__checkbox--radio  {
+
+                & + span::before {                   
+                    content: 'radio_button_unchecked';
+                }
+
+                &:checked + span::before {
+
                     content: 'radio_button_checked';
                 }
-            }
-            
+               
+            }           
 
         }
         
