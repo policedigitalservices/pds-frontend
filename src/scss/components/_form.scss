@@ -9,6 +9,39 @@ form,
   max-width: $max-form-width;
   align-self: center;
 
+  &.form--search {
+    position: relative;
+
+    & .form__input.form__input--search {      
+      padding-right: 3rem;
+    }
+
+    & .form__input--clear {
+      @extend .material-icons;
+      position: absolute;
+      right: $pad;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: $grey--medium;
+
+      &::before {
+        content: "clear";     
+      }      
+    }
+
+    /* Only want to show if non empty */
+    & .form__input--search:not(:placeholder-shown) + .form__input--clear{        
+      display: inline-block !important;
+    }
+
+    /* Show if non empty IE */
+    & .form__input--search:not(:-ms-input-placeholder) + .form__input--clear {
+      display: inline-block !important;
+    }
+
+  }
+
   &__label,
   label,
   legend {
