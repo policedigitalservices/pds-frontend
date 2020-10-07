@@ -1,12 +1,15 @@
 
 .treeview {
 
-    $icon-width: 1.875rem;    
-    $treeview_padding: 0.625rem;
+    $treview-item-left-padding: 0.75rem;      // 12px;
+    $treeview-item-right-padding: 1.5rem;     // 24px;
+    $treeview-icon-width: 1.5rem;             // 24px;
+    $treeview-icon-right-padding: 0.375rem;   // 6px;
 
     border-bottom: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
     padding-bottom: 0;
     padding-top: 0;
+    font-size: 0.875rem;
         
     &__list {
         
@@ -37,28 +40,24 @@
             justify-content: space-between;
             align-items: center;
             position: relative;
-            padding-left: $icon-width + $treeview_padding;
-            padding-right: $icon-width + $treeview_padding;
+            padding-left: $treeview-icon-width + $treeview-icon-right-padding;
+            padding-right: $treeview-icon-width;
             flex-grow: 1;
 
             &::before {   
 
                 background-image: url('/dist/img/Icon_UNIT.svg');
                 background-repeat: no-repeat;
-                background-size: 100%;
-                background-position: 0 -9px;
-
-                text-align: center;;
-                content: ' ';
-                width: $icon-width;
-                margin-right: $treeview_padding;
-                display: inline-block;
-                @extend .material-icons;
-                font-size: 0.8rem;
+                background-position: 9px;
+                width: $treeview-icon-width;
+                height: 1em;
+                margin-right: $treeview-icon-right-padding;
+                display: inline-block;  
+                content: ' ';  
                 position: absolute;
                 top: 50%;
-                transform: translateY(-50%);
                 left: 0;
+                transform: translateY(-50%);
             }   
         }
         
@@ -66,9 +65,8 @@
 
            & > * > .treeview__item-content {
                 &::before {   
-                    font-size: 1.2rem;
-                    background-image: none;
-                    content: 'folder';
+                    background-image: url('/dist/img/Icon_FOLDER.svg');
+                    background-position: 5px;
                 }
             }        
             
@@ -90,7 +88,10 @@
 
             line-height: inherit;
             min-height: 3rem; // 48px
-            padding: 0 $treeview_padding;
+            
+            padding: 0 $treeview-item-right-padding 0 $treview-item-left-padding;
+            
+            
             margin-bottom: 0;
             font-size: inherit;
             font-weight: normal;
@@ -104,8 +105,8 @@
                 flex-shrink: 0;
                 flex-grow: 0;
                 content: '';
-                width: $icon-width;
-                margin-right: $treeview_padding;
+                width: $treeview-icon-width;
+                margin-right: $treeview-icon-right-padding;
                 display: inline-block;
                 // background-color: green;
                 @extend .material-icons;
@@ -122,12 +123,12 @@
             }
                   
             .treeview__item .treeview__item .treeview__item & { 
-                // padding-left: (($treeview_padding + $icon-width) * 2) + $treeview_padding; 
-                padding-left: ($treeview_padding + $icon-width) + $treeview_padding; 
+                
+                padding-left: ($treeview-icon-right-padding + $treeview-icon-width) + $treview-item-left-padding; 
             }
 
             .treeview__item .treeview__item .treeview__item .treeview__item &   {   
-                padding-left: (($treeview_padding + $icon-width) * 2) + $treeview_padding; 
+                padding-left: (($treeview-icon-right-padding + $treeview-icon-width) * 2) + $treview-item-left-padding; 
             
             }
 
@@ -175,7 +176,6 @@
 
                 visibility: hidden; 
                 line-height: inherit;
-                right: $treeview_padding;
 
                 &:disabled + span::before {
                     color: $grey--4;
