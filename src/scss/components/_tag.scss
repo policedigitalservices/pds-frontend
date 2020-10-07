@@ -44,7 +44,8 @@
   }
 }
 
-#GroupTextarea:not(.form__input) {
+#GroupTextarea:not(.form__input),
+.tags {
   & > .tag {
     @extend .chip;
   }
