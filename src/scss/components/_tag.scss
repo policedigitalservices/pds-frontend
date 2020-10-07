@@ -1,5 +1,6 @@
 // link styles
-.tag {
+
+.chip {
   border: none;
   outline: none;
   background-color: pds-type-weight($pds-type-color-primary, 'dark', 'light');
@@ -40,5 +41,17 @@
     margin-left: 5px;
     font-weight: bold;
     margin-right: -2px;
+  }
+}
+
+#GroupTextarea:not(.form__input) {
+  & > .tag {
+    @extend .chip;
+  }
+}
+
+#GroupTextarea.form__input {
+  & > .tag {
+    line-height: normal;
   }
 }
