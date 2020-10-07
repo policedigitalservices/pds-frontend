@@ -29,6 +29,7 @@ table {
     & th {
         padding: 0 1rem;
         padding-bottom: 0.65625rem;
+        text-align: left;
         @extend .subtitle-2;
     }
 }
