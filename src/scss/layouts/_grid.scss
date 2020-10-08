@@ -1,13 +1,14 @@
 .grid {
   position: relative;
-  height: 100%;
+  height: 100vh;
+  max-height: 100vh;
   display: -ms-grid;
   display: grid;
   grid-gap: 0;
   -ms-grid-columns: auto 0 5fr;
   grid-template-columns: auto minmax(auto, 5fr);
   grid-template-rows: auto 1fr auto;
-  -ms-grid-rows: auto 0 minmax(min-content, 100%) 0 auto;
+  -ms-grid-rows: auto 0 1fr 0 auto;
   grid-template-areas:
     "header header"
     "sidebar main"

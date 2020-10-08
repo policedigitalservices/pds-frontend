@@ -1,4 +1,6 @@
-﻿ var groupExist = document.getElementById("Group");
+﻿ import {SeeAllHelper} from './SeeAllHelper';
+ 
+ var groupExist = document.getElementById("Group");
     if(groupExist){
 
         var useCheckboxes = groupExist.hasAttribute('data-with-checkbox');
@@ -11,6 +13,8 @@
     var intiallySelectedNodes = [];
     var groupSelect = document.getElementById("GroupSelector");
     var groupTextarea = document.getElementById("GroupTextarea");
+    
+    let tagsSeeAllHelper = null;
 
     // If the Group Multi Select does exist, hide it (if JS enabled)
     if (groupSelect !== null) {
@@ -26,16 +30,23 @@
     };
 
     if (groupTextarea !== null) {
+
+        const itemLimit = 21;
+
+        tagsSeeAllHelper  = new SeeAllHelper('#GroupTextarea > .tag', '#seeMoreGroups', { itemLimit, countFieldId: 'groupsCount' });
+
         groupTextarea.addEventListener('click', function(e) {
             var target = e.target;
 
             if (target.matches(".tag>.button__icon") && target.hasAttribute('data-path')) {
                 var pathToUncheck = target.getAttribute("data-path").replace(/\\/g, "\\\\");
-                var cbSelector = 'input[type=checkbox].GroupItem[value="'+pathToUncheck+'"]';
+                var cbSelector = 'input[type=checkbox].treeview__checkbox[value="'+pathToUncheck+'"]';
                 var checboxToUncheck = document.querySelector(cbSelector);
                 if (checboxToUncheck) {
                     checboxToUncheck.click();
                 }
+
+                tagsSeeAllHelper.recalculate();
             }
         });
     }
@@ -75,30 +86,40 @@
         return paramsToCheck === pathToCheck;
     }
 
-    // Helper function to build link for the group
     function buildLink(text, path) {
+        
         var link = document.createElement("a");
-        link.textContent = text;
-        link.href = getPagePathForGroup(path);
-        link.classList.add("group-selector__link");
 
-        // NB.  Originally we didnt want the current class to be added if doing a search, but think we do now.
-        // if ((!searchParam) &&  isSelectedGroup(path)) {
-        // if (isSelectedGroup(path)) {
-        //     link.classList.add("group-selector__link--current");
-        // }
+        link.innerHTML = `
+            <span class='treeview__item-toggle'></span>
+            <span class='treeview__item-content'>${text}</span>
+        `;
+        link.href = getPagePathForGroup(path);
+        link.classList.add("treeview__item-link");
+
         return link;
     }
 
-    // Helper function to build checkbox label for the group
-    function buildCheckbox(text, path, parentChecked) {
+    function buildLabel(text, path, parentChecked) {
+
+        var newParentSelected = parentChecked;
+
+        var label = document.createElement('label');
+        label.classList.add("treeview__item-label");
+        var toggleSpan = document.createElement('span');
+        toggleSpan.classList.add('treeview__item-toggle');
+        var outerSpan = document.createElement('span');
+        outerSpan.textContent = text;
+        outerSpan.classList.add('treeview__item-content');
         var checkbox = document.createElement('input');
         checkbox.type = "checkbox";
-        checkbox.setAttribute("class", "GroupItem");
         checkbox.name = text;
         checkbox.value = path;
         checkbox.id = text;
-        var newParentSelected = parentChecked;
+        outerSpan.appendChild(checkbox);
+        outerSpan.appendChild(document.createElement('span'));
+        label.appendChild(toggleSpan);
+        label.appendChild(outerSpan);
 
         if (path === '\\' && lockRootNode) {
             // In this mode the root node should be disabled and checked BUT the children of this node should act as though it isnt checked so we dont update the selected state
@@ -116,38 +137,21 @@
             newParentSelected = newChecked;
         }
 
-        // Style as a radio button
+        checkbox.classList.add('treeview__checkbox');
+
         if (useSingleSelectCheckbox) {
-            var label = document.createElement('label');
-            label.classList.add('radio-checkbox');
-            var checkSpan = document.createElement('span');
-            checkSpan.classList.add('radio-checkbox__check');
-            var borderSpan = document.createElement('span');
-            borderSpan.classList.add('radio-checkbox__border');
-            borderSpan.appendChild(checkbox);
-            borderSpan.appendChild(checkSpan);
-            label.appendChild(borderSpan);
-            checkbox.classList.add('radio-checkbox__input');
-            checkbox = label;
+            checkbox.classList.add('treeview__checkbox--radio');
         }
 
-        return {checkbox, newParentSelected};
+        return {label, newParentSelected};
     }
 
-    // Helper function to build checkbox for the group
-    function buildCheckboxLabel(text, path) {
-        var checkboxLabel = document.createElement('label');
-        checkboxLabel.innerHTML = text;
-        checkboxLabel.for = text;
-        checkboxLabel.setAttribute("for", text);
 
-        return checkboxLabel;
-    }
 
     function transferValues() {
         var data = [];
 
-        var elems= document.querySelectorAll('.GroupItem')
+        var elems= document.querySelectorAll('.treeview__checkbox');
 
             for (var i=0;i<elems.length;i++) {
 
@@ -195,6 +199,8 @@
             for (var i = 0; i < element.options.length; i++) {
                 element.options[i].selected = data.indexOf(element.options[i].value) >= 0;
             }
+
+            tagsSeeAllHelper.recalculate();
         }
     }
 
@@ -205,11 +211,12 @@
             if (path === '') {
                 path = "\\";
             }
-
-            parent.appendChild(buildCheckboxLabel(text, path));
-            var checkboxResult = buildCheckbox(text, path, parentChecked);
-            parent.appendChild(checkboxResult.checkbox);
+            
+            var checkboxResult = buildLabel(text, path, parentChecked);
+            parent.appendChild(checkboxResult.label);
+            
             return checkboxResult.newParentSelected;
+
         } else {
             // Create the link to refresh page with selected node.
             parent.appendChild(buildLink(text, path));
@@ -228,13 +235,13 @@
 
     function handleCheckboxClick(e, checkbox) {
 
-        var parentLi = checkbox.parentNode;
+        var parentLi = checkbox.closest('li');
 
         if (useSingleSelectCheckbox) {
 
-            // In this mode only one item can be selected, and the selected item cannot be deseleted.
+            // In this mode only one item can be selected, and the root item cannot be deseleted.
             if (checkbox.checked) {
-                var allGroupCheckboxes = document.querySelectorAll('.group-selector__list--root input[type=checkbox]');
+                var allGroupCheckboxes = document.querySelectorAll('.treeview__list--root input[type=checkbox]');
                 forEachCheckboxExcludingCurrent(checkbox, allGroupCheckboxes, function(checkboxToUpdate) {
                     checkboxToUpdate.checked = false;
                 });
@@ -244,10 +251,9 @@
                 checkbox.checked = true;
             }
         }
-        else if (parentLi.classList.contains('group-selector__group--parent')){
+        else if (parentLi.classList.contains('treeview__item--parent')){
 
-
-            var childCheckboxes = parentLi.querySelectorAll('input[type=checkbox');
+            var childCheckboxes = parentLi.querySelectorAll('input[type=checkbox]');
             if (checkbox.checked) {
                 forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, function(checkboxToUpdate) {
                     checkboxToUpdate.disabled = true;
@@ -301,8 +307,8 @@
 
     // The base element that will be populated
     var treeContainer = document.createElement("ul");
-    treeContainer.classList.add("group-selector__list");
-    treeContainer.classList.add("group-selector__list--root");
+    treeContainer.classList.add("treeview__list");
+    treeContainer.classList.add("treeview__list--root");
 
 
     // Handle all the clicks at the parent level
@@ -316,23 +322,31 @@
 
         transferValues();
 
-        // We only care about clicks on elements that are parents
-        if (target.matches(".group-selector__group--parent")) {
-            // If an open parent item is clicked, close it, but also all its open descendants.
-            if (target.classList.contains("group-selector__group--active")) {
-                target.classList.remove("group-selector__group--active");
-                var activeChildren = target.querySelectorAll(
-                    ".group-selector__group--active"
-                );
+        if (target.matches(".treeview__item-toggle")) {
 
-                for (var ac_i=0; ac_i<activeChildren.length; ac_i++) {
-                    var activeChild = activeChildren[ac_i];
-                    activeChild.classList.remove("group-selector__group--active");
+            var closestLi = target.closest('li');
+
+            // We only care about clicks on elements that are parents
+            if (closestLi.matches(".treeview__item--parent")) {
+
+                e.preventDefault();
+
+                // If an open parent item is clicked, close it, but also all its open descendants.
+                if (closestLi.classList.contains("treeview__item--open")) {
+                    closestLi.classList.remove("treeview__item--open");
+                    var activeChildren = closestLi.querySelectorAll(
+                        ".treeview__item--open"
+                    );
+
+                    for (var ac_i=0; ac_i<activeChildren.length; ac_i++) {
+                        var activeChild = activeChildren[ac_i];
+                        activeChild.classList.remove("treeview__item--open");
+                    }
                 }
-            }
-            // Open any closed parents that are clicked.
-            else {
-                target.classList.add("group-selector__group--active");
+                // Open any closed parents that are clicked.
+                else {
+                    closestLi.classList.add("treeview__item--open");
+                }
             }
         }
     });
@@ -347,11 +361,11 @@
         var parentCheckedState = parentsChecked;
 
         var childListItem = document.createElement("li");
-        childListItem.classList.add("group-selector__group");
+        childListItem.classList.add("treeview__item");
 
         if (!useCheckboxes && !useSingleSelectCheckbox && isSelectedGroup(currPath)) {
             // Only add the current state when in the 'link mode'
-            childListItem.classList.add("group-selector__group--current");
+            childListItem.classList.add("treeview__item--current");
         }
 
         if (!childKeys.length) {
@@ -364,12 +378,12 @@
         } else {
             // This node has children to process
 
-            childListItem.classList.add("group-selector__group--parent");
+            childListItem.classList.add("treeview__item--parent");
 
             if (level === 1 || shouldParentBeOpen(currPath)) {
                 // Open first level children by default
                 childListItem.classList.add(
-                    "group-selector__group--active"
+                    "treeview__item--open"
                 );
             }
 
@@ -377,7 +391,7 @@
 
             // Create the container ready to be populated with the child nodes
             var childList = document.createElement("ul");
-            childList.classList.add("group-selector__list");
+            childList.classList.add("treeview__list");
             childListItem.appendChild(childList);
             elementToAddTo.appendChild(childListItem);
             // Call recursively with updated params for each child node

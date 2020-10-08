@@ -38,9 +38,21 @@
     }
 
     &-open {    
-        main {
-            margin-bottom: $pad * 3.8;
+
+        /* Fix 1 move draw up */
+        // .app-footer {
+        //     margin-bottom: $bottomDrawerHeight;
+        // }
+        
+       //  Solution 2. Page bottom of main and aside
+        aside {
+            padding-bottom: 123px - 53px;
         }
-    }
-    
+        main 
+        {
+            padding-bottom: 123px - 53px;
+        }
+
+
+    }    
 }

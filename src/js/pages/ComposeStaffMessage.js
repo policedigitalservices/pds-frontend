@@ -5,6 +5,7 @@
 import SimpleCookieHelper from '../SimpleCookieHelper';
 import IdSessionStorageHelper from '../IdSessionStorageHelper';
 import SelectListTags from '../SelectListTags';
+import {SeeAllHelper} from '../SeeAllHelper';
 
 const main = document.querySelector('main');
 
@@ -20,7 +21,6 @@ if (main && main.classList.contains('asc-staff-compose')) {
   const cookieMessageHelper = new SimpleCookieHelper('CourierMessageContent');
   const cookieAutoResendHelper = new SimpleCookieHelper('CourierMessageResend');
   const cookieResponseHelper = new SimpleCookieHelper('CourierMessageResponses');
-
   const idsSessionHelper = new IdSessionStorageHelper('CourierMessageUsers');
   
   const getResponseOptionValuesString = () => {
@@ -41,9 +41,12 @@ if (main && main.classList.contains('asc-staff-compose')) {
     cookieAutoResendHelper.set(resendInput.value);  
     cookieResponseHelper.set(getResponseOptionValuesString());
   });
+
+  const tagsSeeAllHelper = new SeeAllHelper('#AscStaffSelector + div > .tag', '#seeMoreRecipients', { itemLimit: 21, countFieldId: 'recipientsCount' });
   
   const onUpdateFunc = (selectedOptions, allOptions) => {
     idsSessionHelper.filterByIds(selectedOptions.map(x => x.value));
+    tagsSeeAllHelper.recalculate();
   }
 
   const selectOptions = idsSessionHelper.getItems().map(({id, name})=> {
@@ -56,9 +59,14 @@ if (main && main.classList.contains('asc-staff-compose')) {
   
   const slt = new SelectListTags('AscStaffSelector', null, onUpdateFunc, selectOptions); 
 
+  tagsSeeAllHelper.recalculate();
+
   const discardBtn = document.getElementById('btnDiscard');
   discardBtn.addEventListener('click', () => {
     idsSessionHelper.clearItems();
     slt.clearItems();
+    tagsSeeAllHelper();
   });
+
+
 }

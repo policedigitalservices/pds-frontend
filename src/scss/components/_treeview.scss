@@ -1,0 +1,225 @@
+
+.treeview {
+
+    $treview-item-left-padding: 0.75rem;      // 12px;
+    $treeview-item-right-padding: 1.5rem;     // 24px;
+    $treeview-icon-width: 1.5rem;             // 24px;
+    $treeview-icon-right-padding: 0.375rem;   // 6px;
+
+    border-bottom: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
+    padding-bottom: 0;
+    padding-top: 0;
+    font-size: 0.875rem;
+        
+    &__list {
+        
+        /* reset the basics */
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+                
+        &--root {}
+    }    
+    
+    &__item {
+
+        &--current {
+
+            & > .treeview__item-label,
+            & > .treeview__item-link {
+                background-color: pds-color($pds-color-primary, '100');
+            }
+
+        }
+        
+        // line-height: 3rem;    // 48px
+        line-height: 1.25rem;    // 16px
+
+        &-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            padding-left: $treeview-icon-width + $treeview-icon-right-padding;
+            padding-right: $treeview-icon-width;
+            flex-grow: 1;
+
+            &::before {   
+
+                background-image: url('/dist/img/Icon_UNIT.svg');
+                background-repeat: no-repeat;
+                background-position: 9px;
+                width: $treeview-icon-width;
+                height: 1em;
+                margin-right: $treeview-icon-right-padding;
+                display: inline-block;  
+                content: ' ';  
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+            }   
+        }
+        
+        &--parent {
+
+           & > * > .treeview__item-content {
+                &::before {   
+                    background-image: url('/dist/img/Icon_FOLDER.svg');
+                    background-position: 5px;
+                }
+            }        
+            
+            & > .treeview__list {
+                display: none;
+            }
+
+            &.treeview__item--open > .treeview__list {
+                display: block;                
+            }
+        }
+
+        &-toggle {
+            line-height: inherit;
+            height: 20px;
+        }
+        
+        &-label, &-link {
+
+            line-height: inherit;
+            min-height: 3rem; // 48px
+            
+            padding: 0 $treeview-item-right-padding 0 $treview-item-left-padding;
+            
+            
+            margin-bottom: 0;
+            font-size: inherit;
+            font-weight: normal;
+            cursor: pointer;            
+            display: flex;
+            align-items: center;
+            border-top: 1px solid lighten(pds-type-weight($pds-type-color-primary, 'dark', 'light'), 65%);
+            color: pds-type-weight($pds-type-color-primary, 'dark', 'medium');
+
+            & .treeview__item-toggle::before {   
+                flex-shrink: 0;
+                flex-grow: 0;
+                content: '';
+                width: $treeview-icon-width;
+                margin-right: $treeview-icon-right-padding;
+                display: inline-block;
+                // background-color: green;
+                @extend .material-icons;
+                text-align: center;
+                line-height: inherit;
+            }   
+
+            // IE 10 fix for vertical alignment when min rather than regular height
+            // See: https://stackoverflow.com/questions/19371626/flexbox-not-centering-vertically-in-ie/54796082#54796082
+            &::after {
+                content: '';
+                min-height: inherit;
+                font-size: 0;
+            }
+                  
+            .treeview__item .treeview__item .treeview__item & { 
+                
+                padding-left: ($treeview-icon-right-padding + $treeview-icon-width) + $treview-item-left-padding; 
+            }
+
+            .treeview__item .treeview__item .treeview__item .treeview__item &   {   
+                padding-left: (($treeview-icon-right-padding + $treeview-icon-width) * 2) + $treview-item-left-padding; 
+            
+            }
+
+            &:hover {
+                background-color:rgba($blue, 5%);
+            }                            
+        }
+        
+        &--parent {
+
+            // Root node does not have collapsing arrow
+            .treeview__list--root > & {
+                & > .treeview__item-label, 
+                & > .treeview__item-link {
+                    .treeview__item-toggle::before {                        
+                        display: none;
+                    }
+                }
+            }
+
+            & > .treeview__item-label, 
+            & > .treeview__item-link {
+                .treeview__item-toggle::before {      
+                    content: 'arrow_right';
+                    transform-origin: center center;
+                    transition:transform 0.2s;
+                }
+            }
+
+            &.treeview__item--open > .treeview__item-label, 
+            &.treeview__item--open > .treeview__item-link {
+                .treeview__item-toggle::before {      
+                   transform:  translateY(-3px) rotate(90deg);
+                }
+            }
+        }
+       
+        &-link {
+            color: pds-type-weight($pds-type-color-primary, 'dark', 'medium'); 
+        }
+
+        &-label {                    
+            
+            & .treeview__checkbox  {
+
+                visibility: hidden; 
+                line-height: inherit;
+
+                &:disabled + span::before {
+                    color: $grey--4;
+                    cursor: default;
+                }
+
+                & + span::before {
+                    @extend .material-icons;
+                    visibility: visible;
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    transform: translateY(-50%);
+                }               
+            }
+
+            & .treeview__checkbox  {
+
+                & + span::before {                   
+                    content: 'check_box_outline_blank';
+                }
+
+                &:checked + span::before {
+
+                    content: 'check_box';
+                }
+
+               
+            }
+
+            & .treeview__checkbox--radio  {
+
+                & + span::before {                   
+                    content: 'radio_button_unchecked';
+                }
+
+                &:checked + span::before {
+
+                    content: 'radio_button_checked';
+                }
+               
+            }           
+
+        }
+        
+    }    
+}

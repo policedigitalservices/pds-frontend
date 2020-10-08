@@ -26,6 +26,7 @@ module.exports = {
       "./src/js/hint-snackbar.js",
       "./src/js/SelectListTags.js",
       "./src/js/linkify-tables.js",
+      "./src/js/search.js",
       "./src/js/pages/SelectStaffForMessage.js",
       "./src/js/pages/ComposeStaffMessage.js",
       "./src/js/pages/CourierProfile.js"

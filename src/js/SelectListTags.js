@@ -47,7 +47,8 @@ export default class SelectListTags {
         this.revertBtn.classList.remove('is-hidden');
       }
 
-      this.tags = document.createElement('div');      
+      this.tags = document.createElement('div');    
+      this.tags.classList.add('tags');
       this.tags.addEventListener('click', e => {
         e.preventDefault();
         if(e.target.matches('i')) {

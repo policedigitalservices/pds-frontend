@@ -9,11 +9,14 @@ main,
   background-color: $pds-color-background;
   width: 100%;
   padding:  0;
+  overflow-y: auto;
 
-  transition: margin-bottom $bottomDrawerTransitionSpeed $bottomDrawerTransitionTimingFunction;
+  position: relative;
+
+  transition: padding-bottom $bottomDrawerTransitionSpeed $bottomDrawerTransitionTimingFunction;
 
   @include mq(S) {
-    padding: 2.125rem 0 $pad * 2.7 0;
+    padding: 2.125rem 0 0 0;
   }
 
   &--hidden {

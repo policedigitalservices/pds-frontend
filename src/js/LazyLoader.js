@@ -1,3 +1,7 @@
+/*
+  TODO: Switch to using interection observer
+*/
+
 import { debounce } from './Utilities';
 
 /**
@@ -34,6 +38,7 @@ export default class CourierLazyLoader {
         
     this._loader = loaderElement;
     this._loaderFunc = loaderFn;
+    this._main = document.querySelector('main');
         
     // Merge the defaults and passed in config
     this._config = { ...configDefaults, ...configObj };
@@ -92,7 +97,7 @@ export default class CourierLazyLoader {
   // Wire up event listeners and do initial check.
   _startListening() {
     if (!this._hasListenersAdded) {      
-      document.addEventListener('scroll', this._lazyLoadCheck);
+      this._main.addEventListener('scroll', this._lazyLoadCheck);
       window.addEventListener('resize', this._lazyLoadCheck);
       window.addEventListener('orientationChange', this._lazyLoadCheck);
       this._hasListenersAdded = true;
@@ -106,7 +111,7 @@ export default class CourierLazyLoader {
   // Remove the event listeners
   _stopListening() {
     if (this._hasListenersAdded) {
-      document.removeEventListener('scroll', this._lazyLoadCheck);
+      this._main.removeEventListener('scroll', this._lazyLoadCheck);
       window.removeEventListener('resize', this._lazyLoadCheck);
       window.removeEventListener('orientationChange', this._lazyLoadCheck);
       this._hasListenersAdded = false;      
@@ -125,9 +130,36 @@ export default class CourierLazyLoader {
   
   // Do the check to see if screen somewhere it should be loaded.
   _doLoadMoreCheck() {    
+
+    const highestVisibleYPos = this._main.scrollTop + this._main.clientHeight; //window.pageYOffset + window.innerHeight;
+    const documentHeight =  this._main.scrollHeight; //document.documentElement.scrollHeight;
+    const loadMoreTriggerPos = Math.min((this._loader.offsetTop + this._config.peekDistance), documentHeight); 
+    const peekPositionVisible = highestVisibleYPos >= loadMoreTriggerPos;
+    const shouldLoadMore = peekPositionVisible;
+    
+    this._conditionalDebugLog('Doing load more check ...');    
+    this._conditionalDebugLog({ 
+      'Top position of loader element': this._loader.offsetTop,
+      'Config peek distance': this._config.peekDistance,
+      'Y co-ordinate when more should be loaded (including peek, constrained to doc height)': loadMoreTriggerPos,
+      //'Current Y position of scroll': window.pageYOffset,
+      // 'The internal size of the window': window.innerHeight,
+      'The max y position visible': highestVisibleYPos,
+      'The height of document': documentHeight,
+      'Is peek position visible': peekPositionVisible,
+      'Is the load more position visible, or at doc end': shouldLoadMore,
+    }, console.table); 
+    
+    return shouldLoadMore;
+  };
+}
+
+/*
+
+doLoadMoreCheck() {    
     const highestVisibleYPos = window.pageYOffset + window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
-    const loadMoreTriggerPos = Math.min((this._loader.offsetTop + this._config.peekDistance), documentHeight); 
+    const loadMoreTriggerPos = (this._loader.offsetTop + this._config.peekDistance);  // Math.min((this._loader.offsetTop + this._config.peekDistance), documentHeight); 
     const peekPositionVisible = highestVisibleYPos >= loadMoreTriggerPos;
     const shouldLoadMore = peekPositionVisible;
     
@@ -146,4 +178,5 @@ export default class CourierLazyLoader {
     
     return shouldLoadMore;
   };
-}
+
+*/
