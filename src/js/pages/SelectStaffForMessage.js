@@ -141,7 +141,18 @@ if (main && main.classList.contains('asc-staff-index')) {
     newRow.appendChild(createCellWithText(user.name));
     newRow.appendChild(createCellWithText(user.collar));
     newRow.appendChild(createCellWithText(user.email));
-    newRow.appendChild(createCellWithText(user.phoneNumber));
+    const phoneCell = document.createElement('td');
+    const phoneTextNode  = document.createTextNode(user.phoneNumberCount > 1 ? ` ${user.phoneNumber}` : user.phoneNumber);
+    
+    if (user.phoneNumberCount > 1) {
+      const badge = document.createElement('em');
+      badge.classList.add('badge');
+      badge.textContent = user.phoneNumberCount;
+      phoneCell.appendChild(badge);
+    }
+
+    phoneCell.appendChild(phoneTextNode);
+    newRow.appendChild(phoneCell);
     newRow.appendChild(createCheckboxField(user.id, idSh.hasId(user.id), user.name));
 
     usersTableBody.appendChild(newRow);
