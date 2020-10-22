@@ -63,6 +63,11 @@ form,
     overflow: hidden;
     line-height: 1;
     max-width: $max-form-width;
+    text-align: left;
+
+    &.no-bottom-margin {
+      margin-bottom: 0;
+    }
   }
 
   input,
