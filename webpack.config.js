@@ -14,6 +14,7 @@ module.exports = {
   entry: {
     "dist/css/styles": ["./src/scss/styles.scss"],
     "dist/js/scripts": [
+      "./src/js/Start.js",
       "./src/js/GroupsTree.js",
       "./src/js/side.js",
       "./src/js/ToggleContent.js",
@@ -22,7 +23,13 @@ module.exports = {
       "./src/js/SeeAll.js",
       "./src/js/menu.js",
       "./src/js/snackbar.js",
-      "./src/js/SelectListTags.js"
+      "./src/js/hint-snackbar.js",
+      "./src/js/SelectListTags.js",
+      "./src/js/linkify-tables.js",
+      "./src/js/search.js",
+      "./src/js/pages/SelectStaffForMessage.js",
+      "./src/js/pages/ComposeStaffMessage.js",
+      "./src/js/pages/CourierProfile.js"
     ]
   },
   output: {

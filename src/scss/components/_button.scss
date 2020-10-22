@@ -62,6 +62,16 @@ button,
     background-color: inherit !important;
   }
 
+  &--inverse {
+    color: $blue;
+    background-color: $white;
+    border: 1px solid $white;
+
+    &:hover, &:focus {
+      color: #fff;
+    }
+  }
+
   &--outlined {
     background-color: transparent;
     border-color: pds-color($pds-color-secondary, '500');
@@ -149,6 +159,11 @@ button,
     }
   }
 
+  .form__group .space-justify &:last-child
+  {
+    margin-right: 0;
+  }
+
   &--transparent {
     background-color: transparent;
     color: pds-color($pds-color-secondary, '500');
@@ -156,7 +171,6 @@ button,
     margin: 0 .25rem;
     border-radius: 0;
     border-bottom: 2px solid transparent;
-
 
     &:hover {
       background-color: transparent;
@@ -180,4 +194,9 @@ button,
   &--fab {
     border-radius: 3rem;
   }
+
+  .pull-right &:last-child {
+    margin-right: 0;
+  }
+   
 }

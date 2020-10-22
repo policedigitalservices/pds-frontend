@@ -9,6 +9,39 @@ form,
   max-width: $max-form-width;
   align-self: center;
 
+  &.form--search {
+    position: relative;
+
+    & .form__input.form__input--search {      
+      padding-right: 3rem;
+    }
+
+    & .form__input--clear {
+      @extend .material-icons;
+      position: absolute;
+      right: $pad;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: $grey--medium;
+
+      &::before {
+        content: "clear";     
+      }      
+    }
+
+    /* Only want to show if non empty */
+    & .form__input--search:not(:placeholder-shown) + .form__input--clear{        
+      display: inline-block !important;
+    }
+
+    /* Show if non empty IE */
+    & .form__input--search:not(:-ms-input-placeholder) + .form__input--clear {
+      display: inline-block !important;
+    }
+
+  }
+
   &__label,
   label,
   legend {
@@ -16,8 +49,14 @@ form,
 
     display: inline-flex;
     margin-bottom: $pad / 2;
-    align-items: center;
+    align-items: baseline;
+
   }
+
+  & .form__label--cb-text{
+    font-size: 1.125rem;
+    font-weight: 400;
+  }  
 
   &__group {
     margin-bottom: $pad;
@@ -42,6 +81,7 @@ form,
 
   textarea {
     min-height: 10rem;
+    resize: none;
   }
 
   &__hint {
@@ -85,6 +125,7 @@ form,
 
     &.input-validation-error,
     &.field-validation-error {
+
       border-width: 2px;
       border-color: $red;
 
@@ -144,17 +185,64 @@ form,
       background-repeat: no-repeat;
       background-position: ($pad / 4) * 3 50%;
     }
+
+    &--readonly, 
+    &--readonly:focus, 
+    &--readonly:active {
+      border-width: 0;
+      padding: 0;
+      outline: none;
+      background-color: transparent;
+      
+      font-size: 1.125rem;
+      font-weight: normal;
+
+      margin-top: -8px;
+    }
+
+  }
+  p {
+    font-size: 0.875rem;
+
+    
+  }
+  p.mb0 + p {
+      margin-top: 0;
+  }
+
+  h6 {
+    margin-bottom: 10px;
   }
 }
 
 input,
-.input {
+.input {  
+
   &__withaction {
+    button,
+    .button {
+      display: none;
+    }
+  }
+
+  &__withaction {
+
+    &.blank {
+      input {
+        border: 1px solid pds-type-weight($pds-type-color-primary, 'dark', 'light');
+        width: 100%;
+      }
+    }
+
     input {
       width: calc(100% - 3.5rem);
       border-right: 0;
       display: inline-block;
       float: left;
+    }
+
+    &.blank .button--remove {
+      display: none;
     }
 
     button,
@@ -167,6 +255,7 @@ input,
       display: inline-block;
       float: right;
       min-height: 3.5rem;
+      color: transparent;
 
       @extend .material-icons;
       @include font-size(1.5);
@@ -243,4 +332,27 @@ select,
   margin-top: 5px;
   display: inline-block;
   @extend .caption;
+}
+
+.label--select-all {
+  font-size: 0.875rem;
+  line-height: 30px;
+  letter-spacing: 0.25px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  
+  label {
+    height: 100%;    
+  }
+
+  & span {
+      margin-left: 5px;
+      height: 100%;
+      line-height: 30px;
+
+      &::before {        
+        height: 100%;
+      vertical-align: middle;
+      }
+  }
 }

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <path d="M 7 1 C 7 0.448 6.552 0 6 0 L 1 0 C 0.448 0 0 0.448 0 1 L 0 10 C 0 10.552 0.448 11 1 11 L 13 11 C 13.552 11 14 10.552 14 10 L 14 3 C 14 2.448 13.552 2 13 2 L 8 2 C 7.448 2 7 1.552 7 1 Z" fill="black" fill-opacity="0.54" bx:origin="-9.285714 0.5"/>
+</svg>
