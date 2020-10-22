@@ -1,0 +1,26 @@
+.checkbox {       
+
+    cursor: pointer;
+
+    .checkbox-cell & {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }    
+    
+    & > input {
+      display: none;
+    }
+
+    span {
+      @extend .material-icons;
+
+      &::before {
+        content: "check_box_outline_blank";          
+      }
+    }
+    
+    :checked + span::before {
+      content: "check_box";
+    }    
+  }

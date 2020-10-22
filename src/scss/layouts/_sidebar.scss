@@ -15,6 +15,8 @@ aside,
   z-index: 9999;
   overflow-y: scroll;
 
+  transition: padding-bottom $bottomDrawerTransitionSpeed $bottomDrawerTransitionTimingFunction;
+
   ul {
     display: block;
   }
@@ -40,8 +42,8 @@ aside,
 
   @include mq(S) {
     display: none;
-    width: 400px;
-    padding: $pad * 2.7 0;
+    width: 360px;
+    padding: 2.125rem 0 0 0;
     position: relative;
     z-index: 3;
 

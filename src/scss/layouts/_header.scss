@@ -29,24 +29,43 @@ header,
   padding: 0;
   z-index: 11;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
+  line-height: 3.75rem;;
 
   @include mq(S) {
     padding: 0 $pad;
   }
 
   &__logo {
+
     @extend h4;
 
-    display: none;
     text-transform: uppercase;
     color: $white;
     text-decoration: none;
     margin: 0;
-    padding: $pad * .7 $pad;
+    padding: 0 $pad;
     display: inline-block;
+    line-height: inherit;
+    position: relative;
+    top: -3px;
 
     @include mq(S) {
-      padding: $pad * .7 0;
+      padding: 0 0;
+    }
+
+    // Courier
+    &--courier {
+      text-indent: -7000px;
+      background-image: url(/dist/img/logo.svg);
+      background-repeat: no-repeat;
+      background-position: left center;
+      width: 139px;
+      padding: 0;
+
+      @include mq(S, 'max-width') {
+       margin-left: $pad;
+       background-size: 80%;
+      }
     }
   }
 
@@ -68,13 +87,21 @@ header,
   grid-area: header;
   width: 100%;
   padding: 0;
+  margin-bottom: $pad;
+  min-height: 3rem;
+  align-items: baseline;
+  
+
+  & + section {
+    padding-top: 0;
+  }
 
   @include mq(S, 'max-width') {
     display: none;
 
     .message-detail & {
       display: flex;
-      padding-top: $pad;
+      padding: $pad $pad 0;
 
       .material-icons {
         display: none;
@@ -136,7 +163,7 @@ header,
     background-color: transparent;
 
     .message-detail & {
-      padding: 0 $pad 0 0;
+      padding: 0 $pad;
     }
 
     .material-icons {
@@ -150,6 +177,10 @@ header,
     h4,
     .h4 {
       color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
+
+      .material-icons {
+        margin-left: -10px
+    }
     }
   }
 
@@ -167,5 +198,11 @@ header,
 
   h5 + button {
     margin-bottom: $pad ;
+  }
+}
+
+.page-header {
+  .h4 {
+    margin-bottom: 0;
   }
 }

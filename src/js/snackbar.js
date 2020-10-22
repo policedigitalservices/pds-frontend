@@ -1,52 +1,40 @@
-// window.localStorage.clear();
-
 (function (selector) {
 
-    const snackbarStorageItem = window.localStorage.getItem('snackbar');
     const snackbar = document.querySelector(selector);
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    var contactParam = urlParams.get('ContactAdded');
-    var OrganisationParam = urlParams.get('OrganisationAdded');
-    var snackbarMessage = '';
 
-    //check if localStrorage 'snackbar' exists and if it doesnt setup object ready for eventListener
-    if (snackbarStorageItem !== null) {
-
-        var snackbarStorageItemArray = JSON.parse(snackbarStorageItem);
-
-        //check if localStrorage 'snackbar' already contains current page path
-        if (snackbarStorageItemArray.locations.includes(window.location.pathname)) {
-
-            //if it does then hide the snackbar
-            snackbar.checked = true;
-
-        }
-
-    } else {
-
-        var snackbarStorageItemArray =  {
-            locations : new Array()
+    const removeQueryParam = param => {
+        if(urlParams.has(param)){
+            urlParams.delete(param);            
+            window.history.replaceState({}, document.title, `${window.location.pathname}?=${urlParams.toString()}`);
         }
     }
+
+    const contactParam = urlParams.get('ContactAdded');
+    const OrganisationParam = urlParams.get('OrganisationAdded');
+    const MessageSentParam = urlParams.get('MessageSent');
+    const ForceContactUpdatedParam = urlParams.get('ForceContactUpdated');
+
+    let snackbarMessage = '';
 
     if (contactParam === 'True') {
+        removeQueryParam('ContactAdded');
         snackbarMessage = 'New contact has been created';
-
     } else if (OrganisationParam === 'True') {
+        removeQueryParam('OrganisationAdded');
         snackbarMessage = 'New organisation has been created';
-
-    } else if (snackbar) {
-        snackbar.addEventListener("click", function(el) {
-
-            if (!snackbarStorageItemArray.locations.includes(window.location.pathname)) {
-
-                snackbarStorageItemArray.locations.push(window.location.pathname);
-                window.localStorage.setItem('snackbar', JSON.stringify(snackbarStorageItemArray));
-
-            }
-        })
-    }
+    } else if (MessageSentParam === 'True') {
+        /* 
+            Bit hacky, but clearing the sessionStorage here to clear message state here. 
+        */
+        sessionStorage.removeItem("CourierMessageUsers")
+        removeQueryParam('MessageSent');
+        snackbarMessage = 'Message sent';
+    } else if (ForceContactUpdatedParam && ForceContactUpdatedParam.toLowerCase() === 'true') {
+        removeQueryParam('ForceContactUpdated');
+        snackbarMessage = 'Personal contact details updated';
+    } 
 
     if (snackbarMessage) {
         snackbar.classList.add('snackbar--active');
@@ -54,7 +42,7 @@
 
         setTimeout(function(){
             snackbar.classList.remove('snackbar--active');
-        }, 3500);
+        }, 5000);
     }
 
 })("#snackbar");

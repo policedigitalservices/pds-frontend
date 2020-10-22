@@ -117,7 +117,46 @@ p {
   }
 }
 
+.body2 {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+}
+
+.subtitle-2 {
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: 400;
+}
+
 // Text Styles
 em { font-style: italic; }
 strong { font-weight: bold; }
 .uppercase { text-transform: uppercase; }
+
+.standout {
+  color: $blue;
+  font-weight: 700;
+}
+
+.intro {
+  font-weight: 700;
+}
+
+.badge {
+  background-color: $grey--badge;
+  font-size: 12px;
+  font-style: normal;
+  text-align: center;
+  color: $black;
+  padding: 0;
+  position: relative;
+  height: 16px; 
+  width: 16px;
+  top: -2px;
+  display: inline-flex;  
+  align-items: center;
+  justify-content: center;
+  line-height: 16x;
+}
+

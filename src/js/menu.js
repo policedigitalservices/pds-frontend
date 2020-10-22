@@ -47,11 +47,9 @@
         });
 
         window.addEventListener('click', function(e){
-
-            if (!menu.contains(e.target)){
+            if (!menu.contains(e.target)  && menuChild) {
                 menuChild.classList.remove("menu--active");
             }
-
         });
 
     }

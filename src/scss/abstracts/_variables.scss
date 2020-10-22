@@ -29,6 +29,10 @@ $grey: #BDBDBD;
 $grey--light: #929292;
 $grey--medium: #606060;
 
+
+$grey--4: #BDBDBD;
+$grey--badge: #E0E0E0;
+
 // Spacing
 $pad: 1rem;
 $max-form-width: $pad * 42.5;
@@ -98,3 +102,10 @@ $pds-color-background: #F5FBFF;
 
 $pds-type-color-primary: #000000; //body text
 $pds-type-color-secondary: $pds-type-color-primary; //headings text
+$pds-type-color-secondary: $pds-type-color-primary; //headings text
+
+// BottomDrawer
+$bottomDrawerHeight: 7.6875rem;
+$bottomDrawerTransitionSpeed: .5s;
+$bottomDrawerTransitionTimingFunction: ease-in-out;
+$bottomDrawerTransitionTimingFunction: ease-in-out;

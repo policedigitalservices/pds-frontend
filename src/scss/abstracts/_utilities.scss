@@ -74,6 +74,15 @@
   // padding: $pad $pad 0 $pad !important;
 }
 
+.flex-baseline {
+  align-items: baseline !important;
+  display: flex !important;
+}
+
+.flex-grow {
+  flex-grow: 1 !important;
+}
+
 .only {
   &--mobile {
     @include mq(S) {
@@ -86,4 +95,32 @@
       display: none !important;
     }
   }
+}
+
+.js-only {
+
+  body.no-js & {
+    display: none !important;
+  }
+
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.mb0 {
+  margin-bottom: 0 !important;
+}
+
+.mla {
+  margin-left: auto !important;
+}
+
+.pb0 {
+  padding-bottom: 0 !important;
+}
+
+.ml1 {
+  margin-left: $pad !important;
 }
