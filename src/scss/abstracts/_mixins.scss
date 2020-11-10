@@ -76,9 +76,21 @@
     @if type-of($value) == 'number' {
         $value: $value + px;
     }
-    @media screen and (#{$feature}: $value) {
-        @content;
+
+    @if $value == 'P' {
+      @media print {
+          @content;
+      }
+
+      .print-formatted & {
+          @content;
+      }
+    } @else {
+      @media screen and (#{$feature}: $value) {
+          @content;
+      }
     }
+
 }
 
 

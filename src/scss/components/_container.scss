@@ -5,6 +5,42 @@
   padding: 0 $pad;
   width: 100%;
   max-width: #{$max-width + 'rem'};
+  align-self: center;
+
+  padding: $pad;
+
+  form {
+      width: 100%;
+    }
+
+  &--lg {
+    @extend .container;
+    max-width: #{$max-width + 'rem'};
+
+    footer & {
+      @include mq(S) {
+        display: flex;
+  }
+
+    }
+  }
+
+  &--md {
+    @extend .container;
+    max-width: #{$max-width / 3 * 2 + 'rem'};
+  }
+
+  &--sm {
+    @extend .container;
+    max-width: #{($max-width / 3) + 'rem'};
+  }
+
+&--xs {
+    @extend .container;
+    max-width: #{($max-width / 4 * 1.05) + 'rem'};
+  }
+
+
 
   &--padded {
     max-width: #{$max-width / 2 + 'rem'};
@@ -13,5 +49,45 @@
     form {
       width: 100%;
     }
+  }
+
+  // &__lg {
+  //   @extend .container;
+  //   max-width: #{$max-width * .63 + 'rem'};
+  //   display: flex;
+  // }
+}
+
+main {
+    display: flex !important;
+  // align-items: space-between;
+  justify-content: space-between;
+
+  // justify-content: center;
+    flex-direction: column;
+
+    &.vcenter {
+      justify-content: center;
+    }
+
+}
+
+
+
+.tiles {
+  padding: $pad * 2.7 $pad;
+  display: flex;
+  flex-wrap: wrap;
+  // row-gap: $pad;
+  // column-gap: $pad;
+
+  // display: -ms-grid;
+  // display: grid;
+  // grid-template-columns: repeat(auto-fill,minmax(21rem, 1fr));
+
+  > .card,
+  > .tile {
+    flex: 1 1 0;
+    -ms-flex: 1 1 0px;
   }
 }

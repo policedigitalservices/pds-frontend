@@ -27,4 +27,8 @@ main,
     width: $max-form-width/4 * 3;
     margin: auto;
   }
+
+  &.dark-mode {
+    background-color: pds-color($pds-color-primary, '900');
+  }
 }

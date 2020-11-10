@@ -3,11 +3,27 @@ footer,
 .footer {
   justify-content: space-between;
   align-items: center;
-  display: none;
+  // display: none;
 
   @include mq(S) {
     display: flex;
   }
+
+  img {
+    padding: 0 $pad * 3.5;
+
+    // &:first-child  {
+    //   padding-left: 0;
+    // }
+
+    // &:last-child {
+    //   padding-right: 0;
+    // }
+  }
+
+
+
+
 }
 
 .app-footer {
@@ -18,12 +34,13 @@ footer,
   -ms-grid-column-span: 3;
   grid-area: footer;
   flex-shrink: 0;
-  background-color: lighten(pds-color($pds-color-primary, '50'), 1%);
+  background-color: $pds-color-background;
   color: pds-type-weight($pds-type-color-primary, 'dark', 'high');
   padding: $pad;
   width: 100%;
   border-top: 1px solid $grey;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
+
 
   & .separator {
 
@@ -43,12 +60,51 @@ footer,
 
     & .dev-link {
       margin-left: auto;
-     
+
       &::before {
-          content: '';
-          margin-left: $pad;
+        content: '';
+        margin-left: $pad;
       }
     }
   }
 
+
+
+  &.compose-message {
+    bottom: 0;
+    position: sticky;
+    padding: 0;
+    display: block;
+
+
+
+
+
+    @include mq(S) {
+      padding: $pad;
+    }
+
+    .container {
+      padding: 0;
+
+      @include mq(S) {
+        padding: inherit;
+      }
+    }
+
+    label,
+    .file-upload-btn,
+    {
+      display: none;
+
+      @include mq(S) {
+        display: block;
+        width: 100%;
+      }
+    }
+
+
+  }
 }
+
+
