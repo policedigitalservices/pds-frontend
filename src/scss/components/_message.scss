@@ -4,6 +4,13 @@ $message-highlight-color: pds-color($pds-color-primary, '50');
   border: 1px solid $message-highlight-color;
   border-left: 12px solid $message-highlight-color;
   color: $message-highlight-color;
+
+  a {
+    @include mq(P) {
+      color: pds-print-color('text1');
+    }
+  }
+
   padding: $pad / 2 $pad;
 
   // display: grid;
@@ -40,8 +47,20 @@ $message-highlight-color: pds-color($pds-color-primary, '50');
 
 margin: $pad 0;
 
+@include mq(P) {
+  background-color: $pds-color-print-background;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  border-color: pds-print-color('border1');
+}
+
 &--user {
   background-color: pds-color($pds-color-primary, '900');
+
+  @include mq(P) {
+    border-color: pds-print-color('border2');
+  }
 }
 
 &--admin {
@@ -63,6 +82,10 @@ margin: $pad 0;
   color: $message-highlight-color;
   text-align: right;
 
+  @include mq(P) {
+    color: pds-print-color('text1');
+  }
+
   p {
     margin: 0;
   }
@@ -74,6 +97,26 @@ margin: $pad 0;
   -ms-grid-column-span: 5;
   grid-area: content;
   color: white;
+
+  @include mq(P) {
+    color: pds-print-color('text1');
+        
+    grid-column-start: 1;
+    grid-column-end: -1;
+    
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 5;
+        
+    padding-top: 10px;
+    padding-bottom: 10px;
+        
+    p:first-child {
+      margin-top: 0;
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
 
   @include mq(S) {
     -ms-grid-row: 3;
@@ -90,11 +133,26 @@ margin: $pad 0;
     text-align: right;
     color: $message-highlight-color;
     margin-top: $pad * 2;
+
+    @include mq(P) {
+      color: pds-print-color('text1');
+    }
+  }
+
+  &__seperator:first-child {
+      @include mq(P) {
+        margin-top: 0;
+      }
   }
 
   h5 {
       color: $message-highlight-color;
       margin: 0;
+
+      @include mq(P) {
+        color: pds-print-color('text1');
+      }
+
     }
 }
 
@@ -124,13 +182,10 @@ margin: $pad 0;
 
 
     &:first-child {
-      // flex: 1 1 auto;
       flex: 1;
     }
 
     &:last-child {
-      // display: none;
-
       @include mq(S) {
         flex: 0 0 auto;
       }

@@ -68,8 +68,6 @@ footer,
     }
   }
 
-
-
   &.compose-message {
     bottom: 0;
     position: sticky;
@@ -77,7 +75,9 @@ footer,
     display: block;
 
 
-
+    @include mq(P) {
+      display: none;
+    }
 
 
     @include mq(S) {
@@ -93,7 +93,7 @@ footer,
     }
 
     label,
-    .file-upload-btn,
+    .file-upload-btn
     {
       display: none;
 

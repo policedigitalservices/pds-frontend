@@ -115,6 +115,16 @@
   }
 }
 
+@function pds-print-color($shade) {
+  $color: map-get($print-greys, $shade);
+  @if $color {
+    @return $color;
+  } @else {
+    // Libsass still doesn't seem to support @error
+    @warn "=> ERROR: COLOR NOT FOUND! <= | Your $shade did not match any of the values in the $print-greys map.";
+  }
+}
+
 
 /**
  * Retrieves a color value from the $pds-colors Sass map
