@@ -8,6 +8,15 @@ header,
   flex-shrink: 0;
   flex-wrap: wrap;
 
+  h4 {
+        color: pds-color($pds-color-primary, '600');
+        font-weight: 300;
+    }
+
+  .overline {
+    color: $pds-type-color-primary;
+  }
+
   ul {
     display: flex;
     align-items: center;
@@ -26,10 +35,19 @@ header,
   top: 0;
   background-color: pds-color($pds-color-primary, '500');
   color: $white;
+  color: $pds-type-color-primary;
   padding: 0;
   z-index: 11;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
   line-height: 3.75rem;;
+
+  @include mq(P) {
+    background-color: $pds-color-print-background;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }  
 
   @include mq(S) {
     padding: 0 $pad;

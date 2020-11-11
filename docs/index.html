@@ -3,46 +3,39 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Courier Styleguide</title>
+  <title>PDS Frontend Library Styleguide</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="stylesheet" href="styles.css" /> -->
-  <link rel="stylesheet" href="https://static.policedigital.services/dist/css/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- <link rel="stylesheet" href="https://static.policedigital.services/assets/css/style.css" /> -->
+  <!-- <link rel="stylesheet" href="https://static.policedigital.services/dist/css/styles.css" /> -->
   <style>
-    body {
-      padding: 50px;
-    }
 
-    hr {
-      margin-top: 50px;
-      margin-bottom: 50px;
-    }
-
-    h4 {
-      margin-top: 35px;
-      display: block;
-    }
   </style>
 </head>
 
 <body>
-  <h1>Courier Styleguide</h1>
-
-  <hr>
-
-  <h3>Typography</h3>
-
-  <h1>Heading 1</h1>
-  <h2>Heading 2</h2>
-  <h3>Heading 3</h3>
-  <h4>Heading 4</h4>
-  <h5>Heading 5</h5>
-  <h6>Heading 6</h6>
+  <div class="container-lg px-3 my-5 markdown-body">
+  <h1>PDS Frontend Library Styleguide</h1>
 
 
-  <hr>
+  <h2>Typography</h2>
 
-  <h3>Buttons</h3>
+  <div class="pds-styles">
+  <h1>H1 / Roboto Light</h1>
+  <h2>H2 / Roboto Light</h2>
+  <h3>H3 / Roboto Regular</h3>
+  <h4>H4 / Roboto Regular</h4>
+  <h5>H5 / Roboto Medium</h5>
+  <h6>H6 / Roboto Medium</h6>
+  <p class="body1">Body 1 / Roboto Regular</p>
+  <p class="body2">Body 2 / Roboto Regular</p>
+  <p class="subtitle1">Subtitle 1 / Roboto Regular</p>
+  <p class="subtitle2">Subtitle 2 / Roboto Medium</p>
+</div>
+
+
+  <h2>Buttons</h2>
 
   <button class="button button--small"><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
   <button class="button button--small" disabled><i aria-hidden="true" class="button__icon">star</i><span class="button__label">Button Link</span></button>
@@ -57,13 +50,13 @@
   <button class="button button--transparent button--small"><span class="button__label">Button Link</span></button>
   <hr>
 
-  <h3>Tags</h3>
+  <h2>Tags</h2>
   <button class="button button--tag"><span class="button__label">Group tag</span><i aria-hidden="true" class="button__icon">clear</i></button>
 
   <div class="tag">Group tag<i aria-hidden="true" class="button__icon">clear</i></div>
   <hr>
 
-  <h3>Form elements</h3>
+  <h2>Form elements</h2>
 
   <h4>Normal input fields (stacked)</h4>
 
@@ -255,7 +248,7 @@
       </tbody>
     </table>
 
-
+  </div>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.includes%2CArray.prototype.forEach%2CNodeList.prototype.forEach%2CElement.prototype.closest%2CArray.from%2CString.prototype.startsWith%2CURLSearchParams"></script>
     <script src="https://static.policedigital.services/dist/js/scripts.js"></script>
 </body>
