@@ -8,6 +8,7 @@ html {
   line-height: $line-height;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  color: $pds-type-color-primary;
 }
 
 // Header Styles
@@ -25,6 +26,8 @@ h1, h2, h3, h4, h5, h6 {
 
 h1,
 .h1 {
+
+
   @include font-size(2.25);
 
   font-weight: 300;
@@ -35,12 +38,21 @@ h1,
 
 h2,
 .h2 {
-  @include font-size(1.875);
+  @include font-size(1.125);
 
-  font-weight: 300;
-  font-size: 60px;
-  line-height: 70px;
-  letter-spacing: -0.5px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0;
+
+  @include mq(S) {
+    @include font-size(1.875);
+
+    font-weight: 300;
+    font-size: 60px;
+    line-height: 70px;
+    letter-spacing: -0.5px;
+  }
 }
 
 h3,
@@ -118,6 +130,7 @@ p {
 }
 
 .body2 {
+
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.25px;
@@ -127,6 +140,31 @@ p {
   font-size: 14px;
   line-height: 28px;
   font-weight: 400;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+
+
+  @include mq(S) {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+  }
+}
+
+.overline {
+  font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 10px;
+line-height: 16px;
+/* identical to box height, or 160% */
+
+letter-spacing: 1.5px;
+text-transform: uppercase;
+
+
 }
 
 // Text Styles
@@ -151,10 +189,10 @@ strong { font-weight: bold; }
   color: $black;
   padding: 0;
   position: relative;
-  height: 16px; 
+  height: 16px;
   width: 16px;
   top: -2px;
-  display: inline-flex;  
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 16x;

@@ -1,0 +1,213 @@
+$message-highlight-color: pds-color($pds-color-primary, '50');
+
+.message {
+  border: 1px solid $message-highlight-color;
+  border-left: 12px solid $message-highlight-color;
+  color: $message-highlight-color;
+
+  a {
+    @include mq(P) {
+      color: pds-print-color('text1');
+    }
+  }
+
+  padding: $pad / 2 $pad;
+
+  // display: grid;
+  // grid-gap: 0;
+  // grid-template-columns: minmax(auto, 1fr) minmax(auto, 5fr) minmax(auto, 1fr);
+  // grid-template-rows: 1fr auto;
+  // grid-template-areas:
+  // "author author timestamp"
+  // "content content content";
+
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 0;
+  width: auto;
+  -ms-grid-columns: 1fr 0 5fr 0 1fr;
+  grid-template-columns: minmax(auto, 1fr) minmax(auto, 5fr) minmax(auto, 1fr);
+  -ms-grid-rows: 1fr 0 auto;
+  grid-template-rows: 1fr auto;
+      grid-template-areas:
+  "author author timestamp"
+  "content content content";
+
+
+  @include mq(S) {
+
+    grid-template-areas:
+    "author author timestamp"
+    ". content .";
+
+    a {
+      color: $message-highlight-color;
+    }
+  }
+
+margin: $pad 0;
+
+@include mq(P) {
+  background-color: $pds-color-print-background;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  border-color: pds-print-color('border1');
+}
+
+&--user {
+  background-color: pds-color($pds-color-primary, '900');
+
+  @include mq(P) {
+    border-color: pds-print-color('border2');
+  }
+}
+
+&--admin {
+  background-color: pds-color($pds-color-primary, '700');
+}
+
+&__author {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: author;
+  color: $message-highlight-color;
+}
+
+&__timestamp {
+  -ms-grid-row: 1;
+  -ms-grid-column: 5;
+  grid-area: timestamp;
+  color: $message-highlight-color;
+  text-align: right;
+
+  @include mq(P) {
+    color: pds-print-color('text1');
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+&__content {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 5;
+  grid-area: content;
+  color: white;
+
+  @include mq(P) {
+    color: pds-print-color('text1');
+        
+    grid-column-start: 1;
+    grid-column-end: -1;
+    
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 5;
+        
+    padding-top: 10px;
+    padding-bottom: 10px;
+        
+    p:first-child {
+      margin-top: 0;
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @include mq(S) {
+    -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 2;
+  }
+}
+
+  &__file {
+
+  }
+
+  &__seperator {
+    text-align: right;
+    color: $message-highlight-color;
+    margin-top: $pad * 2;
+
+    @include mq(P) {
+      color: pds-print-color('text1');
+    }
+  }
+
+  &__seperator:first-child {
+      @include mq(P) {
+        margin-top: 0;
+      }
+  }
+
+  h5 {
+      color: $message-highlight-color;
+      margin: 0;
+
+      @include mq(P) {
+        color: pds-print-color('text1');
+      }
+
+    }
+}
+
+.compose-message {
+
+  form {
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .break {
+    flex-basis: 100%;
+    height: 0;
+  }
+
+  .form__group {
+    width: auto;
+    max-width: none;
+    overflow: visible;
+
+    margin-bottom: 0;
+
+    @include mq(S) {
+      margin-bottom: $pad;
+    }
+
+
+    &:first-child {
+      flex: 1;
+    }
+
+    &:last-child {
+      @include mq(S) {
+        flex: 0 0 auto;
+      }
+    }
+  }
+
+  textarea {
+    width: 100%;
+    min-height: $pad;
+
+    @include mq(S) {
+      min-height: $pad * 10;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+    column-gap: $pad * 2;
+    row-gap: $pad * 2;
+  }
+
+}

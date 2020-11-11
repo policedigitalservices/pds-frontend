@@ -96,16 +96,23 @@ $pds-colors: (
     ),
   );
 
-$pds-color-primary: 'blue';
-$pds-color-secondary: 'blue';
-$pds-color-background: #F5FBFF;
+$print-greys: (
+  'text1': #333,
+  'border1': #999,
+  'border2': #666
+);
 
-$pds-type-color-primary: #000000; //body text
-$pds-type-color-secondary: $pds-type-color-primary; //headings text
+$pds-color-primary: 'teal';
+$pds-color-secondary: 'purple';
+$pds-color-background: #90F9F0;
+
+$pds-color-print-background: transparent;
+
+$pds-type-color-primary: pds-color($pds-color-primary, '900'); //body text
 $pds-type-color-secondary: $pds-type-color-primary; //headings text
 
 // BottomDrawer
 $bottomDrawerHeight: 7.6875rem;
 $bottomDrawerTransitionSpeed: .5s;
 $bottomDrawerTransitionTimingFunction: ease-in-out;
-$bottomDrawerTransitionTimingFunction: ease-in-out;
+
