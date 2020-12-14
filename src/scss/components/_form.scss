@@ -12,7 +12,7 @@ form,
   &.form--search {
     position: relative;
 
-    & .form__input.form__input--search {
+    & .form__input.form__input--search {      
       padding-right: 3rem;
     }
 
@@ -26,12 +26,12 @@ form,
       color: $grey--medium;
 
       &::before {
-        content: "clear";
-      }
+        content: "clear";     
+      }      
     }
 
     /* Only want to show if non empty */
-    & .form__input--search:not(:placeholder-shown) + .form__input--clear{
+    & .form__input--search:not(:placeholder-shown) + .form__input--clear{        
       display: inline-block !important;
     }
 
@@ -51,47 +51,26 @@ form,
     margin-bottom: $pad / 2;
     align-items: baseline;
 
-    align-items: center;
-
-  //   //Check this does not affect courier
-    display: flex;
-    align-items: left;
-
-    &.body1 {
-      font-size: #{$base-font-size + '%'};
-      font-family: $base-font-family;
-      line-height: $line-height;
-      font-weight: 400;
-      letter-spacing: 0;
-    }
-
   }
 
   & .form__label--cb-text{
     font-size: 1.125rem;
     font-weight: 400;
-  }
+  }  
 
   &__group {
     margin-bottom: $pad;
     overflow: hidden;
     line-height: 1;
     max-width: $max-form-width;
-    // text-align: left;
-
-    &.no-bottom-margin {
-      margin-bottom: 0;
-    }
   }
-
 
   input,
   textarea {
     font-family: $base-font-family;
-    color: pds-type-weight($pds-type-color-primary, 'dark', 'medium');
 
     &:not[type="checkbox"] {
-      -webkit-appearance: none;
+    -webkit-appearance: none;
     }
   }
 
@@ -109,7 +88,7 @@ form,
   }
 
   &__input {
-    border: 1px solid pds-type-weight($pds-type-color-primary, 'dark', 'light');
+    border: 1px solid pds-type-weight($pds-type-color-primary, 'dark', 'light');;
     background-color: $white;
     outline: none;
     border-radius: 0;
@@ -195,10 +174,6 @@ form,
       }
     }
 
-    &:disabled {
-      background: transparent;
-    }
-
     &--search {
       padding-left: $pad * 2.8;
       background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15.502 14H14.708L14.432 13.726C15.407 12.589 16 11.115 16 9.49997C16 5.90997 13.09 2.99997 9.5 2.99997C5.91 2.99997 3 5.90997 3 9.49997C3 13.09 5.91 16 9.5 16C11.115 16 12.588 15.408 13.725 14.434L14.001 14.708V15.5L18.999 20.491L20.49 19L15.502 14ZM9.5 14C7.014 14 5 11.986 5 9.49997C5 7.01497 7.014 4.99997 9.5 4.99997C11.985 4.99997 14 7.01497 14 9.49997C14 11.986 11.985 14 9.5 14Z' fill='black' fill-opacity='0.54'/%3E%3C/svg%3E%0A");
@@ -206,14 +181,14 @@ form,
       background-position: ($pad / 4) * 3 50%;
     }
 
-    &--readonly,
-    &--readonly:focus,
+    &--readonly, 
+    &--readonly:focus, 
     &--readonly:active {
       border-width: 0;
       padding: 0;
       outline: none;
       background-color: transparent;
-
+      
       font-size: 1.125rem;
       font-weight: normal;
 
@@ -221,11 +196,10 @@ form,
     }
 
   }
-
   p {
     font-size: 0.875rem;
 
-
+    
   }
   p.mb0 + p {
       margin-top: 0;
@@ -237,7 +211,7 @@ form,
 }
 
 input,
-.input {
+.input {  
 
   &__withaction {
     button,
@@ -247,7 +221,6 @@ input,
   }
 
   &__withaction {
-    position: relative;
 
     &.blank {
       input {
@@ -256,62 +229,16 @@ input,
       }
     }
 
-
-
-
     input {
-      /* TODO: remove legacy 'button within input field' - all 4 properties below */
       width: calc(100% - 3.5rem);
       border-right: 0;
-      float: left;
       display: inline-block;
+      float: left;
     }
-
-    i {
-      color: pds-type-weight($pds-type-color-primary, 'dark', 'medium');
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-    }
-
 
     &.blank .button--remove {
       display: none;
     }
-
-
-    &.with-trailing-icon {
-
-      input {
-        padding-right: $pad * 3;
-
-        /* TODO: remove legacy 'button within input field' - all 3 properties below once 'button within input field' removed */
-        width: 100%;
-        border-right: 1px solid pds-type-weight($pds-type-color-primary, 'dark', 'light');
-        float: none;
-      }
-
-      i {
-        right: $pad;
-      }
-    }
-
-    &.with-leading-icon {
-      input {
-        padding-left: $pad * 3;
-
-        /* TODO: remove legacy 'button within input field' - all 3 properties below once 'button within input field' removed */
-        width: 100%;
-        border-right: 1px solid pds-type-weight($pds-type-color-primary, 'dark', 'light');
-        float: none;
-      }
-
-      i {
-        left: $pad;
-      }
-    }
-
 
     button,
     .button {
@@ -393,12 +320,14 @@ select,
     display: none;
   }
 }
-.helper-text {
+
+.text-danger,
+.field-validation-error {
+  color: $red;
   margin-top: 5px;
   display: inline-block;
   @extend .caption;
 }
-
 
 .label--select-all {
   font-size: 0.875rem;
@@ -406,56 +335,19 @@ select,
   letter-spacing: 0.25px;
   margin-bottom: 10px;
   cursor: pointer;
-
+  
   label {
-    height: 100%;
+    height: 100%;    
   }
 
   & span {
-    margin-left: 5px;
-    height: 100%;
-    line-height: 30px;
-
-    &::before {
+      margin-left: 5px;
       height: 100%;
+      line-height: 30px;
+
+      &::before {        
+        height: 100%;
       vertical-align: middle;
-    }
+      }
   }
 }
-
-.text-danger,
-.field-validation-error {
-  color: $red;
-}
-
-.file-upload-btn {
-  &:hover,
-  &:focus {
-    outline: 0;
-  }
-}
-
-
-.file-upload-btn::before {
-  content: 'Attachment';
-  @extend .button;
-  @extend .button--transparent;
-}
-
-.file-upload-btn::-webkit-file-upload-button {
-  visibility: hidden;
-  outline: 0;
-
-
-}
-
-input[type="checkbox"] + label {
-  display: inline;
-  font-size: #{$base-font-size + '%'};
-  font-family: $base-font-family;
-  line-height: $line-height;
-  font-weight: 400;
-  letter-spacing: 0;
-  color: $pds-type-color-primary;
-}
-

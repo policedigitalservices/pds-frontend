@@ -10,13 +10,4 @@ body {
     box-sizing: inherit;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
-
-  @include mq(P) {
-    background-color: $pds-color-print-background;
-  }
 }
-
-html.print-formatted {
-  background-color: $pds-color-print-background;
-}
-

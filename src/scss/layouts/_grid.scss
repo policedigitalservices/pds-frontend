@@ -15,12 +15,6 @@
     "footer footer";
 }
 
-body.grid {
-  @include mq(P) {
-    display: block;
-  }
-}
-
 .grid--text-page {
   height: 100%;
   padding: 2 * $pad 0;

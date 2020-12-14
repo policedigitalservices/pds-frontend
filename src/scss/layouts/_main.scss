@@ -11,11 +11,6 @@ main,
   padding:  0;
   overflow-y: auto;
 
-  @include mq(P) {
-    overflow: visible;
-    padding-top: 0;
-  }
-
   position: relative;
 
   transition: padding-bottom $bottomDrawerTransitionSpeed $bottomDrawerTransitionTimingFunction;
@@ -31,13 +26,5 @@ main,
   &--message {
     width: $max-form-width/4 * 3;
     margin: auto;
-  }
-
-  &.dark-mode {
-    background-color: pds-color($pds-color-primary, '900');
-
-    @include mq(P) {
-      background-color: $pds-color-print-background;
-    }
   }
 }

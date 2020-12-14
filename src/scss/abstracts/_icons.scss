@@ -1,14 +1,5 @@
 $icon-font-family: "pds-icons" !default;
-$icon-font-path: "/dist/fonts" !default;
-$pds-icon-star-circle: "\e919";
-$pds-icon-attach-file: "\e916";
-$pds-icon-send: "\e917";
-$pds-icon-star: "\e918";
-$pds-icon-mailbox-empty: "\e913";
-$pds-icon-mailbox-existing: "\e914";
-$pds-icon-mailbox-new: "\e915";
-$pds-icon-visibility-off: "\e911";
-$pds-icon-visibility: "\e912";
+$icon-font-path: "../fonts" !default;
 $pds-icon-group-root: "\e900";
 $pds-icon-error-triangle: "\e901";
 $pds-icon-error-circle: "\e902";
@@ -29,17 +20,17 @@ $pds-icon-group-parent: "\e910";
 
 @font-face {
   font-family: '#{$icon-font-family}';
-  src:  url('#{$icon-font-path}/#{$icon-font-family}.eot');
-  src:  url('#{$icon-font-path}/#{$icon-font-family}.eot#iefix') format('embedded-opentype'),
-    url('#{$icon-font-path}/#{$icon-font-family}.ttf') format('truetype'),
-    url('#{$icon-font-path}/#{$icon-font-family}.woff') format('woff'),
-    url('#{$icon-font-path}/#{$icon-font-family}.svg##{$icon-font-family}') format('svg');
+  src:  url('#{$icon-font-path}/#{$icon-font-family}.eot?7ge13u');
+  src:  url('#{$icon-font-path}/#{$icon-font-family}.eot?7ge13u#iefix') format('embedded-opentype'),
+    url('#{$icon-font-path}/#{$icon-font-family}.ttf?7ge13u') format('truetype'),
+    url('#{$icon-font-path}/#{$icon-font-family}.woff?7ge13u') format('woff'),
+    url('#{$icon-font-path}/#{$icon-font-family}.svg?7ge13u##{$icon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-.pds-icons {
+i {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: '#{$icon-font-family}' !important;
   speak: none;
@@ -48,25 +39,6 @@ $pds-icon-group-parent: "\e910";
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-
-  font-size: 24px;  /* Preferred icon size */
-  font-style: normal;
-  font-weight: normal;
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  outline:none;
-
-  &:hover,
-  &:focus {
-    outline: 0;
-  }
 
   /* Enable Ligatures ================ */
   letter-spacing: 0;
@@ -83,51 +55,6 @@ $pds-icon-group-parent: "\e910";
   -moz-osx-font-smoothing: grayscale;
 }
 
-.pds-icon-star-circle {
-  &:before {
-    content: $pds-icon-star-circle;
-  }
-}
-.pds-icon-attach-file {
-  &:before {
-    content: $pds-icon-attach-file;
-  }
-}
-.pds-icon-send {
-  &:before {
-    content: $pds-icon-send;
-  }
-}
-.pds-icon-star {
-  &:before {
-    content: $pds-icon-star;
-  }
-}
-.pds-icon-mailbox-empty {
-  &:before {
-    content: $pds-icon-mailbox-empty;
-  }
-}
-.pds-icon-mailbox-existing {
-  &:before {
-    content: $pds-icon-mailbox-existing;
-  }
-}
-.pds-icon-mailbox-new {
-  &:before {
-    content: $pds-icon-mailbox-new;
-  }
-}
-.pds-icon-visibility-off {
-  &:before {
-    content: $pds-icon-visibility-off;
-  }
-}
-.pds-icon-visibility {
-  &:before {
-    content: $pds-icon-visibility;
-  }
-}
 .pds-icon-group-root {
   &::before {
     content: $pds-icon-group-root;
