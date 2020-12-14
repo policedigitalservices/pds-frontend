@@ -17,6 +17,18 @@ aside,
 
   transition: padding-bottom $bottomDrawerTransitionSpeed $bottomDrawerTransitionTimingFunction;
 
+  .groups-container, .attributes-container {
+    display: none;
+  }
+
+  &[data-active='groups'] {
+    .groups-container { display: block; }
+  }
+  
+  &[data-active='attributes'] {
+    .attributes-container { display: block; }
+  }
+
   ul {
     display: block;
   }
@@ -26,7 +38,8 @@ aside,
     padding: $pad 0;
   }
 
-  &--active {
+  &--active,
+  &[data-active] {
     display: block;
   }
 

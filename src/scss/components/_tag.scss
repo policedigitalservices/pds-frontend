@@ -45,13 +45,15 @@
 }
 
 #GroupTextarea:not(.form__input),
+.tags-area:not(.form__input),
 .tags {
   & > .tag {
     @extend .chip;
   }
 }
 
-#GroupTextarea.form__input {
+#GroupTextarea.form__input,
+.tags-area.form__input {
   & > .tag {
     line-height: normal;
   }
