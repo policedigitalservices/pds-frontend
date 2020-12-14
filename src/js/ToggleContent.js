@@ -74,11 +74,9 @@ if (document.getElementById('Responses') != null) {
     })();
 }
 
-
 if (document.getElementById('addPhone') !=null) {
 
     (function (selector) {
-
         var addPhoneInput = document.getElementById(selector);
         var addPhoneButton = document.querySelector("#addPhoneBtn");
 
@@ -92,9 +90,7 @@ if (document.getElementById('addPhone') !=null) {
         })
 
     })("addPhone");
-
 }
-
 
 if (document.getElementById('addEmail') !=null) {
 
@@ -116,13 +112,11 @@ if (document.getElementById('addEmail') !=null) {
 }
 
 if (document.getElementById('add_group') !=null) {
-
     (function (selector) {
 
         var addGroupButton = document.querySelector("#add_group");
 
         addGroupButton.addEventListener("click", function(el) {
-
             el.preventDefault();
 
 
@@ -172,7 +166,7 @@ if (document.querySelectorAll('input.input-validation-error') !=null) {
     var inputErrorsArray = Object.keys(inputErrors);
 
     inputErrorsArray.forEach(function(key){
-        console.log(inputErrors[key]);
+
         inputErrors[key].closest('form').classList.remove("is-hidden");
 
     });

@@ -96,6 +96,15 @@ $pds-colors: (
     ),
   );
 
+$print-greys: (
+  'text1': #333,
+  'border1': #999,
+  'border2': #666
+);
+
+$pds-color-print-background: transparent;
+
+
 $pds-color-primary: 'blue';
 $pds-color-secondary: 'blue';
 $pds-color-background: #F5FBFF;

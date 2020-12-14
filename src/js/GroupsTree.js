@@ -1,248 +1,267 @@
 ﻿ import {SeeAllHelper} from './SeeAllHelper';
  
- var groupExist = document.getElementById("Group");
-    if(groupExist){
+/*
+  TODO:  This could do with more refactoring.  This is too tangled up with the tags area.  
+  These should be separate components that dont know about each other (except their public interfaces).  
+  These should then be tied together on containing pages
+*/
 
-        var useCheckboxes = groupExist.hasAttribute('data-with-checkbox');
-        var useSingleSelectCheckbox = groupExist.hasAttribute('data-with-single-select-checkbox');
-        var lockRootNode = groupExist.hasAttribute('data-lock-root');
-
-(function (selector, useCheckboxes, useSingleSelectCheckbox) {
-
-    //Check on page whether Group Multi Select exists
-    var intiallySelectedNodes = [];
-    var groupSelect = document.getElementById("GroupSelector");
-    var groupTextarea = document.getElementById("GroupTextarea");
-    
-    let tagsSeeAllHelper = null;
-
-    // If the Group Multi Select does exist, hide it (if JS enabled)
-    if (groupSelect !== null) {
-        groupSelect.parentElement.classList.add("is-hidden");
-        groupTextarea.parentElement.classList.remove("is-hidden");
-
-        // Grab all the items that should be selected
-        var selectedOptionsNodes = groupSelect.querySelectorAll('option:checked');
-
-        for (var i = 0; i < selectedOptionsNodes.length; i++){
-           intiallySelectedNodes.push(selectedOptionsNodes[i].value || "\\");
-        }
-    };
-
-    if (groupTextarea !== null) {
-
-        const itemLimit = 21;
-
-        tagsSeeAllHelper  = new SeeAllHelper('#GroupTextarea > .tag', '#seeMoreGroups', { itemLimit, countFieldId: 'groupsCount' });
-
-        groupTextarea.addEventListener('click', function(e) {
-            var target = e.target;
-
-            if (target.matches(".tag>.button__icon") && target.hasAttribute('data-path')) {
-                var pathToUncheck = target.getAttribute("data-path").replace(/\\/g, "\\\\");
-                var cbSelector = 'input[type=checkbox].treeview__checkbox[value="'+pathToUncheck+'"]';
-                var checboxToUncheck = document.querySelector(cbSelector);
-                if (checboxToUncheck) {
-                    checboxToUncheck.click();
-                }
-
-                tagsSeeAllHelper.recalculate();
-            }
-        });
+const treeviewDefaults = {
+    sourceSelector: "#Group",
+    useCheckboxes: false,
+    useSingleSelectCheckbox: false,
+    lockRootNode: false,
+    destinationTagsSelector: "#GroupTextarea",
+    destinationSelectSelector: "#GroupSelector",
+    tagSelector: "#GroupTextarea > .tag",
+    defaultOptionValue: "\\",
+    seeAllCountLimit: 21,
+    seeMoreGroupsSelector: "#seeMoreGroups",
+    countFieldId: 'groupsCount',
+    treeviewId: 'treeview-groups',
+    isGroupsStructure: true,
+};
+export class TreeView { 
+    constructor(options) {
+        this._settings = {...treeviewDefaults, ...options};
+        this._initiallySelectedNodes = [];
+        this._sourceSelect = document.querySelector(this._settings.sourceSelector);
+        this._destinationTags = document.querySelector(this._settings.destinationTagsSelector);
+        this._destinationSelect = document.querySelector(this._settings.destinationSelectSelector);
+        this._tagsSeeAllHelper = null;
+        this._searchParts = null;
+        this._treeContainer = null;
+        this._pagePath = "";
+        this._groupParam = "";
+        this._searchParam = "";
+        this._initialiseDestinationSelect();
+        this._intiailiseDestinationTags();
+        this._initialiseSearchParts();
+        this._initialiseTreeView();
     }
 
-    var searchParts = (function getUrlVars() {
-        var vars = {};
-        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    _initialiseDestinationSelect() {
+        
+        if (this._destinationSelect) {
+            this._destinationSelect.parentElement.classList.add("is-hidden");
+            this._destinationTags.parentElement.classList.remove("is-hidden");
+            this._initiallySelectedNodes = Array.from(this._destinationSelect.querySelectorAll('option:checked')).map(option => option.value || this._settings.defaultOptionValue);
+        }
+    }
+
+    _intiailiseDestinationTags() {
+        if (this._destinationTags) {
+    
+            this._tagsSeeAllHelper  = new SeeAllHelper(this._settings.tagSelector, this._settings.seeMoreGroupsSelector, { itemLimit: this._settings.seeAllCountLimit, countFieldId: this._settings.countFieldId });
+    
+            this._destinationTags.addEventListener('click', e => {
+
+                const target = e.target;
+    
+                if (target.matches(".tag>.button__icon") && target.hasAttribute('data-path')) {
+                    const pathToUncheck = target.getAttribute("data-path").replace(/\\/g, "\\\\");
+                    const cbSelector = `#${this._settings.treeviewId} input[type=checkbox].treeview__checkbox[value="${pathToUncheck}"]`;
+                    const checboxToUncheck = document.querySelector(cbSelector);
+                    if (checboxToUncheck) {
+                        checboxToUncheck.click();
+                    }
+    
+                    this._tagsSeeAllHelper.recalculate();
+                }
+            });
+        }
+    }
+
+    _initialiseSearchParts() {
+        const vars = {};
+        window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, (m,key,value) => {
             vars[key] = value;
         });
-        return vars;
-    })();
-
-    var pagePath = window.location.origin + window.location.pathname + "?group=";
-    var groupParam = searchParts.group;
-    var searchParam = searchParts.Search;
-
-    // Function to build the path
-    function getPagePathForGroup(group) {
-      var grp = group === "" ? "\\" : group;
-      return pagePath + grp;
+        this._searchParts = {...vars};
+        this._pagePath = window.location.origin + window.location.pathname + "?group=";
+        this._groupParam = this._searchParts.group;
+        this._searchParam = this._searchParts.Search;
     }
 
-    // Function to check if the node being add should be open i.e. to reveal the currently selected group
-    function shouldParentBeOpen(path) {
-        if (!groupParam) {
+    _getPagePathForGroup(group) {
+        const grp = group === "" ? "\\" : group;
+        return this._pagePath + grp;
+      }
+
+    _shouldParentBeOpen(path) {
+        if (!this._groupParam) {
             return false;
         }
-        var pathToCheck = (path + "\\");
-        return groupParam.startsWith(pathToCheck) && groupParam != pathToCheck;
+        const pathToCheck = (path + "\\");
+        return this._groupParam.startsWith(pathToCheck) && this._groupParam != pathToCheck;
     }
 
-    // Function to check if the node being added is the currentlySelectedGroup
-    function isSelectedGroup(path) {
-        var paramsToCheck = decodeURIComponent(groupParam || "\\");
-        var pathToCheck = (path || "\\");
+    _isSelectedGroup(path) {
+        const paramsToCheck = decodeURIComponent(this._groupParam || "\\");
+        const pathToCheck = (path || "\\");
 
         return paramsToCheck === pathToCheck;
     }
 
-    function buildLink(text, path) {
+    _buildLink(text, path) {
         
-        var link = document.createElement("a");
+        const link = document.createElement("a");
 
         link.innerHTML = `
             <span class='treeview__item-toggle'></span>
             <span class='treeview__item-content'>${text}</span>
         `;
-        link.href = getPagePathForGroup(path);
+        link.href = this._getPagePathForGroup(path);
         link.classList.add("treeview__item-link");
 
         return link;
     }
 
-    function buildLabel(text, path, parentChecked) {
+    _buildLabel(text, path, parentChecked) {
 
-        var newParentSelected = parentChecked;
+        let newParentSelected = parentChecked;
 
-        var label = document.createElement('label');
+        const label = document.createElement('label');
         label.classList.add("treeview__item-label");
-        var toggleSpan = document.createElement('span');
+        const toggleSpan = document.createElement('span');
         toggleSpan.classList.add('treeview__item-toggle');
-        var outerSpan = document.createElement('span');
+        const outerSpan = document.createElement('span');
         outerSpan.textContent = text;
         outerSpan.classList.add('treeview__item-content');
-        var checkbox = document.createElement('input');
+        const checkbox = document.createElement('input');
         checkbox.type = "checkbox";
         checkbox.name = text;
         checkbox.value = path;
         checkbox.id = text;
         outerSpan.appendChild(checkbox);
         outerSpan.appendChild(document.createElement('span'));
-        label.appendChild(toggleSpan);
+        if (this._settings.isGroupsStructure) {
+            const toggleSpan = document.createElement('span');
+            toggleSpan.classList.add('treeview__item-toggle');
+            label.appendChild(toggleSpan);
+        }
+        
         label.appendChild(outerSpan);
 
-        if (path === '\\' && lockRootNode) {
+        if (path === '\\' && this._settings.lockRootNode) {
             // In this mode the root node should be disabled and checked BUT the children of this node should act as though it isnt checked so we dont update the selected state
             checkbox.checked = true;
             checkbox.disabled = true;
-        } else if (parentChecked && !useSingleSelectCheckbox) {
+        } else if (parentChecked && !this._settings.useSingleSelectCheckbox) {
             // If a parent node is selected all its children should be disabled and unchecked
             checkbox.checked = false;
             checkbox.disabled = true;
         }
         else {
             // If a parent node is not checked its children selected state depend on the childs value, and not be disabled
-            var newChecked = intiallySelectedNodes.indexOf(path || '\\') >= 0;
+            const newChecked = this._initiallySelectedNodes.indexOf(path || '\\') >= 0;
             checkbox.checked = newChecked;
             newParentSelected = newChecked;
         }
 
         checkbox.classList.add('treeview__checkbox');
 
-        if (useSingleSelectCheckbox) {
+        if (this._settings.useSingleSelectCheckbox) {
             checkbox.classList.add('treeview__checkbox--radio');
         }
 
         return {label, newParentSelected};
     }
 
+    _transferValues() {
+        
+        const elems = Array.from(document.querySelectorAll(`#${this._settings.treeviewId} .treeview__checkbox`));
 
+        const data = elems.reduce((prev, currentElem) => {
+            if ((this._settings.lockRootNode && !(currentElem.value)) || !currentElem.checked) return prev;        
 
-    function transferValues() {
-        var data = [];
-
-        var elems= document.querySelectorAll('.treeview__checkbox');
-
-            for (var i=0;i<elems.length;i++) {
-
-                if (lockRootNode && !(elems[i].value)) {
-                    // No-operation
-                } else if (elems[i].checked) {
-                    data.push(elems[i].value);
-                }
+            return {
+                ...prev, 
+                [currentElem.value]: currentElem.closest('span').innerText
             }
+        }, {});
 
-            populateGroupField(data);
+            this._populateTagsArea(data);
     }
 
-    function populateGroupField(data) {
+    _populateTagsArea(data) {
+        if (this._destinationTags) {
+            this._destinationTags.innerHTML = '';
 
-        var textarea = document.getElementById("GroupTextarea");
-        if (textarea) {
-            textarea.innerHTML = '';
+            const destinationOptionsArray = Array.from(this._destinationSelect.options);
 
-            var element = document.getElementById('GroupSelector');
+            const existingOptionValues = destinationOptionsArray.map(opt => opt.value);
 
-            var existingOptionValues = Array.from(element.options).map(opt => opt.value);
+            const data_keys = Object.keys(data)
 
-            for (var data_i = 0; data_i < data.length; data_i++){
-                var data_current = data[data_i];
-
-                if (data_current === '\\' && lockRootNode) {
-                    textarea.innerHTML = textarea.innerHTML;
+            data_keys.forEach(data_current => {
+                if (data_current === '\\' && this._settings.lockRootNode) {
+                    // No Op
                 } else if (data_current === '\\') {
-                    textarea.innerHTML = textarea.innerHTML + '<div class="tag">All Contact Groups<i class="button__icon" data-path="'+ data_current +'">clear</i></div>';
-                } else {
-                    textarea.innerHTML = textarea.innerHTML + '<div class="tag">' + data_current.substring(1) + '<i class="button__icon" data-path="'+ data_current +'">clear</i></div>';
+                    this._destinationTags.innerHTML = this._destinationTags.innerHTML + '<div class="tag">All Contact Groups<i class="button__icon" data-path="'+ data_current +'">clear</i></div>';
+                } 
+                else if (data_current.startsWith('\\')) {
+                    this._destinationTags.innerHTML = this._destinationTags.innerHTML + '<div class="tag">' + data_current.substring(1) + '<i class="button__icon" data-path="'+ data_current +'">clear</i></div>';
+                }
+                else {
+                    this._destinationTags.innerHTML = this._destinationTags.innerHTML + '<div class="tag">' + data[data_current] + '<i class="button__icon" data-path="'+ data_current +'">clear</i></div>';
                 }
 
                 // Ensure the option exists - add it if not
                 if (existingOptionValues.indexOf(data_current) < 0) {
-                    var newOption = document.createElement('option');
+                    const newOption = document.createElement('option');
                     newOption.selected = true;
                     newOption.value = data_current;
-                    newOption.innerText = data_current;""
-                    element.appendChild(newOption);
+                    newOption.innerText = data[data_current];
+                    this._destinationSelect.appendChild(newOption);
                 }
-            }
+            })
 
-            for (var i = 0; i < element.options.length; i++) {
-                element.options[i].selected = data.indexOf(element.options[i].value) >= 0;
-            }
+            destinationOptionsArray.forEach(option => {
+                option.selected = data_keys.indexOf(option.value) >= 0;
+            });
 
-            tagsSeeAllHelper.recalculate();
+            this._tagsSeeAllHelper.recalculate();
         }
     }
 
-    function appendChildrenForMode(parent, text, path, parentChecked) {
-        if (useCheckboxes || useSingleSelectCheckbox) {
+    _appendChildrenForMode(parent, text, path, parentChecked) {
+        if (this._settings.useCheckboxes || this._settings.useSingleSelectCheckbox) {
 
             // Temporary workaround the blank value for 'All Contact Groups'
             if (path === '') {
                 path = "\\";
             }
             
-            var checkboxResult = buildLabel(text, path, parentChecked);
+            const checkboxResult = this._buildLabel(text, path, parentChecked);
             parent.appendChild(checkboxResult.label);
             
             return checkboxResult.newParentSelected;
 
         } else {
             // Create the link to refresh page with selected node.
-            parent.appendChild(buildLink(text, path));
+            parent.appendChild(this._buildLink(text, path));
             return parentChecked;
         }
     }
 
-    function forEachCheckboxExcludingCurrent(current, children, updaterFn) {
-        for (var i = 0; i < children.length; i++) {
-            var currentLoopChild = children[i];
+    _forEachCheckboxExcludingCurrent(current, children, updaterFn) {
+        children.forEach(currentLoopChild => {
             if (currentLoopChild !== current) {
                 updaterFn(currentLoopChild);
             }
-        }
+        });
     }
 
-    function handleCheckboxClick(e, checkbox) {
+    _handleCheckboxClick(e, checkbox) {
 
-        var parentLi = checkbox.closest('li');
+        const parentLi = checkbox.closest('li');
 
-        if (useSingleSelectCheckbox) {
-
+        if (this._settings.useSingleSelectCheckbox) {
             // In this mode only one item can be selected, and the root item cannot be deseleted.
             if (checkbox.checked) {
-                var allGroupCheckboxes = document.querySelectorAll('.treeview__list--root input[type=checkbox]');
-                forEachCheckboxExcludingCurrent(checkbox, allGroupCheckboxes, function(checkboxToUpdate) {
+                const allGroupCheckboxes = document.querySelectorAll(`#${this._settings.treeviewId}.treeview__list--root input[type=checkbox]`);
+                this._forEachCheckboxExcludingCurrent(checkbox, allGroupCheckboxes, checkboxToUpdate => {
                     checkboxToUpdate.checked = false;
                 });
             }
@@ -253,117 +272,145 @@
         }
         else if (parentLi.classList.contains('treeview__item--parent')){
 
-            var childCheckboxes = parentLi.querySelectorAll('input[type=checkbox]');
+            const childCheckboxes = parentLi.querySelectorAll('input[type=checkbox]');
             if (checkbox.checked) {
-                forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, function(checkboxToUpdate) {
+                this._forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, checkboxToUpdate => {
                     checkboxToUpdate.disabled = true;
                     checkboxToUpdate.checked = false;
                 });
             } else {
-                forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, function(checkboxToUpdate) {
+                this._forEachCheckboxExcludingCurrent(checkbox, childCheckboxes, checkboxToUpdate => {
                     checkboxToUpdate.disabled = false;
                 });
             }
         }
     }
 
-    // Grab the select list and all of its options
-    var groupSelect = document.querySelector(selector);
-    var options = groupSelect.querySelectorAll("option");
+    _initialiseTreeView() {
+        // Grab the select list and all of its options
+        const options = this._sourceSelect.querySelectorAll("option");
 
-    var hiddenField = document.createElement("input");
-    hiddenField.setAttribute("type", "hidden");
-    hiddenField.setAttribute("name", "Group");
-    hiddenField.value = groupParam || '\\';
+        const hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "Group");
+        hiddenField.value = this._groupParam || '\\';
 
-    // Create the base collections with starting key for the root.
-    var structure = { "\\": {} };
+        const populateStructure = this._settings.isGroupsStructure ?
+            () => {
+                const structure = { "\\": {} };
 
-    // Build on the base structure by looping through each select item.
-    for (var option_i=0; option_i<options.length; option_i++) {
+                // Build on the base structure by looping through each select item.
+                options.forEach(option => {
+                    if (option.textContent !== "") {
+                        // Seperate the group name into all its path segments
+                        const segments = option.textContent.split("\\");
+                        // Start at the root element.
+                        let nodeToCheck = structure["\\"];
 
-        var option = options[option_i];
-
-        if (option.textContent !== "") {
-            // Seperate the group name into all its path segments
-            var segments = option.textContent.split("\\");
-            // Start at the root element.
-            var nodeToCheck = structure["\\"];
-
-            // For each segment ensure that all levels of the structure are in place.
-            for (var segment_i=0; segment_i<segments.length; segment_i++) {
-
-                var seg = segments[segment_i];
-
-                if (seg !== "") {
-                    if (!nodeToCheck[seg]) {
-                        nodeToCheck[seg] = {};
+                        // For each segment ensure that all levels of the structure are in place.
+                        segments.forEach(seg => {
+                            if (seg !== "") {
+                                if (!nodeToCheck[seg]) {
+                                    nodeToCheck[seg] = {};
+                                }
+                                nodeToCheck = nodeToCheck[seg];
+                            }
+                        });
                     }
-                    nodeToCheck = nodeToCheck[seg];
+                });  
+                return structure;
+            } :
+            () => Array.from(options).reduce((structure, current) => {
+                    return {
+                        ...structure,
+                        [current.value]: current.textContent
+                    };
+                }, {});
+
+        const structure = populateStructure();
+        
+        // The base element that will be populated
+        const treeContainer = document.createElement("ul");
+        treeContainer.id = this._settings.treeviewId;
+        treeContainer.classList.add("treeview__list");
+        treeContainer.classList.add("treeview__list--root");
+
+        if (!this._settings.isGroupsStructure) {
+            treeContainer.classList.add('treeview__list--bulletless');
+        }
+
+        // Handle all the clicks at the parent level
+        treeContainer.addEventListener("click", e => {
+            const target = e.target;
+
+            // Handle checkbox items being selected.
+            if (target.matches('input[type=checkbox]')) {
+                this._handleCheckboxClick(e, target);
+            }
+
+            this._transferValues();
+
+            if (target.matches(".treeview__item-toggle")) {
+
+                const closestLi = target.closest('li');
+
+                // We only care about clicks on elements that are parents
+                if (closestLi.matches(".treeview__item--parent")) {
+
+                    e.preventDefault();
+
+                    // If an open parent item is clicked, close it, but also all its open descendants.
+                    if (closestLi.classList.contains("treeview__item--open")) {
+                        closestLi.classList.remove("treeview__item--open");
+                        const activeChildren = closestLi.querySelectorAll(
+                            ".treeview__item--open"
+                        );
+
+                        activeChildren.forEach(activeChild => {
+                            activeChild.classList.remove("treeview__item--open");
+                        });
+                    }
+                    // Open any closed parents that are clicked.
+                    else {
+                        closestLi.classList.add("treeview__item--open");
+                    }
                 }
             }
-        }
+        });
+
+        if (this._settings.isGroupsStructure) {
+            this._displayChildKeys("All Contact Groups", "", structure["\\"], treeContainer, 1, false);
+        } else {
+            this._displayFlatStructure(treeContainer, structure);
+        }           
+
+        // Replace the select list with the new tree
+        this._sourceSelect.parentNode.replaceChild(treeContainer, this._sourceSelect);
+    
+        treeContainer.parentNode.appendChild(hiddenField);
+    
+        this._transferValues();
     }
 
-    // The base element that will be populated
-    var treeContainer = document.createElement("ul");
-    treeContainer.classList.add("treeview__list");
-    treeContainer.classList.add("treeview__list--root");
+    _displayFlatStructure(treeContainer, obj) {
+        Object.entries(obj).forEach(([key, value]) => {
+            const childListItem = document.createElement("li");
+            childListItem.classList.add("treeview__item");
+            this._appendChildrenForMode(childListItem, value, key, false)
+            treeContainer.appendChild(childListItem);
+        });
+    }
 
+    _displayChildKeys(currText, currPath, obj, elementToAddTo, level, parentsChecked) {
 
-    // Handle all the clicks at the parent level
-    treeContainer.addEventListener("click", function (e) {
-        var target = e.target;
+        const childKeys = Object.keys(obj);
 
-        // Handle checkbox items being selected.
-        if (target.matches('input[type=checkbox]')) {
-            handleCheckboxClick(e, target);
-        }
+        let parentCheckedState = parentsChecked;
 
-        transferValues();
-
-        if (target.matches(".treeview__item-toggle")) {
-
-            var closestLi = target.closest('li');
-
-            // We only care about clicks on elements that are parents
-            if (closestLi.matches(".treeview__item--parent")) {
-
-                e.preventDefault();
-
-                // If an open parent item is clicked, close it, but also all its open descendants.
-                if (closestLi.classList.contains("treeview__item--open")) {
-                    closestLi.classList.remove("treeview__item--open");
-                    var activeChildren = closestLi.querySelectorAll(
-                        ".treeview__item--open"
-                    );
-
-                    for (var ac_i=0; ac_i<activeChildren.length; ac_i++) {
-                        var activeChild = activeChildren[ac_i];
-                        activeChild.classList.remove("treeview__item--open");
-                    }
-                }
-                // Open any closed parents that are clicked.
-                else {
-                    closestLi.classList.add("treeview__item--open");
-                }
-            }
-        }
-    });
-
-    /*
-      Recursive function that builds the select list from the previous node structure.
-    */
-    function displayChildKeys(currText, currPath, obj, elementToAddTo, level, parentsChecked) {
-
-        var childKeys = Object.keys(obj);
-
-        var parentCheckedState = parentsChecked;
-
-        var childListItem = document.createElement("li");
+        const childListItem = document.createElement("li");
         childListItem.classList.add("treeview__item");
 
-        if (!useCheckboxes && !useSingleSelectCheckbox && isSelectedGroup(currPath)) {
+        if (!this._settings.useCheckboxes && !this._settings.useSingleSelectCheckbox && this._isSelectedGroup(currPath)) {
             // Only add the current state when in the 'link mode'
             childListItem.classList.add("treeview__item--current");
         }
@@ -371,7 +418,7 @@
         if (!childKeys.length) {
             // This is at the bottom of a branch i.e. no children to process
 
-            appendChildrenForMode(childListItem, currText, currPath, parentCheckedState);
+            this._appendChildrenForMode(childListItem, currText, currPath, parentCheckedState);
 
             elementToAddTo.appendChild(childListItem);
 
@@ -380,49 +427,46 @@
 
             childListItem.classList.add("treeview__item--parent");
 
-            if (level === 1 || shouldParentBeOpen(currPath)) {
+            if (level === 1 || this._shouldParentBeOpen(currPath)) {
                 // Open first level children by default
                 childListItem.classList.add(
                     "treeview__item--open"
                 );
             }
 
-            parentCheckedState = appendChildrenForMode(childListItem, currText, currPath, parentCheckedState);
+            parentCheckedState = this._appendChildrenForMode(childListItem, currText, currPath, parentCheckedState);
 
             // Create the container ready to be populated with the child nodes
-            var childList = document.createElement("ul");
+            const childList = document.createElement("ul");
             childList.classList.add("treeview__list");
             childListItem.appendChild(childList);
             elementToAddTo.appendChild(childListItem);
             // Call recursively with updated params for each child node
 
-            for (var ck_i=0; ck_i < childKeys.length; ck_i++) {
-                var childKey = childKeys[ck_i];
-
+            childKeys.forEach(childKey => {
                 if (childKey !== 'All contacts') {
-                    displayChildKeys(
-                            childKey,
-                            currPath + "\\" + childKey,
-                            obj[childKey],
-                            childList,
-                            level + 1,
-                            parentCheckedState
-                        );
-                    }
-            }
+                    this._displayChildKeys(
+                        childKey,
+                        currPath + "\\" + childKey,
+                        obj[childKey],
+                        childList,
+                        level + 1,
+                        parentCheckedState
+                    );
+                }
+            });           
 
         }
     }
+}
 
-    // The initial call of the recursive function starting at the root.
-    displayChildKeys("All Contact Groups", "", structure["\\"], treeContainer, 1, false);
+/*  Allow the old stuff to keep working in the same manner post refactor i.e. controlled by attributes */
+const sourceSelect = document.getElementById("Group");
 
-    // Replace the select list with the new tree
-    groupSelect.parentNode.replaceChild(treeContainer, groupSelect);
-
-    treeContainer.parentNode.appendChild(hiddenField);
-
-    transferValues();
-
-})("#Group", useCheckboxes, useSingleSelectCheckbox);
+if (sourceSelect) {
+    new TreeView({
+        useCheckboxes: sourceSelect.hasAttribute('data-with-checkbox'),
+        useSingleSelectCheckbox: sourceSelect.hasAttribute('data-with-single-select-checkbox'),
+        lockRootNode: sourceSelect.hasAttribute('data-lock-root')
+    });
 }

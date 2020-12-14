@@ -18,6 +18,42 @@
         margin: 0;
         padding: 0;
         list-style-type: none;
+
+        &:not(&--bulletless) {
+            .treeview__item-content {
+                &::before {   
+                    background-image: url('/dist/img/Icon_UNIT.svg');
+                    background-repeat: no-repeat;
+                    background-position: 9px;
+                    width: $treeview-icon-width;
+                    height: 1em;
+                    margin-right: $treeview-icon-right-padding;
+                    display: inline-block;  
+                    content: ' ';  
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    transform: translateY(-50%);
+                }   
+            }
+            .treeview__item--parent {
+
+                & > * > .treeview__item-content {
+                     &::before {   
+                         background-image: url('/dist/img/Icon_FOLDER.svg');
+                         background-position: 5px;
+                     }
+                 }        
+                 
+                 & > .treeview__list {
+                     display: none;
+                 }
+     
+                 &.treeview__item--open > .treeview__list {
+                     display: block;                
+                 }
+             }
+        }
     }    
     
     &__item {
@@ -40,22 +76,7 @@
             position: relative;
             padding-left: $treeview-icon-width + $treeview-icon-right-padding;
             padding-right: $treeview-icon-width;
-            flex-grow: 1;
-
-            &::before {   
-                background-image: url('/dist/img/Icon_UNIT.svg');
-                background-repeat: no-repeat;
-                background-position: 9px;
-                width: $treeview-icon-width;
-                height: 1em;
-                margin-right: $treeview-icon-right-padding;
-                display: inline-block;  
-                content: ' ';  
-                position: absolute;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-            }   
+            flex-grow: 1;            
         }
         
         &--parent {
