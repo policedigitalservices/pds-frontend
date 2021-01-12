@@ -9,6 +9,7 @@ if (main) {
     const addEmailBtn = document.getElementById('addEmailBtn');
     const removeEmailButtons = Array.from(document.querySelectorAll('.btn-remove-contact-email'));
     const removePhoneButtons = Array.from(document.querySelectorAll('.btn-remove-contact-phone'));
+    const btnSave = document.querySelector('#contact-profile-form #btnSave');
     
     // Show all the js only buttons
     [addPhoneBtn, addEmailBtn, ...removeEmailButtons, ...removePhoneButtons].forEach(el => {
@@ -16,15 +17,27 @@ if (main) {
     });
 
     const emailsSection = document.querySelector('.form-emails');
-    
-    emailsSection.addEventListener('input', (e) => {
+    emailsSection.addEventListener('keydown', e => {
+        if(e.keyCode == 13) {
+            e.preventDefault();
+            btnSave.click();
+            return false;
+          }
+    });
+    emailsSection.addEventListener('input', e => {
         e.target.closest('.form__group').classList.remove('blank');
         setAddEmailButtonVisibilityIfApplicable();
     });
 
     const phonesSection = document.querySelector('.form-phones');
-    
-    phonesSection.addEventListener('input', (e) => {        
+    phonesSection.addEventListener('keydown', e => {
+        if(e.keyCode == 13) {
+            e.preventDefault();            
+            btnSave.click();
+            return false;
+          }
+    });
+    phonesSection.addEventListener('input', e => {   
         e.target.closest('.form__group').classList.remove('blank');
         setAddPhoneButtonVisibilityIfApplicable();
     });
@@ -59,7 +72,6 @@ if (main) {
 
         if (inputsForSelector.length > 1) {
             inputsForSelector.forEach(input => {
-                console.dir(input);
                 if (input.value.trim() === '') {
                     input.closest('.form__group').remove();
                 }
@@ -113,14 +125,14 @@ if (main) {
     }
 
     // Wire up the button listeners
-    addPhoneBtn.addEventListener('click', (e) => {
+    addPhoneBtn.addEventListener('click', e => {
         e.preventDefault();
         e.target.closest('section').appendChild(newPhoneRow());
         _renumberInputs('.input--profile-phone', 'Input.PersonalPhoneNumbers');
         setAddPhoneButtonVisibilityIfApplicable();
     });
     
-    addEmailBtn.addEventListener('click', (e) => {
+    addEmailBtn.addEventListener('click', e => {
         e.preventDefault();
         e.target.closest('section').appendChild(newEmailRow())
         _renumberInputs('.input--profile-email', 'Input.PersonalEmailAddresses');
