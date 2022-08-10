@@ -4000,11 +4000,11 @@ header ul,
 .admin .mailbox-header {
   grid-template-areas: "logo user-nav user-nav" "logo mailbox-id options-nav";
 }
-@media screen and (min-width: 640px) {
+/*@media screen and (min-width: 640px) {
   .admin .mailbox-header {
     grid-template-areas: "user-nav user-nav ." "mailbox-id mailbox-id options-nav";
   }
-}
+}*/
 .mailbox-header__logo {
   display: none;
 }
