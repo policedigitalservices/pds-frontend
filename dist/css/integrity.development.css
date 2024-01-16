@@ -3567,6 +3567,16 @@ input__withaction .hint label#GroupTextarea > .button--tag,
 .dark-mode .message--nomessage .message__content {
   color: #90F9F0;
 }
+.message__content__boxed {
+  background-color: #465a65;
+  text-align: left;
+  padding: 1rem;
+}
+
+.message__content__boxed ul {
+  list-style: inherit;
+  padding: 0 1rem;
+}
 .message--nomessage p {
   margin-bottom: -1rem;
 }
